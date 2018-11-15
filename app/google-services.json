@@ -1,0 +1,42 @@
+{
+  "project_info": {
+    "project_number": "606743448725",
+    "firebase_url": "https://handmade-17b08.firebaseio.com",
+    "project_id": "handmade-17b08",
+    "storage_bucket": "handmade-17b08.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:606743448725:android:96ddc56faba5e2dc",
+        "android_client_info": {
+          "package_name": "secapstone.helper"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "606743448725-3nl98u4kedgpa9rb7nunk5c1ivd3ev3d.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBNN1qiPD9Q3-8QO1MuTrulVY0r9Dx7Nu4"
+        }
+      ],
+      "services": {
+        "analytics_service": {
+          "status": 1
+        },
+        "appinvite_service": {
+          "status": 1,
+          "other_platform_oauth_client": []
+        },
+        "ads_service": {
+          "status": 2
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
