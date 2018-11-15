@@ -1,4 +1,4 @@
-package com.saga.communityhelperhandmade;
+package secapstone.helper;
 
 import android.content.Context;
 import android.support.test.InstrumentationRegistry;
