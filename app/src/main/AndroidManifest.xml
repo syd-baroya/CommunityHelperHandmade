@@ -23,7 +23,8 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="secapstone.helper.MainActivity"></activity>
+        <activity android:name="secapstone.helper.MainActivity" />
+        <activity android:name="secapstone.helper.AddArtisanActivity"></activity>
     </application>
 
 </manifest>

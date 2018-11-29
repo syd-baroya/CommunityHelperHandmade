@@ -35,5 +35,11 @@
             android:layout_height="wrap_content"
             android:text="Logout" />
 
+        <Button
+            android:id="@+id/addArtisanButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Add Artisan" />
+
     </LinearLayout>
 </android.support.constraint.ConstraintLayout>

@@ -28,6 +28,13 @@ public class MainActivity extends AppCompatActivity
             }
         });
 
+        Button addArtisanButton = (Button) findViewById(R.id.addArtisanButton);
+        addArtisanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickAddArtisan();
+            }
+        });
     }
 
     public void onClickLogout()
@@ -37,5 +44,10 @@ public class MainActivity extends AppCompatActivity
 
         startActivity(new Intent(MainActivity.this, LoginActivity.class));
         finish(); //Since we are logging out, close MainActivity so you can't use back button.
+    }
+
+    public void onClickAddArtisan()
+    {
+        startActivity(new Intent(MainActivity.this, AddArtisanActivity.class));
     }
 }
