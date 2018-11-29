@@ -25,7 +25,13 @@
         </activity>
         <activity android:name="secapstone.helper.MainActivity" />
         <activity android:name="secapstone.helper.AddArtisanActivity" />
-        <activity android:name="secapstone.helper.addartisan.WelcomeAddArtisanActivity"></activity>
+        <activity android:name="secapstone.helper.addartisan.WelcomeAddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.NameAddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.PhotoAddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.PhoneNumberAddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.MapAddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.DescriptionAddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity"></activity>
     </application>
 
 </manifest>

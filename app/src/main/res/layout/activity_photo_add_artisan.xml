@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".addartisan.WelcomeAddArtisanActivity">
+    tools:context=".addartisan.PhotoAddArtisanActivity">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,7 +12,7 @@
         android:orientation="vertical">
 
         <ProgressBar
-            android:id="@+id/progressBar1"
+            android:id="@+id/progressBar3"
             style="?android:attr/progressBarStyleHorizontal"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -25,14 +25,14 @@
             android:orientation="horizontal">
 
             <Button
-                android:id="@+id/backButton1"
+                android:id="@+id/backButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Back" />
 
             <Button
-                android:id="@+id/nextButton1"
+                android:id="@+id/nextButton3"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
