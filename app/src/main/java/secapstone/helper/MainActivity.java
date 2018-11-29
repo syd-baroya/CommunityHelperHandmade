@@ -8,6 +8,8 @@ import android.widget.*;
 
 import com.saga.communityhelperhandmade.R;
 
+import secapstone.helper.addartisan.*;
+
 
 public class MainActivity extends AppCompatActivity
 {
@@ -48,6 +50,6 @@ public class MainActivity extends AppCompatActivity
 
     public void onClickAddArtisan()
     {
-        startActivity(new Intent(MainActivity.this, AddArtisanActivity.class));
+        startActivity(new Intent(MainActivity.this, WelcomeAddArtisanActivity.class));
     }
 }

@@ -24,7 +24,8 @@
             </intent-filter>
         </activity>
         <activity android:name="secapstone.helper.MainActivity" />
-        <activity android:name="secapstone.helper.AddArtisanActivity"></activity>
+        <activity android:name="secapstone.helper.AddArtisanActivity" />
+        <activity android:name="secapstone.helper.addartisan.WelcomeAddArtisanActivity"></activity>
     </application>
 
 </manifest>
