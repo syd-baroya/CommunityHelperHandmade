@@ -3,7 +3,7 @@ sudo: required
 jdk: oraclejdk8
 android:
   components:
-    - build-tools=27.0.3
+    - build-tools=19.1.0
 
 before_install:
   - mkdir "$ANDROID_HOME/licenses" || true
