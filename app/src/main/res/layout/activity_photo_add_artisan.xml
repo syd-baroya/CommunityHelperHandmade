@@ -19,6 +19,24 @@
             android:clickable="false"
             android:visibility="visible" />
 
+        <TextView
+            android:id="@+id/textView4"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Please upload a photo of the artisan." />
+
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:src="@android:color/holo_blue_bright" />
+
+        <Button
+            android:id="@+id/uploadPhotoButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Choose/Take a Photo" />
+
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
