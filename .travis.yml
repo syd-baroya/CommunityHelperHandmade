@@ -36,6 +36,7 @@ env:
 
 # Emulator Management: Create, Start and Wait
 before_script:
+  - android list targets
   - echo no | android create avd -t android-28 --name TravisEmulator
   - emulator -avd test -no-skin -no-audio -no-window &
   - android-wait-for-emulator
