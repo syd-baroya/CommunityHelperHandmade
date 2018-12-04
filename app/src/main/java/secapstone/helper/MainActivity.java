@@ -6,6 +6,7 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 
+import com.google.firebase.auth.FirebaseUser;
 import com.saga.communityhelperhandmade.R;
 
 import secapstone.helper.addartisan.*;
@@ -21,7 +22,7 @@ public class MainActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        //Set the logout button's "onClick" callback to local onClickLogout function.
+        //Set the logout button's "onCliczk" callback to local onClickLogout function.
         Button logoutButton = (Button) findViewById(R.id.logoutButton);
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -38,6 +39,7 @@ public class MainActivity extends AppCompatActivity
             }
         });
     }
+
 
     public void onClickLogout()
     {
