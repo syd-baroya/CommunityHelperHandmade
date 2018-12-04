@@ -33,9 +33,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
 
     @Override
     protected void onBindViewHolder(@NonNull final ArtisanHolder holder, int position, @NonNull Artisan model) {
-        holder.textViewPhoneNumber.setText(model.getPhoneNumber());
         holder.textViewDescription.setText(model.getDescription());
-        holder.textViewPictureURL.setText(String.valueOf(model.getPictureURL()));
         holder.textViewName.setText(String.valueOf(model.getName()));
 
         storageRef.child(model.getPictureURL()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
@@ -67,8 +65,6 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
     class ArtisanHolder extends RecyclerView.ViewHolder {
         TextView textViewName;
         TextView textViewDescription;
-        TextView textViewPhoneNumber;
-        TextView textViewPictureURL;
         CircleImageView image;
 
         public ArtisanHolder(@NonNull View itemView) {
@@ -76,8 +72,6 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
 
             textViewName = itemView.findViewById(R.id.text_view_name);
             textViewDescription = itemView.findViewById(R.id.text_view_description);
-            textViewPhoneNumber = itemView.findViewById(R.id.text_view_phonenumber);
-            textViewPictureURL = itemView.findViewById(R.id.text_view_pictureurl);
             image = itemView.findViewById(R.id.image);
         }
     }
