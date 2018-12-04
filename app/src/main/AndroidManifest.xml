@@ -32,7 +32,8 @@
         <activity android:name="secapstone.helper.addartisan.PhoneNumberAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.MapAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.DescriptionAddArtisanActivity" />
-        <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity"></activity>
+        <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity" />
+        <activity android:name="secapstone.helper.ForgotPassword"></activity>
     </application>
 
 </manifest>
