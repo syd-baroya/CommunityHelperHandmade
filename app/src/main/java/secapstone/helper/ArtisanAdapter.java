@@ -32,9 +32,11 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
     }
 
     @Override
-    protected void onBindViewHolder(@NonNull final ArtisanHolder holder, int position, @NonNull Artisan model) {
+    protected void onBindViewHolder(@NonNull ArtisanHolder holder, int position, @NonNull Artisan model) {
         holder.textViewDescription.setText(model.getDescription());
         holder.textViewName.setText(String.valueOf(model.getName()));
+
+        final ArtisanHolder copy = holder;
 
         storageRef.child(model.getPictureURL()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
             @Override
@@ -42,7 +44,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
                 Glide.with(context)
                         .asBitmap()
                         .load(uri)
-                        .into(holder.image);
+                        .into(copy.image);
             }
         }).addOnFailureListener(new OnFailureListener() {
             @Override
