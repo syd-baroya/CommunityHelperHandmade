@@ -54,8 +54,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         //check already session, if->dashboard
         //create dashboard activity
 
-//        if(mAuth.getCurrentUser() != null)
-//            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+        if(mAuth.getCurrentUser() != null)
+            startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
 
     }
