@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/navigation_action_items"
+        android:icon="@drawable/ic_round_notifications"
+        android:title="Action Items" />
+
+    <item
+        android:id="@+id/navigation_artisans"
+        android:icon="@drawable/ic_round_supervisor"
+        android:title="Artisans" />
+
+    <item
+        android:id="@+id/navigation_profile"
+        android:icon="@drawable/ic_round_person"
+        android:title="Profile" />
+
+</menu>

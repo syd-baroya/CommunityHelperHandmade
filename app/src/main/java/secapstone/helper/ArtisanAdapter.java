@@ -53,8 +53,9 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
             }
         });
 
-
     }
+
+
 
     @NonNull
     @Override
