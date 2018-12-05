@@ -9,16 +9,6 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-        <Button
-            android:id="@+id/logoutButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Logout" />
-        <Button
-            android:id="@+id/addArtisanButton"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Add Artisan" />
         <android.support.v7.widget.RecyclerView
             android:id="@+id/recycler_view"
             android:layout_width="match_parent"

@@ -46,25 +46,7 @@ public class Artisans extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_artisans, container, false);
 
-
         setUpRecyclerView();
-
-        Button logoutButton = (Button) view.findViewById(R.id.logoutButton);
-        logoutButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickLogout();
-            }
-        });
-
-        Button addArtisanButton = (Button) view.findViewById(R.id.addArtisanButton);
-        addArtisanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickAddArtisan();
-            }
-        });
-
 
         return view;
     }
@@ -83,16 +65,7 @@ public class Artisans extends Fragment {
         recyclerView.setAdapter(adapter);
     }
 
-    public void onClickLogout()
-    {
-        startActivity(new Intent(getContext(), LoginActivity.class));
-        getActivity().finish(); //Since we are logging out, close MainActivity so you can't use back button.
-    }
 
-    public void onClickAddArtisan()
-    {
-        startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
-    }
 
     @Override
     public void onStart() {
