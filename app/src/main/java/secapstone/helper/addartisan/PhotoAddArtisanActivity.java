@@ -39,6 +39,21 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
             }
         });
 
+        Button photoButton = (Button) findViewById(R.id.uploadPhotoButton);
+        photoButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View view)
+            {
+                onClickSelectPhoto();
+            }
+        });
+
+    }
+
+    public void onClickSelectPhoto()
+    {
+        
     }
 
     public void onClickNext3()

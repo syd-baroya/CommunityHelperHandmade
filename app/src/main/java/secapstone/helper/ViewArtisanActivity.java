@@ -34,17 +34,26 @@ public class ViewArtisanActivity extends AppCompatActivity {
             String name = getIntent().getStringExtra("name");
             String url = getIntent().getStringExtra("url");
             String description = getIntent().getStringExtra("description");
+            String phone = getIntent().getStringExtra("phone");
+            String address = getIntent().getStringExtra("address");
 
-            setImage(url, name, description);
+            setImage(url, name, description, phone, address);
         }
     }
 
-    private void setImage(String url, String name, String description) {
+    private void setImage(String url, String name, String description, String phone, String
+            address) {
         TextView nameTitle = findViewById(R.id.artisan_name);
         nameTitle.setText(name);
 
         TextView descriptionTitle = findViewById(R.id.artisan_description);
         descriptionTitle.setText(description);
+
+        TextView phoneTitle = findViewById(R.id.artisan_phone);
+        phoneTitle.setText(phone);
+
+        TextView addressTitle = findViewById(R.id.artisan_address);
+        addressTitle.setText(address);
 
         final ImageView image = findViewById(R.id.artisan_banner_image);
 

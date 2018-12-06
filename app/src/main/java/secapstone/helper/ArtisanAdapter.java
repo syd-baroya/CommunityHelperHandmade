@@ -72,10 +72,10 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
         intent.putExtra("url", model.getPictureURL());
         intent.putExtra("name", model.getName());
         intent.putExtra("description", model.getDescription());
+        intent.putExtra("phone", model.getPhoneNumber());
+        intent.putExtra("address", model.getAddress());
         context.startActivity(intent);
     }
-
-
 
     @NonNull
     @Override
