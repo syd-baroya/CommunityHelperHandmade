@@ -34,6 +34,7 @@
         <activity android:name="secapstone.helper.addartisan.DescriptionAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity" />
         <activity android:name="secapstone.helper.ForgotPassword"></activity>
+        <activity android:name="secapstone.helper.ViewArtisanActivity" />
     </application>
 
 </manifest>
