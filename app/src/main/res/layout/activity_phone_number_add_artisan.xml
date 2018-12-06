@@ -6,63 +6,60 @@
     android:layout_height="match_parent"
     tools:context=".addartisan.PhoneNumberAddArtisanActivity">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progressBar4"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="wrap_content"
+        android:clickable="false"
+        android:max="100"
+        android:progress="42"
+        android:progressTint="#FF239D9D"
+        android:visibility="visible" />
 
-        <ProgressBar
-            android:id="@+id/progressBar4"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans"
+        android:text="Enter Artisan's Phone Number. (optional)"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar4"
+        tools:layout_editor_absoluteX="0dp" />
+
+    <EditText
+        android:id="@+id/phoneNumText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:ems="10"
+        android:fontFamily="@font/googlesans"
+        android:hint="Phone Number"
+        android:inputType="phone"
+        app:layout_constraintTop_toBottomOf="@+id/textView3" />
+
+    <LinearLayout
+        android:id="@+id/linearLayout3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:orientation="horizontal"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumText">
+
+        <Button
+            android:id="@+id/backButton4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:clickable="false"
-            android:max="100"
-            android:progress="42"
-            android:progressTint="#FF239D9D"
-            android:visibility="visible" />
+            android:layout_weight="1"
+            android:text="Back" />
 
-        <TextView
-            android:id="@+id/textView3"
-            android:layout_width="match_parent"
+        <Button
+            android:id="@+id/nextButton4"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:fontFamily="@font/googlesans"
-            android:text="Enter Artisan's Phone Number. (optional)"
-            android:textSize="30sp" />
-
-        <EditText
-            android:id="@+id/phoneNumText"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:ems="10"
-            android:fontFamily="@font/googlesans"
-            android:hint="Phone Number"
-            android:inputType="phone" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/backButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Back" />
-
-            <Button
-                android:id="@+id/nextButton4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Next" />
-        </LinearLayout>
-
+            android:layout_weight="1"
+            android:text="Next" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>

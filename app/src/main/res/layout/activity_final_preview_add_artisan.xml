@@ -6,69 +6,76 @@
     android:layout_height="match_parent"
     tools:context=".addartisan.FinalPreviewAddArtisanActivity">
 
-    <LinearLayout
+    <ProgressBar
+        android:id="@+id/progressBar8"
+        style="?android:attr/progressBarStyleHorizontal"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_marginStart="24dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="vertical"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        android:layout_height="wrap_content"
+        android:max="100"
+        android:progress="100"
+        android:progressTint="#FF239D9D" />
 
-        <ProgressBar
-            android:id="@+id/progressBar8"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:max="100"
-            android:progress="100"
-            android:progressTint="#FF239D9D" />
+    <TextView
+        android:id="@+id/namePreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar8"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <TextView
-            android:id="@+id/namePreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/googlesans"
-            android:textSize="30sp" />
+    <TextView
+        android:id="@+id/phoneNumberPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/namePreview"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <TextView
-            android:id="@+id/phoneNumberPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/googlesans"
-            android:textSize="30sp" />
+    <TextView
+        android:id="@+id/addressPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans"
+        android:textSize="30sp"
+        app:layout_constraintTop_toBottomOf="@+id/phoneNumberPreview"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <TextView
-            android:id="@+id/addressPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/googlesans"
-            android:textSize="30sp" />
+    <TextView
+        android:id="@+id/descriptionPreview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans"
+        android:textSize="24sp"
+        app:layout_constraintTop_toBottomOf="@+id/addressPreview"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <TextView
-            android:id="@+id/descriptionPreview"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/googlesans"
-            android:textSize="24sp" />
+    <Button
+        android:id="@+id/nextButton8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/primary_button_background"
+        android:fontFamily="@font/googlesans_bold"
+        android:text="Finish"
+        android:textColor="#fff"
+        android:textSize="16sp"
+        app:layout_constraintTop_toBottomOf="@+id/descriptionPreview"
+        tools:layout_editor_absoluteX="0dp" />
 
-        <Button
-            android:id="@+id/nextButton8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@drawable/primary_button_background"
-            android:fontFamily="@font/googlesans_bold"
-            android:text="Finish"
-            android:textColor="#fff"
-            android:textSize="16sp" />
-
-        <Button
-            android:id="@+id/backButton8"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:background="@android:color/transparent"
-            android:fontFamily="@font/googlesans"
-            android:text="Back" />
-
-    </LinearLayout>
+    <Button
+        android:id="@+id/backButton8"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:background="@android:color/transparent"
+        android:fontFamily="@font/googlesans"
+        android:text="Back"
+        app:layout_constraintTop_toBottomOf="@+id/nextButton8"
+        tools:layout_editor_absoluteX="0dp" />
 </android.support.constraint.ConstraintLayout>
