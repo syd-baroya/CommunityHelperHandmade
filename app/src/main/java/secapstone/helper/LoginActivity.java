@@ -1,5 +1,7 @@
 package secapstone.helper;
 
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.support.design.widget.Snackbar;
@@ -17,6 +19,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 
+import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
+import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.ProviderQueryResult;
 import com.saga.communityhelperhandmade.R;
 
 /**
@@ -53,7 +58,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         //check already session, if->dashboard
         //create dashboard activity
-
+//
 //        if(mAuth.getCurrentUser() != null)
 //            startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
@@ -71,22 +76,50 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         }
     }
 
+
     private void loginUser(String email, final String password){
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
                         if(!task.isSuccessful()){
-                            if(password.length()<6){
+                            if(isValidPasswordLength(password)){
                                 Snackbar snackBar= Snackbar.make(activity_login, "Password length must be over 6", Snackbar.LENGTH_SHORT);
                                 snackBar.show();
                             }
+
+                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
+                                /**
+                                 * Thrown when one or more of the credentials passed to a method fail to
+                                 * identify and/or authenticate the user subject of that operation.
+                                 * Inspect the error code and message to find out the specific cause.
+                                 * https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthInvalidCredentialsException
+                                 */
+
+                                Snackbar snackBar= Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
+                                snackBar.show();
+                            } else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
+                                /**
+                                 * Inspect the error code and message to find out the specific cause.
+                                 * https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthInvalidUserException
+                                 */
+                                Snackbar snackBar= Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
+                                snackBar.show();
+                            }
+
                         }
                         else{
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
                     }
                 });
+    }
+
+    public boolean isValidPasswordLength(String password){
+        if(password.length()<6)
+            return false;
+        return true;
     }
 }
 

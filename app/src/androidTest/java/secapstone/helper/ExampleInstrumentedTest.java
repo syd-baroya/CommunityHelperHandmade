@@ -21,6 +21,6 @@ public class ExampleInstrumentedTest {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getTargetContext();
 
-        assertEquals("com.saga.communityhelperhandmade", appContext.getPackageName());
+        assertEquals("secapstone.helper", appContext.getPackageName());
     }
 }
