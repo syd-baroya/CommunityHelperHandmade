@@ -33,13 +33,14 @@
         <activity android:name="secapstone.helper.addartisan.MapAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.DescriptionAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity" />
-        <activity android:name="secapstone.helper.ForgotPassword"></activity>
+        <activity android:name="secapstone.helper.ForgotPassword" />
         <activity android:name="secapstone.helper.ViewArtisanActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
             android:value="AIzaSyBNN1qiPD9Q3-8QO1MuTrulVY0r9Dx7Nu4" />
 
+        <activity android:name="secapstone.helper.addartisan.FinalPreviewAddArtisanActivity"></activity>
     </application>
 
 </manifest>
