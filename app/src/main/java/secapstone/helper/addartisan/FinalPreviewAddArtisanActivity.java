@@ -49,6 +49,18 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
                 onClickBack8();
             }
         });
+
+        TextView namePreview = (TextView) findViewById(R.id.namePreview);
+        namePreview.setText("Name: " + WelcomeAddArtisanActivity.mew.getName());
+
+        TextView phonePreview = (TextView) findViewById(R.id.phoneNumberPreview);
+        phonePreview.setText("Phone Number: " + WelcomeAddArtisanActivity.mew.getPhoneNumber());
+
+        TextView addressPreview = (TextView) findViewById(R.id.addressPreview);
+        addressPreview.setText("Address: " + WelcomeAddArtisanActivity.mew.getAddress());
+
+        TextView descrPreview = (TextView) findViewById(R.id.descriptionPreview);
+        descrPreview.setText("Store Description: " + WelcomeAddArtisanActivity.mew.getDescription());
     }
 
     public void onClickNext8()
