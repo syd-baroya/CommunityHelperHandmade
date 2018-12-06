@@ -8,11 +8,11 @@ import android.widget.Button;
 
 import com.saga.communityhelperhandmade.*;
 
+import secapstone.helper.Artisan;
 import secapstone.helper.MainActivity;
 
 public class SignatureAddArtisanActivity extends AppCompatActivity
 {
-
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -43,11 +43,17 @@ public class SignatureAddArtisanActivity extends AppCompatActivity
 
     public void onNextClick7()
     {
+        pushArtisan(WelcomeAddArtisanActivity.mew);
         startActivity(new Intent(SignatureAddArtisanActivity.this, MainActivity.class));
     }
 
     public void onClickBack7()
     {
         startActivity(new Intent(SignatureAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
+    }
+
+    public void pushArtisan(Artisan mewBoi){
+        //so here is where i would, ideally, push the info to the firebase
+        //but i dont know anything about that
     }
 }

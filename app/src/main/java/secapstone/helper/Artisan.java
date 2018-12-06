@@ -5,6 +5,7 @@ public class Artisan {
     private String description;
     private String phoneNumber;
     private String pictureURL;
+    private String address;
 
     public Artisan(String name, String description, String phoneNumber, String pictureURL) {
         this.description = description;
@@ -15,6 +16,22 @@ public class Artisan {
 
     public Artisan() {
 
+    }
+
+    public void setName(String n) {
+        this.name = n;
+    }
+
+    public void setPhoneNumber(String phoneNum){
+        this.phoneNumber = phoneNum;
+    }
+
+    public void setAddress(String adr){
+        this.address = adr;
+    }
+
+    public void setDescription(String des){
+        this.description = des;
     }
 
     public String getName() {
@@ -32,4 +49,6 @@ public class Artisan {
     public String getPictureURL() {
         return pictureURL;
     }
+
+    public String getAddress() {return address;}
 }

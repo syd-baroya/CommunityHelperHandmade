@@ -5,12 +5,13 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import com.saga.communityhelperhandmade.*;
 
 public class MapAddArtisanActivity extends AppCompatActivity
 {
-
+    EditText adr;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -37,15 +38,21 @@ public class MapAddArtisanActivity extends AppCompatActivity
                 onClickBack5();
             }
         });
+        adr = (EditText)findViewById(R.id.artisanAddress);
     }
 
     public void onClickNext5()
     {
+        setAddress(adr.getText().toString());
         startActivity(new Intent(MapAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
     }
 
     public void onClickBack5()
     {
         startActivity(new Intent(MapAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
+    }
+
+    public void setAddress(String addr){
+        WelcomeAddArtisanActivity.mew.setAddress(addr);
     }
 }

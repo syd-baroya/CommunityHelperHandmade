@@ -8,11 +8,12 @@ import android.widget.Button;
 
 import com.saga.communityhelperhandmade.*;
 
+import secapstone.helper.Artisan;
 import secapstone.helper.MainActivity;
 
 public class WelcomeAddArtisanActivity extends AppCompatActivity
 {
-
+    public static Artisan mew = new Artisan();
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

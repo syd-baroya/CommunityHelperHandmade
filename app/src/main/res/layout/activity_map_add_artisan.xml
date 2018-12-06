@@ -11,6 +11,20 @@
         android:layout_height="match_parent"
         android:orientation="vertical">
 
+        <TextView
+            android:id="@+id/addressPrompt"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Enter Artisan Address" />
+
+        <EditText
+            android:id="@+id/artisanAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:ems="10"
+            android:hint="Artisan Address"
+            android:inputType="textPostalAddress" />
+
         <ProgressBar
             android:id="@+id/progressBar5"
             style="?android:attr/progressBarStyleHorizontal"
