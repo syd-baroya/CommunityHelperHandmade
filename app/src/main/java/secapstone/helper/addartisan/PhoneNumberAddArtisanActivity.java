@@ -54,7 +54,8 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
         startActivity(new Intent(PhoneNumberAddArtisanActivity.this, PhotoAddArtisanActivity.class));
     }
 
-    public void setNum(String num){
+    public void setNum(String num)
+    {
         WelcomeAddArtisanActivity.mew.setPhoneNumber(num);
     }
 }

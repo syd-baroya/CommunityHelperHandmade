@@ -23,7 +23,8 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Tell us about the artisan. Customers want to know the person behind the stuff they buy. Tell us a bit about your story as the artisan." />
+            android:text="Tell us about the artisan. Customers want to know the person behind the stuff they buy. Tell us a bit about your story as the artisan."
+            android:textSize="30sp" />
 
         <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"

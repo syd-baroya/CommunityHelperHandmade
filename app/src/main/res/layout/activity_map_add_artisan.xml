@@ -15,7 +15,8 @@
             android:id="@+id/addressPrompt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Artisan Address" />
+            android:text="Enter Artisan Address"
+            android:textSize="30sp" />
 
         <EditText
             android:id="@+id/artisanAddress"

@@ -23,7 +23,8 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Lets Add An Artisan. Artisans are local members of your community that are making amazing goods. Know someone like this? Then lets get started!" />
+            android:text="Lets Add An Artisan. Artisans are local members of your community that are making amazing goods. Know someone like this? Then lets get started!"
+            android:textSize="30sp" />
 
         <LinearLayout
             android:layout_width="match_parent"
