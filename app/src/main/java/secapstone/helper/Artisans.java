@@ -25,9 +25,6 @@ import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
  */
 public class Artisans extends Fragment {
 
-    private ArrayList<String> mNames = new ArrayList<>();
-    private ArrayList<String> mImageUrls = new ArrayList<>();
-
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference artisansRef = db.collection("artisans");
     private ArtisanAdapter adapter;
