@@ -9,7 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
             android:id="@+id/progressBar6"
@@ -26,6 +30,7 @@
             android:id="@+id/textView5"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans"
             android:text="Tell us about the artisan. Customers want to know the person behind the stuff they buy. Tell us a bit about your story as the artisan."
             android:textSize="30sp" />
 
@@ -38,6 +43,7 @@
                 android:id="@+id/artisanDescription"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/googlesans"
                 android:hint="Description. Feel free to write a lot." />
         </android.support.design.widget.TextInputLayout>
 

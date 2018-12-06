@@ -9,7 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
             android:id="@+id/progressBar3"
@@ -26,6 +30,7 @@
             android:id="@+id/textView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans"
             android:text="Please upload a photo of the artisan."
             android:textSize="30sp" />
 
@@ -39,7 +44,12 @@
             android:id="@+id/uploadPhotoButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Choose/Take a Photo" />
+            android:background="@drawable/primary_button_background"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Choose/Take a Photo"
+            android:textAllCaps="false"
+            android:textColor="#fff"
+            android:textSize="16sp" />
 
         <LinearLayout
             android:layout_width="match_parent"

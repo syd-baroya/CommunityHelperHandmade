@@ -7,9 +7,16 @@
     tools:context=".addartisan.WelcomeAddArtisanActivity">
 
     <LinearLayout
+        android:id="@+id/linearLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <ProgressBar
             android:id="@+id/progressBar1"
@@ -26,28 +33,27 @@
             android:id="@+id/textView"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans_bold"
             android:text="Lets Add An Artisan. Artisans are local members of your community that are making amazing goods. Know someone like this? Then lets get started!"
             android:textSize="30sp" />
 
-        <LinearLayout
+        <Button
+            android:id="@+id/nextButton1"
             android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_height="wrap_content"
+            android:background="@drawable/primary_button_background"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Next"
+            android:textColor="#fff" />
 
-            <Button
-                android:id="@+id/backButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Back" />
+        <Button
+            android:id="@+id/backButton1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@android:color/transparent"
+            android:text="Back" />
 
-            <Button
-                android:id="@+id/nextButton1"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Next" />
-        </LinearLayout>
+
 
     </LinearLayout>
 

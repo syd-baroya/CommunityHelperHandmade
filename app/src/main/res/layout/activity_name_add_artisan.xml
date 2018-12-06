@@ -9,7 +9,11 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:orientation="vertical">
+        android:layout_marginStart="24dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="vertical"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent">
 
         <ProgressBar
             android:id="@+id/progressBar2"
@@ -27,6 +31,7 @@
             android:id="@+id/textView2"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:fontFamily="@font/googlesans"
             android:text="Add the name of the artisan."
             android:textSize="30sp" />
 
@@ -38,6 +43,7 @@
                 android:id="@+id/firstNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/googlesans"
                 android:hint="First Name" />
         </android.support.design.widget.TextInputLayout>
 
@@ -49,6 +55,7 @@
                 android:id="@+id/lastNameInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:fontFamily="@font/googlesans"
                 android:hint="Last Name" />
         </android.support.design.widget.TextInputLayout>
 
