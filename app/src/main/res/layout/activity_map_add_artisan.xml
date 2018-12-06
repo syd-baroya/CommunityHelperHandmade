@@ -25,7 +25,7 @@
             android:id="@+id/addressPrompt"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Enter Artisan Address"
+            android:text="Enter artisan address or select on map."
             android:textSize="30sp" />
 
         <EditText
@@ -35,6 +35,12 @@
             android:ems="10"
             android:hint="Artisan Address"
             android:inputType="textPostalAddress" />
+
+        <Button
+            android:id="@+id/selectOnMapButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Select on Map" />
 
         <LinearLayout
             android:layout_width="match_parent"
