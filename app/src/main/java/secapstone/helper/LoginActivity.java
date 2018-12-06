@@ -4,6 +4,7 @@ import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
@@ -34,7 +35,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     EditText input_email, input_password;
     TextView btnForgotPass;
 
-    RelativeLayout activity_login;
+    ConstraintLayout activity_login;
 
     private FirebaseAuth mAuth;
 
@@ -48,7 +49,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         input_email = (EditText)findViewById(R.id.login_email);
         input_password = (EditText)findViewById(R.id.login_password);
         btnForgotPass = (TextView)findViewById(R.id.login_btn_forgot_password);
-        activity_login = (RelativeLayout)findViewById(R.id.activity_login);
+        activity_login = (ConstraintLayout)findViewById(R.id.activity_login);
 
         btnForgotPass.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
