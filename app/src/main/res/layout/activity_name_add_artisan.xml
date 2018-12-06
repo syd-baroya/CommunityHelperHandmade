@@ -20,6 +20,7 @@
             android:longClickable="true"
             android:max="100"
             android:progress="14"
+            android:progressTint="#FF239D9D"
             android:visibility="visible" />
 
         <TextView
