@@ -7,6 +7,7 @@
     <uses-permission android:name="android.permission.READ_PROFILE" />
     <uses-permission android:name="android.permission.READ_CONTACTS" />
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_FINE_LOCATION" />
 
     <application
         android:allowBackup="true"
@@ -25,7 +26,6 @@
             </intent-filter>
         </activity>
         <activity android:name="secapstone.helper.MainActivity" />
-        <activity android:name="secapstone.helper.AddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.WelcomeAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.NameAddArtisanActivity" />
         <activity android:name="secapstone.helper.addartisan.PhotoAddArtisanActivity" />
@@ -35,6 +35,11 @@
         <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity" />
         <activity android:name="secapstone.helper.ForgotPassword"></activity>
         <activity android:name="secapstone.helper.ViewArtisanActivity" />
+
+        <meta-data
+            android:name="com.google.android.geo.API_KEY"
+            android:value="AIzaSyBNN1qiPD9Q3-8QO1MuTrulVY0r9Dx7Nu4" />
+
     </application>
 
 </manifest>
