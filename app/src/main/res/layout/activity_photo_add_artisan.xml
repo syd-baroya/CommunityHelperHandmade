@@ -6,71 +6,86 @@
     android:layout_height="match_parent"
     tools:context=".addartisan.PhotoAddArtisanActivity">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
+    <Button
+        android:id="@+id/uploadPhotoButton"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="24dp"
-        android:orientation="vertical"
+        android:background="@drawable/primary_button_background"
+        android:fontFamily="@font/googlesans_bold"
+        android:text="Choose/Take a Photo"
+        android:textAllCaps="false"
+        android:textColor="#fff"
+        android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textView4" />
 
-        <ProgressBar
-            android:id="@+id/progressBar3"
-            style="?android:attr/progressBarStyleHorizontal"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:max="100"
-            android:progress="28"
-            android:progressTint="#FF239D9D"
-            android:visibility="visible" />
+    <ProgressBar
+        android:id="@+id/progressBar3"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:clickable="false"
+        android:max="100"
+        android:progress="28"
+        android:progressTint="#FF239D9D"
+        android:visibility="visible"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
 
-        <TextView
-            android:id="@+id/textView4"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:fontFamily="@font/googlesans"
-            android:text="Please upload a photo of the artisan."
-            android:textSize="30sp" />
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:src="@android:color/holo_blue_bright"
+        tools:layout_editor_absoluteX="24dp"
+        tools:layout_editor_absoluteY="98dp" />
 
-        <ImageView
-            android:id="@+id/imageView"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:src="@android:color/holo_blue_bright" />
+    <TextView
+        android:id="@+id/textView4"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="24dp"
+        android:layout_marginEnd="24dp"
+        android:fontFamily="@font/googlesans"
+        android:text="Please upload a photo of the artisan."
+        android:textSize="30sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/progressBar3" />
+
+    <LinearLayout
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="24dp"
+        android:orientation="horizontal"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/uploadPhotoButton">
 
         <Button
-            android:id="@+id/uploadPhotoButton"
-            android:layout_width="match_parent"
+            android:id="@+id/backButton3"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:background="@drawable/primary_button_background"
-            android:fontFamily="@font/googlesans_bold"
-            android:text="Choose/Take a Photo"
-            android:textAllCaps="false"
-            android:textColor="#fff"
-            android:textSize="16sp" />
+            android:layout_weight="1"
+            android:text="Back" />
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/backButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Back" />
-
-            <Button
-                android:id="@+id/nextButton3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Next" />
-        </LinearLayout>
-
+        <Button
+            android:id="@+id/nextButton3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Next" />
     </LinearLayout>
 
 </android.support.constraint.ConstraintLayout>
