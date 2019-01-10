@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
+import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -63,6 +64,9 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
                     // Handle any errors
                 }
             });
+        } else {
+            copy.image.setImageResource(R.drawable.ic_empty_person);
+            //copy.image.setCircleBackgroundColorResource(R.color.colorPrimaryLight);
         }
 
     }
