@@ -74,9 +74,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
                     // Handle any errors
                 }
             });
+        } else {
+            image.setImageResource(R.drawable.ic_empty_person);
         }
-
-
     }
 
 
