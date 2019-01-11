@@ -17,7 +17,7 @@
             android:layout_alignParentTop="true"
             android:layout_marginStart="32dp"
             android:layout_marginTop="18dp"
-            android:src="@mipmap/ic_launcher"
+            android:src="@drawable/ic_empty_person"
             android:layout_gravity="center"
         />
 

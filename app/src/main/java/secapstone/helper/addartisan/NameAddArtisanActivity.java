@@ -9,8 +9,6 @@ import android.widget.EditText;
 
 import com.saga.communityhelperhandmade.*;
 
-import secapstone.helper.Artisan;
-
 public class NameAddArtisanActivity extends AppCompatActivity
 {
     EditText inputFirst, inputLast;
@@ -56,6 +54,6 @@ public class NameAddArtisanActivity extends AppCompatActivity
 
     public void setName(String first, String last)
     {
-        WelcomeAddArtisanActivity.mew.setName(first + " " + last);
+        WelcomeAddArtisanActivity.artisanObject.setName(first + " " + last);
     }
 }

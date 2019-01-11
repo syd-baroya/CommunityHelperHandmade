@@ -9,8 +9,6 @@ import android.widget.EditText;
 
 import com.saga.communityhelperhandmade.*;
 
-import java.time.Instant;
-
 public class PhoneNumberAddArtisanActivity extends AppCompatActivity
 {
     EditText pNum;
@@ -56,6 +54,6 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
 
     public void setNum(String num)
     {
-        WelcomeAddArtisanActivity.mew.setPhoneNumber(num);
+        WelcomeAddArtisanActivity.artisanObject.setPhoneNumber(num);
     }
 }
