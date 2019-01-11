@@ -1,5 +1,8 @@
 package secapstone.helper;
 
+
+//Must match artisan in Firebase!
+
 public class Artisan {
     private String name;
     private String description;
@@ -32,6 +35,10 @@ public class Artisan {
 
     public void setDescription(String des){
         this.description = des;
+    }
+
+    public void setPictureURL(String url) {
+        this.pictureURL = url;
     }
 
     public String getName() {

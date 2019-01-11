@@ -1,6 +1,7 @@
 package secapstone.helper.addartisan;
 
 import android.content.Intent;
+import android.graphics.Bitmap;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -13,7 +14,9 @@ import secapstone.helper.MainActivity;
 
 public class WelcomeAddArtisanActivity extends AppCompatActivity
 {
-    public static Artisan mew = new Artisan();
+    public static Artisan artisanObject = new Artisan();
+    public static Bitmap artisanProfileImage = null;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {

@@ -9,7 +9,6 @@ import android.widget.*;
 import com.google.android.gms.common.*;
 import com.google.android.gms.location.places.*;
 import com.google.android.gms.location.places.ui.*;
-import com.saga.communityhelperhandmade.*;
 import com.saga.communityhelperhandmade.R;
 
 public class MapAddArtisanActivity extends AppCompatActivity
@@ -91,6 +90,6 @@ public class MapAddArtisanActivity extends AppCompatActivity
     }
 
     public void setAddress(String addr){
-        WelcomeAddArtisanActivity.mew.setAddress(addr);
+        WelcomeAddArtisanActivity.artisanObject.setAddress(addr);
     }
 }

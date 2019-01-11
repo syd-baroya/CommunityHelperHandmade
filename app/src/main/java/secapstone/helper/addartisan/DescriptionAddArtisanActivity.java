@@ -57,6 +57,6 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
 
     public void setDescription(String des)
     {
-        WelcomeAddArtisanActivity.mew.setDescription(des);
+        WelcomeAddArtisanActivity.artisanObject.setDescription(des);
     }
 }
