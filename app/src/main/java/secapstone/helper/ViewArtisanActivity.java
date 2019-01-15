@@ -1,12 +1,15 @@
 package secapstone.helper;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -27,6 +30,15 @@ public class ViewArtisanActivity extends AppCompatActivity {
         setContentView(R.layout.activity_view_artisan);
 
         getIncomingIntent();
+
+        Button reportsButton = (Button) findViewById(R.id.reportsButton);
+        reportsButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                onClickReportsButton();
+            }
+        });
     }
 
     private void getIncomingIntent() {
@@ -77,6 +89,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
         } else {
             image.setImageResource(R.drawable.ic_empty_person);
         }
+    }
+
+    public void onClickReportsButton()
+    {
+        startActivity(new Intent(ViewArtisanActivity.this, ViewReportsActivity.class));
     }
 
 
