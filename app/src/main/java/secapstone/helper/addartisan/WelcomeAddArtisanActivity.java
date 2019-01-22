@@ -7,7 +7,7 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
-import com.saga.communityhelperhandmade.*;
+import secapstone.helper.R;
 
 import secapstone.helper.Artisan;
 import secapstone.helper.MainActivity;

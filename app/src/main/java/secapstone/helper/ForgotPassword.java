@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.view.*;
 import android.widget.*;
 
-import com.saga.communityhelperhandmade.R;
+import secapstone.helper.R;
 
 import secapstone.helper.addartisan.*;
 

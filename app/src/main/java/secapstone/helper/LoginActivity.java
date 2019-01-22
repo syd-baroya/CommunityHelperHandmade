@@ -23,7 +23,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.ProviderQueryResult;
-import com.saga.communityhelperhandmade.R;
+import secapstone.helper.R;
 
 /**
  * A login screen that offers login via email/password.
