@@ -23,6 +23,7 @@ import secapstone.helper.R;
 public class ViewArtisanActivity extends AppCompatActivity {
 
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    public static String artisanName;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -53,6 +54,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
     private void getIncomingIntent() {
         if (getIntent().hasExtra("name") && getIntent().hasExtra("url") && getIntent().hasExtra("description")) {
             String name = getIntent().getStringExtra("name");
+            artisanName = name;
             String url = getIntent().getStringExtra("url");
             String description = getIntent().getStringExtra("description");
             String phone = getIntent().getStringExtra("phone");
@@ -109,7 +111,4 @@ public class ViewArtisanActivity extends AppCompatActivity {
     {
         startActivity(new Intent(ViewArtisanActivity.this, LogPaymentActivity.class));
     }
-
-
-
 }
