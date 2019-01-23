@@ -45,7 +45,7 @@
             app:srcCompat="@drawable/handmadelogo" />
 
         <ImageButton
-            android:id="@+id/imageButton6"
+            android:id="@+id/login_with_amazon"
             android:layout_width="215dp"
             android:layout_height="60dp"
             android:layout_marginTop="192dp"
