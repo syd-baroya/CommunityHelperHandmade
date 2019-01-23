@@ -35,6 +35,10 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
             }
         });
 
+        setName();
+        setAmount();
+        setDate();
+
     }
 
     public void setName()
@@ -57,7 +61,7 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
 
     public void onClickFinish()
     {
-        startActivity(new Intent(ReviewLogPaymentActivity.this, ViewArtisanActivity.class));
+        startActivity(new Intent(ReviewLogPaymentActivity.this, MainActivity.class));
     }
 
     public void onClickBack()

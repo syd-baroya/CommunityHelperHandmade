@@ -37,6 +37,9 @@
         <activity android:name="secapstone.helper.addartisan.SignatureAddArtisanActivity" />
         <activity android:name="secapstone.helper.ForgotPassword" />
         <activity android:name="secapstone.helper.ViewArtisanActivity" />
+        <activity android:name="secapstone.helper.LogPaymentActivity" />
+        <activity android:name="secapstone.helper.ReviewLogPaymentActivity" />
+        <activity android:name="secapstone.helper.ViewReportsActivity" />
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

@@ -24,12 +24,9 @@ public class LogPaymentActivity extends AppCompatActivity
 
         setName();
 
-        amount = (EditText)findViewById(R.id.amountToPay);
+        amount = (EditText)findViewById(R.id.amountToPayText);
         date = (EditText)findViewById(R.id.DateTextBox);
-
-        amountPaid = amount.getText().toString();
-        dateToPay = date.getText().toString();
-
+        
         Button makePayment = (Button) findViewById(R.id.makePaymentButton);
         makePayment.setOnClickListener(new View.OnClickListener()
         {
@@ -43,6 +40,8 @@ public class LogPaymentActivity extends AppCompatActivity
 
     public void onClickMakePayment()
     {
+        amountPaid = amount.getText().toString();
+        dateToPay = date.getText().toString();
         startActivity(new Intent(LogPaymentActivity.this, ReviewLogPaymentActivity.class));
     }
 
