@@ -10,6 +10,8 @@ import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.view.View;
+import android.widget.Button;
+import android.widget.TextView;
 
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.api.Listener;
@@ -29,12 +31,18 @@ import secapstone.helper.R;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
+    TextView btnForgotPass;
 
+    ConstraintLayout activity_login;
 
     private RequestContext requestContext;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        btnForgotPass = findViewById(R.id.forgot_password);
+        activity_login = findViewById(R.id.activity_login);
+
         requestContext = RequestContext.create(this);
 
         requestContext.registerListener(new AuthorizeListener() {
@@ -69,6 +77,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                         .build());
             }
         });
+
     }
 
     @Override
@@ -105,6 +114,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
+
         AuthorizationManager.signOut(getApplicationContext(), new Listener < Void, AuthError > () {
             @Override
             public void onSuccess(Void response) {
