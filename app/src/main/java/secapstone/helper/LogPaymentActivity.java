@@ -26,7 +26,7 @@ public class LogPaymentActivity extends AppCompatActivity
 
         amount = (EditText)findViewById(R.id.amountToPayText);
         date = (EditText)findViewById(R.id.DateTextBox);
-        
+
         Button makePayment = (Button) findViewById(R.id.makePaymentButton);
         makePayment.setOnClickListener(new View.OnClickListener()
         {
