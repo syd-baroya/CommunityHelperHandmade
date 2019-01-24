@@ -9,7 +9,7 @@ import android.widget.*;
 import com.google.android.gms.common.*;
 import com.google.android.gms.location.places.*;
 import com.google.android.gms.location.places.ui.*;
-import com.saga.communityhelperhandmade.R;
+import secapstone.helper.R;
 
 public class MapAddArtisanActivity extends AppCompatActivity
 {

@@ -13,7 +13,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.ImageView;
 
-import com.saga.communityhelperhandmade.*;
+import secapstone.helper.R;
 
 import java.io.File;
 import java.io.IOException;

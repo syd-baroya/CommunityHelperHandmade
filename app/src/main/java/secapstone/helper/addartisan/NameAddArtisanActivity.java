@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
-import com.saga.communityhelperhandmade.*;
+import secapstone.helper.R;
 
 public class NameAddArtisanActivity extends AppCompatActivity
 {
