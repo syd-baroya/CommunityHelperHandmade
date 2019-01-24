@@ -24,6 +24,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     public static String artisanName;
+    public static String artisanAddress;
+    public static String artisanPhone;
+    public static String EXTRA_A_NAME = "com.example.application.example.artisanName";
+    public static String EXTRA_A_ADDRESS = "com.example.application.example.artisanAddress";
+    public static String EXTRA_A_PHONE = "com.example.application.example.artisanPhone";
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -49,6 +54,15 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 onClickLogPayments();
             }
         });
+
+        Button contactInfoButton = (Button) findViewById(R.id.contactInfoButton);
+        contactInfoButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view)
+            {
+                onClickContactInfoButton();
+            }
+        });
     }
 
     private void getIncomingIntent() {
@@ -58,7 +72,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
             String url = getIntent().getStringExtra("url");
             String description = getIntent().getStringExtra("description");
             String phone = getIntent().getStringExtra("phone");
+            artisanPhone = phone;
             String address = getIntent().getStringExtra("address");
+            artisanAddress = address;
 
             setImage(url, name, description, phone, address);
         }
@@ -110,5 +126,14 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onClickLogPayments()
     {
         startActivity(new Intent(ViewArtisanActivity.this, LogPaymentActivity.class));
+    }
+
+    public void onClickContactInfoButton()
+    {
+        Intent intent = new Intent(ViewArtisanActivity.this, ViewContactInfoActivity.class);
+        intent.putExtra(EXTRA_A_NAME, artisanName);
+        intent.putExtra(EXTRA_A_ADDRESS, artisanAddress);
+        intent.putExtra(EXTRA_A_PHONE, artisanPhone);
+        startActivity(intent);
     }
 }
