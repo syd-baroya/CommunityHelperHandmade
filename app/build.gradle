@@ -5,7 +5,7 @@ android {
         config {
             keyAlias 'amazonkey'
             keyPassword 'amazonkey'
-            storeFile file('/Users/syd/StudioProjects/CommunityHelperHandmade/app/keystore')
+            storeFile file('../app/keystore')
             storePassword 'amazonkeystore'
         }
     }
