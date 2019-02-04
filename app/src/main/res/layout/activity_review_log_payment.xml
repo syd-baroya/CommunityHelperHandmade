@@ -58,27 +58,27 @@
         android:id="@+id/logPaymentToText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="66dp"
         android:layout_marginTop="64dp"
-        android:layout_marginEnd="180dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/reviewLogTo"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/logAmountText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="133dp"
         android:layout_marginTop="112dp"
-        android:layout_marginEnd="176dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/amountPaid"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/logDateText"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_marginStart="150dp"
         android:layout_marginTop="160dp"
-        android:layout_marginEnd="180dp"
-        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/dateToPay"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button

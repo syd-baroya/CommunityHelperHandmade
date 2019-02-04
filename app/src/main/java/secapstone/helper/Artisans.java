@@ -23,7 +23,7 @@ import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
-public class Artisans extends Fragment {
+public class Artisans extends Fragment implements AdapterView.OnItemSelectedListener {
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference artisansRef = db.collection("artisans");
@@ -42,6 +42,14 @@ public class Artisans extends Fragment {
                              Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_artisans, container, false);
+
+        Spinner sortBySpinner = (Spinner)view.findViewById(R.id.SortBySpinner);
+
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.sortArray, android.R.layout.simple_spinner_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortBySpinner.setAdapter(adapter);
+
+        sortBySpinner.setOnItemSelectedListener(this);
 
         setUpRecyclerView();
 
@@ -63,6 +71,13 @@ public class Artisans extends Fragment {
     }
 
 
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
+        //here we would sort according to what is selected
+    }
+
+    public void onNothingSelected(AdapterView<?> parent){
+        //don't do anything i think
+    }
 
     @Override
     public void onStart() {
