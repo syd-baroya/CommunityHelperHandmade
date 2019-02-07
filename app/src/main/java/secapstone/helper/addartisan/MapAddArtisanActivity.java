@@ -14,6 +14,8 @@ import secapstone.helper.R;
 public class MapAddArtisanActivity extends AppCompatActivity
 {
     EditText adr;
+    EditText zip;
+    EditText country;
     final int PLACE_PICKER_REQUEST = 1;
 
     @Override
@@ -43,6 +45,8 @@ public class MapAddArtisanActivity extends AppCompatActivity
             }
         });
         adr = (EditText)findViewById(R.id.artisanAddress);
+        zip = (EditText)findViewById(R.id.zipPostalEditText);
+        country = (EditText)findViewById(R.id.countryRegionEditText);
 
         Button selectOnMapButton = (Button) findViewById(R.id.selectOnMapButton);
         selectOnMapButton.setOnClickListener(new View.OnClickListener() {
@@ -80,7 +84,9 @@ public class MapAddArtisanActivity extends AppCompatActivity
 
     public void onClickNext5()
     {
-        setAddress(adr.getText().toString());
+        setAddress(adr.getText().toString(), zip.getText().toString(), country.getText().toString());
+        setZipPostalCode(zip.getText().toString());
+        setCountryRegion(country.getText().toString());
         startActivity(new Intent(MapAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
     }
 
@@ -89,7 +95,16 @@ public class MapAddArtisanActivity extends AppCompatActivity
         startActivity(new Intent(MapAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
     }
 
-    public void setAddress(String addr){
-        WelcomeAddArtisanActivity.artisanObject.setAddress(addr);
+    public void setAddress(String addr, String zip, String country){
+
+        WelcomeAddArtisanActivity.artisanObject.setAddress(addr + " " + country + ", " + zip);
+    }
+
+    public void setZipPostalCode(String zpc){
+        WelcomeAddArtisanActivity.artisanObject.setZipPostalCode(zpc);
+    }
+
+    public void setCountryRegion(String cr){
+        WelcomeAddArtisanActivity.artisanObject.setCountryRegion(cr);
     }
 }

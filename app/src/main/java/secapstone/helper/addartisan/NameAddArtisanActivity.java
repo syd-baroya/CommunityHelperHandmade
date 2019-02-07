@@ -44,6 +44,8 @@ public class NameAddArtisanActivity extends AppCompatActivity
     public void onClickNext2()
     {
         setName(inputFirst.getText().toString(), inputLast.getText().toString());
+        setFirstName(inputFirst.getText().toString());
+        setLastName(inputLast.getText().toString());
         startActivity(new Intent(NameAddArtisanActivity.this, PhotoAddArtisanActivity.class));
     }
 
@@ -55,5 +57,13 @@ public class NameAddArtisanActivity extends AppCompatActivity
     public void setName(String first, String last)
     {
         WelcomeAddArtisanActivity.artisanObject.setName(first + " " + last);
+    }
+
+    public void setFirstName(String f){
+        WelcomeAddArtisanActivity.artisanObject.setFirstName(f);
+    }
+
+    public void setLastName(String l){
+        WelcomeAddArtisanActivity.artisanObject.setLastName(l);
     }
 }

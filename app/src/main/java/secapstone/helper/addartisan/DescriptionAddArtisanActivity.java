@@ -13,6 +13,9 @@ import secapstone.helper.R;
 public class DescriptionAddArtisanActivity extends AppCompatActivity
 {
     EditText desInfo;
+    EditText craftInfo;
+    EditText howItsDoneInfo;
+    EditText inspirationInfo;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -42,11 +45,18 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
         });
 
         desInfo = (EditText)findViewById(R.id.artisanDescription);
+        craftInfo = (EditText)findViewById(R.id.craftEditText);
+        howItsDoneInfo = (EditText)findViewById(R.id.howItsMadeEditText);
+        inspirationInfo = (EditText)findViewById(R.id.inspirationEditText);
     }
 
     public void onClickNext6()
     {
         setDescription(desInfo.getText().toString());
+        setCraft(craftInfo.getText().toString());
+        setHowItsMade(howItsDoneInfo.getText().toString());
+        setInspiration(inspirationInfo.getText().toString());
+
         startActivity(new Intent(DescriptionAddArtisanActivity.this, SignatureAddArtisanActivity.class));
     }
 
@@ -58,5 +68,17 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
     public void setDescription(String des)
     {
         WelcomeAddArtisanActivity.artisanObject.setDescription(des);
+    }
+
+    public void setCraft(String c){
+        WelcomeAddArtisanActivity.artisanObject.setCraft(c);
+    }
+
+    public void setHowItsMade(String him){
+        WelcomeAddArtisanActivity.artisanObject.setHowItsMade(him);
+    }
+
+    public void setInspiration(String i){
+        WelcomeAddArtisanActivity.artisanObject.setInspiration(i);
     }
 }
