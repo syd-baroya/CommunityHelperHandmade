@@ -8,6 +8,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
+import android.view.inputmethod.EditorInfo;
 import android.widget.*;
 import secapstone.helper.R;
 
@@ -61,6 +62,19 @@ public class Artisans extends Fragment {
 
         firebaseSearchArtisans();
 
+        TextView.OnEditorActionListener exampleListener = new TextView.OnEditorActionListener() {
+            @Override
+            public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
+                if (actionId == EditorInfo.IME_ACTION_DONE) {
+                    firebaseSearchArtisans();
+                }
+
+                return true;
+            }
+        };
+
+        artisanSearchField.setOnEditorActionListener(exampleListener);
+        artisanSearchField.setImeActionLabel("Search", KeyEvent.KEYCODE_ENTER);
     }
 
     private void firebaseSearchArtisans() {
