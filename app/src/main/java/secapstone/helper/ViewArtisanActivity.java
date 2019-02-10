@@ -85,14 +85,14 @@ public class ViewArtisanActivity extends AppCompatActivity {
         TextView nameTitle = findViewById(R.id.artisan_name);
         nameTitle.setText(name);
 
-        TextView descriptionTitle = findViewById(R.id.artisan_description);
-        descriptionTitle.setText(description);
-
-        TextView phoneTitle = findViewById(R.id.artisan_phone);
-        phoneTitle.setText(phone);
-
-        TextView addressTitle = findViewById(R.id.artisan_address);
-        addressTitle.setText(address);
+//        TextView descriptionTitle = findViewById(R.id.artisan_description);
+//        descriptionTitle.setText(description);
+//
+//        TextView phoneTitle = findViewById(R.id.artisan_phone);
+//        phoneTitle.setText(phone);
+//
+//        TextView addressTitle = findViewById(R.id.artisan_address);
+//        addressTitle.setText(address);
 
         final ImageView image = findViewById(R.id.artisan_banner_image);
 

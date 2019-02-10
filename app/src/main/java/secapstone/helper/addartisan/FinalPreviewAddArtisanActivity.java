@@ -37,7 +37,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_preview_add_artisan);
 
-        Button nextButton8 = (Button) findViewById(R.id.nextButton8);
+        Button nextButton8 = (Button) findViewById(R.id.finishButton);
         nextButton8.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -72,7 +72,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
 
     public void onClickNext8()
     {
-        Button nextButton8 = (Button) findViewById(R.id.nextButton8);
+        Button nextButton8 = (Button) findViewById(R.id.finishButton);
 
         nextButton8.setText("Uploading...");
         pushArtisan(WelcomeAddArtisanActivity.artisanObject);

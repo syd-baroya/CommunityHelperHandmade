@@ -26,7 +26,8 @@
         android:layout_width="300dp"
         android:layout_height="300dp"
         tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="46dp" />
+        tools:layout_editor_absoluteY="46dp"
+        tools:ignore="MissingConstraints" />
 
     <TextView
         android:id="@+id/artisan_phone2"

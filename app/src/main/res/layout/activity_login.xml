@@ -9,7 +9,7 @@
 
     <TextView
         android:id="@+id/forgot_password"
-        style="@style/Widget.AppCompat.Button.Borderless"
+        style="@style/GrayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="16dp"

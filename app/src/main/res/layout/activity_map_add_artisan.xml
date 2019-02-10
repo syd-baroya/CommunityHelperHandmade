@@ -25,18 +25,53 @@
 
     <EditText
         android:id="@+id/artisanAddress"
+        style="@style/TextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="16dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="32dp"
+        android:layout_marginEnd="16dp"
         android:fontFamily="@font/googlesans"
         android:hint="Artisan Address"
         android:inputType="textPostalAddress"
+        app:layout_constraintBottom_toTopOf="@+id/zipPostalEditText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/addressPrompt" />
+
+    <EditText
+        android:id="@+id/zipPostalEditText"
+        style="@style/TextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
+        android:fontFamily="@font/googlesans"
+        android:hint="Zip/Postal Code"
+        app:layout_constraintBottom_toTopOf="@+id/countryRegionEditText"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artisanAddress" />
+
+    <EditText
+        android:id="@+id/countryRegionEditText"
+        style="@style/TextInput"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:ems="10"
+        android:fontFamily="@font/googlesans"
+        android:hint="Country/Region"
+        android:inputType="textPersonName"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/zipPostalEditText" />
 
     <TextView
         android:id="@+id/addressPrompt"
@@ -52,36 +87,53 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/progressBar5" />
 
-    <Button
-        android:id="@+id/selectOnMapButton"
-        android:layout_width="match_parent"
+    <TextView
+        android:id="@+id/textView8"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:background="@drawable/primary_button_background"
-        android:fontFamily="@font/googlesans_bold"
-        android:text="Select on Map"
-        android:textColor="#fff"
+        android:layout_marginStart="196dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="196dp"
+        android:layout_marginBottom="48dp"
+        android:fontFamily="@font/googlesans"
+        android:text="OR"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/selectOnMapButton"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/countryRegionEditText" />
 
-    <LinearLayout
+    <Button
+        android:id="@+id/selectOnMapButton"
+        style="@style/RedButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="28dp"
-        android:layout_marginEnd="24dp"
-        android:orientation="horizontal"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="48dp"
+        android:layout_marginEnd="16dp"
+        android:fontFamily="@font/googlesans"
+        android:text="Select on Map"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/selectOnMapButton">
+        app:layout_constraintTop_toBottomOf="@+id/textView8" />
+
+
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="30dp"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent">>
 
         <Button
             android:id="@+id/backButton5"
+            style="@style/GrayButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
@@ -89,40 +141,11 @@
 
         <Button
             android:id="@+id/nextButton5"
+            style="@style/PrimaryButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
             android:text="Next" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/zipPostalEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:fontFamily="@font/googlesans"
-        android:hint="Zip/Postal Code"
-        android:inputType="text|textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artisanAddress" />
-
-    <EditText
-        android:id="@+id/countryRegionEditText"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginEnd="24dp"
-        android:ems="10"
-        android:fontFamily="@font/googlesans"
-        android:hint="Country/Region"
-        android:inputType="textPersonName"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/zipPostalEditText" />
 
 </android.support.constraint.ConstraintLayout>

@@ -27,6 +27,7 @@
 
     <EditText
         android:id="@+id/amountToPayText"
+        style="@style/TextInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -41,12 +42,12 @@
 
     <Button
         android:id="@+id/makePaymentButton"
+        style="@style/PrimaryButton"
         android:layout_width="137dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
         android:layout_marginTop="64dp"
         android:layout_marginEnd="24dp"
-        android:background="@drawable/primary_button_background"
         android:fontFamily="@font/googlesans"
         android:text="Make Payment"
         android:textColor="#fff"
@@ -67,6 +68,7 @@
 
     <EditText
         android:id="@+id/DateTextBox"
+        style="@style/TextInput"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
