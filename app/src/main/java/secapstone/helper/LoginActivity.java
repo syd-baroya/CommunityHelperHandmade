@@ -32,8 +32,8 @@ import secapstone.helper.R;
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
 
     TextView btnForgotPass;
-
     ConstraintLayout activity_login;
+
 
     private RequestContext requestContext;
     @Override
