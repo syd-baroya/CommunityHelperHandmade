@@ -83,12 +83,12 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
             Log.d("info", "When we click last name");
         }*/
 
-        if (pos == 0){
-            System.out.println("First Name");
+        if (pos == 1){
+            //System.out.println("First Name");
             Log.d("info", "First Name");
         }
-        else if (pos == 1){
-            System.out.println("Last Name");
+        else if (pos == 2){
+            //System.out.println("Last Name");
             Log.d("info", "Last Name");
         }
     }
