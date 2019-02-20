@@ -31,6 +31,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
     private View view;
 
+    RecyclerView recyclerView;
 
     public Artisans() {
         // Required empty public constructor
@@ -51,10 +52,14 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
         sortBySpinner.setOnItemSelectedListener(this);
 
+        recyclerView = view.findViewById(R.id.recycler_view);
+
         setUpRecyclerView("lastName");
 
         return view;
     }
+
+
 
     private void setUpRecyclerView(String sortBy) {
         Query query = artisansRef.orderBy(sortBy, Query.Direction.ASCENDING);
@@ -72,25 +77,31 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-        /*Object choice = parent.getItemAtPosition(pos);
 
-        if (choice.equals("First Name")){
-            setUpRecyclerView("firstName");
-            Log.d("info", "When we click first name");
-        }
-        else if (choice.equals("Last Name")){
-            setUpRecyclerView("lastName");
-            Log.d("info", "When we click last name");
-        }*/
-
+        Query query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
         if (pos == 1){
             //System.out.println("First Name");
             Log.d("info", "First Name");
+            //setUpRecyclerView("firstName");
+            query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
         }
         else if (pos == 2){
             //System.out.println("Last Name");
-            Log.d("info", "Last Name");
+            //setUpRecyclerView("lastName");
+            query = artisansRef.orderBy("lastName", Query.Direction.ASCENDING);
         }
+
+        FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
+                .setQuery(query, Artisan.class)
+                .build();
+
+        adapter = new ArtisanAdapter(options, getContext());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
+
     }
 
     public void onNothingSelected(AdapterView<?> parent){
