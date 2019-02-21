@@ -3,7 +3,7 @@ package secapstone.helper;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 
-import com.saga.communityhelperhandmade.R;
+import secapstone.helper.R;
 
 public class NewListingActivity extends AppCompatActivity {
 
