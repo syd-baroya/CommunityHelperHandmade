@@ -27,13 +27,33 @@ public class SellerToArtisanPayout
             List<Artisan> artisans = getArtisans();
             List<AmazonTransaction> transactions = getTransactions();
 
+            boolean foundTransaction = false;
             for (AmazonTransaction t : transactions) {
-                for (Artisan a : artisans) {
-                    for (Listing l : a.getListings()) {
-                        if (t.productID == l.productID) {
-                            a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
+
+                if (!foundTransaction) {
+
+                    for (Artisan a : artisans) {
+
+                        if (!foundTransaction) {
+
+                            for (Listing l : a.getListings()) {
+
+                                if (t.productID == l.productID) {
+                                    a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
+                                    foundTransaction = true;
+                                    break;
+                                }
+                            }
+                        }
+                        else
+                        {
+                            break;
                         }
                     }
+                }
+                else
+                {
+                    break;
                 }
             }
 
