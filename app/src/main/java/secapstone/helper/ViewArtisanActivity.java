@@ -37,32 +37,15 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         getIncomingIntent();
 
-        Button reportsButton = (Button) findViewById(R.id.reportsButton);
-        reportsButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                onClickReportsButton();
-            }
-        });
-
         Button logPaymentButton = (Button) findViewById(R.id.logPaymentButton);
         logPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
-                onClickLogPayments();
+                onClickLogPayments(view);
             }
         });
 
-        Button contactInfoButton = (Button) findViewById(R.id.contactInfoButton);
-        contactInfoButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                onClickContactInfoButton();
-            }
-        });
     }
 
     private void getIncomingIntent() {
@@ -118,17 +101,17 @@ public class ViewArtisanActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickReportsButton()
+    public void onClickReportsButton(View view)
     {
         startActivity(new Intent(ViewArtisanActivity.this, ViewReportsActivity.class));
     }
 
-    public void onClickLogPayments()
+    public void onClickLogPayments(View view)
     {
         startActivity(new Intent(ViewArtisanActivity.this, LogPaymentActivity.class));
     }
 
-    public void onClickContactInfoButton()
+    public void onClickContactInfoButton(View view)
     {
         Intent intent = new Intent(ViewArtisanActivity.this, ViewContactInfoActivity.class);
         intent.putExtra(EXTRA_A_NAME, artisanName);
