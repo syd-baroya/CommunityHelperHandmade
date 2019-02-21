@@ -3,20 +3,21 @@ package secapstone.helper;
 
 import android.content.Intent;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
 import android.widget.*;
+import android.app.*;
 import secapstone.helper.R;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
-
-import java.util.ArrayList;
 
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 
@@ -24,13 +25,13 @@ import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
  * A simple {@link Fragment} subclass.
  */
 public class Artisans extends Fragment implements AdapterView.OnItemSelectedListener {
-
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference artisansRef = db.collection("artisans");
     private ArtisanAdapter adapter;
 
     private View view;
 
+    RecyclerView recyclerView;
 
     public Artisans() {
         // Required empty public constructor
@@ -51,13 +52,17 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
         sortBySpinner.setOnItemSelectedListener(this);
 
-        setUpRecyclerView();
+        recyclerView = view.findViewById(R.id.recycler_view);
+
+        setUpRecyclerView("lastName");
 
         return view;
     }
 
-    private void setUpRecyclerView() {
-        Query query = artisansRef.orderBy("name", Query.Direction.DESCENDING);
+
+
+    private void setUpRecyclerView(String sortBy) {
+        Query query = artisansRef.orderBy(sortBy, Query.Direction.ASCENDING);
         FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
                 .setQuery(query, Artisan.class)
                 .build();
@@ -72,7 +77,31 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
 
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-        //here we would sort according to what is selected
+
+        Query query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
+        if (pos == 1){
+            //System.out.println("First Name");
+            Log.d("info", "First Name");
+            //setUpRecyclerView("firstName");
+            query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
+        }
+        else if (pos == 2){
+            //System.out.println("Last Name");
+            //setUpRecyclerView("lastName");
+            query = artisansRef.orderBy("lastName", Query.Direction.ASCENDING);
+        }
+
+        FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
+                .setQuery(query, Artisan.class)
+                .build();
+
+        adapter = new ArtisanAdapter(options, getContext());
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
+
     }
 
     public void onNothingSelected(AdapterView<?> parent){
