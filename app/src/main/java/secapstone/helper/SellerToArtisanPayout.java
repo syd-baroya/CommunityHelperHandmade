@@ -22,7 +22,7 @@ public class SellerToArtisanPayout
         List<Artisan> artisans = getArtisans();
         List<Double> transaction = getTransactions();
 
-
+        System.out.println();
     }
 
     public static List<Double> getTransactions()
