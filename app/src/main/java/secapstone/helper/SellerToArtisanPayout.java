@@ -9,6 +9,9 @@ import java.util.List;
 public class SellerToArtisanPayout
 {
 
+    private static long timeLastRun = -1;
+    private static long timeBetweenEachRun = 86400000;
+
     /*
       Gets all the artisans for the Community Leader.
       Calculates how long since the last run to avoid overusing APIs.
@@ -19,21 +22,22 @@ public class SellerToArtisanPayout
      */
     public static void CalculatePayouts()
     {
-        List<Artisan> artisans = getArtisans();
-        List<AmazonTransaction> transactions = getTransactions();
-
-        for (AmazonTransaction t: transactions)
+        if (System.currentTimeMillis() >= timeLastRun + timeBetweenEachRun)
         {
-            for (Artisan a: artisans)
-            {
-                for (Listing l: a.getListings())
-                {
-                    if (t.productID == l.productID)
-                    {
-                        a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
+            List<Artisan> artisans = getArtisans();
+            List<AmazonTransaction> transactions = getTransactions();
+
+            for (AmazonTransaction t : transactions) {
+                for (Artisan a : artisans) {
+                    for (Listing l : a.getListings()) {
+                        if (t.productID == l.productID) {
+                            a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
+                        }
                     }
                 }
             }
+
+            timeLastRun = System.currentTimeMillis();
         }
     }
 
