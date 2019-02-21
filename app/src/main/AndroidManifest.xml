@@ -82,7 +82,9 @@
                 android:resource="@xml/file_paths" />
         </provider>
 
-        <activity android:name=".ViewContactInfoActivity"></activity>
+        <activity android:name=".ViewContactInfoActivity"
+            android:theme="@style/AppTheme.PopUpWindow"
+            ></activity>
     </application>
 
 </manifest>

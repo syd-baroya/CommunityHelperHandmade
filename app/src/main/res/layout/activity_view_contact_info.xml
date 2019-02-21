@@ -7,42 +7,95 @@
     tools:context=".ViewContactInfoActivity">
 
     <TextView
-        android:id="@+id/artisan_name2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginBottom="308dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
-        android:fontFamily="@font/googlesans_bold"
-        android:text="Sarah"
+        android:id="@+id/phone_num"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:fontFamily="@font/googlesans_regular"
+        android:text="Phone Number:"
         android:textColor="#000"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="@+id/mapView"
+        android:textSize="32sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent" />
-
-    <com.google.android.gms.maps.MapView
-        android:id="@+id/mapView"
-        android:layout_width="300dp"
-        android:layout_height="300dp"
-        tools:layout_editor_absoluteX="51dp"
-        tools:layout_editor_absoluteY="46dp"
-        tools:ignore="MissingConstraints" />
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:layout_editor_absoluteY="144dp" />
 
     <TextView
         android:id="@+id/artisan_phone2"
         android:layout_width="0dp"
-        android:layout_height="21dp"
+        android:layout_height="43dp"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="36dp"
+        android:layout_marginTop="8dp"
         android:fontFamily="@font/googlesans_regular"
         android:textColor="#000"
-        android:textSize="16sp"
+        android:textSize="28sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/getDirectionsButton" />
+        app:layout_constraintTop_toBottomOf="@+id/phone_num" />
+
+    <Button
+        android:id="@+id/callNowButton"
+        android:layout_width="162dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/primary_button_background"
+        android:fontFamily="@font/googlesans"
+        android:text="Call"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artisan_phone2" />
+
+    <Button
+        android:id="@+id/textNowButton"
+        android:layout_width="164dp"
+        android:layout_height="wrap_content"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:background="@drawable/primary_button_background"
+        android:fontFamily="@font/googlesans"
+        android:text="Text"
+        android:textColor="#fff"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/artisan_phone2" />
+
+    <TextView
+        android:id="@+id/address"
+        android:layout_width="0dp"
+        android:layout_height="45dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="12dp"
+        android:fontFamily="@font/googlesans_regular"
+        android:text="Address:"
+        android:textColor="#000"
+        android:textSize="32sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/callNowButton" />
+
+    <TextView
+        android:id="@+id/artisan_address"
+        android:layout_width="0dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="24dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="8dp"
+        android:fontFamily="@font/googlesans_regular"
+        android:textColor="#000"
+        android:textSize="20sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/address" />
 
     <Button
         android:id="@+id/getDirectionsButton"
@@ -50,29 +103,13 @@
         android:layout_height="wrap_content"
         android:layout_marginEnd="24dp"
         android:layout_marginStart="24dp"
-        android:layout_marginTop="20dp"
         android:background="@drawable/primary_button_background"
         android:fontFamily="@font/googlesans"
-        android:text="Get Directions"
+        android:text="Open in Maps"
         android:textColor="#fff"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/mapView" />
+        app:layout_constraintTop_toBottomOf="@+id/artisan_address" />
 
-    <Button
-        android:id="@+id/callNowButton"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginEnd="24dp"
-        android:layout_marginStart="24dp"
-        android:layout_marginTop="7dp"
-        android:background="@drawable/primary_button_background"
-        android:fontFamily="@font/googlesans"
-        android:text="Call Now"
-        android:textColor="#fff"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="1.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artisan_phone2" />
 </android.support.constraint.ConstraintLayout>

@@ -58,5 +58,10 @@
         <item name="android:textColor">#0D5455</item>
         <item name="android:background">@drawable/green_button_background</item>
     </style>
+    
+    <style name="AppTheme.PopUpWindow" >
+        <item name="android:windowIsTranslucent">true</item>
+        <item name="android:windowCloseOnTouchOutside">true</item>
+    </style>
 
 </resources>

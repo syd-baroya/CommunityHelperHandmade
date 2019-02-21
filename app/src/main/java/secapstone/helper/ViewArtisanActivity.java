@@ -26,7 +26,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public static String artisanName;
     public static String artisanAddress;
     public static String artisanPhone;
-    public static String EXTRA_A_NAME = "com.example.application.example.artisanName";
     public static String EXTRA_A_ADDRESS = "com.example.application.example.artisanAddress";
     public static String EXTRA_A_PHONE = "com.example.application.example.artisanPhone";
 
@@ -114,7 +113,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onClickContactInfoButton(View view)
     {
         Intent intent = new Intent(ViewArtisanActivity.this, ViewContactInfoActivity.class);
-        intent.putExtra(EXTRA_A_NAME, artisanName);
         intent.putExtra(EXTRA_A_ADDRESS, artisanAddress);
         intent.putExtra(EXTRA_A_PHONE, artisanPhone);
         startActivity(intent);
