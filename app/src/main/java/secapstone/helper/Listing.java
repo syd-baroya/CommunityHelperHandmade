@@ -14,6 +14,8 @@ public class Listing
     private String description = "";
     private ProductCategory category;
 
+    public float productID;
+
     public Listing()
     {
 

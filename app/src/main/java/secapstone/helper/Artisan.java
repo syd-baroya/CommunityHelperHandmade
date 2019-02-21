@@ -3,6 +3,9 @@ package secapstone.helper;
 
 //Must match artisan in Firebase!
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Artisan {
     private String name;
     private String description;
@@ -21,6 +24,8 @@ public class Artisan {
     private String pinterest;
     private String instagram;
     private boolean customOrders;*/
+    private float moneyOwedFromCommunityLeader;
+    private List<Listing> listings = new ArrayList<Listing>();
 
 
     public Artisan(String name, String description, String phoneNumber, String pictureURL) {
@@ -29,6 +34,8 @@ public class Artisan {
 
         this.phoneNumber = phoneNumber;
         this.pictureURL = pictureURL;
+
+        moneyOwedFromCommunityLeader = 0f;
     }
 
     public Artisan() {
@@ -114,4 +121,12 @@ public class Artisan {
     public String getPictureURL() { return pictureURL;}
 
     public String getAddress() {return address;}
+
+    public float getMoneyOwedFromCommunityLeader() { return moneyOwedFromCommunityLeader; }
+
+    public void setMoneyOwedFromCommunityLeader(float newMoneyOwedFromCommunityLeader) { moneyOwedFromCommunityLeader = newMoneyOwedFromCommunityLeader; }
+
+    public List<Listing> getListings() { return listings; }
+
+    public void addListing(Listing newListing) { listings.add(newListing); }
 }

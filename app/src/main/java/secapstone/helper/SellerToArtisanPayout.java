@@ -20,26 +20,34 @@ public class SellerToArtisanPayout
     public static void CalculatePayouts()
     {
         List<Artisan> artisans = getArtisans();
-        List<MyTranaction> transaction = getTransactions();
+        List<AmazonTransaction> transactions = getTransactions();
 
-        for (MyTransaction t in transactions)
+        for (AmazonTransaction t: transactions)
         {
-
+            for (Artisan a: artisans)
+            {
+                for (Listing l: a.getListings())
+                {
+                    if (t.productID == l.productID)
+                    {
+                        a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
+                    }
+                }
+            }
         }
     }
 
-    public static List<MyTransaction> getTransactions()
+    public static List<AmazonTransaction> getTransactions()
     {
-        List<Double> transactions = new ArrayList<Double>();
-
+        List<AmazonTransaction> transactions = new ArrayList<AmazonTransaction>();
+        //TODO This is where Amazon MWS API call is.
         return transactions;
     }
 
     public static List<Artisan> getArtisans()
     {
         List<Artisan> artisans = new ArrayList<Artisan>();
-
-
+        //TODO grab artisans from firebase
         return artisans;
     }
 }
