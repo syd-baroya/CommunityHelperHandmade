@@ -20,12 +20,15 @@ public class SellerToArtisanPayout
     public static void CalculatePayouts()
     {
         List<Artisan> artisans = getArtisans();
-        List<Double> transaction = getTransactions();
+        List<MyTranaction> transaction = getTransactions();
 
-        System.out.println();
+        for (MyTransaction t in transactions)
+        {
+
+        }
     }
 
-    public static List<Double> getTransactions()
+    public static List<MyTransaction> getTransactions()
     {
         List<Double> transactions = new ArrayList<Double>();
 
