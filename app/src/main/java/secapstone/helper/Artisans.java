@@ -10,11 +10,8 @@ import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
 import android.widget.*;
-import android.app.*;
-import secapstone.helper.R;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
@@ -35,6 +32,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     private Button searchButton;
     private RecyclerView recyclerView;
     private Spinner sortBySpinner;
+    private Button addArtisanButton;
 
     public Artisans() {
         // Required empty public constructor
@@ -47,12 +45,13 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
         view = inflater.inflate(R.layout.fragment_artisans, container, false);
 
-        artisanSearchField = (EditText) view.findViewById(R.id.searchArtisanField);
-        searchButton = (Button) view.findViewById(R.id.searchArtisanButton);
+        artisanSearchField = view.findViewById(R.id.searchArtisanField);
+        searchButton = view.findViewById(R.id.searchArtisanButton);
         recyclerView = view.findViewById(R.id.artisan_recycler_view);
-        sortBySpinner = (Spinner)view.findViewById(R.id.SortBySpinner);
+        sortBySpinner = view.findViewById(R.id.SortBySpinner);
+        addArtisanButton = view.findViewById(R.id.addArtisanButton);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.sortArray, android.R.layout.simple_spinner_item);
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.sortArray, R.layout.spinner_dropdown_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter);
         sortBySpinner.setOnItemSelectedListener(this);
@@ -66,21 +65,25 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
             }
         });
 
-        firebaseSearchArtisans();
-
         artisanSearchField.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                Log.d("Artisans", "Enter pressed");
-                // If the event is a key-down event on the "enter" button
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    // Perform action on key press
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
                     firebaseSearchArtisans();
-                    Log.d("Artisans", "Enter pressed");
                     return true;
                 }
                 return false;
             }
         });
+
+
+        addArtisanButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickAddArtisan();
+            }
+        });
+
+        firebaseSearchArtisans();
 
         return view;
     }
@@ -158,6 +161,12 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         adapter.notifyDataSetChanged();
         adapter.startListening();
     }
+
+    public void onClickAddArtisan()
+    {
+        startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
+    }
+
 
     @Override
     public void onStart() {

@@ -50,20 +50,6 @@
                 app:layout_constraintVertical_chainStyle="spread_inside" />
 
             <Button
-                android:id="@+id/addArtisanButton"
-                style="@style/PrimaryButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:drawableRight="@drawable/plus_sign"
-                android:text="New Artisan"
-                app:layout_constraintBottom_toTopOf="@+id/logoutButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button6" />
-
-            <Button
                 android:id="@+id/logoutButton"
                 style="@style/GrayButton"
                 android:layout_width="match_parent"
