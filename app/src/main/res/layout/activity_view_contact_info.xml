@@ -4,7 +4,8 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ViewContactInfoActivity">
+    tools:context=".ViewContactInfoActivity"
+    android:background="#000000dd">
 
     <TextView
         android:id="@+id/phone_num"

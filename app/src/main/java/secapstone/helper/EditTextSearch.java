@@ -2,6 +2,7 @@ package secapstone.helper;
 
 import android.content.Context;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 
 public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {
@@ -24,8 +25,9 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     @Override
     public boolean onKeyPreIme( int key_code, KeyEvent event )
     {
-        if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP )
+        if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP ) {
             this.clearFocus();
+        }
 
         return super.onKeyPreIme( key_code, event );
     }

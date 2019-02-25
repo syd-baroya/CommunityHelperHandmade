@@ -37,14 +37,6 @@ public class Profile extends Fragment {
             }
         });
 
-        Button addArtisanButton = (Button) view.findViewById(R.id.addArtisanButton);
-        addArtisanButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickAddArtisan();
-            }
-        });
-
 
         return view;
     }
@@ -53,11 +45,6 @@ public class Profile extends Fragment {
     {
         startActivity(new Intent(getContext(), LoginActivity.class));
         getActivity().finish(); //Since we are logging out, close MainActivity so you can't use back button.
-    }
-
-    public void onClickAddArtisan()
-    {
-        startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
     }
 
 }
