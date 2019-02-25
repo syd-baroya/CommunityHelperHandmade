@@ -30,9 +30,9 @@ public class Artisans extends Fragment {
 
     private View view;
 
-    TextView artisanSearchField;
-    Button searchButton;
-    RecyclerView recyclerView;
+    private TextView artisanSearchField;
+    private Button searchButton;
+    private RecyclerView recyclerView;
 
 
     public Artisans() {
@@ -50,7 +50,7 @@ public class Artisans extends Fragment {
     @Override
     public void onViewCreated(View view, Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        artisanSearchField = (TextView) view.findViewById(R.id.searchArtisanField);
+        artisanSearchField = (EditText) view.findViewById(R.id.searchArtisanField);
         searchButton = (Button) view.findViewById(R.id.searchArtisanButton);
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -62,19 +62,19 @@ public class Artisans extends Fragment {
 
         firebaseSearchArtisans();
 
-        TextView.OnEditorActionListener exampleListener = new TextView.OnEditorActionListener() {
-            @Override
-            public boolean onEditorAction(TextView exampleView, int actionId, KeyEvent event) {
-                if (actionId == EditorInfo.IME_ACTION_DONE) {
+        artisanSearchField.setOnKeyListener(new View.OnKeyListener() {
+            public boolean onKey(View v, int keyCode, KeyEvent event) {
+                Log.d("Artisans", "Enter pressed");
+                // If the event is a key-down event on the "enter" button
+                if ((event.getAction() == KeyEvent.ACTION_DOWN) || (keyCode == KeyEvent.KEYCODE_ENTER)) {
+                    // Perform action on key press
                     firebaseSearchArtisans();
+                    Log.d("Artisans", "Enter pressed");
+                    return true;
                 }
-
-                return true;
+                return false;
             }
-        };
-
-        artisanSearchField.setOnEditorActionListener(exampleListener);
-        artisanSearchField.setImeActionLabel("Search", KeyEvent.KEYCODE_ENTER);
+        });
     }
 
     private void firebaseSearchArtisans() {
