@@ -49,7 +49,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
             }
         });
 
-        if(model.getPictureURL()!=null) {
+        if(model.getPictureURL()!= null) {
             storageRef.child(model.getPictureURL()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
@@ -66,7 +66,6 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
             });
         } else {
             copy.image.setImageResource(R.drawable.ic_empty_person);
-            //copy.image.setCircleBackgroundColorResource(R.color.colorPrimaryLight);
         }
 
     }
