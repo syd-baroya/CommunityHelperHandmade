@@ -49,8 +49,8 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="28dp"
             android:background="@drawable/gray_filterbutton_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchArtisanField">
@@ -58,7 +58,7 @@
             <Spinner
                 android:id="@+id/SortBySpinner"
                 android:layout_width="110dp"
-                android:layout_height="41dp"
+                android:layout_height="34dp"
                 android:background="@android:color/transparent"
                 android:theme="@style/SpinnerTheme"
                 app:layout_constraintBottom_toBottomOf="parent"
@@ -66,14 +66,14 @@
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:layout_width="12dp"
-                android:layout_height="6dp"
+                android:layout_width="8dp"
+                android:layout_height="4dp"
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
                 android:layout_marginEnd="16dp"
                 android:adjustViewBounds="false"
-                android:scaleType="centerInside"
+                android:scaleType="fitXY"
                 android:src="@drawable/icon_down_carrot"
                 app:layout_constraintBottom_toBottomOf="@+id/SortBySpinner"
                 app:layout_constraintEnd_toEndOf="@+id/SortBySpinner"
@@ -104,7 +104,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/constraintLayout2"
+            app:layout_constraintTop_toBottomOf="@+id/addArtisanButton"
             app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>

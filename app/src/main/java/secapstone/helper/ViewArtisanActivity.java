@@ -36,7 +36,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         getIncomingIntent();
 
-        Button logPaymentButton = (Button) findViewById(R.id.logPaymentButton);
+        Button logPaymentButton = findViewById(R.id.logPaymentButton);
         logPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -108,6 +108,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onClickLogPayments(View view)
     {
         startActivity(new Intent(ViewArtisanActivity.this, LogPaymentActivity.class));
+    }
+
+    public void onClickBackButton(View view)
+    {
+        startActivity(new Intent(ViewArtisanActivity.this, MainActivity.class));
     }
 
     public void onClickContactInfoButton(View view)
