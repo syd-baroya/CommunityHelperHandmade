@@ -49,21 +49,22 @@
             android:id="@+id/constraintLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="28dp"
+            android:layout_marginStart="22dp"
+            android:layout_marginTop="24dp"
             android:background="@drawable/gray_filterbutton_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchArtisanField">
 
             <Spinner
                 android:id="@+id/SortBySpinner"
-                android:layout_width="110dp"
+                android:layout_width="wrap_content"
                 android:layout_height="34dp"
                 android:background="@android:color/transparent"
                 android:theme="@style/SpinnerTheme"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
+                app:layout_constraintTop_toTopOf="parent"
+                android:paddingRight="30dp"/>
 
             <ImageView
                 android:layout_width="8dp"
@@ -71,7 +72,8 @@
                 android:layout_alignParentRight="true"
                 android:layout_centerVertical="true"
                 android:layout_gravity="center"
-                android:layout_marginEnd="16dp"
+                android:layout_marginStart="16dp"
+                android:layout_marginEnd="14dp"
                 android:adjustViewBounds="false"
                 android:scaleType="fitXY"
                 android:src="@drawable/icon_down_carrot"
@@ -84,12 +86,15 @@
         <Button
             android:id="@+id/addArtisanButton"
             style="@style/PrimaryButton"
-            android:layout_width="150dp"
+            android:layout_width="140dp"
             android:layout_height="40dp"
-            android:layout_marginTop="24dp"
-            android:layout_marginEnd="24dp"
-            android:drawableRight="@drawable/plus_sign"
+            android:layout_marginTop="20dp"
+            android:layout_marginEnd="22dp"
+            android:drawableRight="@drawable/plus_image_white"
+            android:paddingLeft="18dp"
+            android:paddingRight="18dp"
             android:text="New Artisan"
+            android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchArtisanField" />
 
@@ -97,7 +102,7 @@
             android:id="@+id/artisan_recycler_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="16dp"
             android:clipChildren="false"
             android:clipToPadding="false"
             app:layout_constraintBottom_toBottomOf="parent"
