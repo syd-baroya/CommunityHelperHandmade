@@ -10,7 +10,7 @@ public class SellerToArtisanPayout
 {
 
     private static long timeLastRun = -1;
-    private static long timeBetweenEachRun = 86400000;
+    private static final long timeBetweenEachRun = 86400000;
 
     /*
       Gets all the artisans for the Community Leader.
@@ -25,21 +25,28 @@ public class SellerToArtisanPayout
         if (System.currentTimeMillis() >= timeLastRun + timeBetweenEachRun)
         {
             List<Artisan> artisans = getArtisans();
-            List<AmazonTransaction> transactions = getTransactions();
+            List<AmazonTransaction> transactions = getTransactions(timeLastRun);
 
-            boolean foundTransaction = false;
+            float totalFromTransactionPeriod = 0;
+
             for (AmazonTransaction t : transactions) {
 
-                if (!foundTransaction) {
+                boolean foundTransaction = false;
 
-                    for (Artisan a : artisans) {
+                for (Artisan a : artisans)
+                {
 
-                        if (!foundTransaction) {
+                        if (!foundTransaction)
+                        {
 
-                            for (Listing l : a.getListings()) {
+                            for (Listing l : a.getListings())
+                            {
 
-                                if (t.productID == l.productID) {
+                                if (t.productID == l.productID)
+                                {
                                     a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
+                                    totalFromTransactionPeriod += t.amount;
+
                                     foundTransaction = true;
                                     break;
                                 }
@@ -51,20 +58,17 @@ public class SellerToArtisanPayout
                         }
                     }
                 }
-                else
-                {
-                    break;
-                }
             }
 
             timeLastRun = System.currentTimeMillis();
         }
     }
 
-    public static List<AmazonTransaction> getTransactions()
+    public static List<AmazonTransaction> getTransactions(long startTime)
     {
         List<AmazonTransaction> transactions = new ArrayList<AmazonTransaction>();
         //TODO This is where Amazon MWS API call is.
+        //TODO Only get transactions after startTime.
         return transactions;
     }
 
