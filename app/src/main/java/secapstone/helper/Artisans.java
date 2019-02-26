@@ -63,6 +63,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                artisanSearchField.setText("");
                 firebaseSearchArtisans();
             }
         });
