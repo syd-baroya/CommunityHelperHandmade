@@ -1,8 +1,10 @@
 package secapstone.helper;
 
+import android.annotation.TargetApi;
 import android.app.AlertDialog;
 import android.app.ProgressDialog;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
@@ -39,6 +41,9 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setStatusBarToWhite();
+
         setContentView(R.layout.activity_login);
 
         btnForgotPass = (TextView) findViewById(R.id.forgot_password);
@@ -107,6 +112,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                     /* The user is signed in */
                     System.out.println("user is signed in");
                     startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                    finish();
 
                 } else {
                     /* The user is not signed in */
@@ -142,6 +148,16 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
             }
         });
+    }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToWhite() {
+        getWindow().setStatusBarColor(Color.WHITE);
     }
 
 }
