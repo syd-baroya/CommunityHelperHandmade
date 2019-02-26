@@ -16,9 +16,9 @@ enum SearchState
 
 public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {
 
-    Activity activity;
-    Button searchButton;
-    SearchState state;
+    private Activity activity;
+    private Button searchButton;
+    public SearchState state;
 
     public EditTextSearch( Context context )
     {
@@ -45,8 +45,7 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     }
 
     @Override
-    public boolean onKeyPreIme( int key_code, KeyEvent event )
-    {
+    public boolean onKeyPreIme( int key_code, KeyEvent event ) {
         if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP ) {
             this.clearFocus();
         }

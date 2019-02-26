@@ -33,7 +33,7 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
             android:id="@+id/searchArtisanButton"
@@ -44,14 +44,15 @@
             android:background="@drawable/search_icon"
             app:layout_constraintBottom_toBottomOf="@+id/searchArtisanField"
             app:layout_constraintEnd_toEndOf="@+id/searchArtisanField"
-            app:layout_constraintTop_toTopOf="@+id/searchArtisanField" />
+            app:layout_constraintTop_toTopOf="@+id/searchArtisanField"
+            android:onClick=""/>
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="22dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="22dp"
             android:background="@drawable/gray_filterbutton_background"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/searchArtisanField">
@@ -61,11 +62,11 @@
                 android:layout_width="wrap_content"
                 android:layout_height="34dp"
                 android:background="@android:color/transparent"
+                android:paddingRight="30dp"
                 android:theme="@style/SpinnerTheme"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                android:paddingRight="30dp"/>
+                app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
                 android:layout_width="8dp"
@@ -88,7 +89,7 @@
             android:id="@+id/addArtisanButton"
             style="@style/PrimaryButton"
             android:layout_width="140dp"
-            android:layout_height="40dp"
+            android:layout_height="38dp"
             android:layout_marginTop="20dp"
             android:layout_marginEnd="22dp"
             android:drawableRight="@drawable/plus_image_white"

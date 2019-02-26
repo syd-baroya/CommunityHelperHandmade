@@ -69,15 +69,9 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
         artisanSearchField.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-                    firebaseSearchArtisans();
-                    return true;
-                }
-
-                return false;
+                return onKeySearchField(keyCode, event);
             }
         });
-
 
         addArtisanButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -183,6 +177,16 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
             imm.showSoftInput(artisanSearchField, InputMethodManager.SHOW_IMPLICIT);
         }
     }
+
+    public boolean onKeySearchField(int keyCode, KeyEvent event) {
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            firebaseSearchArtisans();
+            return true;
+        }
+
+        return false;
+    }
+
 
 
     @Override
