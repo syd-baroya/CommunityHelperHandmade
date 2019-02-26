@@ -8,10 +8,17 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 
+
+enum SearchState
+{
+    FilledSearch, FilledClear, EmptySearch, EmptyClear;
+}
+
 public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {
 
     Activity activity = null;
     Button searchButton = null;
+    SearchState state = SearchState.EmptySearch;
 
     public EditTextSearch( Context context )
     {
@@ -33,12 +40,6 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     {
         if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP ) {
             this.clearFocus();
-            if (searchButton != null) {
-                searchButton.setBackgroundResource(R.drawable.search_icon_white);
-            }
-        }
-        if (this.getText().equals("  ") || this.getText().equals(" ")) {
-            this.setText("");
         }
 
         return super.onKeyPreIme(key_code, event);
@@ -53,19 +54,10 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
             searchButton = activity.findViewById(R.id.searchArtisanButton);
         }
 
-
         if (this.getText().length() != 0) {
-            this.setBackground(getResources().getDrawable(R.drawable.search_background_filled));
-            this.setTextColor(getResources().getColor(R.color.white));
-            if (searchButton != null) {
-                searchButton.setBackgroundResource(R.drawable.icon_close_white);
-            }
+            setFilledClearState();
         } else {
-            this.setBackground(getResources().getDrawable(R.drawable.search_background));
-            this.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-            if (searchButton != null) {
-                searchButton.setBackgroundResource(R.drawable.search_icon);
-            }
+            setEmptySearchState();
         }
     }
 
@@ -75,25 +67,47 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
 
         if (this.hasFocus()) {
             if (this.getText().length() != 0) {
-                if (searchButton != null) {
-                    searchButton.setBackgroundResource(R.drawable.icon_close_white);
-                }
+                setFilledClearState();
             } else {
-                if (searchButton != null) {
-                    searchButton.setBackgroundResource(R.drawable.search_icon);
-                }
+                setEmptySearchState();
             }
         } else {
             if (this.getText().length() != 0) {
-                if (searchButton != null) {
-                    searchButton.setBackgroundResource(R.drawable.search_icon_white);
-                }
+                setFilledSearchState();
             } else {
-                if (searchButton != null) {
-                    searchButton.setBackgroundResource(R.drawable.search_icon);
-                }
+                setEmptySearchState();
             }
         }
+    }
+
+    public void setFilledSearchState() {
+        this.setBackground(getResources().getDrawable(R.drawable.search_background_filled));
+        this.setTextColor(getResources().getColor(R.color.white));
+        if (searchButton != null) {
+            searchButton.setBackgroundResource(R.drawable.search_icon_white);
+        }
+
+        state = SearchState.FilledSearch;
+    }
+
+    public void setFilledClearState() {
+        this.setBackground(getResources().getDrawable(R.drawable.search_background_filled));
+        this.setTextColor(getResources().getColor(R.color.white));
+        if (searchButton != null) {
+            searchButton.setBackgroundResource(R.drawable.icon_close_white);
+        }
+
+        state = SearchState.FilledClear;
+    }
+
+    public void setEmptySearchState() {
+        this.setBackground(getResources().getDrawable(R.drawable.search_background));
+        this.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
+        if (searchButton != null) {
+            searchButton.setBackgroundResource(R.drawable.search_icon);
+        }
+
+        state = SearchState.EmptySearch;
     }
 
 }
