@@ -2,6 +2,7 @@ package secapstone.helper;
 
 import android.app.Activity;
 import android.content.Context;
+import android.graphics.Rect;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -32,6 +33,9 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     {
         if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP ) {
             this.clearFocus();
+            if (searchButton != null) {
+                searchButton.setBackgroundResource(R.drawable.search_icon_white);
+            }
         }
         if (this.getText().equals("  ") || this.getText().equals(" ")) {
             this.setText("");
@@ -61,6 +65,33 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
             this.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
             if (searchButton != null) {
                 searchButton.setBackgroundResource(R.drawable.search_icon);
+            }
+        }
+    }
+
+    @Override
+    public void onFocusChanged(boolean arg0, int arg1, Rect arg2) {
+        super.onFocusChanged(arg0, arg1, arg2);
+
+        if (this.hasFocus()) {
+            if (this.getText().length() != 0) {
+                if (searchButton != null) {
+                    searchButton.setBackgroundResource(R.drawable.icon_close_white);
+                }
+            } else {
+                if (searchButton != null) {
+                    searchButton.setBackgroundResource(R.drawable.search_icon);
+                }
+            }
+        } else {
+            if (this.getText().length() != 0) {
+                if (searchButton != null) {
+                    searchButton.setBackgroundResource(R.drawable.search_icon_white);
+                }
+            } else {
+                if (searchButton != null) {
+                    searchButton.setBackgroundResource(R.drawable.search_icon);
+                }
             }
         }
     }

@@ -26,13 +26,14 @@
             android:hint="Search Artisans"
             android:inputType="textPersonName"
             android:padding="16dp"
+            android:selectAllOnFocus="true"
             android:singleLine="true"
             android:textColor="@color/colorPrimaryDark"
             android:textColorHint="@color/colorPrimaryDark"
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
         <Button
             android:id="@+id/searchArtisanButton"

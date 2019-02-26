@@ -2,6 +2,7 @@ package secapstone.helper;
 
 
 import android.annotation.TargetApi;
+import android.content.Context;
 import android.content.Intent;
 import android.support.v4.app.Fragment;
 import android.support.v4.content.ContextCompat;
@@ -11,6 +12,7 @@ import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.view.*;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
@@ -63,8 +65,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                artisanSearchField.setText("");
-                firebaseSearchArtisans();
+                onClickSearchButton();
             }
         });
 
@@ -169,6 +170,20 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     public void onClickAddArtisan()
     {
         startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
+    }
+
+    public void onClickSearchButton() {
+        if (artisanSearchField.hasFocus()) {
+            artisanSearchField.setText("");
+            firebaseSearchArtisans();
+        } else {
+            firebaseSearchArtisans();
+
+            artisanSearchField.requestFocus();
+
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(artisanSearchField, InputMethodManager.SHOW_IMPLICIT);
+        }
     }
 
 
