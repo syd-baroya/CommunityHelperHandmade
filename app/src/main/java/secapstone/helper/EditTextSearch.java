@@ -11,14 +11,14 @@ import android.widget.Button;
 
 enum SearchState
 {
-    FilledSearch, FilledClear, EmptySearch, EmptyClear;
+    FilledSearch, FilledClear, EmptySearch;
 }
 
 public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {
 
-    Activity activity = null;
-    Button searchButton = null;
-    SearchState state = SearchState.EmptySearch;
+    Activity activity;
+    Button searchButton;
+    SearchState state;
 
     public EditTextSearch( Context context )
     {
@@ -36,6 +36,15 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     }
 
     @Override
+    protected int[] onCreateDrawableState(int extraSpace) {
+        activity = (Activity) getContext();
+        searchButton = activity.findViewById(R.id.searchArtisanButton);
+        state = SearchState.EmptySearch;
+
+        return super.onCreateDrawableState(extraSpace);
+    }
+
+    @Override
     public boolean onKeyPreIme( int key_code, KeyEvent event )
     {
         if ( event.getKeyCode() == KeyEvent.KEYCODE_BACK && event.getAction() == KeyEvent.ACTION_UP ) {
@@ -47,13 +56,6 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
 
     @Override
     public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
-        if (activity == null) {
-            activity = (Activity) getContext();
-        }
-        if (searchButton == null && activity != null) {
-            searchButton = activity.findViewById(R.id.searchArtisanButton);
-        }
-
         if (this.getText().length() != 0) {
             setFilledClearState();
         } else {
