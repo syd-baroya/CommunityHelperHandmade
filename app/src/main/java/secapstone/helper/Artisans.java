@@ -23,6 +23,7 @@ import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 /**
  * A simple {@link Fragment} subclass.
  */
+
 public class Artisans extends Fragment implements AdapterView.OnItemSelectedListener {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference artisansRef = db.collection("artisans");
@@ -36,10 +37,13 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     private Spinner sortBySpinner;
     private Button addArtisanButton;
 
+    private String filter = "lastName";
+    private String searchTerm = "";
+
+
     public Artisans() {
         // Required empty public constructor
     }
-
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
@@ -57,8 +61,6 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         sortBySpinner.setAdapter(adapter);
         sortBySpinner.setOnItemSelectedListener(this);
-
-        setUpRecyclerView("lastName");
 
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -85,66 +87,34 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         return view;
     }
 
-
-
-    private void setUpRecyclerView(String sortBy) {
-        Query query = artisansRef.orderBy(sortBy, Query.Direction.ASCENDING);
-        FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
-                .setQuery(query, Artisan.class)
-                .build();
-
-        adapter = new ArtisanAdapter(options, getContext());
-
-        recyclerView.setHasFixedSize(true);
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-    }
-
-
-    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id){
-
-        Query query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
-        if (pos == 1){
-            //System.out.println("First Name");
-            Log.d("info", "First Name");
-            //setUpRecyclerView("firstName");
-            query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
+    public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
+        if (pos == 0) {
+            filter = "firstName";
         }
-        else if (pos == 2){
-            //System.out.println("Last Name");
-            //setUpRecyclerView("lastName");
-            query = artisansRef.orderBy("lastName", Query.Direction.ASCENDING);
+        else if (pos == 1) {
+            filter = "lastName";
         }
 
-        FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
-                .setQuery(query, Artisan.class)
-                .build();
-
-        adapter = new ArtisanAdapter(options, getContext());
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        adapter.startListening();
-
-    }
-
-    public void onNothingSelected(AdapterView<?> parent){
-        //don't do anything i think
+        runArtisanQuery();
     }
 
     private void firebaseSearchArtisans() {
-        if (adapter != null) {
-            adapter.stopListening();
+        searchTerm = artisanSearchField.getText().toString();
+        runArtisanQuery();
+    }
+
+    private void runArtisanQuery() {
+        Query query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
+
+        if (filter.equals("firstName")) {
+            query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
+        }
+        else if (filter.equals("lastName")) {
+            query = artisansRef.orderBy("lastName", Query.Direction.ASCENDING);
         }
 
-        Query query;
-        String search = artisanSearchField.getText().toString();
-
-        if (search.length() < 1) {
-            query = artisansRef.orderBy("name", Query.Direction.ASCENDING);
-        } else {
-            query = artisansRef.whereEqualTo("name", search).orderBy("name", Query.Direction.ASCENDING);
+        if (searchTerm.length() > 0) {
+            query = query.whereEqualTo("name", searchTerm);
         }
 
         FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
@@ -187,8 +157,6 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         return false;
     }
 
-
-
     @Override
     public void onStart() {
         super.onStart();
@@ -199,5 +167,9 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    public void onNothingSelected(AdapterView<?> parent) {
+        //don't do anything i think
     }
 }
