@@ -52,6 +52,7 @@
     <style name="GreenButton" parent="PrimaryButton">
         <item name="android:textColor">@color/colorPrimaryDarker</item>
         <item name="android:background">@drawable/green_button_background</item>
+        <item name="android:layout_height">44dp</item>
     </style>
     
     <style name="AppTheme.PopUpWindow" >
