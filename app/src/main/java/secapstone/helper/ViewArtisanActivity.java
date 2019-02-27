@@ -1,6 +1,7 @@
 package secapstone.helper;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -173,5 +174,21 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @Override
+    public void onResume() {
+        setStatusBarToDark();
+        super.onResume();
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToDark() {
+        View view = findViewById(R.id.view_artisan_container);
+        int flags = this.getWindow().getDecorView().getSystemUiVisibility();
+        flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        view.setSystemUiVisibility(flags);
+        this.getWindow().setStatusBarColor(getResources().getColor(R.color.almostBlack));
     }
 }

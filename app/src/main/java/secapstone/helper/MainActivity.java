@@ -34,9 +34,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         bottomNavigationView.setSelectedItemId(R.id.navigation_artisans);
-
-        setStatusBarToWhite();
     }
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem item) {
@@ -68,10 +67,5 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 })
                 .setNegativeButton("No", null)
                 .show();
-    }
-
-    @TargetApi(23)
-    public void setStatusBarToWhite() {
-        getWindow().setStatusBarColor(Color.WHITE);
     }
 }
