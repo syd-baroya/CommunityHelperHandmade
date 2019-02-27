@@ -1,12 +1,18 @@
 package secapstone.helper;
 
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
@@ -21,7 +27,6 @@ public class Profile extends Fragment {
     private View view;
 
     Button logoutButton;
-    ImageView artisanProfileImage;
 
     public Profile() {
         // Required empty public constructor
@@ -33,8 +38,6 @@ public class Profile extends Fragment {
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
         logoutButton = view.findViewById(R.id.logoutButton);
-        artisanProfileImage = view.findViewById(R.id.artisan_banner_image);
-        //artisanProfileImage.setImageDrawable(getResources().getDrawable(R.drawable.example_artisan));
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -50,6 +53,21 @@ public class Profile extends Fragment {
     {
         startActivity(new Intent(getContext(), LoginActivity.class));
         getActivity().finish(); //Since we are logging out, close MainActivity so you can't use back button.
+    }
+
+
+    @Override
+    public void onStart() {
+        super.onStart();
+        setStatusBarToDark();
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToDark() {
+        int flags = getActivity().getWindow().getDecorView().getSystemUiVisibility();
+        flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
+        getActivity().getWindow().setStatusBarColor(getResources().getColor(R.color.almostBlack));
     }
 
 }

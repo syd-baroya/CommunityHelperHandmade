@@ -1,8 +1,10 @@
 package secapstone.helper;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -151,12 +153,20 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     public void onStart() {
         super.onStart();
         adapter.startListening();
+        setStatusBarToWhite();
     }
 
     @Override
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToWhite() {
+        int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
+        getActivity().getWindow().setStatusBarColor(Color.WHITE);
     }
 
     public void setUpFilterSpinner() {
