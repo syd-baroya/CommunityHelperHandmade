@@ -46,6 +46,8 @@ public class Profile extends Fragment {
             }
         });
 
+        setStatusBarToDark();
+
         return view;
     }
 
@@ -56,11 +58,11 @@ public class Profile extends Fragment {
     }
 
 
-    @Override
-    public void onStart() {
-        super.onStart();
-        setStatusBarToDark();
-    }
+//    @Override
+//    public void onStart() {
+//        super.onStart();
+//        setStatusBarToDark();
+//    }
 
     @TargetApi(23)
     public void setStatusBarToDark() {

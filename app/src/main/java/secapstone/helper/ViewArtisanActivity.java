@@ -16,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +57,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
         });
 
         myDialog = new Dialog(this);
+
+        setStatusBarToDark();
 
     }
 
@@ -176,12 +179,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
         }
     }
 
-    @Override
-    public void onResume() {
-        setStatusBarToDark();
-        super.onResume();
-    }
-
     @TargetApi(23)
     public void setStatusBarToDark() {
         View view = findViewById(R.id.view_artisan_container);
@@ -189,6 +186,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
         flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         view.setSystemUiVisibility(flags);
-        this.getWindow().setStatusBarColor(getResources().getColor(R.color.almostBlack));
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }
