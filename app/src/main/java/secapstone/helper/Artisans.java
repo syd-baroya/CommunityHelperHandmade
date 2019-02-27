@@ -1,8 +1,10 @@
 package secapstone.helper;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
 import android.content.Intent;
+import android.graphics.Color;
 import android.support.v4.app.Fragment;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -41,40 +43,30 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     private String searchTerm = "";
 
 
-    public Artisans() {
-        // Required empty public constructor
-    }
-
     @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                             Bundle savedInstanceState) {
+    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_artisans, container, false);
 
-        artisanSearchField = view.findViewById(R.id.searchArtisanField);
-        searchButton = view.findViewById(R.id.searchArtisanButton);
-        recyclerView = view.findViewById(R.id.artisan_recycler_view);
-        sortBySpinner = view.findViewById(R.id.SortBySpinner);
-        addArtisanButton = view.findViewById(R.id.addArtisanButton);
+        // Grab all needed views
+        artisanSearchField  =  view.findViewById(R.id.searchArtisanField);
+        searchButton        =  view.findViewById(R.id.searchArtisanButton);
+        recyclerView        =  view.findViewById(R.id.artisan_recycler_view);
+        sortBySpinner       =  view.findViewById(R.id.SortBySpinner);
+        addArtisanButton    =  view.findViewById(R.id.addArtisanButton);
 
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.sortArray, R.layout.spinner_dropdown_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        sortBySpinner.setAdapter(adapter);
-        sortBySpinner.setOnItemSelectedListener(this);
-
+        // Setup listeners
         searchButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickSearchButton();
             }
         });
-
         artisanSearchField.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
                 return onKeySearchField(keyCode, event);
             }
         });
-
         addArtisanButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -82,11 +74,17 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
             }
         });
 
-        firebaseSearchArtisans();
+        // Do everything else
+        setUpFilterSpinner();
+        runArtisanQuery();
+        setStatusBarToWhite();
+
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
         return view;
     }
 
+    // Filter Spinner Clicked
     public void onItemSelected(AdapterView<?> parent, View view, int pos, long id) {
         if (pos == 0) {
             filter = "firstName";
@@ -98,11 +96,36 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         runArtisanQuery();
     }
 
-    private void firebaseSearchArtisans() {
-        searchTerm = artisanSearchField.getText().toString();
-        runArtisanQuery();
+    public void onClickAddArtisan() {
+        startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
     }
 
+    public void onClickSearchButton() {
+        if (artisanSearchField.hasFocus()) {
+            artisanSearchField.setText("");
+            searchTerm = artisanSearchField.getText().toString();
+            runArtisanQuery();
+        } else {
+            searchTerm = artisanSearchField.getText().toString();
+            runArtisanQuery();
+
+            artisanSearchField.requestFocus();
+
+            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
+            imm.showSoftInput(artisanSearchField, InputMethodManager.SHOW_IMPLICIT);
+        }
+    }
+
+    public boolean onKeySearchField(int keyCode, KeyEvent event) {
+        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
+            searchTerm = artisanSearchField.getText().toString();
+            runArtisanQuery();
+            return true;
+        }
+        return false;
+    }
+
+    // Update artisan list based on filter and search term variables
     private void runArtisanQuery() {
         Query query = artisansRef.orderBy("firstName", Query.Direction.ASCENDING);
 
@@ -129,38 +152,11 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         adapter.startListening();
     }
 
-    public void onClickAddArtisan()
-    {
-        startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
-    }
-
-    public void onClickSearchButton() {
-        if (artisanSearchField.hasFocus()) {
-            artisanSearchField.setText("");
-            firebaseSearchArtisans();
-        } else {
-            firebaseSearchArtisans();
-
-            artisanSearchField.requestFocus();
-
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(artisanSearchField, InputMethodManager.SHOW_IMPLICIT);
-        }
-    }
-
-    public boolean onKeySearchField(int keyCode, KeyEvent event) {
-        if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
-            firebaseSearchArtisans();
-            return true;
-        }
-
-        return false;
-    }
-
     @Override
     public void onStart() {
         super.onStart();
         adapter.startListening();
+        //setStatusBarToWhite();
     }
 
     @Override
@@ -169,7 +165,24 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         adapter.stopListening();
     }
 
+    @TargetApi(23)
+    public void setStatusBarToWhite() {
+        int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
+        getActivity().getWindow().setStatusBarColor(Color.WHITE);
+    }
+
+    public void setUpFilterSpinner() {
+        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this.getContext(), R.array.sortArray, R.layout.spinner_dropdown_item);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sortBySpinner.setAdapter(adapter);
+        sortBySpinner.setOnItemSelectedListener(this);
+    }
+
     public void onNothingSelected(AdapterView<?> parent) {
         //don't do anything i think
     }
+
+    // Required empty public constructor
+    public Artisans() {}
 }

@@ -1,6 +1,7 @@
 package secapstone.helper;
 
 import android.Manifest;
+import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -56,6 +58,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         myDialog = new Dialog(this);
 
+        setStatusBarToDark();
+
     }
 
     private void getIncomingIntent() {
@@ -73,19 +77,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
         }
     }
 
-    private void setImage(String url, String name, String description, String phone, String
-            address) {
+    private void setImage(String url, String name, String description, String phone, String address) {
         TextView nameTitle = findViewById(R.id.artisan_name);
         nameTitle.setText(name);
-
-//        TextView descriptionTitle = findViewById(R.id.artisan_description);
-//        descriptionTitle.setText(description);
-//
-//        TextView phoneTitle = findViewById(R.id.artisan_phone);
-//        phoneTitle.setText(phone);
-//
-//        TextView addressTitle = findViewById(R.id.artisan_address);
-//        addressTitle.setText(address);
 
         final ImageView image = findViewById(R.id.artisan_banner_image);
 
@@ -183,5 +177,15 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToDark() {
+        View view = findViewById(R.id.view_artisan_container);
+        int flags = this.getWindow().getDecorView().getSystemUiVisibility();
+        flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        view.setSystemUiVisibility(flags);
+        this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
     }
 }
