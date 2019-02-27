@@ -44,10 +44,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         //view
-        btnLogin = (Button)findViewById(R.id.login_btn_login);
+        btnLogin = (Button)findViewById(R.id.login_btn);
         input_email = (EditText)findViewById(R.id.login_email);
         input_password = (EditText)findViewById(R.id.login_password);
-        btnForgotPass = (TextView)findViewById(R.id.login_btn_forgot_password);
+        btnForgotPass = (TextView)findViewById(R.id.forgot_password);
         activity_login = (ConstraintLayout)findViewById(R.id.activity_login);
 
         btnForgotPass.setOnClickListener(this);
@@ -67,11 +67,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     @Override
     public void onClick(View v) {
-        if(v.getId() == R.id.login_btn_forgot_password){
+        if(v.getId() == R.id.forgot_password){
             startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
             finish();
         }
-        else if(v.getId() == R.id.login_btn_login){
+        else if(v.getId() == R.id.login_btn){
             loginUser(input_email.getText().toString(), input_password.getText().toString());
         }
     }
