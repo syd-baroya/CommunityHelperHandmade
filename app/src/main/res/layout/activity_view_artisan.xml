@@ -12,7 +12,7 @@
     <ImageView
         android:id="@+id/artisan_banner_image"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="264dp"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
@@ -21,7 +21,7 @@
     <View
         android:id="@+id/imageTint"
         android:layout_width="match_parent"
-        android:layout_height="240dp"
+        android:layout_height="264dp"
         android:background="@drawable/gradient_image_overlay"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -257,7 +257,7 @@
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginStart="8dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="34dp"
         android:onClick="onClickBackButton"
         app:layout_constraintStart_toStartOf="@+id/imageTint"
         app:layout_constraintTop_toTopOf="@+id/imageTint">

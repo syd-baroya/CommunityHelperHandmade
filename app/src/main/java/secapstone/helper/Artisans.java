@@ -77,6 +77,9 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         // Do everything else
         setUpFilterSpinner();
         runArtisanQuery();
+        setStatusBarToWhite();
+
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
         return view;
     }
@@ -153,7 +156,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     public void onStart() {
         super.onStart();
         adapter.startListening();
-        setStatusBarToWhite();
+        //setStatusBarToWhite();
     }
 
     @Override
