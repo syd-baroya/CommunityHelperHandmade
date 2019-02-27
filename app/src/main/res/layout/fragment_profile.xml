@@ -7,161 +7,439 @@
     tools:context=".Profile">
 
     <android.support.constraint.ConstraintLayout
-        android:id="@+id/linearLayout2"
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/white"
+        >
 
-        <View
-            android:id="@+id/view2"
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="wrap_content"
+            android:layout_height="32dp"
+            android:layout_marginTop="16dp"
+            android:layout_marginEnd="16dp"
+            android:background="@drawable/white_button_background"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/seperator1"
+            app:layout_constraintTop_toTopOf="@+id/imageTint" />
+
+        <ImageView
+            android:id="@+id/artisan_banner_image"
             android:layout_width="match_parent"
-            android:layout_height="282dp"
-            android:background="@drawable/gradient_image_overlay"
+            android:layout_height="240dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
             android:scaleType="centerCrop"
-            app:layout_constraintBottom_toTopOf="@+id/profileButtonContainer"
+            android:src="@drawable/example_artisan"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout3"
+        <View
+            android:id="@+id/imageTint"
             android:layout_width="match_parent"
-            android:layout_height="140dp"
-            android:layout_marginBottom="48dp"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer">
-
-            <Button
-                android:id="@+id/button6"
-                style="@style/RedButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Manage Artisans"
-                app:layout_constraintBottom_toTopOf="@+id/addArtisanButton"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent"
-                app:layout_constraintVertical_bias="0.6"
-                app:layout_constraintVertical_chainStyle="spread_inside" />
-
-            <Button
-                android:id="@+id/logoutButton"
-                style="@style/GrayButton"
-                android:layout_width="match_parent"
-                android:layout_height="40dp"
-                android:layout_marginStart="8dp"
-                android:layout_marginEnd="8dp"
-                android:text="Logout"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/addArtisanButton" />
-        </android.support.constraint.ConstraintLayout>
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/logPaymentContainer"
-            android:layout_width="395dp"
-            android:layout_height="116dp"
-            app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"
+            android:layout_height="240dp"
+            android:background="@drawable/gradient_image_overlay"
+            android:scaleType="centerCrop"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/profileButtonContainer">
+            app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="130dp"
-                android:layout_height="43dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginTop="16dp"
-                android:text="Current Balance"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button2"
-                style="@style/BlueButton"
-                android:layout_width="125dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="10dp"
-                android:text="Payment Log"
-                app:layout_constraintBottom_toTopOf="@+id/button3"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button3"
-                style="@style/GrayButton"
-                android:layout_width="125dp"
-                android:layout_height="40dp"
-                android:layout_marginTop="10dp"
-                android:layout_marginEnd="16dp"
-                android:layout_marginBottom="24dp"
-                android:text="Edit Account"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/button2" />
-        </android.support.constraint.ConstraintLayout>
+        <TextView
+            android:id="@+id/artisan_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Sarah"
+            android:textColor="#fff"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageTint"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/profileButtonContainer"
-            android:layout_width="395dp"
-            android:layout_height="77dp"
-            android:layout_marginTop="16dp"
-            app:layout_constraintBottom_toTopOf="@+id/logPaymentContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2">
+            app:layout_constraintTop_toBottomOf="@+id/imageTint">
 
-            <Button
-                android:id="@+id/button"
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/cga_contact_button"
+                    android:textColor="@color/colorPrimaryDarker" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:text="Contact Info"
+                    android:textAlignment="center"
+                    android:textColor="#506E6E"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/cga_reports_button"
+                    android:textColor="@color/colorPrimaryDarker" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:text="Reports"
+                    android:textAlignment="center"
+                    android:textColor="#506E6E"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+                app:layout_constraintTop_toTopOf="parent">
+
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/cga_profile_button"
+                    android:textColor="@color/colorPrimaryDarker" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:text="Profile"
+                    android:textAlignment="center"
+                    android:textColor="#506E6E"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+
+            </LinearLayout>
+
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/seperator1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="20dp"
+            android:background="#EBEBEB"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/profileButtonContainer" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/logPaymentContainer"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seperator1">
+
+            <TextView
+                android:id="@+id/textView6"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/cga_reports_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button4"
-                app:layout_constraintStart_toEndOf="@+id/button5"
+                android:fontFamily="@font/googlesans"
+                android:text="Current Balance"
+                android:textColor="#000000"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <TextView
+                android:id="@+id/textView10"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:fontFamily="@font/googlesans"
+                android:text="Checking 8373 ***** ** **"
+                android:textColor="#808080"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+            <TextView
+                android:id="@+id/textView9"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="4dp"
+                android:fontFamily="@font/googlesans_medium"
+                android:text="$3100.32"
+                android:textColor="#000000"
+                android:textSize="26dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+            <Button
+                android:id="@+id/logPaymentButton"
+                style="@style/BlueButton"
+                android:layout_width="128dp"
+                android:layout_height="44dp"
+                android:text="Payment Log"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <Button
-                android:id="@+id/button4"
+                android:id="@+id/EditAccountButton"
+                style="@style/GrayButton"
+                android:layout_width="128dp"
+                android:layout_height="44dp"
+                android:layout_marginTop="8dp"
+                android:text="Edit Account"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/logPaymentButton" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <View
+            android:id="@+id/seperator2"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="32dp"
+            android:background="#EBEBEB"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer" />
+
+        <android.support.constraint.ConstraintLayout
+            android:id="@+id/profileListingContainer"
+            android:layout_width="match_parent"
+            android:layout_height="279dp"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seperator2">
+
+            <TextView
+                android:id="@+id/textView7"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/cga_profile_button"
+                android:fontFamily="@font/googlesans_bold"
+                android:text="Your Artisans"
+                android:textColor="#000000"
+                android:textSize="22dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <android.support.v7.widget.RecyclerView
+                android:id="@+id/recyclerView"
+                android:layout_width="343dp"
+                android:layout_height="269dp"
+                android:layout_marginTop="16dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+        </android.support.constraint.ConstraintLayout>
+
+        <android.support.constraint.ConstraintLayout
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="10dp"
+            android:onClick="onClickBackButton"
+            app:layout_constraintStart_toStartOf="@+id/imageTint"
+            app:layout_constraintTop_toTopOf="@+id/imageTint">
+
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="21.5dp"
+                android:background="@drawable/icon_back_arrow"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/button"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/button5"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="8dp"
-                android:layout_marginTop="8dp"
-                android:layout_marginEnd="8dp"
-                android:background="@android:color/transparent"
-                android:drawableTop="@drawable/cga_contact_button"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toStartOf="@+id/button"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent" />
         </android.support.constraint.ConstraintLayout>
 
+
     </android.support.constraint.ConstraintLayout>
+
+
+
+
+
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:id="@+id/linearLayout2"-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
+
+        <!--<View-->
+            <!--android:id="@+id/view2"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="282dp"-->
+            <!--android:background="@drawable/gradient_image_overlay"-->
+            <!--android:scaleType="centerCrop"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/profileButtonContainer"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/constraintLayout3"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="140dp"-->
+            <!--android:layout_marginBottom="48dp"-->
+            <!--app:layout_constraintBottom_toBottomOf="parent"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintHorizontal_bias="0.0"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer">-->
+
+
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/logPaymentContainer"-->
+            <!--android:layout_width="395dp"-->
+            <!--android:layout_height="116dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/constraintLayout3"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/profileButtonContainer">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView6"-->
+                <!--android:layout_width="130dp"-->
+                <!--android:layout_height="43dp"-->
+                <!--android:layout_marginStart="16dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:text="Current Balance"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/button2"-->
+                <!--style="@style/BlueButton"-->
+                <!--android:layout_width="125dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginTop="16dp"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--android:layout_marginBottom="10dp"-->
+                <!--android:text="Payment Log"-->
+                <!--app:layout_constraintBottom_toTopOf="@+id/button3"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/button3"-->
+                <!--style="@style/GrayButton"-->
+                <!--android:layout_width="125dp"-->
+                <!--android:layout_height="40dp"-->
+                <!--android:layout_marginTop="10dp"-->
+                <!--android:layout_marginEnd="16dp"-->
+                <!--android:layout_marginBottom="24dp"-->
+                <!--android:text="Edit Account"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/button2" />-->
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/profileButtonContainer"-->
+            <!--android:layout_width="395dp"-->
+            <!--android:layout_height="77dp"-->
+            <!--android:layout_marginTop="16dp"-->
+            <!--app:layout_constraintBottom_toTopOf="@+id/logPaymentContainer"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/view2">-->
+
+            <!--<Button-->
+                <!--android:id="@+id/button"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:drawableTop="@drawable/cga_reports_button"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toStartOf="@+id/button4"-->
+                <!--app:layout_constraintStart_toEndOf="@+id/button5"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/button4"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:drawableTop="@drawable/cga_profile_button"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintStart_toEndOf="@+id/button"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/button5"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginStart="8dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:layout_marginEnd="8dp"-->
+                <!--android:background="@android:color/transparent"-->
+                <!--android:drawableTop="@drawable/cga_contact_button"-->
+                <!--app:layout_constraintBottom_toBottomOf="parent"-->
+                <!--app:layout_constraintEnd_toStartOf="@+id/button"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
 
 </FrameLayout>
