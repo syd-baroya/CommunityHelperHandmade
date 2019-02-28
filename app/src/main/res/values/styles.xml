@@ -11,12 +11,17 @@
         <item name="fontFamily">@font/googlesans_medium</item>
     </style>
 
-    <style name="TextInput" parent="android:style/Widget.EditText">
+    <style name="TextInput" parent="Base.V7.Widget.AppCompat.EditText">
         <item name="colorControlNormal">@color/colorPrimaryLight</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="fontFamily">@font/googlesans</item>
-        <item name="android:background">@drawable/search_background</item>
+        <item name="android:autofilledHighlight" tools:targetApi="26">@color/colorPrimary</item>
+        <item name="fontFamily">@font/googlesans_medium</item>
+        <item name="android:background">@drawable/textfield_background</item>
+        <item name="android:padding">16dp</item>
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:textColorHint">@color/colorPrimaryDark</item>
+        <item name="android:textSize">16sp</item>
     </style>
 
     <!-- Main Button Style -->

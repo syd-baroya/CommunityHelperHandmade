@@ -44,11 +44,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         setContentView(R.layout.activity_login);
 
         //view
-        btnLogin = (Button)findViewById(R.id.login_btn);
-        input_email = (EditText)findViewById(R.id.login_email);
-        input_password = (EditText)findViewById(R.id.login_password);
-        btnForgotPass = (TextView)findViewById(R.id.forgot_password);
-        activity_login = (ConstraintLayout)findViewById(R.id.activity_login);
+        btnLogin = findViewById(R.id.login_btn);
+        input_email = findViewById(R.id.login_email);
+        input_password = findViewById(R.id.login_password);
+        btnForgotPass = findViewById(R.id.forgot_password);
+        activity_login = findViewById(R.id.activity_login);
 
         btnForgotPass.setOnClickListener(this);
         btnLogin.setOnClickListener(this);

@@ -7,43 +7,37 @@ import android.graphics.drawable.Drawable;
 import android.os.Build;
 import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 
 
+public class CustomTextField extends android.support.v7.widget.AppCompatEditText {
 
-public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {
-
-    enum SearchState
+    enum State
     {
-        FilledSearch, FilledClear, EmptySearch;
+        filled, empty;
     }
 
-    private Activity activity;
-    private Button searchButton;
-    public SearchState state;
+    public State state;
 
-    public EditTextSearch( Context context )
+    public CustomTextField( Context context )
     {
         super( context );
     }
 
-    public EditTextSearch( Context context, AttributeSet attribute_set )
+    public CustomTextField( Context context, AttributeSet attribute_set )
     {
         super( context, attribute_set );
     }
 
-    public EditTextSearch( Context context, AttributeSet attribute_set, int def_style_attribute )
+    public CustomTextField( Context context, AttributeSet attribute_set, int def_style_attribute )
     {
         super( context, attribute_set, def_style_attribute );
     }
 
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
-        activity = (Activity) getContext();
-        searchButton = activity.findViewById(R.id.searchArtisanButton);
-        state = SearchState.EmptySearch;
+        state = State.empty;
 
         return super.onCreateDrawableState(extraSpace);
     }
@@ -60,9 +54,9 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     @Override
     public void onTextChanged(CharSequence arg0, int arg1, int arg2, int arg3) {
         if (this.getText().length() != 0) {
-            setFilledClearState();
+            setFilledState();
         } else {
-            setEmptySearchState();
+            setEmptyState();
         }
     }
 
@@ -70,49 +64,33 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     public void onFocusChanged(boolean arg0, int arg1, Rect arg2) {
         super.onFocusChanged(arg0, arg1, arg2);
 
-        if (this.hasFocus()) {
-            if (this.getText().length() != 0) {
-                setFilledClearState();
-            } else {
-                setEmptySearchState();
-            }
-        } else {
-            if (this.getText().length() != 0) {
-                setFilledSearchState();
-            } else {
-                setEmptySearchState();
-            }
-        }
+//        if (this.hasFocus()) {
+//            if (this.getText().length() != 0) {
+//                setFilledClearState();
+//            } else {
+//                setEmptySearchState();
+//            }
+//        } else {
+//            if (this.getText().length() != 0) {
+//                setFilledSearchState();
+//            } else {
+//                setEmptySearchState();
+//            }
+//        }
     }
 
-    public void setFilledSearchState() {
+    public void setFilledState() {
         this.setBackground(getResources().getDrawable(R.drawable.search_background_filled));
         this.setTextColor(getResources().getColor(R.color.white));
-        if (searchButton != null) {
-            searchButton.setBackgroundResource(R.drawable.search_icon_white);
-        }
 
-        state = SearchState.FilledSearch;
+        state = State.filled;
     }
 
-    public void setFilledClearState() {
-        this.setBackground(getResources().getDrawable(R.drawable.search_background_filled));
-        this.setTextColor(getResources().getColor(R.color.white));
-        if (searchButton != null) {
-            searchButton.setBackgroundResource(R.drawable.icon_close_white);
-        }
-
-        state = SearchState.FilledClear;
-    }
-
-    public void setEmptySearchState() {
+    public void setEmptyState() {
         this.setBackground(getResources().getDrawable(R.drawable.search_background));
         this.setTextColor(getResources().getColor(R.color.colorPrimaryDark));
-        if (searchButton != null) {
-            searchButton.setBackgroundResource(R.drawable.search_icon);
-        }
 
-        state = SearchState.EmptySearch;
+        state = State.empty;
     }
 
     public static final Drawable getDrawable(Context context, int id) {
@@ -123,4 +101,5 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
             return context.getResources().getDrawable(id);
         }
     }
+
 }
