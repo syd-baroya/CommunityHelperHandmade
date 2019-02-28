@@ -57,13 +57,6 @@ public class Profile extends Fragment {
         getActivity().finish(); //Since we are logging out, close MainActivity so you can't use back button.
     }
 
-
-//    @Override
-//    public void onStart() {
-//        super.onStart();
-//        setStatusBarToDark();
-//    }
-
     @TargetApi(23)
     public void setStatusBarToDark() {
         int flags = getActivity().getWindow().getDecorView().getSystemUiVisibility();
