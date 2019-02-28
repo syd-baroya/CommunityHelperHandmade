@@ -56,7 +56,7 @@
             android:layout_marginStart="24dp"
             android:layout_marginBottom="24dp"
             android:fontFamily="@font/googlesans_bold"
-            android:text="Sarah"
+            android:text="Sarah Fernandez"
             android:textColor="#fff"
             android:textSize="26sp"
             app:layout_constraintBottom_toBottomOf="@+id/imageTint"

@@ -5,14 +5,16 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="secapstone.helper.LoginActivity">
+    tools:context="secapstone.helper.LoginActivity"
+    android:focusable="true"
+    android:focusableInTouchMode="true">
 
     <TextView
         android:id="@+id/forgot_password"
         style="@style/GrayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="16dp"
+        android:layout_marginBottom="24dp"
         android:clickable="true"
         android:fontFamily="@font/googlesans_medium"
         android:text="Forgot Password?"
@@ -26,13 +28,12 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:layout_marginTop="32dp"
+        app:layout_constraintBottom_toTopOf="@+id/forgot_password"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.419">
+        app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
             android:id="@+id/icon"
@@ -56,10 +57,10 @@
             android:layout_marginEnd="24dp"
             android:contentDescription="@string/prompt_email"
             android:hint="Email"
+            android:inputType="textEmailAddress"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon"
-            android:inputType="textEmailAddress" />
+            app:layout_constraintTop_toBottomOf="@+id/icon" />
 
         <secapstone.helper.CustomTextField
             android:id="@+id/login_password"
@@ -70,18 +71,18 @@
             android:layout_marginTop="16dp"
             android:layout_marginEnd="24dp"
             android:hint="Password"
+            android:inputType="textPassword"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_email"
-            android:inputType="textPassword"/>
+            app:layout_constraintTop_toBottomOf="@+id/login_email" />
 
         <Button
             android:id="@+id/login_btn"
             style="@style/PrimaryButton"
             android:layout_width="110dp"
             android:layout_height="wrap_content"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="32dp"
             android:layout_weight="1"
             android:text="Login"
             android:textSize="16sp"

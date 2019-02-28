@@ -79,8 +79,6 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         runArtisanQuery();
         setStatusBarToWhite();
 
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
-
         return view;
     }
 
@@ -167,6 +165,8 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
     @TargetApi(23)
     public void setStatusBarToWhite() {
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+
         int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
         getActivity().getWindow().setStatusBarColor(Color.WHITE);

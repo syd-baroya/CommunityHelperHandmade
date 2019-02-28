@@ -16,6 +16,8 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
 
+import com.google.firebase.auth.FirebaseAuth;
+
 import secapstone.helper.R;
 
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
@@ -26,7 +28,8 @@ public class Profile extends Fragment {
 
     private View view;
 
-    Button logoutButton;
+    private Button logoutButton;
+
 
     public Profile() {
         // Required empty public constructor
@@ -53,6 +56,7 @@ public class Profile extends Fragment {
 
     public void onClickLogout()
     {
+        FirebaseAuth.getInstance().signOut();
         startActivity(new Intent(getContext(), LoginActivity.class));
         getActivity().finish(); //Since we are logging out, close MainActivity so you can't use back button.
     }
