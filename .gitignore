@@ -9,3 +9,4 @@
 /build
 /captures
 .externalNativeBuild
+/src/main/assets/api_key.txt
