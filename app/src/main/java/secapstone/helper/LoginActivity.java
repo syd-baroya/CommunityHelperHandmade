@@ -9,11 +9,13 @@ package secapstone.helper;
         import android.support.v7.app.AppCompatActivity;
 
         import android.os.Bundle;
+        import android.util.Log;
         import android.view.View;
         import android.widget.Button;
         import android.widget.EditText;
         import android.widget.RelativeLayout;
         import android.widget.TextView;
+        import android.widget.Toast;
 
         import com.google.android.gms.tasks.OnCompleteListener;
         import com.google.android.gms.tasks.Task;
@@ -22,6 +24,7 @@ package secapstone.helper;
 
         import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
         import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+        import com.google.firebase.auth.FirebaseUser;
         import com.google.firebase.auth.ProviderQueryResult;
         import secapstone.helper.R;
 /**
@@ -78,14 +81,17 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
 
     private void loginUser(String email, final String password){
+        System.out.println("went into loginUser");
+        //startActivity(new Intent(LoginActivity.this, MainActivity.class));
 
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
-                        if(!task.isSuccessful()){
-                            if(isValidPasswordLength(password)){
-                                Snackbar snackBar= Snackbar.make(activity_login, "Password length must be over 6", Snackbar.LENGTH_SHORT);
+                        if (!task.isSuccessful()) {
+                            if (isValidPasswordLength(password)) {
+                                System.out.println("password too short");
+                                Snackbar snackBar = Snackbar.make(activity_login, "Password length must be over 6", Snackbar.LENGTH_SHORT);
                                 snackBar.show();
                             }
 
@@ -96,24 +102,31 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                  * Inspect the error code and message to find out the specific cause.
                                  * https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthInvalidCredentialsException
                                  */
+                                System.out.println("invalid credentials");
 
-                                Snackbar snackBar= Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
+                                Snackbar snackBar = Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
                                 snackBar.show();
+
                             } else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
                                 /**
                                  * Inspect the error code and message to find out the specific cause.
                                  * https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthInvalidUserException
                                  */
-                                Snackbar snackBar= Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
+                                System.out.println("invalid credentials");
+
+                                Snackbar snackBar = Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
                                 snackBar.show();
                             }
 
-                        }
-                        else{
+                        } else {
+                            System.out.println("logged in!");
                             startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         }
                     }
                 });
+
+        System.out.println("leaving loginUser");
+
     }
 
     public boolean isValidPasswordLength(String password){
