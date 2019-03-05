@@ -9,6 +9,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -26,6 +27,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     Button btnLogin;
     EditText input_email, input_password;
     TextView btnForgotPass;
+    ConstraintLayout loadingSpinner;
 
     ConstraintLayout activity_login;
 
@@ -42,6 +44,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         input_password = findViewById(R.id.login_password);
         btnForgotPass = findViewById(R.id.forgot_password);
         activity_login = findViewById(R.id.activity_login);
+        loadingSpinner = findViewById(R.id.progress_loader);
 
         btnForgotPass.setOnClickListener(this);
         btnLogin.setOnClickListener(this);
@@ -69,10 +72,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private void loginUser(String email, final String password){
 
+        loadingSpinner.setVisibility(View.VISIBLE);
+
         mAuth.signInWithEmailAndPassword(email, password)
                 .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
                     @Override
                     public void onComplete(@NonNull Task<AuthResult> task) {
+                        loadingSpinner.setVisibility(View.GONE);
                         if(!task.isSuccessful()){
                             if(isValidPasswordLength(password)){
                                 Snackbar snackBar= Snackbar.make(activity_login, "Password length must be over 6", Snackbar.LENGTH_SHORT);
