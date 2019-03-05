@@ -2,7 +2,10 @@ package secapstone.helper.addartisan;
 
 import android.content.*;
 import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
+import android.graphics.Matrix;
 import android.graphics.drawable.BitmapDrawable;
+import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import com.google.firebase.firestore.*;
@@ -29,6 +32,8 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference artisansRef = db.collection("artisans");
     private static final String TAG = "FinalPreviewActivity";
+
+    ConstraintLayout loadingSpinner;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -68,13 +73,15 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
 
         TextView descrPreview = (TextView) findViewById(R.id.descriptionPreview);
         descrPreview.setText("Store Description: " + WelcomeAddArtisanActivity.artisanObject.getDescription());
+
+        loadingSpinner = findViewById(R.id.progress_loader_add);
     }
 
     public void onClickNext8()
     {
         Button nextButton8 = (Button) findViewById(R.id.finishButton);
 
-        nextButton8.setText("Uploading...");
+        loadingSpinner.setVisibility(View.VISIBLE);
         pushArtisan(WelcomeAddArtisanActivity.artisanObject);
     }
 
@@ -93,9 +100,9 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         StorageReference storageRef = storage.getReference();
         StorageReference artisanPicRef = storageRef.child(mewBoi.getPictureURL());
 
-        Bitmap bitmap = WelcomeAddArtisanActivity.artisanProfileImage;
+        Bitmap bitmap = getResizedBitmap(WelcomeAddArtisanActivity.artisanProfileImage, 1920);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
-        bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+        bitmap.compress(Bitmap.CompressFormat.JPEG, 70, baos);
         byte[] data = baos.toByteArray();
 
         UploadTask uploadTask = artisanPicRef.putBytes(data);
@@ -113,6 +120,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
                         @Override
                         public void onSuccess(DocumentReference documentReference){
                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            loadingSpinner.setVisibility(View.GONE);
                             startActivity(new Intent(FinalPreviewAddArtisanActivity.this, MainActivity.class));
                         }
                     })
@@ -124,5 +132,22 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
                     });
             }
         });
+    }
+
+
+    public Bitmap getResizedBitmap(Bitmap bm, int maxWidth) {
+        int width = bm.getWidth();
+        int height = bm.getHeight();
+        float scaleFactor = ((float) maxWidth) / width;
+        // CREATE A MATRIX FOR THE MANIPULATION
+        Matrix matrix = new Matrix();
+        // RESIZE THE BIT MAP
+        matrix.postScale(scaleFactor, scaleFactor);
+
+        // "RECREATE" THE NEW BITMAP
+        Bitmap resizedBitmap = Bitmap.createBitmap(
+                bm, 0, 0, width, height, matrix, false);
+        bm.recycle();
+        return resizedBitmap;
     }
 }
