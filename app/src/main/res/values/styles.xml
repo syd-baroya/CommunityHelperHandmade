@@ -22,6 +22,7 @@
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textColorHint">@color/colorPrimaryDark</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
     <!-- Main Button Style -->
