@@ -26,8 +26,7 @@ import com.google.firebase.firestore.Query;
  */
 public class ActionItemFragment extends Fragment {
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference artisansRef = db.collection("Action Items");
+    private CollectionReference actionItemRef;
     private ActionItemAdapter adapter;
 
     private View view;
@@ -37,6 +36,10 @@ public class ActionItemFragment extends Fragment {
     private Button searchButton;
 
     private String searchTerm = "";
+
+    public void setActionItemRef(CollectionReference actionItemRef){
+        this.actionItemRef = actionItemRef;
+    }
 
 
     @Override
@@ -97,7 +100,7 @@ public class ActionItemFragment extends Fragment {
 
     // Update artisan list based on filter and search term variables
     private void runActionItemsQuery() {
-        Query query = artisansRef.orderBy("date", Query.Direction.ASCENDING);
+        Query query = actionItemRef.orderBy("date", Query.Direction.ASCENDING);
 
         if (searchTerm.length() > 0) {
             query = query.whereEqualTo("action", searchTerm);
