@@ -22,6 +22,7 @@ import com.google.firebase.firestore.Query;
 
 import java.io.Serializable;
 
+import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 
 /**
@@ -99,6 +100,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     }
 
     public void onClickAddArtisan() {
+
         startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
     }
 
