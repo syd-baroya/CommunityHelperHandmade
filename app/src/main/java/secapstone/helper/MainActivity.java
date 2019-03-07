@@ -1,6 +1,9 @@
 package secapstone.helper;
 
+import android.annotation.TargetApi;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -8,22 +11,44 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
 
+import com.google.firebase.FirebaseApp;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.Serializable;
+
+import secapstone.helper.R;
+
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
 {
-
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference usersRef = db.collection("users");
+    private DocumentReference CGARef;
     private BottomNavigationView bottomNavigationView;
 
-    private Artisans artisanFragment = new Artisans();
-    private ActionItemFragment actionItemsFragment = new ActionItemFragment();
+    private Artisans artisanFragment;
+    private ActionItemFragment actionItemsFragment;
     private Profile profileFragment = new Profile();
 
+    private User user_info;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user_info = (User) getIntent().getSerializableExtra("USER_INFO");
+        CGARef = usersRef.document(user_info.getIdToken());
+
+        artisanFragment = new Artisans();
+        artisanFragment.setArtisanRef(CGARef.collection("artisans"));
+
+        actionItemsFragment = new ActionItemFragment();
+        actionItemsFragment.setActionItemRef(CGARef.collection("Action Items"));
+
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);

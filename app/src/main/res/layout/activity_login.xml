@@ -15,7 +15,7 @@
         style="@style/GrayButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:clickable="true"
         android:fontFamily="@font/googlesans_medium"
         android:text="Forgot Password?"
@@ -29,67 +29,33 @@
     <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        app:layout_constraintBottom_toTopOf="@+id/forgot_password"
+        app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.419">
 
         <ImageView
             android:id="@+id/icon"
-            android:layout_width="0dp"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="32dp"
-            android:layout_marginRight="32dp"
-            app:layout_constraintHorizontal_bias="0.0"
+            android:layout_marginLeft="24dp"
+            android:layout_marginRight="24dp"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:srcCompat="@drawable/handmadelogo" />
 
-        <secapstone.helper.CustomTextField
-            android:id="@+id/login_email"
-            style="@style/TextInput"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
-            android:layout_marginEnd="24dp"
-            android:contentDescription="@string/prompt_email"
-            android:hint="Email"
-            android:inputType="textEmailAddress"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/icon" />
-
-        <secapstone.helper.CustomTextField
-            android:id="@+id/login_password"
-            style="@style/TextInput"
-            android:layout_width="match_parent"
-            android:layout_height="55dp"
-            android:layout_marginStart="24dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:hint="Password"
-            android:inputType="textPassword"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_email" />
-
-        <Button
-            android:id="@+id/login_btn"
-            style="@style/PrimaryButton"
-            android:layout_width="110dp"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="32dp"
-            android:layout_weight="1"
-            android:text="Login"
-            android:textSize="16sp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/login_password" />
+        <ImageButton
+            android:id="@+id/login_with_amazon"
+            android:layout_width="215dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="192dp"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:srcCompat="@drawable/btnlwa_gry_loginwithamazon" />
 
 
     </android.support.constraint.ConstraintLayout>

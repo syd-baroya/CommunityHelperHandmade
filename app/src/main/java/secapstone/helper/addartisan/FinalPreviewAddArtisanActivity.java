@@ -30,10 +30,13 @@ import secapstone.helper.Artisan;
 public class FinalPreviewAddArtisanActivity extends AppCompatActivity
 {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference artisansRef = db.collection("artisans");
+    private CollectionReference usersRef = db.collection("users");
     private static final String TAG = "FinalPreviewActivity";
 
     ConstraintLayout loadingSpinner;
+    private User user_info;
+    private CollectionReference artisanRef;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -41,6 +44,9 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_preview_add_artisan);
+
+        user_info = (User) getIntent().getSerializableExtra("USER_INFO");
+        artisanRef = usersRef.document(user_info.getIdToken()).collection("artisans");
 
         Button nextButton8 = (Button) findViewById(R.id.finishButton);
         nextButton8.setOnClickListener(new View.OnClickListener()
@@ -91,7 +97,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
     }
 
     public void pushArtisan(Artisan mewBoi){
-        DocumentReference newArtisanRef = db.collection("artisans").document();
+        DocumentReference newArtisanRef = artisanRef.document();
         mewBoi.setPictureURL("profiles/" + newArtisanRef.getId() + ".jpg");
 
         final Artisan mewBoi2 = mewBoi;
@@ -114,7 +120,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                db.collection("artisans")
+                artisanRef
                     .add(mewBoi2)
                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
                         @Override

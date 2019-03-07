@@ -1,124 +1,274 @@
 package secapstone.helper;
 
+import android.annotation.TargetApi;
+import android.app.AlertDialog;
+import android.app.ProgressDialog;
 import android.content.Intent;
-import android.os.Bundle;
+import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+
+import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
-import android.widget.ProgressBar;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.amazon.identity.auth.device.AuthError;
+import com.amazon.identity.auth.device.api.Listener;
+import com.amazon.identity.auth.device.api.authorization.AuthCancellation;
+import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeListener;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeRequest;
+import com.amazon.identity.auth.device.api.authorization.AuthorizeResult;
+import com.amazon.identity.auth.device.api.authorization.ProfileScope;
+import com.amazon.identity.auth.device.api.authorization.Scope;
+import com.amazon.identity.auth.device.api.workflow.RequestContext;
+import com.amazon.identity.auth.device.api.authorization.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
-import com.google.firebase.auth.FirebaseAuthInvalidUserException;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+
+import java.io.Serializable;
+
+import secapstone.helper.R;
+import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
+
+
 /**
  * A login screen that offers login via email/password.
  *
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
-
-    Button btnLogin;
-    EditText input_email, input_password;
-    TextView btnForgotPass;
-    ConstraintLayout loadingSpinner;
-
     ConstraintLayout activity_login;
-
     private FirebaseAuth mAuth;
+
+    private RequestContext requestContext;
+    private static final String TAG = "LoginActivity";
+    private secapstone.helper.User CGA;
+    private String email;
+    private String password;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        setStatusBarToWhite();
         setContentView(R.layout.activity_login);
+        initializeControls();
 
-        //view
-        btnLogin = findViewById(R.id.login_btn);
-        input_email = findViewById(R.id.login_email);
-        input_password = findViewById(R.id.login_password);
-        btnForgotPass = findViewById(R.id.forgot_password);
-        activity_login = findViewById(R.id.activity_login);
-        loadingSpinner = findViewById(R.id.progress_loader);
-
-        btnForgotPass.setOnClickListener(this);
-        btnLogin.setOnClickListener(this);
-
-        //init firebase auth
+        // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
+        activity_login = (ConstraintLayout)findViewById(R.id.activity_login);
 
-        //check already session, if->dashboard, then create dashboard activity
-        if(mAuth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-        }
+        authorizeAmazon();
+        setupLoginBtn();
+        CGA = null;
+    }
+
+    private void setupLoginBtn(){
+        View loginButton = findViewById(R.id.login_with_amazon);
+        loginButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                AuthorizationManager.authorize(new AuthorizeRequest
+                        .Builder(requestContext)
+                        .addScopes(ProfileScope.profile(), ProfileScope.postalCode())
+                        .build());
+            }
+        });
+    }
+
+    private void authorizeAmazon(){
+        requestContext = RequestContext.create(this);
+
+        requestContext.registerListener(new AuthorizeListener() {
+
+            /* Authorization was completed successfully. */
+            @Override
+            public void onSuccess(AuthorizeResult result) {
+                /* Your app is now authorized for the requested scopes */
+                System.out.println("app is now authorized");
+
+            }
+
+            /* There was an error during the attempt to authorize the
+            application. */
+            @Override
+            public void onError(AuthError ae) {
+                /* Inform the user of the error */
+                System.out.println("cannot authorize application");
+            }
+
+            /* Authorization was cancelled before it could be completed. */
+            @Override
+            public void onCancel(AuthCancellation cancellation) {
+                /* Reset the UI to a ready-to-login state */
+                System.out.println("reset ui to ready-to-login");
+                startActivity(new Intent(LoginActivity.this, LoginActivity.class));
+            }
+        });
+    }
+
+    private void initializeControls(){
+        View loginButton = findViewById(R.id.login_with_amazon);
+        loginButton.setOnClickListener(this);
+        TextView btnForgotPass = findViewById(R.id.forgot_password);
+        btnForgotPass.setOnClickListener(this);
 
     }
 
     @Override
-    public void onClick(View v) {
-        if(v.getId() == R.id.forgot_password){
-            startActivity(new Intent(LoginActivity.this,ForgotPassword.class));
-        }
-        else if(v.getId() == R.id.login_btn){
-            loginUser(input_email.getText().toString(), input_password.getText().toString());
-        }
+    protected void onResume() {
+        super.onResume();
+        requestContext.onResume();
     }
 
+    private void updateUI(FirebaseUser user){
+        if(user!=null) {
+            /* The user is signed in */
+            System.out.println("user is signed in");
+            Intent intent2 = new Intent(getBaseContext(), FinalPreviewAddArtisanActivity.class);
+            intent2.putExtra("USER_INFO", CGA);
+            Intent intent1 = new Intent(getBaseContext(), MainActivity.class);
+            intent1.putExtra("USER_INFO", CGA);
+            startActivity(intent1);
+            finish();
+        }
+        else {
+            if (email != null && password != null){
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    CGA = new secapstone.helper.User(email, password, name, user.getUid());
+                                    updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
 
-    private void loginUser(String email, final String password){
-
-        loadingSpinner.setVisibility(View.VISIBLE);
-
-        mAuth.signInWithEmailAndPassword(email, password)
-                .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                    @Override
-                    public void onComplete(@NonNull Task<AuthResult> task) {
-                        loadingSpinner.setVisibility(View.GONE);
-                        if(!task.isSuccessful()){
-                            if(isValidPasswordLength(password)){
-                                Snackbar snackBar= Snackbar.make(activity_login, "Password length must be over 6", Snackbar.LENGTH_SHORT);
-                                snackBar.show();
                             }
+                        });
+            }
+        }
 
-                            if (task.getException() instanceof FirebaseAuthInvalidCredentialsException) {
-                                /**
-                                 * Thrown when one or more of the credentials passed to a method fail to
-                                 * identify and/or authenticate the user subject of that operation.
-                                 * Inspect the error code and message to find out the specific cause.
-                                 * https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthInvalidCredentialsException
-                                 */
+    }
 
-                                Snackbar snackBar= Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
-                                snackBar.show();
-                            } else if (task.getException() instanceof FirebaseAuthInvalidUserException) {
-                                /**
-                                 * Inspect the error code and message to find out the specific cause.
-                                 * https://firebase.google.com/docs/reference/android/com/google/firebase/auth/FirebaseAuthInvalidUserException
-                                 */
-                                Snackbar snackBar= Snackbar.make(activity_login, " Invalid credentials. Check email and password again.", Snackbar.LENGTH_SHORT);
-                                snackBar.show();
-                            }
+    private void fetchUserProfile() {
+        User.fetch(this, new Listener<User, AuthError>() {
+            /* fetch completed successfully. */
+            @Override
+            public void onSuccess(User user) {
+                name = user.getUserName();
+                email = user.getUserEmail();
+                password = user.getUserId();
+                Log.i(TAG, "email: " + email + ", password: " + password);
+            }
+            /* There was an error during the attempt to get the profile. */
+            @Override
+            public void onError(AuthError ae) {
+                /* Retry or inform the user of the error */
+                Log.i(TAG, "user profile error: " + ae.toString());
+            }
+        });
+    }
 
-                        }
-                        else{
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
-                            finish();
-                        }
+    @Override
+    protected void onStart() {
+        super.onStart();
+
+        Scope[] scopes = {
+                ProfileScope.profile(),
+                ProfileScope.postalCode()
+        };
+        AuthorizationManager.getToken(this, scopes, new Listener< AuthorizeResult, AuthError >() {
+
+            @Override
+            public void onSuccess(AuthorizeResult result) {
+                if (result.getAccessToken() != null) {
+                    fetchUserProfile();
+                    if(email!=null && password!=null) {
+                        mAuth.signInWithEmailAndPassword(email, password)
+                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                                    @Override
+                                    public void onComplete(@NonNull Task<AuthResult> task) {
+                                        if (task.isSuccessful()) {
+                                            // Sign in success, update UI with the signed-in user's information
+                                            Log.d(TAG, "signInWithEmail:success");
+                                            FirebaseUser user = mAuth.getCurrentUser();
+                                            CGA = new secapstone.helper.User(email, password, name, user.getUid());
+                                            updateUI(user);
+                                        } else {
+                                            // If sign in fails, display a message to the user.
+                                            Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                            Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                                    Toast.LENGTH_SHORT).show();
+                                            updateUI(null);
+                                        }
+                                    }
+                                });
+
                     }
-                });
+
+                } else {
+                    /* The user is not signed in */
+                    System.out.println("user is not signed in");
+
+
+                }
+            }
+
+            @Override
+            public void onError(AuthError ae) {
+                /* The user is not signed in */
+                System.out.println("user is not signed in");
+
+            }
+        });
     }
 
-    public boolean isValidPasswordLength(String password){
-        if(password.length()<6)
-            return false;
-        return true;
+
+    @Override
+    public void onClick(View v) {
+
+        AuthorizationManager.signOut(getApplicationContext(), new Listener < Void, AuthError > () {
+            @Override
+            public void onSuccess(Void response) {
+                // Set logged out state in UI
+                System.out.println("set logged out state in ui");
+
+            }
+            @Override
+            public void onError(AuthError authError) {
+                // Log the error
+                System.out.println("log error");
+
+            }
+        });
     }
+
+    @Override
+    public void onBackPressed() {
+        moveTaskToBack(true);
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToWhite() {
+        getWindow().setStatusBarColor(Color.WHITE);
+    }
+
 }
-
-
-
