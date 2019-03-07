@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -49,7 +48,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         view = inflater.inflate(R.layout.fragment_artisans, container, false);
 
         // Grab all needed views
-        artisanSearchField  =  view.findViewById(R.id.searchArtisanField);
+        artisanSearchField  =  view.findViewById(R.id.searchActionItemsField);
         searchButton        =  view.findViewById(R.id.searchArtisanButton);
         recyclerView        =  view.findViewById(R.id.artisan_recycler_view);
         sortBySpinner       =  view.findViewById(R.id.SortBySpinner);
