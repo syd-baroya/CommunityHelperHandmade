@@ -46,4 +46,8 @@ public class AmazonTransaction
     {
         return time;
     }
+
+    public boolean getHasBeenAccounted() { return hasBeenAccounted; }
+
+    public void setHasBeenAccounted(boolean newHasBeenAcounted) { hasBeenAccounted = newHasBeenAcounted; }
 }

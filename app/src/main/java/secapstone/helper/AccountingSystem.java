@@ -34,43 +34,16 @@ public class AccountingSystem
                 {
                     SparseArray<Listing> artisanListings = a.getListings();
 
-                    if (artisanListings.get(t.getProductID()) != null)
+                    if (artisanListings.get(t.getProductID()) != null && !t.getHasBeenAccounted())
                     {
-
+                        a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.getAmount());
+                        totalFromTransactionPeriod += t.getAmount();
+                        t.setHasBeenAccounted(true);
+                        break;
                     }
 
                 }
             }
-
-            for (AmazonTransaction t : transactions) {
-
-                boolean foundTransaction = false;
-
-                for (Artisan a : artisans)
-                {
-
-                        if (!foundTransaction)
-                        {
-
-                            for (Listing l : a.getListings())
-                            {
-
-                                if (t.getProductID() == l.getProductID())
-                                {
-                                    a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.getAmount());
-                                    totalFromTransactionPeriod += t.getAmount();
-
-                                    foundTransaction = true;
-                                    break;
-                                }
-                            }
-                        }
-                        else
-                        {
-                            break;
-                        }
-                    }
-                }
 
             timeLastRun = System.currentTimeMillis();
 
