@@ -30,6 +30,7 @@ import com.google.firebase.storage.StorageReference;
 
 public class ViewArtisanActivity extends AppCompatActivity {
     private static final int REQUEST_CALL = 1;
+    private static final int REQUEST_SMS = 2;
 
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     public static String artisanName;
@@ -170,14 +171,35 @@ public class ViewArtisanActivity extends AppCompatActivity {
     }
 
     public void onClickCallButton() {
-        if (ContextCompat.checkSelfPermission(myDialog.getContext(), Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
-            ActivityCompat.requestPermissions(myDialog.getOwnerActivity(), new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
+        if (ContextCompat.checkSelfPermission(ViewArtisanActivity.this, Manifest.permission.CALL_PHONE) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(ViewArtisanActivity.this, new String[] {Manifest.permission.CALL_PHONE}, REQUEST_CALL);
         }
         else {
             Intent intent = new Intent(Intent.ACTION_DIAL);
             intent.setData(Uri.parse("tel:"+artisanPhone));
             startActivity(intent);
         }
+    }
+
+    public void onClickTextButton() {
+        //Using built-in Android messaging app
+        if (ContextCompat.checkSelfPermission(ViewArtisanActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(ViewArtisanActivity.this, new String[] {Manifest.permission.SEND_SMS}, REQUEST_SMS);
+        }
+        else {
+            Intent textIntent = new Intent(Intent.ACTION_VIEW);
+            textIntent.setData(Uri.parse("sms:"));
+            //textIntent.setType("vnd.android-dir/mms-sms");
+            textIntent.putExtra("address", artisanPhone);
+            startActivity(textIntent);
+        }
+        //Using Whatsapp
+        /*
+        Uri uri = Uri.parse("smsto:" + artisanPhone);
+        Intent whatsappIntent = new Intent(Intent.ACTION_SENDTO, uri);
+        whatsappIntent.setPackage("com.whatsapp");
+        startActivity(whatsappIntent);
+         */
     }
 
     @Override
@@ -190,22 +212,14 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
-    }
-
-    public void onClickTextButton() {
-        //Using built-in Android messaging app
-        Intent textIntent = new Intent(Intent.ACTION_VIEW);
-        textIntent.putExtra("address", artisanPhone);
-        textIntent.setType("vnd.android-dir/mms-sms");
-        startActivity(textIntent);
-
-        //Using Whatsapp
-        /*
-        Uri uri = Uri.parse("smsto:" + artisanPhone);
-        Intent whatsappIntent = new Intent(Intent.ACTION_SENDTO, uri);
-        whatsappIntent.setPackage("com.whatsapp");
-        startActivity(whatsappIntent);
-         */
+        if (requestCode == REQUEST_SMS) {
+            if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_GRANTED) {
+                onClickTextButton();
+            }
+            else {
+                Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
+            }
+        }
     }
 
     public void onClickMapButton() {
