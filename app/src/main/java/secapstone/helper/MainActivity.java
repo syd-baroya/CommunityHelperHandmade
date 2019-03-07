@@ -29,7 +29,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private BottomNavigationView bottomNavigationView;
 
     private Artisans artisanFragment;
-    private ActionItems actionItemsFragment = new ActionItems();
+    private ActionItemFragment actionItemsFragment = new ActionItemFragment();
     private Profile profileFragment = new Profile();
 
     private User user_info;
@@ -48,7 +48,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
-        bottomNavigationView.setSelectedItemId(R.id.navigation_artisans);
+        bottomNavigationView.setSelectedItemId(R.id.navigation_action_items);
     }
 
 

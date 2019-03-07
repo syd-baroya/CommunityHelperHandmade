@@ -15,7 +15,7 @@
         android:focusableInTouchMode="true">
 
         <secapstone.helper.EditTextSearch
-            android:id="@+id/searchArtisanField"
+            android:id="@+id/searchActionItemsField"
             android:layout_width="0dp"
             android:layout_height="50dp"
             android:layout_marginStart="22dp"
@@ -37,16 +37,15 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/searchArtisanButton"
+            android:id="@+id/searchButton"
             style="@style/PrimaryButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:layout_marginEnd="12dp"
             android:background="@drawable/search_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/searchArtisanField"
-            app:layout_constraintEnd_toEndOf="@+id/searchArtisanField"
-            app:layout_constraintTop_toTopOf="@+id/searchArtisanField"
-            android:onClick=""/>
+            app:layout_constraintBottom_toBottomOf="@+id/searchActionItemsField"
+            app:layout_constraintEnd_toEndOf="@+id/searchActionItemsField"
+            app:layout_constraintTop_toTopOf="@+id/searchActionItemsField" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"
@@ -56,7 +55,7 @@
             android:layout_marginTop="22dp"
             android:background="@drawable/gray_filterbutton_background"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchArtisanField">
+            app:layout_constraintTop_toBottomOf="@+id/searchActionItemsField">
 
             <Spinner
                 android:id="@+id/SortBySpinner"
@@ -99,7 +98,7 @@
             android:text="New Artisan"
             android:textAlignment="viewStart"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchArtisanField" />
+            app:layout_constraintTop_toBottomOf="@+id/searchActionItemsField" />
 
         <android.support.v7.widget.RecyclerView
             android:id="@+id/artisan_recycler_view"

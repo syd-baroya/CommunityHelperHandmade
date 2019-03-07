@@ -6,7 +6,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
@@ -35,7 +34,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
     private View view;
 
-    private TextView artisanSearchField;
+    private EditTextSearch artisanSearchField;
     private Button searchButton;
     private RecyclerView recyclerView;
     private Spinner sortBySpinner;
@@ -54,8 +53,8 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         view = inflater.inflate(R.layout.fragment_artisans, container, false);
 
         // Grab all needed views
-        artisanSearchField  =  view.findViewById(R.id.searchArtisanField);
-        searchButton        =  view.findViewById(R.id.searchArtisanButton);
+        artisanSearchField  =  view.findViewById(R.id.searchActionItemsField);
+        searchButton        =  view.findViewById(R.id.searchButton);
         recyclerView        =  view.findViewById(R.id.artisan_recycler_view);
         sortBySpinner       =  view.findViewById(R.id.SortBySpinner);
         addArtisanButton    =  view.findViewById(R.id.addArtisanButton);
@@ -83,8 +82,6 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
         setUpFilterSpinner();
         runArtisanQuery();
         setStatusBarToWhite();
-
-        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
 
         return view;
     }
@@ -172,6 +169,8 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
     @TargetApi(23)
     public void setStatusBarToWhite() {
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+
         int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
         getActivity().getWindow().setStatusBarColor(Color.WHITE);

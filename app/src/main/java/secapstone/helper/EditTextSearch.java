@@ -17,7 +17,7 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
 
     enum SearchState
     {
-        FilledSearch, FilledClear, EmptySearch;
+        FilledSearch, FilledClear, EmptySearch
     }
 
     private Activity activity;
@@ -42,7 +42,7 @@ public class EditTextSearch extends android.support.v7.widget.AppCompatEditText 
     @Override
     protected int[] onCreateDrawableState(int extraSpace) {
         activity = (Activity) getContext();
-        searchButton = activity.findViewById(R.id.searchArtisanButton);
+        searchButton = activity.findViewById(R.id.searchButton);
         state = SearchState.EmptySearch;
 
         return super.onCreateDrawableState(extraSpace);

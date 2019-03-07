@@ -5,6 +5,7 @@
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="android:autofilledHighlight" tools:targetApi="26">@android:color/transparent</item>
     </style>
 
     <style name="Widget.BottomNavigationView" parent="Widget.Design.BottomNavigationView">
@@ -15,13 +16,13 @@
         <item name="colorControlNormal">@color/colorPrimaryLight</item>
         <item name="colorControlActivated">@color/colorPrimary</item>
         <item name="colorControlHighlight">@color/colorAccent</item>
-        <item name="android:autofilledHighlight" tools:targetApi="26">@color/colorPrimary</item>
         <item name="fontFamily">@font/googlesans_medium</item>
         <item name="android:background">@drawable/textfield_background</item>
         <item name="android:padding">16dp</item>
         <item name="android:textColor">@color/colorPrimaryDark</item>
         <item name="android:textColorHint">@color/colorPrimaryDark</item>
         <item name="android:textSize">16sp</item>
+        <item name="android:textCursorDrawable">@null</item>
     </style>
 
     <!-- Main Button Style -->
