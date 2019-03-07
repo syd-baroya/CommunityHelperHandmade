@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/searchActionItemsButton"
+            android:id="@+id/searchButton"
             style="@style/PrimaryButton"
             android:layout_width="24dp"
             android:layout_height="24dp"

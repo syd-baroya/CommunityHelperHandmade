@@ -37,7 +37,7 @@
             app:layout_constraintTop_toTopOf="parent"/>
 
         <Button
-            android:id="@+id/searchArtisanButton"
+            android:id="@+id/searchButton"
             style="@style/PrimaryButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
@@ -45,8 +45,7 @@
             android:background="@drawable/search_icon"
             app:layout_constraintBottom_toBottomOf="@+id/searchActionItemsField"
             app:layout_constraintEnd_toEndOf="@+id/searchActionItemsField"
-            app:layout_constraintTop_toTopOf="@+id/searchActionItemsField"
-            android:onClick=""/>
+            app:layout_constraintTop_toTopOf="@+id/searchActionItemsField" />
 
         <android.support.constraint.ConstraintLayout
             android:id="@+id/constraintLayout2"

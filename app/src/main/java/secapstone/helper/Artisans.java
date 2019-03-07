@@ -32,7 +32,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
     private View view;
 
-    private TextView artisanSearchField;
+    private EditTextSearch artisanSearchField;
     private Button searchButton;
     private RecyclerView recyclerView;
     private Spinner sortBySpinner;
@@ -49,7 +49,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
         // Grab all needed views
         artisanSearchField  =  view.findViewById(R.id.searchActionItemsField);
-        searchButton        =  view.findViewById(R.id.searchArtisanButton);
+        searchButton        =  view.findViewById(R.id.searchButton);
         recyclerView        =  view.findViewById(R.id.artisan_recycler_view);
         sortBySpinner       =  view.findViewById(R.id.SortBySpinner);
         addArtisanButton    =  view.findViewById(R.id.addArtisanButton);
