@@ -9,7 +9,7 @@ import java.util.List;
 public class SellerToArtisanPayout
 {
 
-    private static long timeLastRun = -1;
+    private static long timeLastRun = -1; //TODO This needs to be stored, not kept in RAM or it will reset each time APP resets.
     private static final long timeBetweenEachRun = 86400000;
 
     /*
@@ -58,10 +58,11 @@ public class SellerToArtisanPayout
                         }
                     }
                 }
-            }
 
             timeLastRun = System.currentTimeMillis();
+
         }
+
     }
 
     public static List<AmazonTransaction> getTransactions(long startTime)
