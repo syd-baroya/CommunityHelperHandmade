@@ -1,16 +1,15 @@
 package secapstone.helper;
 
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
+import android.util.SparseArray;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class SellerToArtisanPayout
+public class AccountingSystem
 {
 
-    private static long timeLastRun = -1; //TODO This needs to be stored, not kept in RAM or it will reset each time APP resets.
-    private static final long timeBetweenEachRun = 86400000;
+    private static long timeLastRun = -1; //TODO This needs to be in firebase, not kept in RAM or it will reset each time APP restarts.
+    private static final long TIME_BETWEEN_EACH_RUN = 86400000;
 
     /*
       Gets all the artisans for the Community Leader.
@@ -22,12 +21,26 @@ public class SellerToArtisanPayout
      */
     public static void CalculatePayouts()
     {
-        if (System.currentTimeMillis() >= timeLastRun + timeBetweenEachRun)
+        if (System.currentTimeMillis() >= timeLastRun + TIME_BETWEEN_EACH_RUN)
         {
             List<Artisan> artisans = getArtisans();
             List<AmazonTransaction> transactions = getTransactions(timeLastRun);
 
             float totalFromTransactionPeriod = 0;
+
+            for (AmazonTransaction t: transactions)
+            {
+                for (Artisan a: artisans)
+                {
+                    SparseArray<Listing> artisanListings = a.getListings();
+
+                    if (artisanListings.get(t.getProductID()) != null)
+                    {
+
+                    }
+
+                }
+            }
 
             for (AmazonTransaction t : transactions) {
 
@@ -42,10 +55,10 @@ public class SellerToArtisanPayout
                             for (Listing l : a.getListings())
                             {
 
-                                if (t.productID == l.productID)
+                                if (t.getProductID() == l.getProductID())
                                 {
-                                    a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.amount);
-                                    totalFromTransactionPeriod += t.amount;
+                                    a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.getAmount());
+                                    totalFromTransactionPeriod += t.getAmount();
 
                                     foundTransaction = true;
                                     break;
