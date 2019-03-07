@@ -9,5 +9,5 @@
 /build
 /captures
 .externalNativeBuild
-/src/main/assets/api_key.txt
-/handmade-17b08-firebase-adminsdk-sxsop-f3b4136f67.json
+app/src/main/assets/api_key.txt
+app/handmade-17b08-firebase-adminsdk-sxsop-f3b4136f67.json
