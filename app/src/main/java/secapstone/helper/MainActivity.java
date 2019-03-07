@@ -2,6 +2,7 @@ package secapstone.helper;
 
 import android.annotation.TargetApi;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
@@ -12,7 +13,10 @@ import android.view.*;
 
 import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.io.Serializable;
 
 import secapstone.helper.R;
 
@@ -20,20 +24,27 @@ import secapstone.helper.R;
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
 {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference userRef = db.collection("users");
-
+    private CollectionReference usersRef = db.collection("users");
+    private DocumentReference CGARef;
     private BottomNavigationView bottomNavigationView;
 
-    private Artisans artisanFragment = new Artisans();
+    private Artisans artisanFragment;
     private ActionItems actionItemsFragment = new ActionItems();
     private Profile profileFragment = new Profile();
 
+    private User user_info;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        user_info = (User) getIntent().getSerializableExtra("USER_INFO");
+        CGARef = usersRef.document(user_info.getIdToken());
+
+        artisanFragment = new Artisans();
+        artisanFragment.setArtisanRef(CGARef.collection("artisans"));
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);

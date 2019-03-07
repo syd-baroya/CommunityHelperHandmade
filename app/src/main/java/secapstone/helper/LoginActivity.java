@@ -26,13 +26,16 @@ import com.amazon.identity.auth.device.api.authorization.AuthorizeRequest;
 import com.amazon.identity.auth.device.api.authorization.AuthorizeResult;
 import com.amazon.identity.auth.device.api.authorization.ProfileScope;
 import com.amazon.identity.auth.device.api.authorization.Scope;
-import com.amazon.identity.auth.device.api.authorization.User;
 import com.amazon.identity.auth.device.api.workflow.RequestContext;
+import com.amazon.identity.auth.device.api.authorization.User;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.auth.GetTokenResult;
+
+import java.io.Serializable;
 
 import secapstone.helper.R;
 
@@ -48,8 +51,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     private RequestContext requestContext;
     private static final String TAG = "LoginActivity";
+    private secapstone.helper.User CGA;
     private String email;
-    private String account;
+    private String password;
+    private String name;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,9 +70,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
         authorizeAmazon();
         setupLoginBtn();
-        email = null;
-        account = null;
-
+        CGA = null;
     }
 
     private void setupLoginBtn(){
@@ -132,28 +135,33 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(user!=null) {
             /* The user is signed in */
             System.out.println("user is signed in");
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            Intent intent = new Intent(getBaseContext(), MainActivity.class);
+            intent.putExtra("USER_INFO", CGA);
+            startActivity(intent);
             finish();
         }
-        else{
-            mAuth.createUserWithEmailAndPassword(email, account)
-                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                        @Override
-                        public void onComplete(@NonNull Task<AuthResult> task) {
-                            if (task.isSuccessful()) {
-                                // Sign in success, update UI with the signed-in user's information
-                                Log.d(TAG, "createUserWithEmail:success");
-                                FirebaseUser user = mAuth.getCurrentUser();
-                                updateUI(user);
-                            } else {
-                                // If sign in fails, display a message to the user.
-                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                        Toast.LENGTH_SHORT).show();
-                            }
+        else {
+            if (email != null && password != null){
+                mAuth.createUserWithEmailAndPassword(email, password)
+                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "createUserWithEmail:success");
+                                    FirebaseUser user = mAuth.getCurrentUser();
+                                    CGA = new secapstone.helper.User(email, password, name, user.getUid());
+                                    updateUI(user);
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
 
-                        }
-                    });
+                            }
+                        });
+            }
         }
 
     }
@@ -163,10 +171,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             /* fetch completed successfully. */
             @Override
             public void onSuccess(User user) {
-//                final String name = user.getUserName();
+                name = user.getUserName();
                 email = user.getUserEmail();
-                account = user.getUserId();
-                Log.i(TAG, "email: " + email + ", account: " + account);
+                password = user.getUserId();
+                Log.i(TAG, "email: " + email + ", password: " + password);
             }
             /* There was an error during the attempt to get the profile. */
             @Override
@@ -191,8 +199,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(AuthorizeResult result) {
                 if (result.getAccessToken() != null) {
                     fetchUserProfile();
-                    if(email!=null && account!=null) {
-                        mAuth.signInWithEmailAndPassword(email, account)
+                    if(email!=null && password!=null) {
+                        mAuth.signInWithEmailAndPassword(email, password)
                                 .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
                                     @Override
                                     public void onComplete(@NonNull Task<AuthResult> task) {
@@ -200,6 +208,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d(TAG, "signInWithEmail:success");
                                             FirebaseUser user = mAuth.getCurrentUser();
+                                            CGA = new secapstone.helper.User(email, password, name, user.getUid());
                                             updateUI(user);
                                         } else {
                                             // If sign in fails, display a message to the user.
@@ -210,6 +219,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                         }
                                     }
                                 });
+
                     }
 
                 } else {

@@ -17,8 +17,11 @@ import android.widget.*;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import java.io.Serializable;
 
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 
@@ -27,8 +30,7 @@ import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
  */
 
 public class Artisans extends Fragment implements AdapterView.OnItemSelectedListener {
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference artisansRef = db.collection("artisans");
+    private CollectionReference artisansRef;
     private ArtisanAdapter adapter;
 
     private View view;
@@ -42,6 +44,9 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     private String filter = "lastName";
     private String searchTerm = "";
 
+    public void setArtisanRef(CollectionReference artisansRef){
+        this.artisansRef = artisansRef;
+    }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -185,4 +190,5 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
     // Required empty public constructor
     public Artisans() {}
+
 }
