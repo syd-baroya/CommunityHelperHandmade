@@ -141,6 +141,20 @@ public class ViewArtisanActivity extends AppCompatActivity {
             }
         });
 
+        myDialog.findViewById(R.id.textNowButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickTextButton();
+            }
+        });
+
+        myDialog.findViewById(R.id.getDirectionsButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickMapButton();
+            }
+        });
+
         myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
         myDialog.show();
     }
@@ -166,7 +180,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
         }
     }
 
-
     @Override
     public void onRequestPermissionsResult(int requestCode, @NonNull String[] permissions, @NonNull int[] grantResults) {
         if (requestCode == REQUEST_CALL) {
@@ -176,6 +189,31 @@ public class ViewArtisanActivity extends AppCompatActivity {
             else {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
+        }
+    }
+
+    public void onClickTextButton() {
+        //Using built-in Android messaging app
+        Intent textIntent = new Intent(Intent.ACTION_VIEW);
+        textIntent.putExtra("address", artisanPhone);
+        textIntent.setType("vnd.android-dir/mms-sms");
+        startActivity(textIntent);
+
+        //Using Whatsapp
+        /*
+        Uri uri = Uri.parse("smsto:" + artisanPhone);
+        Intent whatsappIntent = new Intent(Intent.ACTION_SENDTO, uri);
+        whatsappIntent.setPackage("com.whatsapp");
+        startActivity(whatsappIntent);
+         */
+    }
+
+    public void onClickMapButton() {
+        Uri uri = Uri.parse("geo:0,0?q=" + artisanAddress);
+        Intent mapIntent = new Intent(Intent.ACTION_VIEW, uri);
+        mapIntent.setPackage("com.google.android.apps.maps");
+        if (mapIntent.resolveActivity(getPackageManager()) != null) {
+            startActivity(mapIntent);
         }
     }
 
