@@ -30,9 +30,8 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
 
     private Artisans artisanFragment;
     private ActionItemFragment actionItemsFragment;
-    private Profile profileFragment = new Profile();
+    private Profile profileFragment;
 
-    private User user_info;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -40,8 +39,11 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user_info = User.getUser();
+        User user_info = User.getUser();
         CGARef = usersRef.document(user_info.getIdToken());
+
+        profileFragment = new Profile();
+        profileFragment.setArtisanRef(CGARef.collection("artisans"));
 
         artisanFragment = new Artisans();
         artisanFragment.setArtisanRef(CGARef.collection("artisans"));

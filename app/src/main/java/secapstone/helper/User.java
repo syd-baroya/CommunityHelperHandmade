@@ -13,13 +13,6 @@ public class User implements Serializable {
     private static User obj=new User();//Early, instance will be created at load time
     private User(){}
 
-//    public User(String email, String password, String name, String idToken){
-//        this.email = email;
-//        this.password = password;
-//        this.name = name;
-//        this.idToken = idToken;
-//    }
-
     public void setEmail(String email) {this.email = email;}
 
     public void setIdToken(String idToken) {
