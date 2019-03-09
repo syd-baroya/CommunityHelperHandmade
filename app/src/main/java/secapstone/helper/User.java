@@ -10,11 +10,32 @@ public class User implements Serializable {
     private String name;
     private String idToken;
 
-    public User(String email, String password, String name, String idToken){
-        this.email = email;
-        this.password = password;
-        this.name = name;
+    private static User obj=new User();//Early, instance will be created at load time
+    private User(){}
+
+//    public User(String email, String password, String name, String idToken){
+//        this.email = email;
+//        this.password = password;
+//        this.name = name;
+//        this.idToken = idToken;
+//    }
+
+    public void setEmail(String email) {this.email = email;}
+
+    public void setIdToken(String idToken) {
         this.idToken = idToken;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public static User getUser(){
+        return obj;
     }
 
     public String getEmail() {

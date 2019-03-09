@@ -135,11 +135,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         if(user!=null) {
             /* The user is signed in */
             System.out.println("user is signed in");
-            Intent intent2 = new Intent(getBaseContext(), FinalPreviewAddArtisanActivity.class);
-            intent2.putExtra("USER_INFO", CGA);
-            Intent intent1 = new Intent(getBaseContext(), MainActivity.class);
-            intent1.putExtra("USER_INFO", CGA);
-            startActivity(intent1);
+            startActivity(new Intent(getBaseContext(), MainActivity.class));
             finish();
         }
         else {
@@ -152,7 +148,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     // Sign in success, update UI with the signed-in user's information
                                     Log.d(TAG, "createUserWithEmail:success");
                                     FirebaseUser user = mAuth.getCurrentUser();
-                                    CGA = new secapstone.helper.User(email, password, name, user.getUid());
+                                    CGA = secapstone.helper.User.getUser();
+                                    CGA.setEmail(email);
+                                    CGA.setIdToken(user.getUid());
+                                    CGA.setName(name);
+                                    CGA.setPassword(password);
                                     updateUI(user);
                                 } else {
                                     // If sign in fails, display a message to the user.
@@ -210,7 +210,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                             // Sign in success, update UI with the signed-in user's information
                                             Log.d(TAG, "signInWithEmail:success");
                                             FirebaseUser user = mAuth.getCurrentUser();
-                                            CGA = new secapstone.helper.User(email, password, name, user.getUid());
+                                            CGA = secapstone.helper.User.getUser();
+                                            CGA.setEmail(email);
+                                            CGA.setIdToken(user.getUid());
+                                            CGA.setName(name);
+                                            CGA.setPassword(password);
                                             updateUI(user);
                                         } else {
                                             // If sign in fails, display a message to the user.

@@ -100,7 +100,6 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     }
 
     public void onClickAddArtisan() {
-
         startActivity(new Intent(getContext(), WelcomeAddArtisanActivity.class));
     }
 

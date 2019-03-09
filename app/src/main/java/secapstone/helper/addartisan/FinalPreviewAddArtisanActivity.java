@@ -45,7 +45,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_preview_add_artisan);
 
-        user_info = (User) getIntent().getSerializableExtra("USER_INFO");
+        user_info = User.getUser();
         artisanRef = usersRef.document(user_info.getIdToken()).collection("artisans");
 
         Button nextButton8 = (Button) findViewById(R.id.finishButton);

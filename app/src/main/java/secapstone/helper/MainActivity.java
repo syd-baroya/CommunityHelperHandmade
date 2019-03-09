@@ -40,7 +40,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        user_info = (User) getIntent().getSerializableExtra("USER_INFO");
+        user_info = User.getUser();
         CGARef = usersRef.document(user_info.getIdToken());
 
         artisanFragment = new Artisans();
