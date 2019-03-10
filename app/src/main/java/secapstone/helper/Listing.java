@@ -13,6 +13,9 @@ public class Listing
     private List<String> images = new ArrayList<String>(); //TODO Make this a list of files, not strings.
     private String description = "";
     private ProductCategory category;
+    private int productID;
+    private float price;
+    private boolean isFulfilledByAmazon;
 
     public Listing()
     {
@@ -58,5 +61,15 @@ public class Listing
     public ProductCategory getCategory()
     {
         return category;
+    }
+
+    public int getProductID()
+    {
+        return productID;
+    }
+
+    public void setProductID(int newProductID)
+    {
+        productID = newProductID;
     }
 }

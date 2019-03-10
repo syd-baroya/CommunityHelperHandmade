@@ -3,6 +3,10 @@ package secapstone.helper;
 
 //Must match artisan in Firebase!
 
+import android.util.SparseArray;
+
+import java.util.Map;
+
 public class Artisan {
     private String name;
     private String description;
@@ -21,6 +25,8 @@ public class Artisan {
     private String pinterest;
     private String instagram;
     private boolean customOrders;*/
+    private float moneyOwedFromCommunityLeader;
+    private SparseArray<Listing> listings = new SparseArray<Listing>(); //Better performance than a HashMap for this scenario.
 
 
     public Artisan(String name, String description, String phoneNumber, String pictureURL) {
@@ -29,6 +35,8 @@ public class Artisan {
 
         this.phoneNumber = phoneNumber;
         this.pictureURL = pictureURL;
+
+        moneyOwedFromCommunityLeader = 0f;
     }
 
     public Artisan() {
@@ -114,4 +122,12 @@ public class Artisan {
     public String getPictureURL() { return pictureURL;}
 
     public String getAddress() {return address;}
+
+    public float getMoneyOwedFromCommunityLeader() { return moneyOwedFromCommunityLeader; }
+
+    public void setMoneyOwedFromCommunityLeader(float newMoneyOwedFromCommunityLeader) { moneyOwedFromCommunityLeader = newMoneyOwedFromCommunityLeader; }
+
+    public SparseArray<Listing> getListings() { return listings; }
+
+    public void addListing(Listing newListing) { listings.put(newListing.getProductID(), newListing); }
 }
