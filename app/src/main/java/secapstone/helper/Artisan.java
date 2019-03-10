@@ -16,6 +16,7 @@ public class Artisan {
     private String craft;
     private String howItsMade;
     private String inspiration;
+    private String idToken;
     /*private String facebook;
     private String twitter;
     private String pinterest;
@@ -60,6 +61,10 @@ public class Artisan {
     public void setHowItsMade(String him){this.howItsMade = him;}
 
     public void setInspiration(String ins){this.inspiration = ins;}
+
+    public void setIdToken(String idToken) {
+        this.idToken = idToken;
+    }
 
     /*public void setFacebook(String fb){this.facebook = fb;}
 
@@ -114,4 +119,6 @@ public class Artisan {
     public String getPictureURL() { return pictureURL;}
 
     public String getAddress() {return address;}
+
+    public String getIDToken() {return idToken;}
 }

@@ -99,6 +99,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
     public void pushArtisan(Artisan mewBoi){
         DocumentReference newArtisanRef = artisanRef.document();
         mewBoi.setPictureURL("profiles/" + newArtisanRef.getId() + ".jpg");
+        mewBoi.setIdToken(newArtisanRef.getId());
 
         final Artisan mewBoi2 = mewBoi;
 

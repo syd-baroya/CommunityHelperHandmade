@@ -19,6 +19,7 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import secapstone.helper.R;
@@ -30,6 +31,8 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
     private Context context;
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     private CollectionReference artisansRef;
+    private DocumentReference artisanDocRef;
+
 
     public ArtisanAdapter(@NonNull FirestoreRecyclerOptions<Artisan> options, Context context, CollectionReference artisansRef) {
         super(options);
@@ -42,8 +45,13 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
         holder.textViewDescription.setText(model.getDescription());
         holder.textViewName.setText(String.valueOf(model.getName()));
 
+        System.out.println(position);
+
         final ArtisanHolder copy = holder;
         final Artisan modelCopy = model;
+
+        artisanDocRef = artisansRef.document(model.getIDToken());
+
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -75,7 +83,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
 
     private void onTileClick(Artisan model) {
         Intent intent = new Intent(context, ViewArtisanActivity.class);
-        ViewArtisanActivity.setArtisanRef(artisansRef);
+        ViewArtisanActivity.setArtisanRef(artisanDocRef);
         intent.putExtra("url", model.getPictureURL());
         intent.putExtra("name", model.getName());
         intent.putExtra("description", model.getDescription());
