@@ -11,3 +11,4 @@
 .externalNativeBuild
 app/src/main/assets
 app/handmade-17b08-firebase-adminsdk-sxsop-f3b4136f67.json
+app/google-services.json
