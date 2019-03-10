@@ -1,7 +1,9 @@
 package secapstone.helper;
 
 
+import android.annotation.TargetApi;
 import android.content.Context;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
@@ -10,6 +12,7 @@ import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.Button;
@@ -68,6 +71,7 @@ public class ActionItemFragment extends Fragment {
 
         // Do everything else
         runActionItemsQuery();
+        setStatusBarToWhite();
 
 
         return view;
@@ -128,6 +132,15 @@ public class ActionItemFragment extends Fragment {
     public void onStop() {
         super.onStop();
         adapter.stopListening();
+    }
+
+    @TargetApi(23)
+    public void setStatusBarToWhite() {
+        getActivity().getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+
+        int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
+        getActivity().getWindow().setStatusBarColor(Color.WHITE);
     }
 
     public ActionItemFragment() {
