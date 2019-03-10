@@ -60,13 +60,12 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        setStatusBarToWhite();
         setContentView(R.layout.activity_login);
         initializeControls();
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
-        activity_login = (ConstraintLayout)findViewById(R.id.activity_login);
+        activity_login = findViewById(R.id.activity_login);
 
         authorizeAmazon();
         setupLoginBtn();
@@ -95,8 +94,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(AuthorizeResult result) {
                 /* Your app is now authorized for the requested scopes */
-                System.out.println("app is now authorized");
-
+                Log.d(TAG,"app is now authorized");
             }
 
             /* There was an error during the attempt to authorize the
@@ -104,14 +102,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onError(AuthError ae) {
                 /* Inform the user of the error */
-                System.out.println("cannot authorize application");
+                Log.d(TAG,"cannot authorize application");
             }
 
             /* Authorization was cancelled before it could be completed. */
             @Override
             public void onCancel(AuthCancellation cancellation) {
                 /* Reset the UI to a ready-to-login state */
-                System.out.println("reset ui to ready-to-login");
+                Log.d(TAG,"reset ui to ready-to-login");
                 startActivity(new Intent(LoginActivity.this, LoginActivity.class));
             }
         });
@@ -134,7 +132,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     private void updateUI(FirebaseUser user){
         if(user!=null) {
             /* The user is signed in */
-            System.out.println("user is signed in");
+            Log.d(TAG,"user is signed in");
             startActivity(new Intent(getBaseContext(), MainActivity.class));
             finish();
         }
@@ -154,6 +152,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                     CGA.setName(name);
                                     CGA.setPassword(password);
                                     updateUI(user);
+                                    startActivity(new Intent(getBaseContext(), MainActivity.class));
+                                    finish();
                                 } else {
                                     // If sign in fails, display a message to the user.
                                     Log.w(TAG, "createUserWithEmail:failure", task.getException());
@@ -230,7 +230,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                 } else {
                     /* The user is not signed in */
-                    System.out.println("user is not signed in");
+                    Log.d(TAG,"user is not signed in");
 
 
                 }
@@ -239,7 +239,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onError(AuthError ae) {
                 /* The user is not signed in */
-                System.out.println("user is not signed in");
+                Log.d(TAG,"user is not signed in");
 
             }
         });
@@ -253,13 +253,13 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             @Override
             public void onSuccess(Void response) {
                 // Set logged out state in UI
-                System.out.println("set logged out state in ui");
+                Log.d(TAG,"set logged out state in ui");
 
             }
             @Override
             public void onError(AuthError authError) {
                 // Log the error
-                System.out.println("log error");
+                Log.d(TAG,"log error");
 
             }
         });
