@@ -147,7 +147,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
                 .setQuery(query, Artisan.class)
                 .build();
 
-        adapter = new ArtisanAdapter(options, getContext());
+        adapter = new ArtisanAdapter(options, getContext(), artisansRef);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

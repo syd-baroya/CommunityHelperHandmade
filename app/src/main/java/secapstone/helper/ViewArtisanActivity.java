@@ -25,6 +25,7 @@ import android.widget.Toast;
 import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -38,6 +39,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public static String artisanPhone;
     public static String EXTRA_A_ADDRESS = "com.example.application.example.artisanAddress";
     public static String EXTRA_A_PHONE = "com.example.application.example.artisanPhone";
+
+    //reference to user's artisans in database
+    private static CollectionReference artisansRef;
 
     Dialog myDialog;
 
@@ -61,6 +65,10 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         setStatusBarToDark();
 
+    }
+
+    public static void setArtisanRef(CollectionReference ref){
+        artisansRef = ref;
     }
 
     private void getIncomingIntent() {
