@@ -22,11 +22,13 @@ public class SignatureAddArtisanActivity extends AppCompatActivity
     public void onClickNext(View view)
     {
         startActivity(new Intent(SignatureAddArtisanActivity.this, FinalPreviewAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void onClickBack(View view)
     {
         startActivity(new Intent(SignatureAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
 

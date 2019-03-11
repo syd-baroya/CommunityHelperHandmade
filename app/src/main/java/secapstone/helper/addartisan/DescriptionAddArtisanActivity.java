@@ -37,11 +37,13 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
 //        setInspiration(inspirationInfo.getText().toString());
 
         startActivity(new Intent(DescriptionAddArtisanActivity.this, SignatureAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void onClickBack(View view)
     {
         startActivity(new Intent(DescriptionAddArtisanActivity.this, MapAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void setDescription(String des)

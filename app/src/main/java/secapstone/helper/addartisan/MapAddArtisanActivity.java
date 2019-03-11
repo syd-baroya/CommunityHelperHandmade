@@ -73,11 +73,13 @@ public class MapAddArtisanActivity extends AppCompatActivity
         setZipPostalCode(zip.getText().toString());
         setCountryRegion(country.getText().toString());
         startActivity(new Intent(MapAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void onClickBack(View view)
     {
         startActivity(new Intent(MapAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void setAddress(String addr, String zip, String country){

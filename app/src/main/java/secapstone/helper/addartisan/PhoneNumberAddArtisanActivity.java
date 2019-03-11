@@ -26,11 +26,13 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
     {
         setNum(pNum.getText().toString());
         startActivity(new Intent(PhoneNumberAddArtisanActivity.this, MapAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void onClickBack(View view)
     {
         startActivity(new Intent(PhoneNumberAddArtisanActivity.this, PhotoAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void setNum(String num) {

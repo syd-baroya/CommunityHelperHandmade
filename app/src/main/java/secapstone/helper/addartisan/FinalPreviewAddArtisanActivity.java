@@ -72,6 +72,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
     public void onClickBack(View view)
     {
         startActivity(new Intent(FinalPreviewAddArtisanActivity.this, SignatureAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void pushArtisan(Artisan mewBoi){

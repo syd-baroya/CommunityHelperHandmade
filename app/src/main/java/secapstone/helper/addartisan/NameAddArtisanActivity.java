@@ -29,11 +29,13 @@ public class NameAddArtisanActivity extends AppCompatActivity
         setFirstName(inputFirst.getText().toString());
         setLastName(inputLast.getText().toString());
         startActivity(new Intent(NameAddArtisanActivity.this, PhotoAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void onClickBack(View view)
     {
         startActivity(new Intent(NameAddArtisanActivity.this, WelcomeAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void setName(String first, String last)

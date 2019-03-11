@@ -96,10 +96,12 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
     public void onClickNext(View view)
     {
         startActivity(new Intent(PhotoAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
     public void onClickBack(View view)
     {
         startActivity(new Intent(PhotoAddArtisanActivity.this, NameAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 }

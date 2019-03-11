@@ -33,5 +33,6 @@ public class WelcomeAddArtisanActivity extends AppCompatActivity
     public void onClickNext(View view)
     {
         startActivity(new Intent(WelcomeAddArtisanActivity.this, NameAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }
