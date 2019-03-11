@@ -18,6 +18,9 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.amazon.identity.auth.device.AuthError;
+import com.amazon.identity.auth.device.api.Listener;
+import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
@@ -85,36 +88,25 @@ public class Profile extends Fragment {
     public void onClickLogout()
     {
         FirebaseAuth.getInstance().signOut();
-        startActivity(new Intent(getContext(), LoginActivity.class));
-        getActivity().finish(); //Since we are logging out, close MainActivity so you can't use back button.
+
+        AuthorizationManager.signOut(getContext(), new Listener< Void, AuthError >() {
+            @Override
+            public void onSuccess(Void response) {
+                // Set logged out state in UI
+
+                startActivity(new Intent(getContext(), LoginActivity.class));
+                getActivity().finish();
+            }
+            @Override
+            public void onError(AuthError authError) {
+                // Log the error
+            }
+        });
     }
 
     private void setImage(String url, String name) {
         TextView nameTitle = view.findViewById(R.id.cga_name);
         nameTitle.setText(name);
-
-//        final ImageView image = findViewById(R.id.artisan_banner_image);
-//
-//        final Activity thisAct = this;
-//
-//        if (url != null) {
-//            storageRef.child(url).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
-//                @Override
-//                public void onSuccess(Uri uri) {
-//                    Glide.with(thisAct)
-//                            .asBitmap()
-//                            .load(uri)
-//                            .into(image);
-//                }
-//            }).addOnFailureListener(new OnFailureListener() {
-//                @Override
-//                public void onFailure(@NonNull Exception exception) {
-//                    // Handle any errors
-//                }
-//            });
-//        } else {
-//            image.setImageResource(R.drawable.ic_empty_person);
-//        }
     }
 
 

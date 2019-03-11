@@ -13,6 +13,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -52,16 +53,17 @@ import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
  *
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
+    private ConstraintLayout activity_login;
 
-    ConstraintLayout activity_login;
     private FirebaseAuth mAuth;
 
     private RequestContext requestContext;
-    private static final String TAG = "LoginActivity";
     private secapstone.helper.User CGA;
     private String email;
     private String password;
     private String name;
+
+    private static final String TAG = "LoginActivity";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -103,6 +105,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(AuthorizeResult result) {
                 /* Your app is now authorized for the requested scopes */
                 Log.d(TAG,"app is now authorized");
+                fetchUserProfile();
             }
 
             /* There was an error during the attempt to authorize the
@@ -128,7 +131,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         loginButton.setOnClickListener(this);
         TextView btnForgotPass = findViewById(R.id.forgot_password);
         btnForgotPass.setOnClickListener(this);
-
     }
 
     @Override
@@ -166,34 +168,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             }
         }
         else {
-            if (email != null && password != null){
-                mAuth.createUserWithEmailAndPassword(email, password)
-                        .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
-                            @Override
-                            public void onComplete(@NonNull Task<AuthResult> task) {
-                                if (task.isSuccessful()) {
-                                    // Sign in success, update UI with the signed-in user's information
-                                    Log.d(TAG, "createUserWithEmail:success");
-                                    FirebaseUser user = mAuth.getCurrentUser();
-                                    CGA = secapstone.helper.User.getUser();
-                                    CGA.setEmail(email);
-                                    CGA.setIdToken(user.getUid());
-                                    CGA.setName(name);
-                                    CGA.setPassword(password);
-                                    startActivity(new Intent(getBaseContext(), MainActivity.class));
-                                    finish();
-                                } else {
-                                    // If sign in fails, display a message to the user.
-                                    Log.w(TAG, "createUserWithEmail:failure", task.getException());
-                                    Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                            Toast.LENGTH_SHORT).show();
-                                }
-
-                            }
-                        });
-            }
+            createNewUser();
         }
-
     }
 
     private void fetchUserProfile() {
@@ -205,6 +181,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 email = user.getUserEmail();
                 password = user.getUserId();
                 Log.i(TAG, "email: " + email + ", password: " + password);
+
+                signInUser();
             }
             /* There was an error during the attempt to get the profile. */
             @Override
@@ -219,56 +197,26 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
     protected void onStart() {
         super.onStart();
 
+        Log.d(TAG, "OnStart!!!!");
+
         Scope[] scopes = {
                 ProfileScope.profile(),
                 ProfileScope.postalCode()
         };
-        AuthorizationManager.getToken(this, scopes, new Listener< AuthorizeResult, AuthError >() {
 
+        AuthorizationManager.getToken(this, scopes, new Listener< AuthorizeResult, AuthError >() {
             @Override
             public void onSuccess(AuthorizeResult result) {
                 if (result.getAccessToken() != null) {
                     fetchUserProfile();
-                    if(email!=null && password!=null) {
-                        mAuth.signInWithEmailAndPassword(email, password)
-                                .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
-                                    @Override
-                                    public void onComplete(@NonNull Task<AuthResult> task) {
-                                        if (task.isSuccessful()) {
-                                            // Sign in success, update UI with the signed-in user's information
-                                            Log.d(TAG, "signInWithEmail:success");
-                                            FirebaseUser user = mAuth.getCurrentUser();
-                                            CGA = secapstone.helper.User.getUser();
-                                            CGA.setEmail(email);
-                                            CGA.setIdToken(user.getUid());
-                                            CGA.setName(name);
-                                            CGA.setPassword(password);
-                                            updateUI(user);
-                                        } else {
-                                            // If sign in fails, display a message to the user.
-                                            Log.w(TAG, "signInWithEmail:failure", task.getException());
-                                            Toast.makeText(LoginActivity.this, "Authentication failed.",
-                                                    Toast.LENGTH_SHORT).show();
-                                            updateUI(null);
-                                        }
-                                    }
-                                });
-
-                    }
-
                 } else {
-                    /* The user is not signed in */
                     Log.d(TAG,"user is not signed in");
-
-
                 }
             }
 
             @Override
             public void onError(AuthError ae) {
-                /* The user is not signed in */
                 Log.d(TAG,"user is not signed in");
-
             }
         });
     }
@@ -293,13 +241,76 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         });
     }
 
+    public void signInUser() {
+        if(email!=null && password!=null) {
+            mAuth.signInWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "signInWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                CGA = secapstone.helper.User.getUser();
+                                CGA.setEmail(email);
+                                CGA.setIdToken(user.getUid());
+                                CGA.setName(name);
+                                CGA.setPassword(password);
+                                updateUI(user);
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                                updateUI(null);
+                            }
+                        }
+                    });
+        } else {
+            Log.d(TAG, "email or pass is null");
+        }
+    }
+
+    public void createNewUser() {
+        if (email != null && password != null){
+            mAuth.createUserWithEmailAndPassword(email, password)
+                    .addOnCompleteListener(this, new OnCompleteListener<AuthResult>() {
+                        @Override
+                        public void onComplete(@NonNull Task<AuthResult> task) {
+                            if (task.isSuccessful()) {
+                                // Sign in success, update UI with the signed-in user's information
+                                Log.d(TAG, "createUserWithEmail:success");
+                                FirebaseUser user = mAuth.getCurrentUser();
+                                CGA = secapstone.helper.User.getUser();
+                                CGA.setEmail(email);
+                                CGA.setIdToken(user.getUid());
+                                CGA.setName(name);
+                                CGA.setPassword(password);
+                                updateUI(user);
+                                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                                finish();
+                            } else {
+                                // If sign in fails, display a message to the user.
+                                Log.w(TAG, "createUserWithEmail:failure", task.getException());
+                                Toast.makeText(LoginActivity.this, "Authentication failed.",
+                                        Toast.LENGTH_SHORT).show();
+                            }
+                        }
+                    });
+        }
+    }
+
+
     @Override
     public void onBackPressed() {
         moveTaskToBack(true);
     }
-
     @TargetApi(23)
     public void setStatusBarToWhite() {
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN, WindowManager.LayoutParams.FLAG_LAYOUT_IN_SCREEN);
+
+        int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
+        getWindow().getDecorView().setSystemUiVisibility(flags);
         getWindow().setStatusBarColor(Color.WHITE);
     }
 

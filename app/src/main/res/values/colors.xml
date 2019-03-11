@@ -19,6 +19,9 @@
     <color name="mediumGray">#E5E5E5</color>
     <color name="gray">#727272</color>
 
+    <color name="orange">#FCA21D</color>
+    <color name="mediumOrange">#EF9A19</color>
+
     <color name="white">#ffffff</color>
     <color name="almostBlack">#1A1A1A</color>
 </resources>
