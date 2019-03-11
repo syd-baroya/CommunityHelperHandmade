@@ -30,6 +30,8 @@ import com.amazon.identity.auth.device.api.authorization.Scope;
 import com.amazon.identity.auth.device.api.workflow.RequestContext;
 import com.amazon.identity.auth.device.api.authorization.User;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
@@ -145,28 +147,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.d(TAG,"user is signed in");
             startActivity(new Intent(getBaseContext(), MainActivity.class));
             finish();
-            System.out.println("user is signed in");
-            FirebaseFirestore db = FirebaseFirestore.getInstance();
-            CollectionReference usersRef = db.collection("users");
-            DocumentReference userDocRef = usersRef.document(CGA.getIdToken());
-
-            try{
-                userDocRef.update("id", CGA.getIdToken());
-            }catch(Error e) {
-                //asynchronously update doc, create the document if missing
-                Map<String, Object> docUpdate = new HashMap<>();
-                Map<String, Object> docMapUpdate = new HashMap<>();
-                docMapUpdate.put("Action Items", null);
-                docMapUpdate.put("Payouts", null);
-                docMapUpdate.put("Transactions", null);
-                docMapUpdate.put("artisans", null);
-                docUpdate.put(CGA.getIdToken(), docMapUpdate);
-                userDocRef.set(docUpdate, SetOptions.merge());
-            }finally {
-// ...
-                startActivity(new Intent(getBaseContext(), MainActivity.class));
-                finish();
-            }
         }
         else {
             createNewUser();
@@ -287,9 +267,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 CGA.setIdToken(user.getUid());
                                 CGA.setName(name);
                                 CGA.setPassword(password);
-                                updateUI(user);
-                                startActivity(new Intent(getBaseContext(), MainActivity.class));
-                                finish();
+                                FirebaseFirestore db = FirebaseFirestore.getInstance();
+                                CollectionReference usersRef = db.collection("users");
+
+                                //asynchronously update doc, create the document if missing
+                                usersRef
+                                        .add(CGA)
+                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
+                                            @Override
+                                            public void onSuccess(DocumentReference documentReference){
+                                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                                                finish();
+                                            }
+                                        })
+                                        .addOnFailureListener(new OnFailureListener(){
+                                            @Override
+                                            public void onFailure(@NonNull Exception e) {
+                                                Log.w(TAG, "Error adding document", e);
+                                            }
+                                        });
+
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
