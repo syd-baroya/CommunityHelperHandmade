@@ -20,47 +20,26 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_description_add_artisan);
 
-        Button nextButton6 = (Button) findViewById(R.id.nextButton6);
-        nextButton6.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickNext6();
-            }
-        });
-
-        Button backButton6 = (Button) findViewById(R.id.backButton6);
-        backButton6.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack6();
-            }
-        });
-
-        desInfo = (EditText)findViewById(R.id.artisanDescription);
-        craftInfo = (EditText)findViewById(R.id.craftEditText);
-        howItsDoneInfo = (EditText)findViewById(R.id.howItsMadeEditText);
-        inspirationInfo = (EditText)findViewById(R.id.inspirationEditText);
+        desInfo = findViewById(R.id.artisanDescription);
+        craftInfo = findViewById(R.id.craftEditText);
+        howItsDoneInfo = findViewById(R.id.howItsMadeEditText);
+        inspirationInfo = findViewById(R.id.inspirationEditText);
     }
 
-    public void onClickNext6()
+    public void onClickNext(View view)
     {
         setDescription(desInfo.getText().toString());
-        setCraft(craftInfo.getText().toString());
-        setHowItsMade(howItsDoneInfo.getText().toString());
-        setInspiration(inspirationInfo.getText().toString());
+//        setCraft(craftInfo.getText().toString());
+//        setHowItsMade(howItsDoneInfo.getText().toString());
+//        setInspiration(inspirationInfo.getText().toString());
 
         startActivity(new Intent(DescriptionAddArtisanActivity.this, SignatureAddArtisanActivity.class));
     }
 
-    public void onClickBack6()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(DescriptionAddArtisanActivity.this, MapAddArtisanActivity.class));
     }

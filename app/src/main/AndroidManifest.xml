@@ -23,9 +23,9 @@
     <application
         android:name=".MyApplication"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/app_logo"
         android:label="@string/app_name"
-        android:roundIcon="@mipmap/ic_launcher_round"
+        android:roundIcon="@drawable/app_logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
@@ -56,11 +56,11 @@
         </activity>
         <activity android:name=".MainActivity" />
         <activity android:name=".addartisan.WelcomeAddArtisanActivity" />
-        <activity android:name=".addartisan.NameAddArtisanActivity" />
-        <activity android:name=".addartisan.PhotoAddArtisanActivity" />
-        <activity android:name=".addartisan.PhoneNumberAddArtisanActivity" />
-        <activity android:name=".addartisan.MapAddArtisanActivity" />
-        <activity android:name=".addartisan.DescriptionAddArtisanActivity" />
+        <activity android:name=".addartisan.NameAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".addartisan.PhotoAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".addartisan.PhoneNumberAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".addartisan.MapAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".addartisan.DescriptionAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".addartisan.SignatureAddArtisanActivity" />
         <activity android:name=".ForgotPassword" />
         <activity android:name=".ViewArtisanActivity" />
@@ -70,7 +70,7 @@
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"
-            android:value="AIzaSyBNN1qiPD9Q3-8QO1MuTrulVY0r9Dx7Nu4" />
+            android:value="AIzaSyBEDSZf9dusN_kHsOXemV3DUnD-GL4nQAQ" />
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />

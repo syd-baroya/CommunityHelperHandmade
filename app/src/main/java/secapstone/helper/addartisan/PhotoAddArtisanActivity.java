@@ -23,7 +23,6 @@ import java.util.Date;
 public class PhotoAddArtisanActivity extends AppCompatActivity
 {
 
-    static final int REQUEST_IMAGE_CAPTURE = 1;
     static final int REQUEST_TAKE_PHOTO = 1;
     public String mCurrentPhotoPath;
 
@@ -34,39 +33,13 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_add_artisan);
 
-        Button nextButton3 = (Button) findViewById(R.id.nextButton3);
-        nextButton3.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickNext3();
-            }
-        });
-
-        Button backButton3 = (Button) findViewById(R.id.backButton3);
-        backButton3.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack3();
-            }
-        });
-
-        Button photoButton = (Button) findViewById(R.id.uploadPhotoButton);
-        photoButton.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickSelectPhoto();
-            }
-        });
+        Button nextButton = findViewById(R.id.nextButton);
+        Button backButton = findViewById(R.id.backButton);
+        Button photoButton = findViewById(R.id.uploadPhotoButton);
 
     }
 
-    public void onClickSelectPhoto()
+    public void onClickSelectPhoto(View view)
     {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -95,8 +68,8 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
         String imageFileName = "JPEG_" + timeStamp + "_";
         File storageDir = getExternalFilesDir(Environment.DIRECTORY_PICTURES);
         File image = File.createTempFile(
-                imageFileName,  /* prefix */
-                ".jpg",         /* suffix */
+                imageFileName,   /* prefix */
+                ".jpg",   /* suffix */
                 storageDir      /* directory */
         );
 
@@ -120,12 +93,12 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
         WelcomeAddArtisanActivity.artisanProfileImage = bmp;
     }
 
-    public void onClickNext3()
+    public void onClickNext(View view)
     {
         startActivity(new Intent(PhotoAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
     }
 
-    public void onClickBack3()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(PhotoAddArtisanActivity.this, NameAddArtisanActivity.class));
     }

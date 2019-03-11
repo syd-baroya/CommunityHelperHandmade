@@ -46,50 +46,30 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         user_info = User.getUser();
         artisanRef = usersRef.document(user_info.getID()).collection("artisans");
 
-        Button nextButton8 = (Button) findViewById(R.id.finishButton);
-        nextButton8.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickNext8();
-            }
-        });
+        TextView namePreview = findViewById(R.id.nameText);
+        namePreview.setText(WelcomeAddArtisanActivity.artisanObject.getName());
 
-        Button backButton8 = (Button) findViewById(R.id.backButton8);
-        backButton8.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack8();
-            }
-        });
+        TextView phonePreview = findViewById(R.id.phoneText);
+        phonePreview.setText(WelcomeAddArtisanActivity.artisanObject.getPhoneNumber());
 
-        TextView namePreview = (TextView) findViewById(R.id.namePreview);
-        namePreview.setText("Name: " + WelcomeAddArtisanActivity.artisanObject.getName());
+        TextView addressPreview = findViewById(R.id.addressText);
+        addressPreview.setText(WelcomeAddArtisanActivity.artisanObject.getAddress());
 
-        TextView phonePreview = (TextView) findViewById(R.id.phoneNumberPreview);
-        phonePreview.setText("Phone Number: " + WelcomeAddArtisanActivity.artisanObject.getPhoneNumber());
-
-        TextView addressPreview = (TextView) findViewById(R.id.addressPreview);
-        addressPreview.setText("Address: " + WelcomeAddArtisanActivity.artisanObject.getAddress());
-
-        TextView descrPreview = (TextView) findViewById(R.id.descriptionPreview);
-        descrPreview.setText("Store Description: " + WelcomeAddArtisanActivity.artisanObject.getDescription());
+        TextView descrPreview = findViewById(R.id.descriptionText);
+        descrPreview.setText(WelcomeAddArtisanActivity.artisanObject.getDescription());
 
         loadingSpinner = findViewById(R.id.progress_loader_add);
     }
 
-    public void onClickNext8()
+    public void onClickNext(View view)
     {
-        Button nextButton8 = (Button) findViewById(R.id.finishButton);
+        Button nextButton8 = findViewById(R.id.finishButton);
 
         loadingSpinner.setVisibility(View.VISIBLE);
         pushArtisan(WelcomeAddArtisanActivity.artisanObject);
     }
 
-    public void onClickBack8()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(FinalPreviewAddArtisanActivity.this, SignatureAddArtisanActivity.class));
     }

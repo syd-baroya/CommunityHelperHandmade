@@ -40,6 +40,20 @@
 
         <item name="android:background">@drawable/primary_button_background</item>
     </style>
+
+    <style name="PrimaryButtonSquare" parent="PrimaryButton">
+        <item name="android:background">@drawable/primary_button_background_square</item>
+    </style>
+
+
+    <style name="PrimaryButtonWhite" parent="PrimaryButton">
+        <item name="android:textColor">@color/colorPrimaryDark</item>
+        <item name="android:background">@drawable/red_button_background</item>
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingRight">24dp</item>
+    </style>
+
+
     <style name="RedButton" parent="PrimaryButton">
         <item name="android:textColor">@color/red</item>
         <item name="android:background">@drawable/red_button_background</item>

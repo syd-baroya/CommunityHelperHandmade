@@ -7,53 +7,33 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import secapstone.helper.CustomTextField;
 import secapstone.helper.R;
 
 public class PhoneNumberAddArtisanActivity extends AppCompatActivity
 {
-    EditText pNum;
+    CustomTextField pNum;
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_add_artisan);
 
-        Button nextButton4 = (Button) findViewById(R.id.nextButton4);
-        nextButton4.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickNext4();
-            }
-        });
-
-        Button backButton4 = (Button) findViewById(R.id.backButton4);
-        backButton4.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack4();
-            }
-        });
-
-        pNum = (EditText)findViewById(R.id.phoneNumText);
+        pNum = findViewById(R.id.phoneNumText);
     }
 
-    public void onClickNext4()
+    public void onClickNext(View view)
     {
         setNum(pNum.getText().toString());
         startActivity(new Intent(PhoneNumberAddArtisanActivity.this, MapAddArtisanActivity.class));
     }
 
-    public void onClickBack4()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(PhoneNumberAddArtisanActivity.this, PhotoAddArtisanActivity.class));
     }
 
-    public void setNum(String num)
-    {
+    public void setNum(String num) {
         WelcomeAddArtisanActivity.artisanObject.setPhoneNumber(num);
     }
 }
