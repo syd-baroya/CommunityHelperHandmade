@@ -147,6 +147,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             FirebaseFirestore db = FirebaseFirestore.getInstance();
             CollectionReference usersRef = db.collection("users");
             DocumentReference userDocRef = usersRef.document(CGA.getIdToken());
+
             try{
                 userDocRef.update("id", CGA.getIdToken());
             }catch(Error e) {
