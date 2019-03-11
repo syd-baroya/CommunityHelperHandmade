@@ -1,9 +1,6 @@
 package secapstone.helper;
 
-import android.annotation.TargetApi;
 import android.content.DialogInterface;
-import android.content.Intent;
-import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AlertDialog;
@@ -11,14 +8,9 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
 
-import com.google.firebase.FirebaseApp;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-
-import java.io.Serializable;
-
-import secapstone.helper.R;
 
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
@@ -40,7 +32,7 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         setContentView(R.layout.activity_main);
 
         User user_info = User.getUser();
-        CGARef = usersRef.document(user_info.getIdToken());
+        CGARef = usersRef.document(user_info.getID());
 
         profileFragment = new Profile();
         profileFragment.setArtisanRef(CGARef.collection("artisans"));

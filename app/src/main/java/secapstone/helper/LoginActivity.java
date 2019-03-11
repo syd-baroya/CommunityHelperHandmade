@@ -1,20 +1,16 @@
 package secapstone.helper;
 
 import android.annotation.TargetApi;
-import android.app.AlertDialog;
-import android.app.ProgressDialog;
 import android.content.Intent;
 import android.graphics.Color;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,18 +32,9 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
-import com.google.firebase.auth.GetTokenResult;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.SetOptions;
-
-import java.io.Serializable;
-import java.util.HashMap;
-import java.util.Map;
-
-import secapstone.helper.R;
-import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
 
 
 /**
@@ -234,9 +221,8 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 CGA = secapstone.helper.User.getUser();
                                 CGA.setEmail(email);
-                                CGA.setIdToken(user.getUid());
+                                CGA.setID(user.getUid());
                                 CGA.setName(name);
-                                CGA.setPassword(password);
                                 updateUI(user);
                             } else {
                                 // If sign in fails, display a message to the user.
@@ -264,20 +250,14 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 FirebaseUser user = mAuth.getCurrentUser();
                                 CGA = secapstone.helper.User.getUser();
                                 CGA.setEmail(email);
-                                CGA.setIdToken(user.getUid());
+                                CGA.setID(user.getUid());
                                 CGA.setName(name);
-                                CGA.setPassword(password);
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 CollectionReference usersRef = db.collection("users");
-                                DocumentReference userDoc = usersRef.document();
-                                userDoc.collection("artisans");
-                                userDoc.collection("Action Items");
-                                userDoc.collection("Payouts");
-                                userDoc.collection("Transactions");
 
                                 //asynchronously update doc, create the document if missing
                                 usersRef
-                                        .add(userDoc)
+                                        .add(CGA)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
                                             @Override
                                             public void onSuccess(DocumentReference documentReference){
@@ -292,6 +272,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                                 Log.w(TAG, "Error adding document", e);
                                             }
                                         });
+
 
                             } else {
                                 // If sign in fails, display a message to the user.
