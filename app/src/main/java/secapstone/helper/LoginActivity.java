@@ -269,10 +269,15 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 CGA.setPassword(password);
                                 FirebaseFirestore db = FirebaseFirestore.getInstance();
                                 CollectionReference usersRef = db.collection("users");
+                                DocumentReference userDoc = usersRef.document();
+                                userDoc.collection("artisans");
+                                userDoc.collection("Action Items");
+                                userDoc.collection("Payouts");
+                                userDoc.collection("Transactions");
 
                                 //asynchronously update doc, create the document if missing
                                 usersRef
-                                        .add(CGA)
+                                        .add(userDoc)
                                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
                                             @Override
                                             public void onSuccess(DocumentReference documentReference){
