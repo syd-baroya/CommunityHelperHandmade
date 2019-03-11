@@ -44,7 +44,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         setContentView(R.layout.activity_final_preview_add_artisan);
 
         user_info = User.getUser();
-        artisanRef = usersRef.document(user_info.getIdToken()).collection("artisans");
+        artisanRef = usersRef.document(user_info.getID()).collection("artisans");
 
         Button nextButton8 = (Button) findViewById(R.id.finishButton);
         nextButton8.setOnClickListener(new View.OnClickListener()
