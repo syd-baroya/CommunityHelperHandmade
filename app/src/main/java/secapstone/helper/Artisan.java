@@ -20,6 +20,7 @@ public class Artisan {
     private String craft;
     private String howItsMade;
     private String inspiration;
+    private String id;
     /*private String facebook;
     private String twitter;
     private String pinterest;
@@ -68,6 +69,10 @@ public class Artisan {
     public void setHowItsMade(String him){this.howItsMade = him;}
 
     public void setInspiration(String ins){this.inspiration = ins;}
+
+    public void setID(String id) {
+        this.id = id;
+    }
 
     /*public void setFacebook(String fb){this.facebook = fb;}
 
@@ -122,6 +127,8 @@ public class Artisan {
     public String getPictureURL() { return pictureURL;}
 
     public String getAddress() {return address;}
+
+    public String getID() {return id;}
 
     public float getMoneyOwedFromCommunityLeader() { return moneyOwedFromCommunityLeader; }
 

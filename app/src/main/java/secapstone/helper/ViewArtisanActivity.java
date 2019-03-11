@@ -26,6 +26,7 @@ import com.bumptech.glide.Glide;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
@@ -40,8 +41,10 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public static String EXTRA_A_ADDRESS = "com.example.application.example.artisanAddress";
     public static String EXTRA_A_PHONE = "com.example.application.example.artisanPhone";
 
-    //reference to user's artisans in database
-    private static CollectionReference artisansRef;
+    //reference to a certain artisan in database
+    private static DocumentReference artisanRef;
+    //reference to the current artisan's products
+    private static CollectionReference productsRef;
 
     Dialog myDialog;
 
@@ -63,12 +66,14 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         myDialog = new Dialog(this);
 
+        productsRef = artisanRef.collection("Products");
+
         setStatusBarToDark();
 
     }
 
-    public static void setArtisanRef(CollectionReference ref){
-        artisansRef = ref;
+    public static void setArtisanRef( DocumentReference ref){
+        artisanRef = ref;
     }
 
     private void getIncomingIntent() {
