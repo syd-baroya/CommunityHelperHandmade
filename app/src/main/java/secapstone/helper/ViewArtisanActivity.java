@@ -31,6 +31,7 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 public class ViewArtisanActivity extends AppCompatActivity {
+    //Used when requesting permissions for Call and Text
     private static final int REQUEST_CALL = 1;
     private static final int REQUEST_SMS = 2;
 
@@ -38,8 +39,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public static String artisanName;
     public static String artisanAddress;
     public static String artisanPhone;
-    public static String EXTRA_A_ADDRESS = "com.example.application.example.artisanAddress";
-    public static String EXTRA_A_PHONE = "com.example.application.example.artisanPhone";
 
     //reference to a certain artisan in database
     private static DocumentReference artisanRef;
@@ -176,11 +175,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onClickCloseContactInfo(View view)
     {
         myDialog.dismiss();
-    }
-
-    public void onClickDirectionsButton()
-    {
-        //startActivity(new Intent(ViewArtisanActivity.this, ViewReportsActivity.class));
     }
 
     public void onClickCallButton() {
