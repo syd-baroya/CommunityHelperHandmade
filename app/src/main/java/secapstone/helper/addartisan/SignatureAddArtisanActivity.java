@@ -15,39 +15,20 @@ public class SignatureAddArtisanActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signature_add_artisan);
-
-        Button nextButton7 = (Button) findViewById(R.id.nextButton7);
-        nextButton7.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onNextClick7();
-            }
-        });
-
-        Button backButton7 = (Button) findViewById(R.id.backButton7);
-        backButton7.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack7();
-            }
-        });
     }
 
-    public void onNextClick7()
+    public void onClickNext(View view)
     {
         startActivity(new Intent(SignatureAddArtisanActivity.this, FinalPreviewAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
-    public void onClickBack7()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(SignatureAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
 

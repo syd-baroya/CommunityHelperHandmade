@@ -20,37 +20,19 @@ public class WelcomeAddArtisanActivity extends AppCompatActivity
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_welcome_add_artisan);
-
-        Button nextButton1 = (Button) findViewById(R.id.nextButton1);
-        nextButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickNext1();
-            }
-        });
-
-        Button backButton1 = (Button) findViewById(R.id.backButton1);
-        backButton1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                onClickBack1();
-            }
-        });
-
-
     }
 
 
-    public void onClickBack1()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(WelcomeAddArtisanActivity.this, MainActivity.class));
     }
 
-    public void onClickNext1()
+    public void onClickNext(View view)
     {
         startActivity(new Intent(WelcomeAddArtisanActivity.this, NameAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 }

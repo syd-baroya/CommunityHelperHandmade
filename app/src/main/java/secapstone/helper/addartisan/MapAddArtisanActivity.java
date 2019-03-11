@@ -3,6 +3,7 @@ package secapstone.helper.addartisan;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.View;
 import android.widget.*;
 
@@ -25,30 +26,11 @@ public class MapAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_map_add_artisan);
 
-        Button nextButton5 = (Button) findViewById(R.id.nextButton5);
-        nextButton5.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickNext5();
-            }
-        });
+        adr = findViewById(R.id.artisanAddress);
+        zip = findViewById(R.id.zipPostalEditText);
+        country = findViewById(R.id.countryRegionEditText);
 
-        Button backButton5 = (Button) findViewById(R.id.backButton5);
-        backButton5.setOnClickListener(new View.OnClickListener()
-        {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack5();
-            }
-        });
-        adr = (EditText)findViewById(R.id.artisanAddress);
-        zip = (EditText)findViewById(R.id.zipPostalEditText);
-        country = (EditText)findViewById(R.id.countryRegionEditText);
-
-        Button selectOnMapButton = (Button) findViewById(R.id.selectOnMapButton);
+        Button selectOnMapButton = findViewById(R.id.selectOnMapButton);
         selectOnMapButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
@@ -61,7 +43,7 @@ public class MapAddArtisanActivity extends AppCompatActivity
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
-                Place place = PlacePicker.getPlace(data, this);
+                Place place = PlacePicker.getPlace(this, data);
                 adr.setText(place.getLatLng().toString());
             }
         }
@@ -79,20 +61,25 @@ public class MapAddArtisanActivity extends AppCompatActivity
             //TODO Alert the user that Google maps isn't availible right now.
         } catch (GooglePlayServicesRepairableException e) {
             e.printStackTrace();
+        } catch (Exception e) {
+            e.printStackTrace();
+            Log.d("Amazon", e.getStackTrace().toString());
         }
     }
 
-    public void onClickNext5()
+    public void onClickNext(View view)
     {
         setAddress(adr.getText().toString(), zip.getText().toString(), country.getText().toString());
         setZipPostalCode(zip.getText().toString());
         setCountryRegion(country.getText().toString());
         startActivity(new Intent(MapAddArtisanActivity.this, DescriptionAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
-    public void onClickBack5()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(MapAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void setAddress(String addr, String zip, String country){

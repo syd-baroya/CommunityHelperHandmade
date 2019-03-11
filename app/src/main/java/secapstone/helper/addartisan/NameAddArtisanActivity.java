@@ -4,14 +4,13 @@ import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
-import android.widget.EditText;
 
+import secapstone.helper.CustomTextField;
 import secapstone.helper.R;
 
 public class NameAddArtisanActivity extends AppCompatActivity
 {
-    EditText inputFirst, inputLast;
+    CustomTextField inputFirst, inputLast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -19,39 +18,24 @@ public class NameAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_name_add_artisan);
 
-        inputFirst = (EditText)findViewById(R.id.firstNameInput);
-        inputLast = (EditText)findViewById(R.id.lastNameInput);
+        inputFirst = findViewById(R.id.artisanAddress);
+        inputLast = findViewById(R.id.zipPostalEditText);
 
-        Button nextButton2 = (Button) findViewById(R.id.nextButton2);
-        nextButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                onClickNext2();
-            }
-        });
-
-        Button backButton2 = (Button) findViewById(R.id.backButton2);
-        backButton2.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                onClickBack2();
-            }
-        });
     }
 
-    public void onClickNext2()
+    public void onClickNext(View view)
     {
         setName(inputFirst.getText().toString(), inputLast.getText().toString());
         setFirstName(inputFirst.getText().toString());
         setLastName(inputLast.getText().toString());
         startActivity(new Intent(NameAddArtisanActivity.this, PhotoAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
     }
 
-    public void onClickBack2()
+    public void onClickBack(View view)
     {
         startActivity(new Intent(NameAddArtisanActivity.this, WelcomeAddArtisanActivity.class));
+        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
     public void setName(String first, String last)
