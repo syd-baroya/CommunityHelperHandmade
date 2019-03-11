@@ -21,14 +21,7 @@ public class Artisan {
     private String howItsMade;
     private String inspiration;
     private String id;
-    /*private String facebook;
-    private String twitter;
-    private String pinterest;
-    private String instagram;
-    private boolean customOrders;*/
     private float moneyOwedFromCommunityLeader;
-    private SparseArray<Listing> listings = new SparseArray<Listing>(); //Better performance than a HashMap for this scenario.
-
 
     public Artisan(String name, String description, String phoneNumber, String pictureURL) {
         this.description = description;
@@ -74,15 +67,6 @@ public class Artisan {
         this.id = id;
     }
 
-    /*public void setFacebook(String fb){this.facebook = fb;}
-
-    public void setTwitter(String twit){this.twitter = twit;}
-
-    public void setPinterest(String pin){this.pinterest = pin;}
-
-    public void setInstagram (String inst){this.instagram = inst;}
-
-    public void setCustomOrders(boolean co){this.customOrders = co;}*/
 
     public void setDescription(String des){
         this.description = des;
@@ -112,15 +96,6 @@ public class Artisan {
 
     public String getInspiration(){ return inspiration;}
 
-    /*public String getFacebook() { return facebook;}
-
-    public String getTwitter() {return twitter;}
-
-    public String getPinterest() { return pinterest;}
-
-    public String getInstagram() { return instagram;}
-
-    public boolean getCustomOrders() {return customOrders;}*/
 
     public String getPhoneNumber() { return phoneNumber;}
 
@@ -134,7 +109,4 @@ public class Artisan {
 
     public void setMoneyOwedFromCommunityLeader(float newMoneyOwedFromCommunityLeader) { moneyOwedFromCommunityLeader = newMoneyOwedFromCommunityLeader; }
 
-    public SparseArray<Listing> getListings() { return listings; }
-
-    public void addListing(Listing newListing) { listings.put(newListing.getProductID(), newListing); }
 }

@@ -32,15 +32,15 @@ public class AccountingSystem
             {
                 for (Artisan a: artisans)
                 {
-                    SparseArray<Listing> artisanListings = a.getListings();
-
-                    if (artisanListings.get(t.getProductID()) != null && !t.getHasBeenAccounted())
-                    {
-                        a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.getAmount());
-                        totalFromTransactionPeriod += t.getAmount();
-                        t.setHasBeenAccounted(true);
-                        break;
-                    }
+//                    SparseArray<Listing> artisanListings = a.getListings();
+//
+//                    if (artisanListings.get(t.getProductID()) != null && !t.getHasBeenAccounted())
+//                    {
+//                        a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.getAmount());
+//                        totalFromTransactionPeriod += t.getAmount();
+//                        t.setHasBeenAccounted(true);
+//                        break;
+//                    }
 
                 }
             }
