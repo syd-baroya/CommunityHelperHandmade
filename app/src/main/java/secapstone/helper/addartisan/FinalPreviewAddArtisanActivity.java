@@ -2,9 +2,7 @@ package secapstone.helper.addartisan;
 
 import android.content.*;
 import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.graphics.Matrix;
-import android.graphics.drawable.BitmapDrawable;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -99,6 +97,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
     public void pushArtisan(Artisan mewBoi){
         DocumentReference newArtisanRef = artisanRef.document();
         mewBoi.setPictureURL("profiles/" + newArtisanRef.getId() + ".jpg");
+        mewBoi.setID(newArtisanRef.getId());
 
         final Artisan mewBoi2 = mewBoi;
 

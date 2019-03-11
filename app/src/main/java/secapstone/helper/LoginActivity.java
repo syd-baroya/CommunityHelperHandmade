@@ -35,8 +35,14 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.auth.GetTokenResult;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.SetOptions;
 
 import java.io.Serializable;
+import java.util.HashMap;
+import java.util.Map;
 
 import secapstone.helper.R;
 import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
@@ -48,6 +54,7 @@ import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
  */
 public class LoginActivity extends AppCompatActivity implements View.OnClickListener{
     private ConstraintLayout activity_login;
+
     private FirebaseAuth mAuth;
 
     private RequestContext requestContext;
@@ -138,6 +145,27 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             Log.d(TAG,"user is signed in");
             startActivity(new Intent(getBaseContext(), MainActivity.class));
             finish();
+            System.out.println("user is signed in");
+            FirebaseFirestore db = FirebaseFirestore.getInstance();
+            CollectionReference usersRef = db.collection("users");
+            DocumentReference userDocRef = usersRef.document(CGA.getIdToken());
+            try{
+                userDocRef.update("id", CGA.getIdToken());
+            }catch(Error e) {
+                //asynchronously update doc, create the document if missing
+                Map<String, Object> docUpdate = new HashMap<>();
+                Map<String, Object> docMapUpdate = new HashMap<>();
+                docMapUpdate.put("Action Items", null);
+                docMapUpdate.put("Payouts", null);
+                docMapUpdate.put("Transactions", null);
+                docMapUpdate.put("artisans", null);
+                docUpdate.put(CGA.getIdToken(), docMapUpdate);
+                userDocRef.set(docUpdate, SetOptions.merge());
+            }finally {
+// ...
+                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                finish();
+            }
         }
         else {
             createNewUser();
