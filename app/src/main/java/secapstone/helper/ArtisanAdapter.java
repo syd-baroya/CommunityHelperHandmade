@@ -8,7 +8,6 @@ import android.content.Intent;
 import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
-import android.support.v4.content.res.ResourcesCompat;
 import android.support.v7.widget.RecyclerView;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -19,10 +18,8 @@ import android.widget.TextView;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import secapstone.helper.R;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
@@ -31,7 +28,6 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
     private Context context;
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     private CollectionReference artisansRef;
-    private DocumentReference artisanDocRef;
 
 
     public ArtisanAdapter(@NonNull FirestoreRecyclerOptions<Artisan> options, Context context, CollectionReference artisansRef) {
@@ -49,9 +45,6 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
 
         final ArtisanHolder copy = holder;
         final Artisan modelCopy = model;
-
-        artisanDocRef = artisansRef.document(model.getIDToken());
-
 
         holder.parent.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -83,7 +76,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
 
     private void onTileClick(Artisan model) {
         Intent intent = new Intent(context, ViewArtisanActivity.class);
-        ViewArtisanActivity.setArtisanRef(artisanDocRef);
+        ViewArtisanActivity.setArtisanRef(artisansRef.document(model.getID()));
         intent.putExtra("url", model.getPictureURL());
         intent.putExtra("name", model.getName());
         intent.putExtra("description", model.getDescription());
