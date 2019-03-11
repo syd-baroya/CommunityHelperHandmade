@@ -36,6 +36,8 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
+
 
 /**
  * A login screen that offers login via email/password.
@@ -252,16 +254,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                                 CGA.setEmail(email);
                                 CGA.setID(user.getUid());
                                 CGA.setName(name);
-                                FirebaseFirestore db = FirebaseFirestore.getInstance();
-                                CollectionReference usersRef = db.collection("users");
-
-                                //asynchronously update doc, create the document if missing
-                                usersRef
-                                        .document(CGA.getID())
-                                        .set(CGA);
-                                startActivity(new Intent(getBaseContext(), MainActivity.class));
-                                finish();
-
+                                startActivity(new Intent(LoginActivity.this, MainActivity.class));
                             } else {
                                 // If sign in fails, display a message to the user.
                                 Log.w(TAG, "createUserWithEmail:failure", task.getException());
