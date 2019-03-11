@@ -257,22 +257,10 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
                                 //asynchronously update doc, create the document if missing
                                 usersRef
-                                        .add(CGA)
-                                        .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
-                                            @Override
-                                            public void onSuccess(DocumentReference documentReference){
-                                                Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                                                startActivity(new Intent(getBaseContext(), MainActivity.class));
-                                                finish();
-                                            }
-                                        })
-                                        .addOnFailureListener(new OnFailureListener(){
-                                            @Override
-                                            public void onFailure(@NonNull Exception e) {
-                                                Log.w(TAG, "Error adding document", e);
-                                            }
-                                        });
-
+                                        .document(CGA.getID())
+                                        .set(CGA);
+                                startActivity(new Intent(getBaseContext(), MainActivity.class));
+                                finish();
 
                             } else {
                                 // If sign in fails, display a message to the user.
