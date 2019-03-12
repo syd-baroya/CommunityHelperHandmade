@@ -28,6 +28,9 @@ public class NameAddArtisanActivity extends AppCompatActivity
 
         setupTextChangedListener(inputFirst);
         setupTextChangedListener(inputLast);
+
+        inputFirst.setText(WelcomeAddArtisanActivity.artisanObject.getFirstName());
+        inputLast.setText(WelcomeAddArtisanActivity.artisanObject.getLastName());
     }
 
     public void onClickNext(View view)

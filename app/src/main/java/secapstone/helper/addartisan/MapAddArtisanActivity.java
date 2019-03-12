@@ -44,6 +44,8 @@ public class MapAddArtisanActivity extends AppCompatActivity
             { onClickLaunchGoogleMaps();
             }
         });
+
+        adr.setText(WelcomeAddArtisanActivity.artisanObject.getAddress());
     }
 
     @Override

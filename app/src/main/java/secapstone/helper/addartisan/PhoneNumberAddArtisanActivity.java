@@ -27,6 +27,8 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
         nextButton = findViewById(R.id.nextButton);
 
         setupTextChangedListener(pNum);
+
+        pNum.setText(WelcomeAddArtisanActivity.artisanObject.getPhoneNumber());
     }
 
     public void onClickNext(View view)

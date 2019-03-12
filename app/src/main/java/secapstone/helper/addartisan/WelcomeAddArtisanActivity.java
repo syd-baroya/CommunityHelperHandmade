@@ -28,6 +28,7 @@ public class WelcomeAddArtisanActivity extends AppCompatActivity
     public void onClickBack(View view)
     {
         startActivity(new Intent(WelcomeAddArtisanActivity.this, MainActivity.class));
+        artisanObject = new Artisan();
     }
 
     public void onClickNext(View view)

@@ -27,18 +27,20 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
     public String mCurrentPhotoPath;
 
     Button nextButton, backButton, photoButton;
+    ImageView photoPreview;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_photo_add_artisan);
 
         nextButton = findViewById(R.id.nextButton);
         backButton = findViewById(R.id.backButton);
         photoButton = findViewById(R.id.uploadPhotoButton);
+        photoPreview = findViewById(R.id.imageView);
 
+        setImageViewImage(WelcomeAddArtisanActivity.artisanProfileImage);
     }
 
     public void onClickSelectPhoto(View view)
@@ -90,6 +92,10 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
             e.printStackTrace();
         }
 
+        setImageViewImage(bmp);
+    }
+
+    public void setImageViewImage(Bitmap bmp) {
         if (bmp != null) {
             ImageView image = findViewById(R.id.imageView);
             image.setImageBitmap(bmp);
@@ -98,6 +104,7 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
             nextButton.setEnabled(true);
         }
     }
+
 
     public void onClickNext(View view)
     {

@@ -31,6 +31,8 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
         nextButton = findViewById(R.id.nextButton);
 
         setupTextChangedListener(desInfo);
+
+        desInfo.setText(WelcomeAddArtisanActivity.artisanObject.getDescription());
     }
 
     public void onClickNext(View view)

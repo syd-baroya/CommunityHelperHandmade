@@ -35,27 +35,28 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
     private User user_info;
     private CollectionReference artisanRef;
 
+    TextView namePreview, phonePreview, addressPreview, descrPreview;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
-
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_final_preview_add_artisan);
 
         user_info = User.getUser();
         artisanRef = usersRef.document(user_info.getID()).collection("artisans");
 
-        TextView namePreview = findViewById(R.id.nameText);
+        namePreview = findViewById(R.id.nameText);
         namePreview.setText(WelcomeAddArtisanActivity.artisanObject.getName());
 
-        TextView phonePreview = findViewById(R.id.phoneText);
+        phonePreview = findViewById(R.id.phoneText);
         phonePreview.setText(WelcomeAddArtisanActivity.artisanObject.getPhoneNumber());
 
-        TextView addressPreview = findViewById(R.id.addressText);
+        addressPreview = findViewById(R.id.addressText);
         addressPreview.setText(WelcomeAddArtisanActivity.artisanObject.getAddress());
 
-        TextView descrPreview = findViewById(R.id.descriptionText);
+        descrPreview = findViewById(R.id.descriptionText);
         descrPreview.setText(WelcomeAddArtisanActivity.artisanObject.getDescription());
 
         loadingSpinner = findViewById(R.id.progress_loader_add);
@@ -63,10 +64,9 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
 
     public void onClickNext(View view)
     {
-        Button nextButton8 = findViewById(R.id.finishButton);
-
         loadingSpinner.setVisibility(View.VISIBLE);
         pushArtisan(WelcomeAddArtisanActivity.artisanObject);
+        WelcomeAddArtisanActivity.artisanObject = new Artisan();
     }
 
     public void onClickBack(View view)
@@ -75,7 +75,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
-    public void pushArtisan(Artisan mewBoi){
+    public void pushArtisan(Artisan mewBoi) {
         DocumentReference newArtisanRef = artisanRef.document();
         mewBoi.setPictureURL("profiles/" + newArtisanRef.getId() + ".jpg");
         mewBoi.setID(newArtisanRef.getId());
