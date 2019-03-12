@@ -96,7 +96,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(AuthorizeResult result) {
                 /* Your app is now authorized for the requested scopes */
                 Log.d(TAG,"app is now authorized");
-                fetchUserProfile();
             }
 
             /* There was an error during the attempt to authorize the
@@ -152,7 +151,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
                 password = user.getUserId();
                 Log.i(TAG, "email: " + email + ", password: " + password);
 
-                signInUser();
             }
             /* There was an error during the attempt to get the profile. */
             @Override
@@ -179,6 +177,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(AuthorizeResult result) {
                 if (result.getAccessToken() != null) {
                     fetchUserProfile();
+                    signInUser();
                 } else {
                     Log.d(TAG,"user is not signed in");
                 }
