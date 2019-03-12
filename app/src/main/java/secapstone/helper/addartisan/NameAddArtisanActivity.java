@@ -3,7 +3,10 @@ package secapstone.helper.addartisan;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
+import android.widget.Button;
 
 import secapstone.helper.CustomTextField;
 import secapstone.helper.R;
@@ -11,6 +14,7 @@ import secapstone.helper.R;
 public class NameAddArtisanActivity extends AppCompatActivity
 {
     CustomTextField inputFirst, inputLast;
+    Button nextButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -20,7 +24,10 @@ public class NameAddArtisanActivity extends AppCompatActivity
 
         inputFirst = findViewById(R.id.artisanAddress);
         inputLast = findViewById(R.id.zipPostalEditText);
+        nextButton = findViewById(R.id.nextButton);
 
+        setupTextChangedListener(inputFirst);
+        setupTextChangedListener(inputLast);
     }
 
     public void onClickNext(View view)
@@ -49,5 +56,27 @@ public class NameAddArtisanActivity extends AppCompatActivity
 
     public void setLastName(String l){
         WelcomeAddArtisanActivity.artisanObject.setLastName(l);
+    }
+
+    public void setupTextChangedListener(CustomTextField editText)
+    {
+        editText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if ((inputFirst.getText().length() != 0) && (inputLast.getText().length() != 0)) {
+                    nextButton.setEnabled(true);
+                } else {
+                    nextButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,int arg2, int arg3) {}
+        });
     }
 }

@@ -16,6 +16,8 @@
 
             <solid android:color="@color/colorPrimaryLight" />
 
+            <corners android:radius="500dp" />
+
         </shape>
     </item>
 </selector>

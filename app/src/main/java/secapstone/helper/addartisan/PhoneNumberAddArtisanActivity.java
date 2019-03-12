@@ -3,6 +3,8 @@ package secapstone.helper.addartisan;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -13,6 +15,8 @@ import secapstone.helper.R;
 public class PhoneNumberAddArtisanActivity extends AppCompatActivity
 {
     CustomTextField pNum;
+    Button nextButton;
+
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -20,6 +24,9 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
         setContentView(R.layout.activity_phone_number_add_artisan);
 
         pNum = findViewById(R.id.phoneNumText);
+        nextButton = findViewById(R.id.nextButton);
+
+        setupTextChangedListener(pNum);
     }
 
     public void onClickNext(View view)
@@ -37,5 +44,28 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
 
     public void setNum(String num) {
         WelcomeAddArtisanActivity.artisanObject.setPhoneNumber(num);
+    }
+
+
+    public void setupTextChangedListener(CustomTextField editText)
+    {
+        editText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if (pNum.getText().length() > 6) {
+                    nextButton.setEnabled(true);
+                } else {
+                    nextButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,int arg2, int arg3) {}
+        });
     }
 }

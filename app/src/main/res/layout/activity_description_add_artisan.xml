@@ -195,6 +195,7 @@
         android:drawableRight="@drawable/right_arrow_with_padding_white"
         android:onClick="onClickNext"
         android:paddingLeft="28dp"
+        android:enabled="false"
         android:paddingRight="28dp"
         android:text="Continue  "
         android:textSize="18sp"

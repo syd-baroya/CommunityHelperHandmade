@@ -3,6 +3,8 @@ package secapstone.helper.addartisan;
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.*;
@@ -10,13 +12,15 @@ import android.widget.*;
 import com.google.android.gms.common.*;
 import com.google.android.gms.location.places.*;
 import com.google.android.gms.location.places.ui.*;
+
+import secapstone.helper.CustomTextField;
 import secapstone.helper.R;
 
 public class MapAddArtisanActivity extends AppCompatActivity
 {
-    EditText adr;
-    EditText zip;
-    EditText country;
+    CustomTextField adr, zip, country;
+    Button nextButton;
+
     final int PLACE_PICKER_REQUEST = 1;
 
     @Override
@@ -29,6 +33,9 @@ public class MapAddArtisanActivity extends AppCompatActivity
         adr = findViewById(R.id.artisanAddress);
         zip = findViewById(R.id.zipPostalEditText);
         country = findViewById(R.id.countryRegionEditText);
+        nextButton = findViewById(R.id.nextButton);
+
+        setupTextChangedListener(adr);
 
         Button selectOnMapButton = findViewById(R.id.selectOnMapButton);
         selectOnMapButton.setOnClickListener(new View.OnClickListener() {
@@ -83,8 +90,19 @@ public class MapAddArtisanActivity extends AppCompatActivity
     }
 
     public void setAddress(String addr, String zip, String country){
+        String combinedAdress = "";
+        if (addr.length() > 0) {
+            combinedAdress += addr;
+        }
 
-        WelcomeAddArtisanActivity.artisanObject.setAddress(addr + " " + country + ", " + zip);
+        if (country.length() > 0) {
+            combinedAdress += " " + country;
+        }
+
+        if (zip.length() > 0) {
+            combinedAdress += ", " + zip;
+        }
+        WelcomeAddArtisanActivity.artisanObject.setAddress(combinedAdress);
     }
 
     public void setZipPostalCode(String zpc){
@@ -93,5 +111,27 @@ public class MapAddArtisanActivity extends AppCompatActivity
 
     public void setCountryRegion(String cr){
         WelcomeAddArtisanActivity.artisanObject.setCountryRegion(cr);
+    }
+
+    public void setupTextChangedListener(CustomTextField editText)
+    {
+        editText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if ((adr.getText().length() > 0)) {
+                    nextButton.setEnabled(true);
+                } else {
+                    nextButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,int arg2, int arg3) {}
+        });
     }
 }
