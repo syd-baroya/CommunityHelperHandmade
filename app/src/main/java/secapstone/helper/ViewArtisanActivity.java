@@ -16,6 +16,8 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.ImageView;
@@ -45,7 +47,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
     //reference to the current artisan's products
     private static CollectionReference productsRef;
 
-    Dialog myDialog;
+    Dialog contactInfoModal;
+    Dialog logPaymentDialog;
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -54,16 +57,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         getIncomingIntent();
 
-        Button logPaymentButton = findViewById(R.id.logPaymentButton);
-        logPaymentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                onClickLogPayments(view);
-            }
-        });
+        contactInfoModal = new Dialog(this);
+        logPaymentDialog = new Dialog(this);
 
-        myDialog = new Dialog(this);
+        setUpContactInfoModal();
+        setUpLogPaymentModal();
 
         productsRef = artisanRef.collection("Products");
 
@@ -133,48 +131,67 @@ public class ViewArtisanActivity extends AppCompatActivity {
         startActivity(new Intent(ViewArtisanActivity.this, MainActivity.class));
     }
 
-    public void onClickContactInfoButton(View view)
-    {
-        myDialog.setContentView(R.layout.view_contact_info_modal);
+    public void setUpContactInfoModal() {
+        contactInfoModal.setContentView(R.layout.view_contact_info_modal);
 
         if (artisanPhone != null) {
-            TextView phoneNumText = myDialog.findViewById(R.id.artisan_phone2);
+            TextView phoneNumText = contactInfoModal.findViewById(R.id.logPaymentTitle);
             phoneNumText.setText(artisanPhone);
         }
 
         if (artisanAddress != null) {
-            TextView addressText = myDialog.findViewById(R.id.artisan_address);
+            TextView addressText = contactInfoModal.findViewById(R.id.artisan_address);
             addressText.setText(artisanAddress);
         }
 
-        myDialog.findViewById(R.id.callNowButton).setOnClickListener(new View.OnClickListener() {
+        contactInfoModal.findViewById(R.id.callNowButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickCallButton();
             }
         });
 
-        myDialog.findViewById(R.id.textNowButton).setOnClickListener(new View.OnClickListener() {
+        contactInfoModal.findViewById(R.id.textNowButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickTextButton();
             }
         });
 
-        myDialog.findViewById(R.id.getDirectionsButton).setOnClickListener(new View.OnClickListener() {
+        contactInfoModal.findViewById(R.id.getDirectionsButton).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickMapButton();
             }
         });
 
-        myDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
-        myDialog.show();
+        contactInfoModal.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
-    public void onClickCloseContactInfo(View view)
+    public void onClickContactInfoButton(View view)
     {
-        myDialog.dismiss();
+        contactInfoModal.show();
+    }
+
+
+    public void setUpLogPaymentModal() {
+        logPaymentDialog.setContentView(R.layout.modal_log_payment);
+
+        TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
+        title.setText("Log Payment to " + artisanName);
+
+        logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public void onClickLogPaymentButton(View view)
+    {
+        logPaymentDialog.show();
+    }
+
+    public void onClickCloseModal(View view)
+    {
+        contactInfoModal.dismiss();
+        logPaymentDialog.dismiss();
     }
 
     public void onClickCallButton() {

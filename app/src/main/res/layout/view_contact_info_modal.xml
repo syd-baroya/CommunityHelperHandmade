@@ -26,7 +26,7 @@
         app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
 
     <TextView
-        android:id="@+id/artisan_phone2"
+        android:id="@+id/logPaymentTitle"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -51,7 +51,7 @@
         android:fontFamily="@font/googlesans"
         android:text="Call"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artisan_phone2"/>
+        app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle"/>
 
     <Button
         android:id="@+id/textNowButton"
@@ -63,7 +63,7 @@
         android:fontFamily="@font/googlesans"
         android:text="Text"
         app:layout_constraintStart_toEndOf="@+id/callNowButton"
-        app:layout_constraintTop_toBottomOf="@+id/artisan_phone2" />
+        app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle" />
 
     <View
         android:id="@+id/seperator1"
@@ -76,7 +76,7 @@
         app:layout_constraintTop_toBottomOf="@+id/textNowButton" />
 
     <TextView
-        android:id="@+id/address"
+        android:id="@+id/amount"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -105,7 +105,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/address" />
+        app:layout_constraintTop_toBottomOf="@+id/amount" />
 
     <Button
         android:id="@+id/getDirectionsButton"
@@ -128,7 +128,7 @@
         android:layout_height="40dp"
         android:layout_marginTop="4dp"
         android:layout_marginEnd="8dp"
-        android:onClick="onClickCloseContactInfo"
+        android:onClick="onClickCloseModal"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent">
 
