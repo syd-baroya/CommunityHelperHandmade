@@ -177,7 +177,6 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             public void onSuccess(AuthorizeResult result) {
                 if (result.getAccessToken() != null) {
                     fetchUserProfile();
-                    signInUser();
                 } else {
                     Log.d(TAG,"user is not signed in");
                 }
