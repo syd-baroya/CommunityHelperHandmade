@@ -67,6 +67,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         loadingSpinner.setVisibility(View.VISIBLE);
         pushArtisan(WelcomeAddArtisanActivity.artisanObject);
         WelcomeAddArtisanActivity.artisanObject = new Artisan();
+        WelcomeAddArtisanActivity.artisanProfileImage = null;
     }
 
     public void onClickBack(View view)
@@ -108,6 +109,7 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                             loadingSpinner.setVisibility(View.GONE);
                             startActivity(new Intent(FinalPreviewAddArtisanActivity.this, MainActivity.class));
+                            finish();
                         }
                     })
                     .addOnFailureListener(new OnFailureListener(){

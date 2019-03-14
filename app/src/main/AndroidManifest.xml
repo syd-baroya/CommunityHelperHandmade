@@ -67,6 +67,8 @@
         <activity android:name=".LogPaymentActivity" />
         <activity android:name=".ReviewLogPaymentActivity" />
         <activity android:name=".ViewReportsActivity" />
+        <activity android:name=".NewListingActivity" />
+
 
         <meta-data
             android:name="com.google.android.geo.API_KEY"

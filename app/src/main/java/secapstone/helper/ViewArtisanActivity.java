@@ -131,6 +131,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
         startActivity(new Intent(ViewArtisanActivity.this, MainActivity.class));
     }
 
+    public void onClickNewListingButton(View view)
+    {
+        startActivity(new Intent(ViewArtisanActivity.this, NewListingActivity.class));
+    }
+
     public void setUpContactInfoModal() {
         contactInfoModal.setContentView(R.layout.view_contact_info_modal);
 
