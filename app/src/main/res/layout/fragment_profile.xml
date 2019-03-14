@@ -165,124 +165,116 @@
 
         </android.support.constraint.ConstraintLayout>
 
-        <View
-            android:id="@+id/seperator1"
+        <!--<View-->
+            <!--android:id="@+id/seperator1"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginTop="18dp"-->
+            <!--android:background="#EBEBEB"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/profileButtonContainer" />-->
+
+        <!--<android.support.constraint.ConstraintLayout-->
+            <!--android:id="@+id/logPaymentContainer"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_marginStart="32dp"-->
+            <!--android:layout_marginTop="32dp"-->
+            <!--android:layout_marginEnd="32dp"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/seperator1">-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView6"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:fontFamily="@font/googlesans"-->
+                <!--android:text="Current Balance"-->
+                <!--android:textColor="#000000"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView10"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="12dp"-->
+                <!--android:fontFamily="@font/googlesans"-->
+                <!--android:text="Checking 8373 ***** ** **"-->
+                <!--android:textColor="#808080"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/textView9" />-->
+
+            <!--<TextView-->
+                <!--android:id="@+id/textView9"-->
+                <!--android:layout_width="wrap_content"-->
+                <!--android:layout_height="wrap_content"-->
+                <!--android:layout_marginTop="4dp"-->
+                <!--android:fontFamily="@font/googlesans_medium"-->
+                <!--android:text="$3100.32"-->
+                <!--android:textColor="#000000"-->
+                <!--android:textSize="26dp"-->
+                <!--app:layout_constraintStart_toStartOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/textView6" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/logPaymentButton"-->
+                <!--style="@style/BlueButton"-->
+                <!--android:layout_width="128dp"-->
+                <!--android:layout_height="44dp"-->
+                <!--android:text="Payment Log"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toTopOf="parent" />-->
+
+            <!--<Button-->
+                <!--android:id="@+id/EditAccountButton"-->
+                <!--style="@style/GrayButton"-->
+                <!--android:layout_width="128dp"-->
+                <!--android:layout_height="44dp"-->
+                <!--android:layout_marginTop="8dp"-->
+                <!--android:text="Edit Account"-->
+                <!--app:layout_constraintEnd_toEndOf="parent"-->
+                <!--app:layout_constraintTop_toBottomOf="@+id/logPaymentButton" />-->
+
+        <!--</android.support.constraint.ConstraintLayout>-->
+
+        <!--<View-->
+            <!--android:id="@+id/seperator2"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="1dp"-->
+            <!--android:layout_marginTop="32dp"-->
+            <!--android:background="#EBEBEB"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer" />*/-->
+
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ArtisanRecyclerView"
             android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="18dp"
-            android:background="#EBEBEB"
+            android:layout_height="0dp"
+            android:layout_marginTop="8dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/profileButtonContainer"
+            app:layout_constraintTop_toBottomOf="@+id/textView10" />
+
+        <TextView
+            android:id="@+id/textView10"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="5dp"
+            android:layout_marginTop="15dp"
+            android:fontFamily="@font/googlesans_medium"
+            android:text="Your Artisans"
+            android:textColor="#808080"
+            android:textSize="22dp"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileButtonContainer" />
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/logPaymentContainer"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seperator1">
-
-            <TextView
-                android:id="@+id/textView6"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:fontFamily="@font/googlesans"
-                android:text="Current Balance"
-                android:textColor="#000000"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="12dp"
-                android:fontFamily="@font/googlesans"
-                android:text="Checking 8373 ***** ** **"
-                android:textColor="#808080"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView9" />
-
-            <TextView
-                android:id="@+id/textView9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="4dp"
-                android:fontFamily="@font/googlesans_medium"
-                android:text="$3100.32"
-                android:textColor="#000000"
-                android:textSize="26dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView6" />
-
-            <Button
-                android:id="@+id/logPaymentButton"
-                style="@style/BlueButton"
-                android:layout_width="128dp"
-                android:layout_height="44dp"
-                android:text="Payment Log"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <Button
-                android:id="@+id/EditAccountButton"
-                style="@style/GrayButton"
-                android:layout_width="128dp"
-                android:layout_height="44dp"
-                android:layout_marginTop="8dp"
-                android:text="Edit Account"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/logPaymentButton" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <View
-            android:id="@+id/seperator2"
-            android:layout_width="0dp"
-            android:layout_height="1dp"
-            android:layout_marginTop="32dp"
-            android:background="#EBEBEB"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer" />
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/profileListingContainer"
-            android:layout_width="match_parent"
-            android:layout_height="279dp"
-            android:layout_marginStart="32dp"
-            android:layout_marginTop="32dp"
-            android:layout_marginEnd="32dp"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/seperator2">
-
-            <TextView
-                android:id="@+id/textView7"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:fontFamily="@font/googlesans_bold"
-                android:text="Your Artisans"
-                android:textColor="#000000"
-                android:textSize="22dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/recyclerView"
-                android:layout_width="343dp"
-                android:layout_height="269dp"
-                android:layout_marginTop="16dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/textView7" />
-
-        </android.support.constraint.ConstraintLayout>
 
 
     </android.support.constraint.ConstraintLayout>

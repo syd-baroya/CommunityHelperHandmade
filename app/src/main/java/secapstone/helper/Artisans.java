@@ -25,6 +25,8 @@ import java.io.Serializable;
 import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 
+import static java.security.AccessController.getContext;
+
 /**
  * A simple {@link Fragment} subclass.
  */
@@ -147,7 +149,7 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
                 .setQuery(query, Artisan.class)
                 .build();
 
-        adapter = new ArtisanAdapter(options, getContext(), artisansRef);
+        adapter = new ArtisanAdapter(options, this.getContext(), artisansRef);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
         recyclerView.setAdapter(adapter);

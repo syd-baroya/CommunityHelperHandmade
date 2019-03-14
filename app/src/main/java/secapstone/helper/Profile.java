@@ -26,10 +26,19 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
-import secapstone.helper.R;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 
+import secapstone.helper.R;
+import android.support.v7.widget.RecyclerView;
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 
+import static java.security.AccessController.getContext;
 
 
 public class Profile extends Fragment {
@@ -41,13 +50,14 @@ public class Profile extends Fragment {
 
     private Button logoutButton;
     private Dialog myDialog;
+    private RecyclerView recyclerView;
+    private ArtisanAdapter adapter;
+    public void setArtisanRef(CollectionReference artisansRef){
+        this.artisansRef = artisansRef;
+    }
 
     public Profile() {
         // Required empty public constructor
-    }
-
-    public void setArtisanRef(CollectionReference artisansRef){
-        this.artisansRef = artisansRef;
     }
 
 
@@ -64,23 +74,25 @@ public class Profile extends Fragment {
                 onClickLogout();
             }
         });
+        recyclerView=  view.findViewById(R.id.ArtisanRecyclerView);
 
         User user_info = User.getUser();
         setImage("",  user_info.getName());
 
 
-        Button logPaymentButton = view.findViewById(R.id.logPaymentButton);
-        logPaymentButton.setOnClickListener(new View.OnClickListener() {
+        /*Button logPaymentButton = view.findViewById(R.id.logPaymentButton);
+        //logPaymentButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view)
             {
                 onClickLogPayments(view);
             }
-        });
+        });*/
 
         myDialog = new Dialog(getActivity());
 
         setStatusBarToDark();
+        makeRecyclerView();
 
         return view;
     }
@@ -128,6 +140,28 @@ public class Profile extends Fragment {
     public void onClickContactInfoButton(View view)
     {
 
+    }
+
+    public void makeRecyclerView(){
+        Query query = artisansRef.orderBy("lastName", Query.Direction.ASCENDING);
+        FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
+                .setQuery(query, Artisan.class)
+                .build();
+
+        adapter = new ArtisanAdapter(options, this.getContext(), artisansRef);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
+
+
+        adapter = new ArtisanAdapter(options, getContext(), artisansRef);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
     }
 
 
