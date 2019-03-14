@@ -150,18 +150,25 @@ public class Profile extends Fragment {
 
         adapter = new ArtisanAdapter(options, this.getContext(), artisansRef);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+        RecyclerView.LayoutManager m = new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        recyclerView.setLayoutManager(m);
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         adapter.startListening();
 
 
-        adapter = new ArtisanAdapter(options, getContext(), artisansRef);
-
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        adapter.startListening();
+//        adapter = new ArtisanAdapter(options, getContext(), artisansRef);
+//
+//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+//        recyclerView.setAdapter(adapter);
+//        adapter.notifyDataSetChanged();
+//        adapter.startListening();
     }
 
 

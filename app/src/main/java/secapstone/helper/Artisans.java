@@ -151,7 +151,16 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
 
         adapter = new ArtisanAdapter(options, this.getContext(), artisansRef);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
+
+        RecyclerView.LayoutManager m = new LinearLayoutManager(getActivity()){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        recyclerView.setLayoutManager(m);
+
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         adapter.startListening();

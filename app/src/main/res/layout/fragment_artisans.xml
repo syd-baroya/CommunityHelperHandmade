@@ -14,6 +14,108 @@
         android:focusable="true"
         android:focusableInTouchMode="true">
 
+        <ScrollView
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <android.support.constraint.ConstraintLayout
+                android:layout_width="match_parent"
+                android:layout_height="500dp">
+
+                <android.support.constraint.ConstraintLayout
+                    android:id="@+id/constraintLayout2"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginStart="22dp"
+                    android:layout_marginTop="98dp"
+                    android:background="@drawable/gray_filterbutton_background"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent">
+
+                    <Spinner
+                        android:id="@+id/SortBySpinner"
+                        android:layout_width="wrap_content"
+                        android:layout_height="34dp"
+                        android:background="@android:color/transparent"
+                        android:paddingRight="30dp"
+                        android:theme="@style/SpinnerTheme"
+                        app:layout_constraintBottom_toBottomOf="parent"
+                        app:layout_constraintStart_toStartOf="parent"
+                        app:layout_constraintTop_toTopOf="parent" />
+
+                    <ImageView
+                        android:layout_width="8dp"
+                        android:layout_height="4dp"
+                        android:layout_alignParentRight="true"
+                        android:layout_centerVertical="true"
+                        android:layout_gravity="center"
+                        android:layout_marginStart="16dp"
+                        android:layout_marginEnd="14dp"
+                        android:adjustViewBounds="false"
+                        android:scaleType="fitXY"
+                        android:src="@drawable/icon_down_carrot"
+                        app:layout_constraintBottom_toBottomOf="@+id/SortBySpinner"
+                        app:layout_constraintEnd_toEndOf="@+id/SortBySpinner"
+                        app:layout_constraintTop_toTopOf="@+id/SortBySpinner" />
+
+                </android.support.constraint.ConstraintLayout>
+
+                <Button
+                    android:id="@+id/addArtisanButton"
+                    style="@style/PrimaryButton"
+                    android:layout_width="140dp"
+                    android:layout_height="38dp"
+                    android:layout_marginTop="98dp"
+                    android:layout_marginEnd="22dp"
+                    android:drawableRight="@drawable/plus_image_white"
+                    android:paddingLeft="18dp"
+                    android:paddingRight="18dp"
+                    android:text="New Artisan"
+                    android:textAlignment="viewStart"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintTop_toTopOf="parent" />
+
+                <android.support.v7.widget.RecyclerView
+                    android:id="@+id/artisan_recycler_view"
+                    android:layout_width="0dp"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="16dp"
+                    android:clipChildren="false"
+                    android:clipToPadding="false"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.0"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toBottomOf="@+id/addArtisanButton" />
+
+            </android.support.constraint.ConstraintLayout>
+
+
+        </ScrollView>
+
+        <View
+            android:id="@+id/view2"
+            android:layout_width="wrap_content"
+            android:layout_height="98dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:background="@color/white"/>
+
+        <Button
+            android:id="@+id/searchButton"
+            style="@style/PrimaryButton"
+            android:layout_width="24dp"
+            android:layout_height="24dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/search_icon"
+            app:layout_constraintBottom_toBottomOf="@+id/searchActionItemsField"
+            app:layout_constraintEnd_toEndOf="@+id/searchActionItemsField"
+            app:layout_constraintTop_toTopOf="@+id/searchActionItemsField" />
+
         <secapstone.helper.EditTextSearch
             android:id="@+id/searchActionItemsField"
             android:layout_width="0dp"
@@ -34,85 +136,8 @@
             android:textSize="16sp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"/>
+            app:layout_constraintTop_toTopOf="parent" />
 
-        <Button
-            android:id="@+id/searchButton"
-            style="@style/PrimaryButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:layout_marginEnd="12dp"
-            android:background="@drawable/search_icon"
-            app:layout_constraintBottom_toBottomOf="@+id/searchActionItemsField"
-            app:layout_constraintEnd_toEndOf="@+id/searchActionItemsField"
-            app:layout_constraintTop_toTopOf="@+id/searchActionItemsField" />
-
-        <android.support.constraint.ConstraintLayout
-            android:id="@+id/constraintLayout2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginStart="22dp"
-            android:layout_marginTop="22dp"
-            android:background="@drawable/gray_filterbutton_background"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchActionItemsField">
-
-            <Spinner
-                android:id="@+id/SortBySpinner"
-                android:layout_width="wrap_content"
-                android:layout_height="34dp"
-                android:background="@android:color/transparent"
-                android:paddingRight="30dp"
-                android:theme="@style/SpinnerTheme"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:layout_width="8dp"
-                android:layout_height="4dp"
-                android:layout_alignParentRight="true"
-                android:layout_centerVertical="true"
-                android:layout_gravity="center"
-                android:layout_marginStart="16dp"
-                android:layout_marginEnd="14dp"
-                android:adjustViewBounds="false"
-                android:scaleType="fitXY"
-                android:src="@drawable/icon_down_carrot"
-                app:layout_constraintBottom_toBottomOf="@+id/SortBySpinner"
-                app:layout_constraintEnd_toEndOf="@+id/SortBySpinner"
-                app:layout_constraintTop_toTopOf="@+id/SortBySpinner" />
-
-        </android.support.constraint.ConstraintLayout>
-
-        <Button
-            android:id="@+id/addArtisanButton"
-            style="@style/PrimaryButton"
-            android:layout_width="140dp"
-            android:layout_height="38dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginEnd="22dp"
-            android:drawableRight="@drawable/plus_image_white"
-            android:paddingLeft="18dp"
-            android:paddingRight="18dp"
-            android:text="New Artisan"
-            android:textAlignment="viewStart"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/searchActionItemsField" />
-
-        <android.support.v7.widget.RecyclerView
-            android:id="@+id/artisan_recycler_view"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:layout_marginTop="16dp"
-            android:clipChildren="false"
-            android:clipToPadding="false"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/addArtisanButton"
-            app:layout_constraintVertical_bias="1.0" />
 
     </android.support.constraint.ConstraintLayout>
 
