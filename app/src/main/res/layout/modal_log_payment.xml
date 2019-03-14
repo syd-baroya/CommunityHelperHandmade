@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="48dp"
         android:fontFamily="@font/googlesans_bold"
         android:text="Log Payment"
         android:textColor="#000"

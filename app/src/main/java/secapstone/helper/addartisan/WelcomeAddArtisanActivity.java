@@ -29,6 +29,7 @@ public class WelcomeAddArtisanActivity extends AppCompatActivity
     {
         startActivity(new Intent(WelcomeAddArtisanActivity.this, MainActivity.class));
         artisanObject = new Artisan();
+        artisanProfileImage = null;
     }
 
     public void onClickNext(View view)
