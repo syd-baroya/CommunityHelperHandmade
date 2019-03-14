@@ -18,6 +18,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import secapstone.helper.R;
+import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
+import secapstone.helper.addartisan.SignatureAddArtisanActivity;
 import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
 
 public class NewListingActivity extends AppCompatActivity {
@@ -96,6 +98,10 @@ public class NewListingActivity extends AppCompatActivity {
             ImageView image = findViewById(R.id.newListingImage);
             image.setImageBitmap(bmp);
         }
+    }
+
+    public void onClickBackButton(View view) {
+        finish();
     }
 
     public void onClickAddListingButton(View view) {
