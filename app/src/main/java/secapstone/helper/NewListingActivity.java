@@ -105,6 +105,6 @@ public class NewListingActivity extends AppCompatActivity {
     }
 
     public void onClickAddListingButton(View view) {
-        //TODO
+        finish();
     }
 }
