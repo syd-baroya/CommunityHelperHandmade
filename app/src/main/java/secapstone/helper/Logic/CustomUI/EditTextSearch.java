@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.CustomUI;
 
 import android.app.Activity;
 import android.content.Context;
@@ -11,6 +11,7 @@ import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Button;
 
+import secapstone.helper.R;
 
 
 public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {

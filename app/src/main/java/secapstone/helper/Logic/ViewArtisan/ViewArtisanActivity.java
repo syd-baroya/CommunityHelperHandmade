@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.ViewArtisan;
 
 import android.Manifest;
 import android.annotation.TargetApi;
@@ -16,10 +16,7 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
-import android.view.ViewGroup;
-import android.view.Window;
 import android.view.WindowManager;
-import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -31,6 +28,10 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import secapstone.helper.LogPayment.LogPaymentActivity;
+import secapstone.helper.MainActivity;
+import secapstone.helper.R;
 
 public class ViewArtisanActivity extends AppCompatActivity {
     //Used when requesting permissions for Call and Text

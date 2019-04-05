@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.Login;
 
 import android.content.*;
 import android.support.v7.app.AppCompatActivity;
@@ -8,9 +8,7 @@ import android.widget.*;
 
 import secapstone.helper.R;
 
-import secapstone.helper.addartisan.*;
-
-public class ForgotPassword extends AppCompatActivity {
+public class ForgotPasswordActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,6 +28,6 @@ public class ForgotPassword extends AppCompatActivity {
 
     public void onClickReturnToLogin()
     {
-        startActivity(new Intent(ForgotPassword.this, LoginActivity.class));
+        startActivity(new Intent(ForgotPasswordActivity.this, LoginActivity.class));
     }
 }

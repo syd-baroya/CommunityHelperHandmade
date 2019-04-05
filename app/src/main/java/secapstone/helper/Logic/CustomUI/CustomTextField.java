@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.CustomUI;
 
 import android.app.Activity;
 import android.content.Context;
@@ -9,6 +9,8 @@ import android.support.v4.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.widget.Button;
+
+import secapstone.helper.R;
 
 
 public class CustomTextField extends android.support.v7.widget.AppCompatEditText {

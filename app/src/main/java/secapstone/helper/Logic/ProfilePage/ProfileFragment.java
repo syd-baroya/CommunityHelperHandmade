@@ -1,21 +1,15 @@
-package secapstone.helper;
+package secapstone.helper.ProfilePage;
 
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Intent;
-import android.graphics.Color;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
-import android.support.v4.content.ContextCompat;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.view.Window;
-import android.view.WindowManager;
 import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.amazon.identity.auth.device.AuthError;
@@ -23,25 +17,23 @@ import com.amazon.identity.auth.device.api.Listener;
 import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import secapstone.helper.ArtisansPage.ArtisanAdapter;
+import secapstone.helper.LogPayment.LogPaymentActivity;
+import secapstone.helper.Login.LoginActivity;
+import secapstone.helper.MainActivity;
+import secapstone.helper.Model.Artisan;
+import secapstone.helper.Model.User;
 import secapstone.helper.R;
-import android.support.v7.widget.RecyclerView;
-import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
-
-import static java.security.AccessController.getContext;
+import secapstone.helper.ViewArtisan.ViewReportsActivity;
 
 
-public class Profile extends Fragment {
+public class ProfileFragment extends Fragment {
 
     //reference to user's artisans in database
     private CollectionReference artisansRef;
@@ -56,7 +48,7 @@ public class Profile extends Fragment {
         this.artisansRef = artisansRef;
     }
 
-    public Profile() {
+    public ProfileFragment() {
         // Required empty public constructor
     }
 

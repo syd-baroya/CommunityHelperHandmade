@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.Login;
 
 import android.annotation.TargetApi;
 import android.content.Context;
@@ -28,13 +28,15 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 
+import secapstone.helper.MainActivity;
+import secapstone.helper.R;
 
 
 public class LoginActivity extends AppCompatActivity {
     private FirebaseAuth mAuth = FirebaseAuth.getInstance();
 
     private RequestContext amazonAuthListener;
-    private secapstone.helper.User CGA;
+    private secapstone.helper.Model.User CGA;
     private String email;
     private String password;
     private String name;
@@ -127,7 +129,7 @@ public class LoginActivity extends AppCompatActivity {
                                 // Sign in success, update UI with the signed-in user's information
                                 Log.d(TAG, "Successfully signed into firebase");
                                 FirebaseUser user = mAuth.getCurrentUser();
-                                CGA = secapstone.helper.User.getUser();
+                                CGA = secapstone.helper.Model.User.getUser();
                                 CGA.setEmail(email);
                                 CGA.setID(user.getUid());
                                 CGA.setName(name);
@@ -153,7 +155,7 @@ public class LoginActivity extends AppCompatActivity {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "Created firebase user successfully");
                             FirebaseUser user = mAuth.getCurrentUser();
-                            CGA = secapstone.helper.User.getUser();
+                            CGA = secapstone.helper.Model.User.getUser();
                             CGA.setEmail(email);
                             CGA.setID(user.getUid());
                             CGA.setName(name);

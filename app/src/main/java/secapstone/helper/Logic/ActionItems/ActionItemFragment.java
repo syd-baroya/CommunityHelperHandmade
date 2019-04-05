@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.ActionItems;
 
 
 import android.annotation.TargetApi;
@@ -14,14 +14,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
-import android.widget.AdapterView;
 import android.widget.Button;
-import android.widget.TextView;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+
+import secapstone.helper.ActionItems.ActionItemAdapter;
+import secapstone.helper.CustomUI.EditTextSearch;
+import secapstone.helper.Model.ActionItem;
+import secapstone.helper.R;
 
 
 /**

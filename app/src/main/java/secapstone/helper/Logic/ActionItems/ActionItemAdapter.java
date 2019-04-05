@@ -1,8 +1,6 @@
-package secapstone.helper;
+package secapstone.helper.ActionItems;
 
 import android.content.Context;
-import android.content.Intent;
-import android.net.Uri;
 import android.support.annotation.NonNull;
 import android.support.constraint.ConstraintLayout;
 import android.support.v7.widget.RecyclerView;
@@ -11,15 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
-import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnFailureListener;
-import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import de.hdodenhof.circleimageview.CircleImageView;
+import secapstone.helper.Model.ActionItem;
+import secapstone.helper.R;
 
 public class ActionItemAdapter extends FirestoreRecyclerAdapter<ActionItem, ActionItemAdapter.ActionItemHolder> {
 

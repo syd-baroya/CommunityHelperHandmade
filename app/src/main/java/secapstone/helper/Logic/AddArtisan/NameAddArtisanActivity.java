@@ -1,4 +1,4 @@
-package secapstone.helper.addartisan;
+package secapstone.helper.AddArtisan;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -8,7 +8,7 @@ import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
 
-import secapstone.helper.CustomTextField;
+import secapstone.helper.CustomUI.CustomTextField;
 import secapstone.helper.R;
 
 public class NameAddArtisanActivity extends AppCompatActivity

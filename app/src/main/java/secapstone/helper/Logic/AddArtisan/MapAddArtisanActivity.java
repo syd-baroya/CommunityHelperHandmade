@@ -1,4 +1,4 @@
-package secapstone.helper.addartisan;
+package secapstone.helper.AddArtisan;
 
 import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
@@ -13,7 +13,7 @@ import com.google.android.gms.common.*;
 import com.google.android.gms.location.places.*;
 import com.google.android.gms.location.places.ui.*;
 
-import secapstone.helper.CustomTextField;
+import secapstone.helper.CustomUI.CustomTextField;
 import secapstone.helper.R;
 
 public class MapAddArtisanActivity extends AppCompatActivity

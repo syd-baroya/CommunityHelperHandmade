@@ -1,4 +1,4 @@
-package secapstone.helper.addartisan;
+package secapstone.helper.ViewArtisan;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -10,40 +10,37 @@ import android.support.v4.content.FileProvider;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Button;
 import android.widget.ImageView;
-
-import secapstone.helper.R;
 
 import java.io.File;
 import java.io.IOException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
-public class PhotoAddArtisanActivity extends AppCompatActivity
-{
+import secapstone.helper.CustomUI.CustomTextField;
+import secapstone.helper.R;
+
+public class NewListingActivity extends AppCompatActivity {
 
     static final int REQUEST_TAKE_PHOTO = 1;
     public String mCurrentPhotoPath;
 
-    Button nextButton, backButton, photoButton;
-    ImageView photoPreview;
+    CustomTextField name;
+    CustomTextField price;
+    CustomTextField description;
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_photo_add_artisan);
+        setContentView(R.layout.activity_new_listing);
 
-        nextButton = findViewById(R.id.nextButton);
-        backButton = findViewById(R.id.backButton);
-        photoButton = findViewById(R.id.uploadPhotoButton);
-        photoPreview = findViewById(R.id.imageView);
+        name = findViewById(R.id.nlNameText);
+        price = findViewById(R.id.nlPriceText);
+        description = findViewById(R.id.nlDescriptionText);
 
-        setImageViewImage(WelcomeAddArtisanActivity.artisanProfileImage);
     }
 
-    public void onClickSelectPhoto(View view)
+    public void onClickNewListingPhoto(View view)
     {
         Intent takePictureIntent = new Intent(MediaStore.ACTION_IMAGE_CAPTURE);
         // Ensure that there's a camera activity to handle the intent
@@ -91,32 +88,21 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
         } catch (Exception e) {
             e.printStackTrace();
         }
-
-        setImageViewImage(bmp);
+        setImageNewListingImage(bmp);
     }
 
-    public void setImageViewImage(Bitmap bmp) {
+    public void setImageNewListingImage(Bitmap bmp) {
         if (bmp != null) {
-            ImageView image = findViewById(R.id.imageView);
+            ImageView image = findViewById(R.id.newListingImage);
             image.setImageBitmap(bmp);
-            WelcomeAddArtisanActivity.artisanProfileImage = bmp;
-
-            nextButton.setEnabled(true);
         }
     }
 
-
-    public void onClickNext(View view)
-    {
-        startActivity(new Intent(PhotoAddArtisanActivity.this, PhoneNumberAddArtisanActivity.class));
-        overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
+    public void onClickBackButton(View view) {
         finish();
     }
 
-    public void onClickBack(View view)
-    {
-        startActivity(new Intent(PhotoAddArtisanActivity.this, NameAddArtisanActivity.class));
-        overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
+    public void onClickAddListingButton(View view) {
         finish();
     }
 }

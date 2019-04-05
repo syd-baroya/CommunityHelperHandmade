@@ -1,4 +1,4 @@
-package secapstone.helper.addartisan;
+package secapstone.helper.AddArtisan;
 
 import android.content.*;
 import android.graphics.Bitmap;
@@ -22,7 +22,8 @@ import android.widget.*;
 import java.io.ByteArrayOutputStream;
 
 import secapstone.helper.*;
-import secapstone.helper.Artisan;
+import secapstone.helper.Model.Artisan;
+import secapstone.helper.Model.User;
 
 
 public class FinalPreviewAddArtisanActivity extends AppCompatActivity

@@ -1,9 +1,10 @@
-package secapstone.helper;
-
-import android.util.SparseArray;
+package secapstone.helper.LogPayment;
 
 import java.util.ArrayList;
 import java.util.List;
+
+import secapstone.helper.Model.AmazonTransaction;
+import secapstone.helper.Model.Artisan;
 
 public class AccountingSystem
 {

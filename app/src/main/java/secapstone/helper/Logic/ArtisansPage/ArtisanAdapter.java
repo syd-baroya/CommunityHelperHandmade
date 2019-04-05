@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.ArtisansPage;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
@@ -22,6 +22,9 @@ import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import secapstone.helper.Model.Artisan;
+import secapstone.helper.R;
+import secapstone.helper.ViewArtisan.ViewArtisanActivity;
 
 public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAdapter.ArtisanHolder> {
 

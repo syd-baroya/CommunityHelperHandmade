@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.ArtisansPage;
 
 
 import android.annotation.TargetApi;
@@ -16,22 +16,18 @@ import android.widget.*;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.CollectionReference;
-import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
-import java.io.Serializable;
-
-import secapstone.helper.addartisan.FinalPreviewAddArtisanActivity;
-import secapstone.helper.addartisan.WelcomeAddArtisanActivity;
-
-import static java.security.AccessController.getContext;
+import secapstone.helper.CustomUI.EditTextSearch;
+import secapstone.helper.AddArtisan.WelcomeAddArtisanActivity;
+import secapstone.helper.Model.Artisan;
+import secapstone.helper.R;
 
 /**
  * A simple {@link Fragment} subclass.
  */
 
-public class Artisans extends Fragment implements AdapterView.OnItemSelectedListener {
+public class ArtisansFragment extends Fragment implements AdapterView.OnItemSelectedListener {
     private CollectionReference artisansRef;
     private ArtisanAdapter adapter;
 
@@ -200,6 +196,6 @@ public class Artisans extends Fragment implements AdapterView.OnItemSelectedList
     }
 
     // Required empty public constructor
-    public Artisans() {}
+    public ArtisansFragment() {}
 
 }

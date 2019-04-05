@@ -12,6 +12,11 @@ import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
 
+import secapstone.helper.ActionItems.ActionItemFragment;
+import secapstone.helper.ArtisansPage.ArtisansFragment;
+import secapstone.helper.Model.User;
+import secapstone.helper.ProfilePage.ProfileFragment;
+
 
 public class MainActivity extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener
 {
@@ -20,9 +25,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     private DocumentReference CGARef;
     private BottomNavigationView bottomNavigationView;
 
-    private Artisans artisanFragment;
+    private ArtisansFragment artisanFragment;
     private ActionItemFragment actionItemsFragment;
-    private Profile profileFragment;
+    private ProfileFragment profileFragment;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -34,10 +39,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         User user_info = User.getUser();
         CGARef = usersRef.document(user_info.getID());
 
-        profileFragment = new Profile();
+        profileFragment = new ProfileFragment();
         profileFragment.setArtisanRef(CGARef.collection("artisans"));
 
-        artisanFragment = new Artisans();
+        artisanFragment = new ArtisansFragment();
         artisanFragment.setArtisanRef(CGARef.collection("artisans"));
 
         actionItemsFragment = new ActionItemFragment();

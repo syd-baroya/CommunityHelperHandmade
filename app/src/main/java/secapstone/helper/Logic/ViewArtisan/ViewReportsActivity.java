@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.ViewArtisan;
 
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
