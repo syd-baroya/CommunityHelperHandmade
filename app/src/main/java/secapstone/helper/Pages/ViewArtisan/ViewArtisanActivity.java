@@ -223,13 +223,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
             textIntent.putExtra("address", artisanPhone);
             startActivity(textIntent);
         }
-        //Using Whatsapp
-        /*
-        Uri uri = Uri.parse("smsto:" + artisanPhone);
-        Intent whatsappIntent = new Intent(Intent.ACTION_SENDTO, uri);
-        whatsappIntent.setPackage("com.whatsapp");
-        startActivity(whatsappIntent);
-         */
     }
 
     @Override

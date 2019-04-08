@@ -12,6 +12,7 @@ import android.widget.*;
 import com.google.android.gms.common.*;
 import com.google.android.gms.location.places.*;
 import com.google.android.gms.location.places.ui.*;
+import com.google.android.gms.maps.model.LatLng;
 
 import secapstone.helper.Pages.CustomUI.CustomTextField;
 import secapstone.helper.R;
@@ -53,7 +54,9 @@ public class MapAddArtisanActivity extends AppCompatActivity
         if (requestCode == PLACE_PICKER_REQUEST) {
             if (resultCode == RESULT_OK) {
                 Place place = PlacePicker.getPlace(this, data);
-                adr.setText(place.getLatLng().toString());
+                LatLng placeLatLng = place.getLatLng();
+                String address = placeLatLng.latitude + ", " + placeLatLng.longitude;
+                adr.setText(address);
             }
         }
     }
