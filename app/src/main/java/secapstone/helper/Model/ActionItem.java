@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.Model;
 
 
 //Must match ActionItem in Firebase!

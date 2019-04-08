@@ -2,6 +2,8 @@ package secapstone.helper;
 
 import org.junit.Test;
 
+import secapstone.helper.Pages.Login.LoginActivity;
+
 import static org.junit.Assert.*;
 
 public class LoginUnitTest
@@ -12,6 +14,6 @@ public class LoginUnitTest
 
         LoginActivity myObjectUnderTest = new LoginActivity();
 
-        assertTrue(myObjectUnderTest.isValidPasswordLength("password1234"));
+        assertTrue(myObjectUnderTest.isValidPassword("password1234"));
     }
 }

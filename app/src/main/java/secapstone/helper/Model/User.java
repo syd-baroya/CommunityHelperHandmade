@@ -1,6 +1,4 @@
-package secapstone.helper;
-
-import android.os.Parcelable;
+package secapstone.helper.Model;
 
 import java.io.Serializable;
 

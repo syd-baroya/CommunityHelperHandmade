@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@color/colorPrimary"
-    tools:context=".addartisan.WelcomeAddArtisanActivity">
+    tools:context=".Pages.AddArtisan.WelcomeAddArtisanActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="48dp"
@@ -71,7 +71,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:drawableRight="@drawable/right_arrow_with_padding"
+            android:drawableRight="@drawable/icon_right_arrow_green_padded"
             android:text="Continue  "
             android:textSize="18sp"
             app:layout_constraintStart_toStartOf="parent"

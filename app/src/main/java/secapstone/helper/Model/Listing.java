@@ -1,4 +1,4 @@
-package secapstone.helper;
+package secapstone.helper.Model;
 import java.util.ArrayList;
 import java.util.List;
 

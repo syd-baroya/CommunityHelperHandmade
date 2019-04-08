@@ -1,11 +1,7 @@
-package secapstone.helper;
+package secapstone.helper.Model;
 
 
 //Must match artisan in Firebase!
-
-import android.util.SparseArray;
-
-import java.util.Map;
 
 public class Artisan {
     private String name;

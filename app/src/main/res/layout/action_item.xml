@@ -12,7 +12,7 @@
         android:id="@+id/action_item_parent"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/action_item_background">
+        android:background="@drawable/background_action_item">
 
         <TextView
             android:id="@+id/action_item_text"
