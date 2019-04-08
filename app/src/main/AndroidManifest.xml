@@ -21,15 +21,15 @@
         android:maxSdkVersion="18" />
 
     <application
-        android:name=".MyApplication"
+        android:name=".Other.MyApplication"
         android:allowBackup="true"
-        android:icon="@drawable/app_logo"
+        android:icon="@drawable/logo"
         android:label="@string/app_name"
-        android:roundIcon="@drawable/app_logo_round"
+        android:roundIcon="@drawable/logo_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
         <activity
-            android:name=".LoginActivity"
+            android:name=".Pages.Login.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"
             android:label="@string/app_name">
             <intent-filter>
@@ -54,20 +54,20 @@
                     android:scheme="amzn" />
             </intent-filter>
         </activity>
-        <activity android:name=".MainActivity" />
-        <activity android:name=".addartisan.WelcomeAddArtisanActivity" />
-        <activity android:name=".addartisan.NameAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".addartisan.PhotoAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".addartisan.PhoneNumberAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".addartisan.MapAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".addartisan.DescriptionAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".addartisan.SignatureAddArtisanActivity" />
-        <activity android:name=".ForgotPassword" />
-        <activity android:name=".ViewArtisanActivity" />
-        <activity android:name=".LogPaymentActivity" />
-        <activity android:name=".ReviewLogPaymentActivity" />
-        <activity android:name=".ViewReportsActivity" />
-        <activity android:name=".NewListingActivity" />
+        <activity android:name=".Pages.MainActivity" />
+        <activity android:name=".Pages.AddArtisan.WelcomeAddArtisanActivity" />
+        <activity android:name=".Pages.AddArtisan.NameAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Pages.AddArtisan.PhotoAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Pages.AddArtisan.PhoneNumberAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Pages.AddArtisan.MapAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Pages.AddArtisan.DescriptionAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
+        <activity android:name=".Pages.AddArtisan.SignatureAddArtisanActivity" />
+        <activity android:name=".Pages.Login.ForgotPasswordActivity" />
+        <activity android:name=".Pages.ViewArtisan.ViewArtisanActivity" />
+        <activity android:name=".Pages.LogPayment.LogPaymentActivity" />
+        <activity android:name=".Pages.LogPayment.ReviewLogPaymentActivity" />
+        <activity android:name=".Pages.ViewArtisan.ViewReportsActivity" />
+        <activity android:name=".Pages.ViewArtisan.NewListingActivity" />
 
 
         <meta-data
@@ -77,7 +77,7 @@
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
 
-        <activity android:name=".addartisan.FinalPreviewAddArtisanActivity" />
+        <activity android:name=".Pages.AddArtisan.FinalPreviewAddArtisanActivity" />
 
         <provider
             android:name="android.support.v4.content.FileProvider"
