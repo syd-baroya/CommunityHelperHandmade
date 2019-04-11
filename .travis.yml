@@ -33,4 +33,4 @@ script :
 - ./gradlew build check
 before_install:
 - chmod +x gradlew
-- yes | sudo ~/Library/Android/sdk/tools/bin/sdkmanager --licenses
+- yes | sdkmanager "platforms;android-28"
