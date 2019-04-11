@@ -34,4 +34,3 @@ script :
     - ./gradlew build check
 before_install:
 - chmod +x gradlew
-
