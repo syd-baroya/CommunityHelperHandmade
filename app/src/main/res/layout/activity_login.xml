@@ -6,7 +6,7 @@
     android:id="@+id/activity_login"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pages.Login.LoginActivity"
+    tools:context=".pages.login.LoginActivity"
     android:focusable="true"
     android:focusableInTouchMode="true"
     android:background="@color/white">

@@ -6,7 +6,7 @@
     android:layout_height="match_parent"
     android:focusable="true"
     android:focusableInTouchMode="true"
-    tools:context="Pages.AddArtisan.SignatureAddArtisanActivity">
+    tools:context="pages.add_artisan.SignatureAddArtisanActivity">
 
     <android.support.constraint.ConstraintLayout
         android:layout_width="48dp"

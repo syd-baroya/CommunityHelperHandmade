@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@drawable/background_modal"
     android:minWidth="320dp"
-    tools:context=".Pages.ViewArtisan.ViewArtisanActivity"
+    tools:context=".pages.view_artisan.ViewArtisanActivity"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent">
 
