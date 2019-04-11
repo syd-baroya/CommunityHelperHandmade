@@ -6,8 +6,8 @@
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:minWidth="340dp"
-    android:background="@drawable/modal_background"
-    tools:context=".ViewArtisanActivity"
+    android:background="@drawable/background_modal"
+    tools:context=".Pages.ViewArtisan.ViewArtisanActivity"
     app:layout_constraintEnd_toEndOf="parent"
     app:layout_constraintStart_toStartOf="parent"
     android:focusable="true"
@@ -41,7 +41,7 @@
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginTop="36dp"
-        android:layout_marginEnd="32dp"
+        android:layout_marginEnd="48dp"
         android:fontFamily="@font/googlesans_bold"
         android:text="Log Payment"
         android:textColor="#000"
@@ -67,7 +67,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle" />
 
-    <secapstone.helper.CustomTextField
+    <secapstone.helper.Pages.CustomUI.CustomTextField
         android:id="@+id/amountTextField"
         style="@style/TextInput"
         android:layout_width="0dp"
@@ -98,7 +98,7 @@
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/amountTextField" />
 
-    <secapstone.helper.CustomTextField
+    <secapstone.helper.Pages.CustomUI.CustomTextField
         android:id="@+id/dateTextField"
         style="@style/TextInput"
         android:layout_width="0dp"

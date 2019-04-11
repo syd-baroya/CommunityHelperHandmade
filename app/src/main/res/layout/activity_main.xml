@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MainActivity"
+    tools:context=".Pages.MainActivity"
     android:theme="@style/Widget.BottomNavigationView"
     android:background="@color/white" >
 
@@ -25,8 +25,8 @@
         android:layout_height="56dp"
         android:background="@color/colorPrimary"
         app:itemBackground="@color/colorPrimary"
-        app:itemIconTint="@drawable/item_selected"
-        app:itemTextColor="@drawable/item_selected"
+        app:itemIconTint="@drawable/background_navigation_item"
+        app:itemTextColor="@drawable/background_navigation_item"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
