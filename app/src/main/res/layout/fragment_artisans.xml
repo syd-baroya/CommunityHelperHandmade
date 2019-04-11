@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Pages.ArtisansPage.ArtisansFragment"
+    tools:context=".pages.artisans_page.ArtisansFragment"
     android:id="@+id/artisan_page_container">
 
     <android.support.constraint.ConstraintLayout
@@ -116,7 +116,7 @@
             app:layout_constraintEnd_toEndOf="@+id/searchActionItemsField"
             app:layout_constraintTop_toTopOf="@+id/searchActionItemsField" />
 
-        <secapstone.helper.Pages.CustomUI.EditTextSearch
+        <secapstone.helper.pages.custom_ui.EditTextSearch
             android:id="@+id/searchActionItemsField"
             android:layout_width="0dp"
             android:layout_height="50dp"
