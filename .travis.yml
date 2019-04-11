@@ -28,4 +28,4 @@ cache:
 script :
     - ./gradlew build check
 before_install:
-- chmod +x gradlew
+- chmod +x gradle
