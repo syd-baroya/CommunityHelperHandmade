@@ -20,6 +20,7 @@ import com.amazon.identity.auth.device.api.authorization.AuthorizeListener;
 import com.amazon.identity.auth.device.api.authorization.AuthorizeRequest;
 import com.amazon.identity.auth.device.api.authorization.AuthorizeResult;
 import com.amazon.identity.auth.device.api.authorization.ProfileScope;
+import com.amazon.identity.auth.device.api.authorization.Scope;
 import com.amazon.identity.auth.device.api.authorization.User;
 import com.amazon.identity.auth.device.api.workflow.RequestContext;
 import com.google.android.gms.tasks.OnCompleteListener;
@@ -57,6 +58,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private void onClickLoginButton(){
         //Calls amazonAuthListener's listeners (look at authorizeAmazon())
+        Log.d(TAG,"Click Login");
         AuthorizationManager.authorize(new AuthorizeRequest
             .Builder(amazonAuthListener)
             .addScopes(ProfileScope.profile(), ProfileScope.postalCode())
@@ -169,6 +171,11 @@ public class LoginActivity extends AppCompatActivity {
         }
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        amazonAuthListener.onResume();
+    }
 
     private void initializeControls(){
         //Grab any needed views
