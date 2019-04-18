@@ -161,7 +161,7 @@ public class LoginActivity extends AppCompatActivity {
                             CGA.setEmail(email);
                             CGA.setID(user.getUid());
                             CGA.setName(name);
-                            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                            goToMainActivity(user);
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "Failed to create firebase user", task.getException());

@@ -134,6 +134,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     public void onClickNewListingButton(View view)
     {
+        NewListingActivity.setArtisanRef(productsRef);
         startActivity(new Intent(ViewArtisanActivity.this, NewListingActivity.class));
     }
 

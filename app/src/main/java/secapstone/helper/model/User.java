@@ -7,7 +7,7 @@ public class User implements Serializable {
     private String name;
     private String id;
 
-    private static User obj=new User();//Early, instance will be created at load time
+    private static User obj;//Early, instance will be created at load time
     private User(){}
 
     public void setEmail(String email) {this.email = email;}
@@ -20,7 +20,9 @@ public class User implements Serializable {
         this.name = name;
     }
 
-    public static User getUser(){
+    public static synchronized User getUser(){
+        if(obj==null)
+            obj=new User();
         return obj;
     }
 
@@ -36,3 +38,4 @@ public class User implements Serializable {
         return id;
     }
 }
+

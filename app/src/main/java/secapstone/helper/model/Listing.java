@@ -13,9 +13,11 @@ public class Listing
     private List<String> images = new ArrayList<String>(); //TODO Make this a list of files, not strings.
     private String description = "";
     private ProductCategory category;
-    private int productID;
+    private String productID;
     private float price;
     private boolean isFulfilledByAmazon;
+    private String pictureURL;
+
 
     public Listing()
     {
@@ -27,6 +29,10 @@ public class Listing
         this.title = newTitle;
         this.description = newDescription;
         this.category = newCategory;
+    }
+
+    public void setPictureURL(String url) {
+        this.pictureURL = url;
     }
 
     public void setTitle(String newTitle)
@@ -63,13 +69,17 @@ public class Listing
         return category;
     }
 
-    public int getProductID()
+    public String getProductID()
     {
         return productID;
     }
 
-    public void setProductID(int newProductID)
+    public void setProductID(String newProductID)
     {
         productID = newProductID;
     }
+    public String getPictureURL() { return pictureURL;}
+
+    public void setPrice(float price){this.price = price;}
+
 }
