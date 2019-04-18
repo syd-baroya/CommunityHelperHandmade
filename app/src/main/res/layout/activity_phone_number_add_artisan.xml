@@ -74,7 +74,7 @@
 
 
     <secapstone.helper.pages.custom_ui.CustomTextField
-        android:id="@+id/phoneNumText"
+        android:id="@+id/reportText"
         style="@style/TextInput"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

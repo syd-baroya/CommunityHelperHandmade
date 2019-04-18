@@ -1,181 +1,170 @@
 <?xml version="1.0" encoding="utf-8"?>
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".pages.profile_page.ProfileFragment">
 
-    <ScrollView
+    <android.support.constraint.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="wrap_content"
+        android:background="@color/white">
+
+        <Button
+            android:id="@+id/logoutButton"
+            android:layout_width="80dp"
+            android:layout_height="28dp"
+            android:layout_marginTop="12dp"
+            android:layout_marginEnd="12dp"
+            android:background="@drawable/button_white"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Logout"
+            android:textAllCaps="false"
+            android:textColor="@color/red"
+            android:textSize="12dp"
+            app:layout_constraintEnd_toEndOf="@+id/imageTint"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/artisan_banner_image"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:adjustViewBounds="false"
+            android:cropToPadding="false"
+            android:scaleType="centerCrop"
+            android:src="@drawable/example_artisan"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <View
+            android:id="@+id/imageTint"
+            android:layout_width="match_parent"
+            android:layout_height="240dp"
+            android:background="@drawable/gradient_image_overlay"
+            android:scaleType="centerCrop"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/cga_name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginBottom="24dp"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Sarah Fernandez"
+            android:textColor="#fff"
+            android:textSize="26sp"
+            app:layout_constraintBottom_toBottomOf="@+id/imageTint"
+            app:layout_constraintStart_toStartOf="parent" />
 
         <android.support.constraint.ConstraintLayout
-            android:layout_width="match_parent"
+            android:id="@+id/profileButtonContainer"
+            android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:background="@color/white">
+            android:layout_marginTop="20dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imageTint">
 
-            <android.support.constraint.ConstraintLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content">
-
-
-            </android.support.constraint.ConstraintLayout>
-
-            <Button
-                android:id="@+id/logoutButton"
-                android:layout_width="80dp"
-                android:layout_height="28dp"
-                android:layout_marginTop="12dp"
-                android:layout_marginEnd="12dp"
-                android:background="@drawable/button_white"
-                android:fontFamily="@font/googlesans_bold"
-                android:text="Logout"
-                android:textAllCaps="false"
-                android:textColor="@color/red"
-                android:textSize="12dp"
-                app:layout_constraintEnd_toEndOf="@+id/imageTint"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <ImageView
-                android:id="@+id/artisan_banner_image"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:adjustViewBounds="false"
-                android:cropToPadding="false"
-                android:scaleType="centerCrop"
-                android:src="@drawable/example_artisan"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <View
-                android:id="@+id/imageTint"
-                android:layout_width="match_parent"
-                android:layout_height="240dp"
-                android:background="@drawable/gradient_image_overlay"
-                android:scaleType="centerCrop"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toTopOf="parent" />
-
-            <TextView
-                android:id="@+id/cga_name"
-                android:layout_width="wrap_content"
+            <LinearLayout
+                android:id="@+id/linearLayout4"
+                android:layout_width="100dp"
                 android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginBottom="24dp"
-                android:fontFamily="@font/googlesans_bold"
-                android:text="Sarah Fernandez"
-                android:textColor="#fff"
-                android:textSize="26sp"
-                app:layout_constraintBottom_toBottomOf="@+id/imageTint"
-                app:layout_constraintStart_toStartOf="parent" />
-
-            <android.support.constraint.ConstraintLayout
-                android:id="@+id/profileButtonContainer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="20dp"
-                app:layout_constraintEnd_toEndOf="parent"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
+                app:layout_constraintHorizontal_bias="0.5"
                 app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/imageTint">
+                app:layout_constraintTop_toTopOf="parent">
 
-                <LinearLayout
-                    android:id="@+id/linearLayout4"
-                    android:layout_width="100dp"
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/icon_cga_contact_button"
+                    android:textColor="@color/colorPrimaryDarker" />
+
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout3"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:text="Contact Info"
+                    android:textAlignment="center"
+                    android:textColor="#506E6E"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
+            </LinearLayout>
 
-                    <ImageView
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/icon_cga_contact_button"
-                        android:textColor="@color/colorPrimaryDarker" />
+            <LinearLayout
+                android:id="@+id/linearLayout3"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
+                app:layout_constraintHorizontal_bias="0.5"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout4"
+                app:layout_constraintTop_toTopOf="parent">
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/googlesans"
-                        android:text="Contact Info"
-                        android:textAlignment="center"
-                        android:textColor="#506E6E"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/icon_cga_reports_button"
+                    android:textColor="@color/colorPrimaryDarker" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout3"
-                    android:layout_width="100dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    app:layout_constraintEnd_toStartOf="@+id/linearLayout5"
-                    app:layout_constraintHorizontal_bias="0.5"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout4"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:text="Reports"
+                    android:textAlignment="center"
+                    android:textColor="#506E6E"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/icon_cga_reports_button"
-                        android:textColor="@color/colorPrimaryDarker" />
+            </LinearLayout>
 
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/googlesans"
-                        android:text="Reports"
-                        android:textAlignment="center"
-                        android:textColor="#506E6E"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
+            <LinearLayout
+                android:id="@+id/linearLayout5"
+                android:layout_width="100dp"
+                android:layout_height="wrap_content"
+                android:gravity="center_horizontal"
+                android:orientation="vertical"
+                android:padding="10dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toEndOf="@+id/linearLayout3"
+                app:layout_constraintTop_toTopOf="parent">
 
-                </LinearLayout>
+                <ImageView
+                    android:layout_width="34dp"
+                    android:layout_height="34dp"
+                    android:background="@drawable/icon_cga_profile_button"
+                    android:textColor="@color/colorPrimaryDarker" />
 
-                <LinearLayout
-                    android:id="@+id/linearLayout5"
-                    android:layout_width="100dp"
+                <TextView
+                    android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:gravity="center_horizontal"
-                    android:orientation="vertical"
-                    android:padding="10dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/linearLayout3"
-                    app:layout_constraintTop_toTopOf="parent">
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="@font/googlesans"
+                    android:text="Profile"
+                    android:textAlignment="center"
+                    android:textColor="#506E6E"
+                    android:textSize="12dp"
+                    android:textStyle="bold" />
 
-                    <ImageView
-                        android:layout_width="34dp"
-                        android:layout_height="34dp"
-                        android:background="@drawable/icon_cga_profile_button"
-                        android:textColor="@color/colorPrimaryDarker" />
-
-                    <TextView
-                        android:layout_width="wrap_content"
-                        android:layout_height="wrap_content"
-                        android:layout_marginTop="8dp"
-                        android:fontFamily="@font/googlesans"
-                        android:text="Profile"
-                        android:textAlignment="center"
-                        android:textColor="#506E6E"
-                        android:textSize="12dp"
-                        android:textStyle="bold" />
-
-                </LinearLayout>
+            </LinearLayout>
 
 
-            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
 
-            <View
+        <View
             android:id="@+id/seperator1"
             android:layout_width="0dp"
             android:layout_height="1dp"
@@ -185,7 +174,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/profileButtonContainer" />
 
-            <android.support.constraint.ConstraintLayout
+        <android.support.constraint.ConstraintLayout
             android:id="@+id/logPaymentContainer"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
@@ -196,7 +185,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/seperator1">
 
-            <TextView
+        <TextView
             android:id="@+id/textView6"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -206,8 +195,8 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-            <TextView
-            android:id="@+id/textView10"
+        <TextView
+            android:id="@+id/textView19"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="12dp"
@@ -217,7 +206,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView9" />
 
-            <TextView
+        <TextView
             android:id="@+id/textView9"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -229,7 +218,7 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/textView6" />
 
-            <Button
+        <Button
             android:id="@+id/logPaymentButton"
             style="@style/BlueButton"
             android:layout_width="128dp"
@@ -238,7 +227,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
-            <Button
+        <Button
             android:id="@+id/EditAccountButton"
             style="@style/GrayButton"
             android:layout_width="128dp"
@@ -248,9 +237,9 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/logPaymentButton" />
 
-            </android.support.constraint.ConstraintLayout>
+        </android.support.constraint.ConstraintLayout>
 
-            <View
+        <View
             android:id="@+id/seperator2"
             android:layout_width="0dp"
             android:layout_height="1dp"
@@ -258,38 +247,43 @@
             android:background="#EBEBEB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer" />*/
+            app:layout_constraintTop_toBottomOf="@+id/logPaymentContainer" />
 
-            <android.support.v7.widget.RecyclerView
-                android:id="@+id/ArtisanRecyclerView"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:clipChildren="false"
-                android:clipToPadding="false"
-                app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.0"
-                app:layout_constraintStart_toStartOf="@+id/profileButtonContainer"
-                app:layout_constraintTop_toBottomOf="@+id/textView10" />
+        <android.support.v7.widget.RecyclerView
+            android:id="@+id/ArtisanRecyclerView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:clipChildren="false"
+            android:clipToPadding="false"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="@+id/profileButtonContainer"
+            app:layout_constraintTop_toBottomOf="@+id/textView18" />
 
-            <TextView
-                android:id="@+id/textView10"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginStart="24dp"
-                android:layout_marginTop="24dp"
-                android:fontFamily="@font/googlesans_bold"
-                android:text="Your Artisans"
-                android:textColor="@color/almostBlack"
-                android:textSize="22dp"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/seperator2" />
+        <TextView
+            android:id="@+id/textView18"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="Your Artisans"
+            android:textColor="@color/almostBlack"
+            android:textSize="22dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/seperator2" />
+
+        <Button
+            android:id="@+id/reportIssueButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="onClickReportIssue"
+            android:text="Report Issue"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
 
-        </android.support.constraint.ConstraintLayout>
-    </ScrollView>
-
-
-
-</FrameLayout>
+    </android.support.constraint.ConstraintLayout>
+</ScrollView>

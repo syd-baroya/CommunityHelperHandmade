@@ -4,8 +4,12 @@ package secapstone.helper.pages.profile_page;
 import android.annotation.TargetApi;
 import android.app.Dialog;
 import android.content.Intent;
+import android.graphics.Color;
+import android.graphics.drawable.ColorDrawable;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +19,25 @@ import android.widget.TextView;
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.api.Listener;
 import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 
+import java.util.Calendar;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
+
 import secapstone.helper.pages.artisans_page.ArtisanAdapter;
+import secapstone.helper.pages.custom_ui.CustomTextField;
 import secapstone.helper.pages.log_payment.LogPaymentActivity;
 import secapstone.helper.pages.login.LoginActivity;
 import secapstone.helper.pages.MainActivity;
@@ -32,18 +46,24 @@ import secapstone.helper.model.User;
 import secapstone.helper.R;
 import secapstone.helper.pages.view_artisan.ViewReportsActivity;
 
+import static android.support.constraint.Constraints.TAG;
+
 
 public class ProfileFragment extends Fragment {
 
     //reference to user's artisans in database
     private CollectionReference artisansRef;
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     private View view;
 
     private Button logoutButton;
-    private Dialog myDialog;
     private RecyclerView recyclerView;
     private ArtisanAdapter adapter;
+    private Dialog reportIssueModal;
+    private Button reportIssueButton;
+    private CustomTextField reportField;
+    private Button submitReportButton;
     public void setArtisanRef(CollectionReference artisansRef){
         this.artisansRef = artisansRef;
     }
@@ -58,7 +78,15 @@ public class ProfileFragment extends Fragment {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
 
+        reportIssueModal = new Dialog(this.getContext());
+        reportIssueModal.setContentView(R.layout.modal_report_issue);
+        reportIssueModal.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+
         logoutButton = view.findViewById(R.id.logoutButton);
+        reportIssueButton = view.findViewById(R.id.reportIssueButton);
+        submitReportButton = reportIssueModal.findViewById(R.id.submitReportButton);
+        reportField = reportIssueModal.findViewById(R.id.reportText);
+        recyclerView=  view.findViewById(R.id.ArtisanRecyclerView);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -66,25 +94,28 @@ public class ProfileFragment extends Fragment {
                 onClickLogout();
             }
         });
-        recyclerView=  view.findViewById(R.id.ArtisanRecyclerView);
+
+        reportIssueButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickReportIssue();
+            }
+        });
+
+        submitReportButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickSubmitReport();
+            }
+        });
+
 
         User user_info = User.getUser();
         setImage("",  user_info.getName());
 
-
-        /*Button logPaymentButton = view.findViewById(R.id.logPaymentButton);
-        //logPaymentButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view)
-            {
-                onClickLogPayments(view);
-            }
-        });*/
-
-        myDialog = new Dialog(getActivity());
-
         setStatusBarToDark();
         makeRecyclerView();
+
 
         return view;
     }
@@ -117,6 +148,35 @@ public class ProfileFragment extends Fragment {
     public void onClickReportsButton(View view)
     {
         startActivity(new Intent(getActivity(), ViewReportsActivity.class));
+    }
+
+    public void onClickReportIssue()
+    {
+        reportIssueModal.show();
+    }
+
+    public void onClickSubmitReport() {
+        if (reportField.getText().toString().length() > 0) {
+            Map<String, Object> report = new HashMap<>();
+            report.put("report", reportField.getText().toString());
+            report.put("UserID", User.getUser().getID());
+            report.put("time", Calendar.getInstance().getTime().toString());
+
+            db.collection("reports").document()
+                    .set(report)
+                    .addOnSuccessListener(new OnSuccessListener<Void>() {
+                        @Override
+                        public void onSuccess(Void aVoid) {
+                            reportIssueModal.dismiss();
+                        }
+                    })
+                    .addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception e) {
+                            Log.w(TAG, "Error writing document", e);
+                        }
+                    });
+        }
     }
 
     public void onClickLogPayments(View view)

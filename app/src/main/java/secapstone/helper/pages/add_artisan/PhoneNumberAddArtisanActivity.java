@@ -22,7 +22,7 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_add_artisan);
 
-        pNum = findViewById(R.id.phoneNumText);
+        pNum = findViewById(R.id.reportText);
         nextButton = findViewById(R.id.nextButton);
 
         setupTextChangedListener(pNum);
