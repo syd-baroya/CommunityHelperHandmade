@@ -1,48 +1,58 @@
+---
+description: Installation Setup Guide
+---
+
 # Install
 
-Installation Setup Guide: :\)
+### 1. Download latest Android Studio and SDK Packets
 
-1. Download latest Android Studio and SDK Packets  
-3.3.2 Windows 64—bit \(948 MP\)
+[https://developer.android.com/studio/index.html](https://developer.android.com/studio/index.html)
 
-2. Get Permission for Figma for Development Purposes:  
-We use this for dev and storyboard to check out our idea of the app.
+### 2. Get Permission for Figma:
 
-3. Get permission for Firebase:  
-Google NoSQL Database solution: we store the artisans, action items, pictures, addresses, all the information on   
-artisans.
+We use Figma to create our UI Designs and Mockups. To see these go to:  
+[https://www.figma.com/file/0YumQIW2i6DQVPX6BjKPuVpi/Amazon-Handmade?node-id=0%3A1](https://www.figma.com/file/0YumQIW2i6DQVPX6BjKPuVpi/Amazon-Handmade?node-id=0%3A1)
 
-4. Use Github: https://github.com/syd-baroya/CommunityHelperHandmade
+### 3. Get permission for Firebase:
 
-5. Clone the Github link at: https://github.com/syd-baroya/CommunityHelperHandmade.git  
-Set up and Clone Github to Local File. \(option that pops up to install missing SDK\)
+We use Firebase Firestore for our database. Email spoorthyvemula@gmail.com to get access to this. Then go to the following link to see our database:  
+[https://console.firebase.google.com/u/0/project/handmade-17b08](https://console.firebase.google.com/u/0/project/handmade-17b08) 
 
-6. Install SDK Packages: Android SDK Build-Tools 28.0.3  
+### 4. Clone the Github Repo 
+
+You can find our github repo here:  
+[https://github.com/syd-baroya/CommunityHelperHandmade](https://github.com/syd-baroya/CommunityHelperHandmade)  
+For instruction on how to clone a repo go here:  
+[https://help.github.com/en/articles/cloning-a-repository](https://help.github.com/en/articles/cloning-a-repository)
+
+### 6. Install SDK Packages: 
+
+Android SDK Build-Tools 28.0.3  
 It should be ready to build now, if not you would want to press rebuild  
 \*Available Pixel XL API P as emulator to use.
 
-7. This error code would pop up:   
-“2:19 PM IDE and Plugin Updates: The following components are ready to update: Android Emulator, Intel x86 Emulator   
-Accelerator \(HAXM installer\), Android SDK Platform-Tools, Android SDK Platform 27, Google APIs Intel x86 Atom System   
-Image”
+### 7. This error code would pop up: 
 
-8. To update this error press the update button and this message pops up.  
-Make sure you have Android 6.0 \(Marshmallow\)  
-Android 8.1 \(Oreo\)
+`2:19 PM IDE and Plugin Updates: The following components are ready to update: Android Emulator, Intel x86 Emulator Accelerator (HAXM installer), Android SDK Platform-Tools, Android SDK Platform 27, Google APIs Intel x86 Atom System   
+Image`
 
-9. PRESS UPDATE NOW  
-You should be able to run the app now. This should be the screen displayed:
+**To fix this error:** 
 
-10. You would have to provide Login credentials and google services J-son. \(We are not allowed to post these on the git   
-hub so please contact us for these 2 files.\) They are provided back below:  
-Api\_key.txt  
-google-services.json  
-You would want to enter the file right here.
+1. Press the update button and this message pops up.
+2. Make sure you have Android 6.0 \(Marshmallow\), Android 8.1 \(Oreo\)
+3. Press "Update Now"
 
-11. Afterwards you are ready to run the app: Just login with your amazon\_account credentials and enter right in. Login   
-with these credentials  
-User: sbarayo@calpoly.edu  
-Password: S.A.G.A.S.
+### 9. Obtain the api-keys
 
-11.A My current emulator setup is: Pixel API 28. \(Andriod 9, API 28\).
+You need to get our api key's for Amazon Login and for Firebase. Email spoorthyvemula@gmail.com for these files. 
+
+The two files you need are Api\_key.txt and google-services.json. 
+
+### 10. Press the green play button to run the app
+
+### 11. Login to the app with your amazon account
+
+If you want to use the test account, use the following info to login:  
+**User**: sbaroya@calpoly.edu  
+**Password**: S.A.G.A.S.
 
