@@ -1,4 +1,4 @@
-# Licensing
+# Legal
 
 ## EULA
 
@@ -8,7 +8,8 @@
 
 [Download](https://drive.google.com/open?id=1HBqQnM_ghy3hKO9IyEfSqHyXr0ztGokbp4f9rL25XSQ)
 
-## Firebase
+## Open Source License
 
-[https://console.firebase.google.com/u/0/project/handmade-17b08/overview](https://console.firebase.google.com/u/0/project/handmade-17b08/overview)
+* Firebase Firestore Android: [https://console.firebase.google.com/u/0/project/handmade-17b08/overview](https://console.firebase.google.com/u/0/project/handmade-17b08/overview)
+* Android: [https://source.android.com/setup/start/licenses](https://source.android.com/setup/start/licenses)
 

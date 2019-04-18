@@ -2,6 +2,6 @@
 
 * [Welcome!](README.md)
 * [Install](untitled.md)
-* [Licensing](licensing.md)
+* [Legal](licensing.md)
 * [Contact](contact.md)
 
