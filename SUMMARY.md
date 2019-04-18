@@ -1,7 +1,7 @@
 # Table of contents
 
-* [Welcome!](README.md)
+* [Community Helper](README.md)
 * [Install](untitled.md)
-* [Legal](licensing.md)
+* [Licensing](licensing.md)
 * [Contact](contact.md)
 
