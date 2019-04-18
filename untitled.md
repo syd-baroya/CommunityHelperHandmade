@@ -31,7 +31,13 @@ Android SDK Build-Tools 28.0.3
 It should be ready to build now, if not you would want to press rebuild  
 \*Available Pixel XL API P as emulator to use.
 
-### 7. This error code would pop up: 
+### 7. Open the android studio project
+
+Go to file -&gt; open
+
+### 7. Press the green play button to run the app
+
+### 8. This error code would pop up: 
 
 `2:19 PM IDE and Plugin Updates: The following components are ready to update: Android Emulator, Intel x86 Emulator Accelerator (HAXM installer), Android SDK Platform-Tools, Android SDK Platform 27, Google APIs Intel x86 Atom System   
 Image`
@@ -48,9 +54,11 @@ You need to get our api key's for Amazon Login and for Firebase. Email spoorthyv
 
 The two files you need are Api\_key.txt and google-services.json. 
 
-### 10. Press the green play button to run the app
+### 10. Press the green play button again to run the app 
 
-### 11. Login to the app with your amazon account
+### 11. Use the Pixel API 28. \(Android 9, API 28\) emulator
+
+### 12. Login to the app with your amazon account
 
 If you want to use the test account, use the following info to login:  
 **User**: sbaroya@calpoly.edu  

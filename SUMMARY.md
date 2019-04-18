@@ -1,6 +1,6 @@
 # Table of contents
 
-* [Community Helper](README.md)
+* [Welcome!](README.md)
 * [Install](untitled.md)
 * [Licensing](licensing.md)
 * [Contact](contact.md)

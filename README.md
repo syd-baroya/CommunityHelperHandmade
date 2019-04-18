@@ -1,10 +1,6 @@
----
-description: >-
-  Community Helper is an app to aid community leaders involved in Amazon
-  Handmade organize their artisans.
----
+# Welcome!
 
-# Community Helper
+Community Helper is an app to aid community leaders involved in Amazon Handmade organize their artisans.
 
 ## Features
 
