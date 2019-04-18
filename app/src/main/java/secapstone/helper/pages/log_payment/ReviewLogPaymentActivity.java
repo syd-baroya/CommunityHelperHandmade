@@ -65,6 +65,9 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
 
     public void onClickFinish()
     {
+
+
+
         startActivity(new Intent(ReviewLogPaymentActivity.this, MainActivity.class));
     }
 

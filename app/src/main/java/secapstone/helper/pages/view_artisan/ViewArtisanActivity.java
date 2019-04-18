@@ -1,6 +1,7 @@
 package secapstone.helper.pages.view_artisan;
 
 import android.Manifest;
+import android.accounts.Account;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
@@ -17,6 +18,7 @@ import android.support.v4.content.ContextCompat;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -26,9 +28,14 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Calendar;
+import java.util.Date;
+
+import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.log_payment.LogPaymentActivity;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
@@ -39,6 +46,10 @@ public class ViewArtisanActivity extends AppCompatActivity {
     private static final int REQUEST_SMS = 2;
 
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
+    private CollectionReference usersRef = db.collection("users");
+
     public static String artisanName;
     public static String artisanAddress;
     public static String artisanPhone;
@@ -186,6 +197,18 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
         title.setText("Log Payment to " + artisanName);
+        logPaymentDialog.findViewById(R.id.logPaymentButton).setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                //double amount = Double.parseDouble((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
+                //Date userEnteredDate = new Date((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
+                double amount = 10.11;
+                Date userEnteredDate = new Date(1999, 12, 31);
+                logPayment(amount, userEnteredDate);
+
+                logPaymentDialog.hide();
+            }
+        });
 
         logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
@@ -193,6 +216,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onClickLogPaymentButton(View view)
     {
         logPaymentDialog.show();
+    }
+
+    public void logPayment(double amount, Date userEnteredDate)
+    {
+        AccountingSystem.logPayment(artisanRef,amount, userEnteredDate, Calendar.getInstance().getTime());
     }
 
     public void onClickCloseModal(View view)
