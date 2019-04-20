@@ -13,3 +13,11 @@ description: >-
 * Adding new products 
 * Artisan contact information, including address, phone number, and email\(optional\)
 
+
+
+## Install App
+
+{% file src=".gitbook/assets/app-debug.apk" %}
+
+_Last Updated: April 19th, 2019_
+
