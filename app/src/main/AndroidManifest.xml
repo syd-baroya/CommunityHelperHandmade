@@ -80,7 +80,7 @@
         <activity android:name=".pages.add_artisan.FinalPreviewAddArtisanActivity" />
 
         <provider
-            android:name="android.support.v4.content.FileProvider"
+            android:name="androidx.core.content.FileProvider"
             android:authorities="com.example.android.fileprovider"
             android:exported="false"
             android:grantUriPermissions="true">
