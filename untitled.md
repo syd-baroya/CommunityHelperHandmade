@@ -31,6 +31,8 @@ Android SDK Build-Tools 28.0.3
 It should be ready to build now, if not you would want to press rebuild  
 \*Available Pixel XL API P as emulator to use.
 
+![](https://lh5.googleusercontent.com/OYyPiGfvfsW9g9P_3dUjN3i3UXWCLlhjwD-Dj14bxVbJQV4hKyDmyUmnAZo5eOQeULt8KJqxQI5WZUbfAO7tDO4ENlCwOnap9_Ki-kG6D5z7PHgLlmSEPk0s8lMJyCB1jK1Y4EtG)
+
 ### 6. Open the android studio project
 
 Go to file -&gt; open
@@ -54,11 +56,21 @@ You need to get our api key's for Amazon Login and for Firebase. Email spoorthyv
 
 The two files you need are Api\_key.txt and google-services.json. 
 
+Put them here
+
+
+
+![Notice where api-Key.txt and google-services.json are located](https://lh6.googleusercontent.com/QGht29qz9nUaNgl1-O9jvW0H1XbQav23blmqQoUlrS1_0VFTO_jYUU0Qr4g1w6s45TV4O6KVOUffvWHE89YLvHa-TBzCn4FdktOnOekgavIzuaLTpMKDh1okd4GnNyBclexKSwVi)
+
 ### 10. Press the green play button again to run the app 
 
 ### 11. Use the Pixel API 28. \(Android 9, API 28\) emulator
 
 ### 12. Login to the app with your amazon account
+
+
+
+![Successful App running page](https://lh6.googleusercontent.com/Ua6lqPqR5FagXl1SDzwKfO-3OH6t4S-lIXgduhmwBKBgg2nvWLXa6edtfeuA0gVnldsNNXB53s7cDqyJImysl49qO8jxqrh5w9EeoeAOyVBTZl-X71bkM6sSHrKjashzXtqOpiGS)
 
 If you want to use the test account, use the following info to login:  
 **User**: sbaroya@calpoly.edu  
