@@ -31,8 +31,6 @@ Android SDK Build-Tools 28.0.3
 It should be ready to build now, if not you would want to press rebuild  
 \*Available Pixel XL API P as emulator to use.
 
-![](https://lh5.googleusercontent.com/OYyPiGfvfsW9g9P_3dUjN3i3UXWCLlhjwD-Dj14bxVbJQV4hKyDmyUmnAZo5eOQeULt8KJqxQI5WZUbfAO7tDO4ENlCwOnap9_Ki-kG6D5z7PHgLlmSEPk0s8lMJyCB1jK1Y4EtG)
-
 ### 6. Open the android studio project
 
 Go to file -&gt; open
@@ -49,6 +47,8 @@ Image`
 1. Press the update button and this message pops up.
 2. Make sure you have Android 6.0 \(Marshmallow\), Android 8.1 \(Oreo\)
 3. Press "Update Now"
+
+![](https://lh5.googleusercontent.com/OYyPiGfvfsW9g9P_3dUjN3i3UXWCLlhjwD-Dj14bxVbJQV4hKyDmyUmnAZo5eOQeULt8KJqxQI5WZUbfAO7tDO4ENlCwOnap9_Ki-kG6D5z7PHgLlmSEPk0s8lMJyCB1jK1Y4EtG)
 
 ### 9. Obtain the api-keys
 
