@@ -1,7 +1,7 @@
 package secapstone.helper.pages.login;
 
 import android.content.*;
-import android.support.v7.app.AppCompatActivity;
+import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.*;
 import android.widget.*;

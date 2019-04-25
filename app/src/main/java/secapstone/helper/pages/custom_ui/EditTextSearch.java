@@ -5,7 +5,7 @@ import android.content.Context;
 import android.graphics.Rect;
 import android.graphics.drawable.Drawable;
 import android.os.Build;
-import android.support.v4.content.ContextCompat;
+import androidx.core.content.ContextCompat;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.widget.Button;
@@ -13,7 +13,7 @@ import android.widget.Button;
 import secapstone.helper.R;
 
 
-public class EditTextSearch extends android.support.v7.widget.AppCompatEditText {
+public class EditTextSearch extends androidx.appcompat.widget.AppCompatEditText {
 
     enum SearchState
     {
