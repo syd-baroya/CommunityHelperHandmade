@@ -1,6 +1,6 @@
 # Community Helper
 
-Community Helper is an app to aid community leaders involved in Amazon Handmade organize their artisans.
+Community Helper is an app to help community leaders sell goods on Amazon Handmade for Rural artisans.
 
 ## Our Website
 https://sagas.gitbook.io/sagas-community-helper/
