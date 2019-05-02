@@ -12,6 +12,7 @@ import android.os.Environment;
 import android.provider.MediaStore;
 import androidx.annotation.NonNull;
 import androidx.annotation.RequiresApi;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
@@ -47,6 +48,7 @@ public class NewListingActivity extends AppCompatActivity {
     static final int REQUEST_TAKE_PHOTO = 1;
     private static final String TAG = "NewListingActivity";
     public String mCurrentPhotoPath;
+    ConstraintLayout loadingSpinner;
 
     CustomTextField name;
     CustomTextField price;
@@ -73,6 +75,7 @@ public class NewListingActivity extends AppCompatActivity {
         setupTextChangedListener(price);
         setupTextChangedListener(description);
 
+        loadingSpinner = findViewById(R.id.progress_loader_add);
         getIncomingIntent();
 
     }
@@ -156,6 +159,7 @@ public class NewListingActivity extends AppCompatActivity {
     }
 
     public void onClickAddListingButton(View view) {
+        loadingSpinner.setVisibility(View.VISIBLE);
         Listing newListing = new Listing();
         newListing.setTitle(name.getText().toString());
         newListing.setDescription(description.getText().toString());
@@ -198,7 +202,7 @@ public class NewListingActivity extends AppCompatActivity {
                             @Override
                             public void onSuccess(DocumentReference documentReference){
                                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-                                //loadingSpinner.setVisibility(View.GONE);
+                                loadingSpinner.setVisibility(View.GONE);
                                 finish();
                             }
                         })
@@ -206,6 +210,7 @@ public class NewListingActivity extends AppCompatActivity {
                             @Override
                             public void onFailure(@NonNull Exception e) {
                                 Log.w(TAG, "Error adding document", e);
+                                loadingSpinner.setVisibility(View.GONE);
                             }
                         });
             }
