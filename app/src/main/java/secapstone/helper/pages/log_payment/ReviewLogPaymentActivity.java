@@ -48,19 +48,19 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
     public void setName()
     {
         TextView logPaymentTo = findViewById(R.id.logPaymentToText);
-        logPaymentTo.setText(ViewArtisanActivity.artisanName);
+        //logPaymentTo.setText(ViewArtisanActivity.artisanName);
     }
 
     public void setAmount()
     {
         TextView logAmount = findViewById(R.id.logAmountText);
-        logAmount.setText(LogPaymentActivity.amountPaid);
+        //logAmount.setText(LogPaymentActivity.amountPaid);
     }
 
     public void setDate()
     {
         TextView logDate = findViewById(R.id.logDateText);
-        logDate.setText(LogPaymentActivity.dateToPay);
+        //logDate.setText(LogPaymentActivity.dateToPay);
     }
 
     public void onClickFinish()

@@ -22,6 +22,7 @@ import android.view.*;
 import android.widget.*;
 
 import java.io.ByteArrayOutputStream;
+import java.util.Random;
 
 import secapstone.helper.model.Artisan;
 import secapstone.helper.model.User;
@@ -78,16 +79,17 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
         overridePendingTransition(R.anim.slide_from_left, R.anim.slide_to_right);
     }
 
-    public void pushArtisan(Artisan mewBoi) {
+    public void pushArtisan(Artisan artisanObject) {
         DocumentReference newArtisanRef = artisanRef.document();
-        mewBoi.setPictureURL("profiles/" + newArtisanRef.getId() + ".jpg");
-        mewBoi.setID(newArtisanRef.getId());
 
-        final Artisan mewBoi2 = mewBoi;
+        artisanObject.setPictureURL("profiles/" + newArtisanRef.getId() + ".jpg");
+        artisanObject.setID(newArtisanRef.getId());
+
+        final Artisan mewBoi2 = artisanObject;
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference artisanPicRef = storageRef.child(mewBoi.getPictureURL());
+        StorageReference artisanPicRef = storageRef.child(artisanObject.getPictureURL());
 
         Bitmap bitmap = getResizedBitmap(WelcomeAddArtisanActivity.artisanProfileImage, 1920);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -109,6 +111,8 @@ public class FinalPreviewAddArtisanActivity extends AppCompatActivity
                         @Override
                         public void onSuccess(DocumentReference documentReference){
                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                            documentReference.update("id", documentReference.getId());
+
                             loadingSpinner.setVisibility(View.GONE);
                             startActivity(new Intent(FinalPreviewAddArtisanActivity.this, MainActivity.class));
                             finish();

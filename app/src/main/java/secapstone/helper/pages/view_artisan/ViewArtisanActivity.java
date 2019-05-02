@@ -33,6 +33,7 @@ import com.google.firebase.storage.StorageReference;
 import java.util.Calendar;
 import java.util.Date;
 
+import secapstone.helper.model.User;
 import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.log_payment.LogPaymentActivity;
 import secapstone.helper.pages.MainActivity;
@@ -48,14 +49,15 @@ public class ViewArtisanActivity extends AppCompatActivity {
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
     private CollectionReference usersRef = db.collection("users");
 
-    public static String artisanName;
-    public static String artisanAddress;
-    public static String artisanPhone;
+    public String artisanName;
+    public String artisanAddress;
+    public String artisanPhone;
+    public String artisanID;
+    public String artisanDescription;
+    public String artisanPicURL;
 
     //reference to a certain artisan in database
-    private static DocumentReference artisanRef;
-    //reference to the current artisan's products
-    private static CollectionReference productsRef;
+    private DocumentReference artisanRef;
 
     Dialog contactInfoModal;
     Dialog logPaymentDialog;
@@ -73,28 +75,23 @@ public class ViewArtisanActivity extends AppCompatActivity {
         setUpContactInfoModal();
         setUpLogPaymentModal();
 
-        productsRef = artisanRef.collection("Products");
+        artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
 
         setStatusBarToDark();
 
     }
 
-    public static void setArtisanRef( DocumentReference ref){
-        artisanRef = ref;
-    }
-
     private void getIncomingIntent() {
-        if (getIntent().hasExtra("name") && getIntent().hasExtra("url") && getIntent().hasExtra("description")) {
-            String name = getIntent().getStringExtra("name");
-            artisanName = name;
-            String url = getIntent().getStringExtra("url");
-            String description = getIntent().getStringExtra("description");
-            String phone = getIntent().getStringExtra("phone");
-            artisanPhone = phone;
-            String address = getIntent().getStringExtra("address");
-            artisanAddress = address;
+        if (getIntent().hasExtra("name") && getIntent().hasExtra("url") && getIntent().hasExtra("description")&& getIntent().hasExtra("id")) {
 
-            setImage(url, name, description, phone, address);
+            artisanPhone = getIntent().getStringExtra("phone");
+            artisanAddress = getIntent().getStringExtra("address");
+            artisanName = getIntent().getStringExtra("name");
+            artisanID = getIntent().getStringExtra("id");
+            artisanDescription = getIntent().getStringExtra("description");
+            artisanPicURL = getIntent().getStringExtra("url");
+
+            setImage(artisanPicURL, artisanName, artisanDescription, artisanPhone, artisanAddress);
         }
     }
 
@@ -143,8 +140,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     public void onClickNewListingButton(View view)
     {
-        NewListingActivity.setArtisanRef(productsRef);
-        startActivity(new Intent(ViewArtisanActivity.this, NewListingActivity.class));
+        Intent intent = new Intent(ViewArtisanActivity.this, NewListingActivity.class);
+        intent.putExtra("id", artisanID);
+        startActivity(intent);
     }
 
     public void setUpContactInfoModal() {

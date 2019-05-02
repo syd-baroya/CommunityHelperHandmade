@@ -79,12 +79,12 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
 
     private void onTileClick(Artisan model) {
         Intent intent = new Intent(context, ViewArtisanActivity.class);
-        ViewArtisanActivity.setArtisanRef(artisansRef.document(model.getID()));
         intent.putExtra("url", model.getPictureURL());
         intent.putExtra("name", model.getName());
         intent.putExtra("description", model.getDescription());
         intent.putExtra("phone", model.getPhoneNumber());
         intent.putExtra("address", model.getAddress());
+        intent.putExtra("id", model.getID());
         context.startActivity(intent);
     }
 

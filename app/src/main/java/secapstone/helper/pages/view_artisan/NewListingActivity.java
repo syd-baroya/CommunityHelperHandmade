@@ -15,14 +15,18 @@ import androidx.annotation.RequiresApi;
 import androidx.core.content.FileProvider;
 import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
@@ -34,6 +38,7 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 
 import secapstone.helper.model.Listing;
+import secapstone.helper.model.User;
 import secapstone.helper.pages.custom_ui.CustomTextField;
 import secapstone.helper.R;
 
@@ -46,8 +51,11 @@ public class NewListingActivity extends AppCompatActivity {
     CustomTextField name;
     CustomTextField price;
     CustomTextField description;
-    private static CollectionReference productsRef;
-    private static Bitmap productImage = null;
+    Button uploadButton;
+    String artisanID;
+
+    //private static CollectionReference productsRef;
+    private Bitmap productImage = null;
 
 
     @Override
@@ -58,11 +66,21 @@ public class NewListingActivity extends AppCompatActivity {
         name = findViewById(R.id.nlNameText);
         price = findViewById(R.id.nlPriceText);
         description = findViewById(R.id.nlDescriptionText);
+        uploadButton = findViewById(R.id.nlAddListing);
+        uploadButton.setEnabled(false);
+
+        setupTextChangedListener(name);
+        setupTextChangedListener(price);
+        setupTextChangedListener(description);
+
+        getIncomingIntent();
 
     }
 
-    public static void setArtisanRef( CollectionReference ref){
-        productsRef = ref;
+    private void getIncomingIntent() {
+        if (getIntent().hasExtra("id")) {
+            artisanID = getIntent().getStringExtra("id");
+        }
     }
 
     public void onClickNewListingPhoto(View view)
@@ -124,6 +142,13 @@ public class NewListingActivity extends AppCompatActivity {
             image.setImageBitmap(bmp);
             productImage = bmp;
         }
+
+        if ((name.getText().length() != 0) && (price.getText().length() != 0)
+                && (description.getText().length() != 0) && (productImage != null))  {
+            uploadButton.setEnabled(true);
+        } else {
+            uploadButton.setEnabled(false);
+        }
     }
 
     public void onClickBackButton(View view) {
@@ -139,16 +164,20 @@ public class NewListingActivity extends AppCompatActivity {
         finish();
     }
 
-    public void pushListing(Listing mewBoi) {
-        DocumentReference newProductRef = productsRef.document();
-        mewBoi.setPictureURL("products/" + newProductRef.getId() + ".jpg");
-        mewBoi.setProductID(newProductRef.getId());
+    public void pushListing(Listing listingObject) {
+        DocumentReference artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
+        CollectionReference newProductRef = artisanRef.collection("products");
+        DocumentReference newProductRefTempDoc = newProductRef.document();
 
-        final Listing mewBoi2 = mewBoi;
+        listingObject.setPictureURL("products/" + newProductRefTempDoc.getId() + ".jpg");
+        listingObject.setProductID(newProductRefTempDoc.getId());
+
+        final Listing mewBoi2 = listingObject;
+        final CollectionReference finalNewProductRef = newProductRef;
 
         FirebaseStorage storage = FirebaseStorage.getInstance();
         StorageReference storageRef = storage.getReference();
-        StorageReference productPicRef = storageRef.child(mewBoi.getPictureURL());
+        StorageReference productPicRef = storageRef.child(listingObject.getPictureURL());
 
         Bitmap bitmap = getResizedBitmap(productImage, 1920);
         ByteArrayOutputStream baos = new ByteArrayOutputStream();
@@ -164,14 +193,14 @@ public class NewListingActivity extends AppCompatActivity {
         }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
             @Override
             public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
-                productsRef
+                finalNewProductRef
                         .add(mewBoi2)
                         .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
                             @Override
                             public void onSuccess(DocumentReference documentReference){
                                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                                 //loadingSpinner.setVisibility(View.GONE);
-                                startActivity(new Intent(NewListingActivity.this, ViewArtisanActivity.class));
+                                //startActivity(new Intent(NewListingActivity.this, ViewArtisanActivity.class));
                                 finish();
                             }
                         })
@@ -185,6 +214,28 @@ public class NewListingActivity extends AppCompatActivity {
         });
     }
 
+    public void setupTextChangedListener(CustomTextField editText)
+    {
+        editText.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if ((name.getText().length() != 0) && (price.getText().length() != 0)
+                        && (description.getText().length() != 0) && (productImage != null))  {
+                        uploadButton.setEnabled(true);
+                } else {
+                    uploadButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,int arg2, int arg3) {}
+        });
+    }
 
     public Bitmap getResizedBitmap(Bitmap bm, int maxWidth) {
         int width = bm.getWidth();

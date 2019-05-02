@@ -16,8 +16,8 @@ public class LogPaymentActivity extends AppCompatActivity
     EditText amount;
     EditText date;
 
-    static String amountPaid;
-    static String dateToPay;
+    String amountPaid;
+    String dateToPay;
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
@@ -51,6 +51,6 @@ public class LogPaymentActivity extends AppCompatActivity
     public void setName()
     {
         TextView artisanNameBox = findViewById(R.id.artisanNameText);
-        artisanNameBox.setText(ViewArtisanActivity.artisanName);
+        //artisanNameBox.setText(ViewArtisanActivity.artisanName);
     }
 }
