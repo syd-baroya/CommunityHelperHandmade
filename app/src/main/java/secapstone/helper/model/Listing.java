@@ -4,82 +4,55 @@ import java.util.List;
 
 public class Listing
 {
-    public enum ProductCategory
-    {
-        ART, JEWELRY, PET_FOOD, CLOTHES, OTHER;
-    }
 
-    private String title = ""; // Cannot contain more than 200 characters.
-    private List<String> images = new ArrayList<String>(); //TODO Make this a list of files, not strings.
-    private String description = "";
-    private ProductCategory category;
-    private String productID;
-    private float price;
-    private boolean isFulfilledByAmazon;
+    private String title;
     private String pictureURL;
-
+    private String description;
+    private float price;
 
     public Listing()
     {
 
     }
 
-    public Listing(String newTitle, String newDescription, ProductCategory newCategory)
+    public Listing(String title, String description, String pictureURL, float price)
     {
-        this.title = newTitle;
-        this.description = newDescription;
-        this.category = newCategory;
+        this.title = title;
+        this.description = description;
+        this.pictureURL = pictureURL;
+        this.price = price;
     }
 
-    public void setPictureURL(String url) {
-        this.pictureURL = url;
-    }
-
-    public void setTitle(String newTitle)
-    {
-        title = newTitle;
-    }
-
-    public String getTitle()
-    {
+    public String getTitle() {
         return title;
     }
 
-    public void setDescription(String newDescription) { description = newDescription; }
-
-    public String getDescription() { return description; }
-
-    public void addImage(String newImage)
-    {
-        images.add(newImage);
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public List<String> getAllImages()
-    {
-        return images;
+    public String getPictureURL() {
+        return pictureURL;
     }
 
-    public void setCategory(ProductCategory newCategory)
-    {
-        this.category = newCategory;
+    public void setPictureURL(String pictureURL) {
+        this.pictureURL = pictureURL;
     }
 
-    public ProductCategory getCategory()
-    {
-        return category;
+    public String getDescription() {
+        return description;
     }
 
-    public String getProductID()
-    {
-        return productID;
+    public void setDescription(String description) {
+        this.description = description;
     }
 
-    public void setProductID(String newProductID)
-    {
-        productID = newProductID;
+    public float getPrice() {
+        return price;
     }
-    public String getPictureURL() { return pictureURL;}
 
-    public void setPrice(float price){this.price = price;}
+    public void setPrice(float price) {
+        this.price = price;
+    }
 
 }
