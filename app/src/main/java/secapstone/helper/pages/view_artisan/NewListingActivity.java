@@ -164,8 +164,8 @@ public class NewListingActivity extends AppCompatActivity {
         newListing.setTitle(name.getText().toString());
         newListing.setDescription(description.getText().toString());
         newListing.setPrice(Float.parseFloat(price.getText().toString()));
+
         pushListing(newListing);
-        finish();
     }
 
     public void pushListing(Listing listingObject) {
@@ -174,7 +174,6 @@ public class NewListingActivity extends AppCompatActivity {
         DocumentReference newProductRefTempDoc = newProductRef.document();
 
         listingObject.setPictureURL("products/" + newProductRefTempDoc.getId() + ".jpg");
-        listingObject.setProductID(newProductRefTempDoc.getId());
 
         final Listing mewBoi2 = listingObject;
         final CollectionReference finalNewProductRef = newProductRef;
@@ -204,7 +203,6 @@ public class NewListingActivity extends AppCompatActivity {
                             public void onSuccess(DocumentReference documentReference){
                                 Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
                                 loadingSpinner.setVisibility(View.GONE);
-                                //startActivity(new Intent(NewListingActivity.this, ViewArtisanActivity.class));
                                 finish();
                             }
                         })

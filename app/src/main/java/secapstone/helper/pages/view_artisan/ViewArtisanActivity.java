@@ -15,6 +15,9 @@ import androidx.annotation.Nullable;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.recyclerview.widget.LinearLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
+
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.ImageView;
@@ -22,18 +25,23 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
+import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 import java.util.Date;
 
+import secapstone.helper.model.ActionItem;
+import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
+import secapstone.helper.pages.action_items.ActionItemAdapter;
 import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.log_payment.LogPaymentActivity;
 import secapstone.helper.pages.MainActivity;
@@ -56,6 +64,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public String artisanDescription;
     public String artisanPicURL;
 
+    private ListingAdapter adapter;
+    private RecyclerView recyclerView;
+
     //reference to a certain artisan in database
     private DocumentReference artisanRef;
 
@@ -66,6 +77,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_artisan);
+
+        recyclerView = findViewById(R.id.recyclerView);
 
         getIncomingIntent();
 
@@ -78,6 +91,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
         artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
 
         setStatusBarToDark();
+
+        runListingsQuery();
 
     }
 
@@ -268,6 +283,21 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 Toast.makeText(this, "Permission Denied", Toast.LENGTH_SHORT).show();
             }
         }
+    }
+
+    private void runListingsQuery() {
+        Query query = artisanRef.collection("products").orderBy("title", Query.Direction.ASCENDING);
+
+        FirestoreRecyclerOptions<Listing> options = new FirestoreRecyclerOptions.Builder<Listing>()
+                .setQuery(query, Listing.class)
+                .build();
+
+        adapter = new ListingAdapter(options, ViewArtisanActivity.this);
+
+        recyclerView.setLayoutManager(new LinearLayoutManager(ViewArtisanActivity.this));
+        recyclerView.setAdapter(adapter);
+        adapter.notifyDataSetChanged();
+        adapter.startListening();
     }
 
     public void onClickMapButton() {
