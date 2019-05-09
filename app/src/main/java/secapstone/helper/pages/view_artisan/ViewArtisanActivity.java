@@ -231,7 +231,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     public void logPayment(double amount, Date userEnteredDate)
     {
-        AccountingSystem.logPayment(artisanRef,amount, userEnteredDate, Calendar.getInstance().getTime());
+        AccountingSystem.logPayment(artisanID, amount, userEnteredDate, Calendar.getInstance().getTime());
     }
 
     public void onClickCloseModal(View view)

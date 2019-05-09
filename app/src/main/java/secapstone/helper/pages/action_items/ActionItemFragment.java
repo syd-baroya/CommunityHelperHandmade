@@ -66,7 +66,7 @@ public class ActionItemFragment extends Fragment {
         });
         artisanSearchField.setOnKeyListener(new View.OnKeyListener() {
             public boolean onKey(View v, int keyCode, KeyEvent event) {
-                return onKeySearchField(keyCode, event);
+                return onKeySearchField(keyCode, event, view);
             }
         });
 
@@ -89,18 +89,22 @@ public class ActionItemFragment extends Fragment {
 
             artisanSearchField.requestFocus();
 
-            InputMethodManager imm = (InputMethodManager) getActivity().getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.showSoftInput(artisanSearchField, InputMethodManager.SHOW_IMPLICIT);
         }
     }
 
-    public boolean onKeySearchField(int keyCode, KeyEvent event) {
+    public boolean onKeySearchField(int keyCode, KeyEvent event, View view) {
         if ((event.getAction() == KeyEvent.ACTION_DOWN) && (keyCode == KeyEvent.KEYCODE_ENTER)) {
             searchTerm = artisanSearchField.getText().toString();
+            hideSoftKeyboard(view);
             runActionItemsQuery();
             return true;
         }
         return false;
+    }
+
+    private void hideSoftKeyboard(View view){
+        InputMethodManager imm =(InputMethodManager)view.getContext().getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(view.getWindowToken(), 0);
     }
 
     // Update artisan list based on filter and search term variables
