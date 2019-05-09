@@ -35,14 +35,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.Calendar;
-import java.util.Date;
-
-import secapstone.helper.model.ActionItem;
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
-import secapstone.helper.pages.action_items.ActionItemAdapter;
-import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.log_payment.LogPaymentActivity;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
@@ -213,9 +207,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
             public void onClick(View view) {
                 //double amount = Double.parseDouble((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
                 //Date userEnteredDate = new Date((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
-                double amount = 10.11;
-                Date userEnteredDate = new Date(1999, 12, 31);
-                logPayment(amount, userEnteredDate);
+//                float amount = 10.11f;
+                //logPayment(amount);
 
                 logPaymentDialog.hide();
             }
@@ -229,10 +222,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
         logPaymentDialog.show();
     }
 
-    public void logPayment(double amount, Date userEnteredDate)
-    {
-        AccountingSystem.logPayment(artisanID, amount, userEnteredDate, Calendar.getInstance().getTime());
-    }
+//    public void logPayment(float amount)
+//    {
+//        AccountingSystem accountingSystem = new AccountingSystem();
+//        accountingSystem.logPayment(artisanID, amount);
+//    }
 
     public void onClickCloseModal(View view)
     {

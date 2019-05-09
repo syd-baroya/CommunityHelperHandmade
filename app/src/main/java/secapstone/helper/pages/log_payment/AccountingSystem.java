@@ -50,44 +50,13 @@ public class AccountingSystem
       which Artisan made that product, and adds that transaction amount
       to the amount the Community Leader owes that Artisan.
      */
-    public static void CalculatePayouts()
-    {
-        if (System.currentTimeMillis() >= timeLastRun + TIME_BETWEEN_EACH_RUN)
-        {
-            List<Artisan> artisans = getArtisans();
-            List<ProductTransaction> transactions = getTransactions(timeLastRun);
-
-            float totalFromTransactionPeriod = 0;
-
-            for (ProductTransaction t: transactions)
-            {
-                for (Artisan a: artisans)
-                {
-//                    SparseArray<Listing> artisanListings = a.getListings();
 //
-//                    if (artisanListings.get(t.getProductID()) != null && !t.getHasBeenAccounted())
-//                    {
-//                        a.setMoneyOwedFromCommunityLeader(a.getMoneyOwedFromCommunityLeader() + t.getAmount());
-//                        totalFromTransactionPeriod += t.getAmount();
-//                        t.setHasBeenAccounted(true);
-//                        break;
-//                    }
-
-                }
-            }
-
-            timeLastRun = System.currentTimeMillis();
-
-        }
-
-    }
-
-    public static void logPayment(String artisanID, Double amount, Date userEnteredDate, Date dateUploaded)
+    public static void logPayment(String artisanID, float amount)
     {
         String userID = User.getUser().getID();
         DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
-        DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
-        CollectionReference reportsRef = FirebaseFirestore.getInstance().collection("reports");
+        final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
+        CollectionReference payoutsRef = FirebaseFirestore.getInstance().collection("PayoutTranactions");
 
 
         final PayoutTransaction mewBoi2 = new PayoutTransaction(userID, artisanID, amount);
@@ -98,17 +67,20 @@ public class AccountingSystem
                 if(task.isSuccessful()){
                     DocumentSnapshot docSnapshot = task.getResult();
                     if(docSnapshot!=null){
-                        mewBoi2.setAddress((String)docSnapshot.get("address"));
+                        String address = (String) docSnapshot.get("address");
+                        if(address!=null)
+                            mewBoi2.setAddress(address);
                     }
+                }else{
+                    Log.d(TAG, "GET FAILED WITH: ", task.getException());
                 }
             }
         });
-        Report report = new Report(mewBoi2);
-        final CollectionReference finalReportsRef = reportsRef;
+        final CollectionReference finalPayoutsRef = payoutsRef;
 
 
-        finalReportsRef
-                .add(report)
+        finalPayoutsRef
+                .add(mewBoi2)
                 .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
                     @Override
                     public void onSuccess(DocumentReference documentReference){
