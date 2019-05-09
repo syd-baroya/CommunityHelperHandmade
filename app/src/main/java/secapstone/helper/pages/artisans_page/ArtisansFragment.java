@@ -2,10 +2,16 @@ package secapstone.helper.pages.artisans_page;
 
 
 import android.annotation.TargetApi;
+import android.app.Dialog;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
+
+import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+
+import android.graphics.drawable.ColorDrawable;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.os.Bundle;
 import androidx.recyclerview.widget.LinearLayoutManager;
@@ -15,7 +21,14 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.*;
 
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 
 import secapstone.helper.pages.custom_ui.EditTextSearch;
@@ -28,6 +41,9 @@ import secapstone.helper.R;
  */
 
 public class ArtisansFragment extends Fragment implements AdapterView.OnItemSelectedListener {
+
+    private static final String TAG = "ArtisansFragment";
+
     private CollectionReference artisansRef;
     private ArtisanAdapter adapter;
 
@@ -38,9 +54,12 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
     private RecyclerView recyclerView;
     private Spinner sortBySpinner;
     private Button addArtisanButton;
+    Dialog deleteArtisanDialog;
 
     private String filter = "lastName";
     private String searchTerm = "";
+
+    private FirebaseFirestore db = FirebaseFirestore.getInstance();
 
     public void setArtisanRef(CollectionReference artisansRef){
         this.artisansRef = artisansRef;
@@ -79,10 +98,75 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
 
         // Do everything else
         setUpFilterSpinner();
+        setUpDeleteArtisanModal();
         runArtisanQuery();
         setStatusBarToWhite();
 
         return view;
+    }
+
+    public void showDeleteArtisanModel(Artisan model) {
+        deleteArtisanDialog.show();
+        final Artisan modelCopy = model;
+        Button deleteButton = deleteArtisanDialog.findViewById(R.id.deleteArtisanButton);
+        deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                DocumentReference toPath = db.collection("deleted-artisans").document();
+                DocumentReference artisanRef = artisansRef.document(modelCopy.getID());
+                moveFirestoreDocument(artisanRef, toPath, deleteArtisanDialog);
+            }
+        });
+    }
+
+    public void setUpDeleteArtisanModal() {
+        deleteArtisanDialog = new Dialog(this.getContext());
+        deleteArtisanDialog.setContentView(R.layout.modal_delete_artisan);
+        deleteArtisanDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public void moveFirestoreDocument(final DocumentReference fromPath, final DocumentReference toPath, Dialog dialog) {
+        fromPath.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if (task.isSuccessful()) {
+                    DocumentSnapshot document = task.getResult();
+                    if (document != null) {
+                        toPath.set(document.getData())
+                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                    @Override
+                                    public void onSuccess(Void aVoid) {
+                                        Log.d(TAG, "DocumentSnapshot successfully written!");
+                                        fromPath.delete()
+                                                .addOnSuccessListener(new OnSuccessListener<Void>() {
+                                                    @Override
+                                                    public void onSuccess(Void aVoid) {
+                                                        Log.d(TAG, "DocumentSnapshot successfully deleted!");
+                                                        deleteArtisanDialog.dismiss();
+                                                    }
+                                                })
+                                                .addOnFailureListener(new OnFailureListener() {
+                                                    @Override
+                                                    public void onFailure(@NonNull Exception e) {
+                                                        Log.w(TAG, "Error deleting document", e);
+                                                    }
+                                                });
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error writing document", e);
+                                    }
+                                });
+                    } else {
+                        Log.d(TAG, "No such document");
+                    }
+                } else {
+                    Log.d(TAG, "get failed with ", task.getException());
+                }
+            }
+        });
     }
 
     // Filter Spinner Clicked
@@ -145,7 +229,7 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
                 .setQuery(query, Artisan.class)
                 .build();
 
-        adapter = new ArtisanAdapter(options, this.getContext(), artisansRef);
+        adapter = new ArtisanAdapter(options, this.getContext(), artisansRef, this);
 
 
         RecyclerView.LayoutManager m = new LinearLayoutManager(getActivity()){

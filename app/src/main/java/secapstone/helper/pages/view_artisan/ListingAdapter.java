@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -31,16 +32,17 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
 
     private Context context;
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    private ViewArtisanActivity activity;
 
 
-    public ListingAdapter(@NonNull FirestoreRecyclerOptions<Listing> options, Context context) {
+    public ListingAdapter(@NonNull FirestoreRecyclerOptions<Listing> options, Context context, ViewArtisanActivity activity) {
         super(options);
         this.context = context;
+        this.activity = activity;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ListingHolder holder, int position, @NonNull Listing model) {
-        holder.textViewDescription.setText(model.getDescription());
         holder.textViewTitle.setText(String.valueOf(model.getTitle()));
 
         final ListingHolder copy = holder;
@@ -64,6 +66,13 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
         } else {
             copy.image.setImageResource(R.drawable.icon_empty_person);
         }
+
+        holder.logShipmentButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onClickLogShipment(modelCopy);
+            }
+        });
     }
 
     @NonNull
@@ -76,17 +85,21 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
 
     class ListingHolder extends RecyclerView.ViewHolder {
         TextView textViewTitle;
-        TextView textViewDescription;
         ImageView image;
         ConstraintLayout parent;
+        Button logShipmentButton;
 
         public ListingHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);
-            textViewDescription = itemView.findViewById(R.id.text_view_description);
+            logShipmentButton = itemView.findViewById(R.id.logShipmentButon);
             image = itemView.findViewById(R.id.image);
             parent = itemView.findViewById(R.id.listing_list_parent);
+        }
+
+        public void logShipment(Listing model) {
+
         }
     }
 }
