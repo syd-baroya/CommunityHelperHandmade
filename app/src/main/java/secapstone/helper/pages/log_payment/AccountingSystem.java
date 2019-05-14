@@ -51,8 +51,10 @@ public class AccountingSystem
       to the amount the Community Leader owes that Artisan.
      */
 //
+    public AccountingSystem(){ System.out.println("made new Accounting System"); }
     public static void logPayment(String artisanID, float amount)
     {
+        System.out.println("in Accounting System logPayment");
         String userID = User.getUser().getID();
         DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
         final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
