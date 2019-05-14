@@ -60,7 +60,7 @@ public class LogPaymentDialog extends Dialog
         dateToPay = date.getText().toString();
         AccountingSystem accountingSystem = new AccountingSystem();
         accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
-        //upload payment info and
+        this.dismiss();
     }
 
     public void setName()

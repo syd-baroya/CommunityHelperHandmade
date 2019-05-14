@@ -73,6 +73,6 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
 
     public void onClickBack()
     {
-        startActivity(new Intent(ReviewLogPaymentActivity.this, LogPaymentActivity.class));
+        startActivity(new Intent(ReviewLogPaymentActivity.this, LogPaymentDialog.class));
     }
 }

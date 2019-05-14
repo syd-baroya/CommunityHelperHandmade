@@ -140,11 +140,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     public void onClickLogPayments(View view)
     {
-
-      //  Intent intent = new Intent(ViewArtisanActivity.this, LogPaymentActivity.class);
-        //intent.putExtra("id", artisanID);
         logPaymentDialog.show();
-       // startActivity(intent);
     }
 
     public void onClickBackButton(View view)
