@@ -30,6 +30,8 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
+import com.google.firebase.firestore.QueryDocumentSnapshot;
+import com.google.firebase.firestore.QuerySnapshot;
 
 import secapstone.helper.pages.custom_ui.EditTextSearch;
 import secapstone.helper.pages.add_artisan.WelcomeAddArtisanActivity;
@@ -114,9 +116,27 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
             public void onClick(View view) {
                 DocumentReference toPath = db.collection("deleted-artisans").document();
                 DocumentReference artisanRef = artisansRef.document(modelCopy.getID());
-                moveFirestoreDocument(artisanRef, toPath, deleteArtisanDialog);
+                deleteListingsThenMove(artisanRef, toPath, deleteArtisanDialog);
             }
         });
+    }
+
+    public void deleteListingsThenMove(final DocumentReference artisanRef, final DocumentReference toPath, Dialog dialog) {
+        artisanRef.collection("products")
+            .get()
+            .addOnCompleteListener(new OnCompleteListener<QuerySnapshot>() {
+                @Override
+                public void onComplete(@NonNull Task<QuerySnapshot> task) {
+                    if (task.isSuccessful()) {
+                        for (QueryDocumentSnapshot document : task.getResult()) {
+                            document.getReference().delete();
+                        }
+                        moveFirestoreDocument(artisanRef, toPath, deleteArtisanDialog);
+                    } else {
+                        Log.d(TAG, "Error getting documents: ", task.getException());
+                    }
+                }
+            });
     }
 
     public void setUpDeleteArtisanModal() {
