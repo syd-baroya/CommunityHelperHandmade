@@ -75,6 +75,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
     Dialog contactInfoModal;
     Dialog logPaymentDialog;
     Dialog logShipmentDialog;
+    Dialog purchaseDialog;
 
 
     @Override
@@ -89,10 +90,12 @@ public class ViewArtisanActivity extends AppCompatActivity {
         contactInfoModal = new Dialog(this);
         logPaymentDialog = new Dialog(this);
         logShipmentDialog = new Dialog(this);
+        purchaseDialog = new Dialog(this);
 
         setUpContactInfoModal();
         setUpLogPaymentModal();
         setUpLogShipmentModal();
+        setUpPurchaseModal();
 
         artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
 
@@ -143,10 +146,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
         }
     }
 
-    public void onClickPurchaseButton(View view)
-    {
-    }
-
     public void onClickReportsButton(View view)
     {
         startActivity(new Intent(ViewArtisanActivity.this, ViewReportsActivity.class));
@@ -169,12 +168,18 @@ public class ViewArtisanActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void setUpPurchaseModal() {
+        purchaseDialog.setContentView(R.layout.modal_purchase);
+        purchaseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
 
-
+    public void onClickPurchase(Listing model) {
+        purchaseDialog.show();
+    }
 
 
     public void setUpLogShipmentModal() {
-        logShipmentDialog.setContentView(R.layout.modal_contact_info);
+        logShipmentDialog.setContentView(R.layout.modal_log_shipment);
         logShipmentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 

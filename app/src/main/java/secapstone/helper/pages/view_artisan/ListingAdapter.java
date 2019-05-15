@@ -73,6 +73,13 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
                 activity.onClickLogShipment(modelCopy);
             }
         });
+
+        holder.purchaseButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                activity.onClickPurchase(modelCopy);
+            }
+        });
     }
 
     @NonNull
@@ -88,12 +95,14 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
         ImageView image;
         ConstraintLayout parent;
         Button logShipmentButton;
+        Button purchaseButton;
 
         public ListingHolder(@NonNull View itemView) {
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);
             logShipmentButton = itemView.findViewById(R.id.logShipmentButton);
+            purchaseButton = itemView.findViewById(R.id.purchaseButton);
             image = itemView.findViewById(R.id.image);
             parent = itemView.findViewById(R.id.listing_list_parent);
         }
