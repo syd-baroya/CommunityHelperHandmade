@@ -40,7 +40,6 @@ import secapstone.helper.model.User;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.pages.artisans_page.ArtisanAdapter;
 import secapstone.helper.pages.custom_ui.CustomTextField;
-import secapstone.helper.pages.log_payment.LogPaymentDialog;
 import secapstone.helper.pages.login.LoginActivity;
 import secapstone.helper.pages.view_artisan.ViewReportsActivity;
 
@@ -179,7 +178,7 @@ public class ProfileFragment extends Fragment {
 
     public void onClickLogPayments(View view)
     {
-        startActivity(new Intent(getActivity(), LogPaymentDialog.class));
+        //startActivity(new Intent(getActivity(), LogPaymentDialog.class));
     }
 
     public void onClickBackButton(View view)
