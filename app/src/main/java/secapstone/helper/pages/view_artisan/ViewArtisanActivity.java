@@ -25,6 +25,7 @@ import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -48,7 +49,7 @@ import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
 
-public class ViewArtisanActivity extends AppCompatActivity {
+public class ViewArtisanActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
     //Used when requesting permissions for Call and Text
     private static final int REQUEST_CALL = 1;
     private static final int REQUEST_SMS = 2;
@@ -206,6 +207,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     public void setUpPurchaseModal() {
         purchaseDialog.setContentView(R.layout.modal_purchase);
+        final NumberPicker np = (NumberPicker) purchaseDialog.findViewById(R.id.numberPicker);
+        np.setMaxValue(100);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(this);
         purchaseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
@@ -383,5 +389,10 @@ public class ViewArtisanActivity extends AppCompatActivity {
         flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         view.setSystemUiVisibility(flags);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    }
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+
     }
 }
