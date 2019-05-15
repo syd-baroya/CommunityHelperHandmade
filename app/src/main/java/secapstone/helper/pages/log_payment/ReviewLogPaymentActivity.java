@@ -18,24 +18,23 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
     {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_review_log_payment);
-
-        Button finish = (Button) findViewById(R.id.finishButton);
-        finish.setOnClickListener(new View.OnClickListener()
+        Button confirmPayment = (Button) findViewById(R.id.confirmPaymentButton);
+        confirmPayment.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                onClickFinish();
+                onClickConfirm();
             }
         });
 
-        Button back = (Button) findViewById(R.id.backButton);
-        back.setOnClickListener(new View.OnClickListener()
+        Button declinePayment = (Button) findViewById(R.id.declinePaymentButton);
+        declinePayment.setOnClickListener(new View.OnClickListener()
         {
             @Override
             public void onClick(View view)
             {
-                onClickBack();
+                onClickDecline();
             }
         });
 
@@ -53,17 +52,17 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
 
     public void setAmount()
     {
-        TextView logAmount = findViewById(R.id.logAmountText);
+        TextView logAmount = findViewById(R.id.amountToPay);
         //logAmount.setText(LogPaymentActivity.amountPaid);
     }
 
     public void setDate()
     {
-        TextView logDate = findViewById(R.id.logDateText);
+        //TextView logDate = findViewById(R.id.logDateText);
         //logDate.setText(LogPaymentActivity.dateToPay);
     }
 
-    public void onClickFinish()
+    public void onClickConfirm()
     {
 
 
@@ -71,8 +70,8 @@ public class ReviewLogPaymentActivity extends AppCompatActivity
         startActivity(new Intent(ReviewLogPaymentActivity.this, MainActivity.class));
     }
 
-    public void onClickBack()
+    public void onClickDecline()
     {
-        startActivity(new Intent(ReviewLogPaymentActivity.this, LogPaymentDialog.class));
+        //startActivity(new Intent(ReviewLogPaymentActivity.this, LogPaymentDialog.class));
     }
 }

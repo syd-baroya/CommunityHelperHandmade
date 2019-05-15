@@ -20,6 +20,8 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -37,10 +39,9 @@ import com.google.firebase.storage.StorageReference;
 
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
-import secapstone.helper.pages.log_payment.LogPaymentDialog;
+import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
-import secapstone.helper.pages.log_payment.LogPaymentDialog;
 
 public class ViewArtisanActivity extends AppCompatActivity {
     //Used when requesting permissions for Call and Text
@@ -58,6 +59,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public String artisanID;
     public String artisanDescription;
     public String artisanPicURL;
+    public EditText amount;
+    public EditText date;
 
     private ListingAdapter adapter;
     private RecyclerView recyclerView;
@@ -78,7 +81,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
         getIncomingIntent();
 
         contactInfoModal = new Dialog(this);
-        logPaymentDialog = new LogPaymentDialog(this, this.artisanID);
+        logPaymentDialog = new Dialog(this);
 
         setUpContactInfoModal();
         setUpLogPaymentModal();
@@ -203,19 +206,30 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
         title.setText("Log Payment to " + artisanName);
-        logPaymentDialog.findViewById(R.id.logPaymentButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //double amount = Double.parseDouble((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
-                //Date userEnteredDate = new Date((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
-//                float amount = 10.11f;
-                //logPayment(amount);
 
-                logPaymentDialog.hide();
+        logPaymentDialog.findViewById(R.id.logPaymentButton).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                EditText amount = (EditText)logPaymentDialog.findViewById((R.id.amountTextField));
+                EditText date = (EditText)logPaymentDialog.findViewById((R.id.dateTextField));
+                onClickMakePayment(amount, date);
             }
         });
 
+
         logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public void onClickMakePayment(EditText amount, EditText date)
+    {
+        System.out.println("clicked make payment");
+
+        String amountPaid = amount.getText().toString();
+        String dateToPay = date.getText().toString();
+        AccountingSystem accountingSystem = new AccountingSystem();
+        accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
+        logPaymentDialog.dismiss();
+
     }
 
     public void onClickLogPaymentButton(View view)
