@@ -64,6 +64,7 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
                 }
             });
         } else {
+            System.out.println("in ListingAdapter, model has null url");
             copy.image.setImageResource(R.drawable.icon_empty_person);
         }
 

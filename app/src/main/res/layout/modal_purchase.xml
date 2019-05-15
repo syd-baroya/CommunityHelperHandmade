@@ -15,67 +15,63 @@
     android:focusableInTouchMode="true">
 
     <TextView
-        android:id="@+id/text_view_title4"
+        android:id="@+id/quantityText"
         android:layout_width="138dp"
         android:layout_height="27dp"
-        android:layout_marginStart="8dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="256dp"
+        android:layout_marginStart="24dp"
+        android:layout_marginTop="16dp"
         android:layout_marginBottom="16dp"
         android:fontFamily="@font/googlesans"
         android:maxLines="1"
         android:text="Quantity:"
         android:textColor="#000000"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_title2"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_description2" />
+        app:layout_constraintBottom_toTopOf="@+id/priceText"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/description" />
 
     <TextView
-        android:id="@+id/text_view_title3"
+        android:id="@+id/name"
         android:layout_width="138dp"
         android:layout_height="27dp"
         android:layout_marginStart="48dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="15dp"
+        android:layout_marginBottom="8dp"
         android:fontFamily="@font/googlesans"
         android:maxLines="1"
         android:text="title"
         android:textColor="#000000"
         android:textSize="16dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_description2"
+        app:layout_constraintBottom_toTopOf="@+id/description"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/image2" />
+        app:layout_constraintTop_toBottomOf="@+id/banner_image" />
 
     <TextView
-        android:id="@+id/text_view_description2"
+        android:id="@+id/description"
         android:layout_width="138dp"
         android:layout_height="35dp"
         android:layout_marginStart="48dp"
-        android:layout_marginTop="15dp"
+        android:layout_marginTop="8dp"
         android:layout_marginEnd="48dp"
-        android:layout_marginBottom="24dp"
+        android:layout_marginBottom="16dp"
         android:fontFamily="@font/googlesans"
         android:maxLines="1"
         android:text="description"
         android:textColor="#A4A4A4"
         android:textSize="14dp"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_title2"
+        app:layout_constraintBottom_toTopOf="@+id/priceText"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_title3" />
+        app:layout_constraintTop_toBottomOf="@+id/name" />
 
     <TextView
-        android:id="@+id/text_view_title2"
+        android:id="@+id/priceText"
         android:layout_width="138dp"
         android:layout_height="27dp"
-        android:layout_marginStart="8dp"
+        android:layout_marginStart="24dp"
         android:layout_marginTop="3dp"
-        android:layout_marginEnd="252dp"
         android:layout_marginBottom="8dp"
         android:fontFamily="@font/googlesans"
         android:maxLines="1"
@@ -83,13 +79,11 @@
         android:textColor="#000000"
         android:textSize="16dp"
         app:layout_constraintBottom_toTopOf="@+id/logPaymentButton"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toEndOf="@+id/image"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_title4" />
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/quantityText" />
 
     <androidx.appcompat.widget.AppCompatImageView
-        android:id="@+id/image2"
+        android:id="@+id/banner_image"
         android:layout_width="313dp"
         android:layout_height="170dp"
         android:layout_gravity="center"
@@ -99,7 +93,7 @@
         android:layout_marginBottom="8dp"
         android:scaleType="centerCrop"
         android:src="@drawable/icon_empty_person"
-        app:layout_constraintBottom_toTopOf="@+id/text_view_title3"
+        app:layout_constraintBottom_toTopOf="@+id/name"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle" />
@@ -115,7 +109,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <ImageView
-            android:id="@+id/button8"
+            android:id="@+id/closeButton"
             android:layout_width="24dp"
             android:layout_height="24dp"
             android:background="@drawable/icon_close_gray"
@@ -138,7 +132,7 @@
         android:text="Purchase Item"
         android:textColor="#000"
         android:textSize="24sp"
-        app:layout_constraintBottom_toTopOf="@+id/image2"
+        app:layout_constraintBottom_toTopOf="@+id/banner_image"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
@@ -153,12 +147,13 @@
         android:layout_marginStart="16dp"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="16dp"
+        android:layout_marginBottom="16dp"
         android:text="Confirm"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/text_view_title2" />
+        app:layout_constraintTop_toBottomOf="@+id/priceText" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

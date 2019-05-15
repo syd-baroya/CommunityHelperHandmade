@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -114,15 +115,15 @@ public class ViewArtisanActivity extends AppCompatActivity {
             artisanDescription = getIntent().getStringExtra("description");
             artisanPicURL = getIntent().getStringExtra("url");
 
-            setImage(artisanPicURL, artisanName, artisanDescription, artisanPhone, artisanAddress);
+            setImage(this, artisanPicURL, artisanName);
         }
     }
 
-    private void setImage(String url, String name, String description, String phone, String address) {
-        TextView nameTitle = findViewById(R.id.artisan_name);
+    private void setImage(Activity view, String url, String name) {
+        TextView nameTitle = view.findViewById(R.id.name);
         nameTitle.setText(name);
 
-        final ImageView image = findViewById(R.id.artisan_banner_image);
+        final ImageView image = view.findViewById(R.id.banner_image);
 
         final Activity thisAct = this;
 
@@ -144,6 +145,41 @@ public class ViewArtisanActivity extends AppCompatActivity {
         } else {
             image.setImageResource(R.drawable.icon_empty_person);
         }
+
+
+    }
+    private void setImage(Dialog view, String url, String name, String description) {
+        TextView nameTitle = view.findViewById(R.id.name);
+        nameTitle.setText(name);
+
+        TextView descTitle = view.findViewById(R.id.description);
+        descTitle.setText(description);
+
+        final ImageView image = view.findViewById(R.id.banner_image);
+
+        final Activity thisAct = this;
+
+        if (url != null) {
+            storageRef.child(url).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(thisAct)
+                            .asBitmap()
+                            .load(uri)
+                            .into(image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        } else {
+            System.out.println("in ViewArtisanActivity, model has null url");
+            image.setImageResource(R.drawable.icon_empty_person);
+        }
+
+
     }
 
     public void onClickReportsButton(View view)
@@ -174,6 +210,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
     }
 
     public void onClickPurchase(Listing model) {
+        setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
         purchaseDialog.show();
     }
 
@@ -265,6 +302,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
     {
         contactInfoModal.dismiss();
         logPaymentDialog.dismiss();
+        logShipmentDialog.dismiss();
+        purchaseDialog.dismiss();
     }
 
     public void onClickCallButton() {
