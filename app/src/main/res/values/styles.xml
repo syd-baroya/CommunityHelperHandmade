@@ -75,7 +75,7 @@
 
     <style name="RedOutlineButton" parent="PrimaryButton">
         <item name="android:textColor">@color/red</item>
-        <item name="android:background">@drawable/button_red_outline</item>
+        <item name="android:background">@drawable/button_red_outline_round</item>
     </style>
 
     <style name="BlueButton" parent="PrimaryButton">

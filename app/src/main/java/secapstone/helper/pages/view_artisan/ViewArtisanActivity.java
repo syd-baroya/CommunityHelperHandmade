@@ -71,6 +71,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     //reference to a certain artisan in database
     private DocumentReference artisanRef;
+    private float itemClickedPrice=0.0f;
 
     Dialog contactInfoModal;
     Dialog logPaymentDialog;
@@ -154,6 +155,14 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         TextView descTitle = view.findViewById(R.id.description);
         descTitle.setText(description);
 
+        TextView pricePer = purchaseDialog.findViewById(R.id.pricePer);
+        String pricePerString = "$" + String.valueOf(itemClickedPrice) + " x 0";
+        pricePer.setText(pricePerString);
+
+        TextView totalPrice = purchaseDialog.findViewById(R.id.totalPrice);
+        String totalPriceString = "$0";
+        totalPrice.setText(totalPriceString);
+
         final ImageView image = view.findViewById(R.id.banner_image);
 
         final Activity thisAct = this;
@@ -210,10 +219,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         np.setMinValue(0);
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
+
         purchaseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     public void onClickPurchase(Listing model) {
+        itemClickedPrice = model.getPrice();
         setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
         purchaseDialog.show();
     }
@@ -417,6 +428,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        TextView pricePer = purchaseDialog.findViewById(R.id.pricePer);
+        String pricePerString = "$" + String.valueOf(itemClickedPrice) + " x " + String.valueOf(newVal);
+        pricePer.setText(pricePerString);
 
+        TextView totalPrice = purchaseDialog.findViewById(R.id.totalPrice);
+        String totalPriceString = "$" + String.valueOf(itemClickedPrice * newVal);
+        totalPrice.setText(totalPriceString);
     }
 }
