@@ -19,7 +19,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -31,17 +30,16 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import java.util.Calendar;
+import java.util.Date;
 
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
@@ -222,7 +220,14 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
 
     public void setUpLogShipmentModal() {
+
         logShipmentDialog.setContentView(R.layout.modal_log_shipment);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(logShipmentDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+
+        logShipmentDialog.getWindow().setAttributes(lp);
         logShipmentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
@@ -232,6 +237,10 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void setUpContactInfoModal() {
         contactInfoModal.setContentView(R.layout.modal_contact_info);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(contactInfoModal.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 
         if (artisanPhone != null) {
             TextView phoneNumText = contactInfoModal.findViewById(R.id.logPaymentTitle);
@@ -264,6 +273,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             }
         });
 
+        contactInfoModal.getWindow().setAttributes(lp);
         contactInfoModal.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
@@ -275,6 +285,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void setUpLogPaymentModal() {
         logPaymentDialog.setContentView(R.layout.modal_log_payment);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(logPaymentDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+
+        logPaymentDialog.getWindow().setAttributes(lp);
 
         TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
         title.setText("Log Payment to " + artisanName);
@@ -366,7 +382,15 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
         adapter = new ListingAdapter(options, ViewArtisanActivity.this, this);
 
-        recyclerView.setLayoutManager(new LinearLayoutManager(ViewArtisanActivity.this));
+        RecyclerView.LayoutManager m = new LinearLayoutManager(this){
+            @Override
+            public boolean canScrollVertically() {
+                return false;
+            }
+        };
+
+        recyclerView.setLayoutManager(m);
+
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
         adapter.startListening();
