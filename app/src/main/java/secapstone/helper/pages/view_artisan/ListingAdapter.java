@@ -93,7 +93,7 @@ public class ListingAdapter extends FirestoreRecyclerAdapter<Listing, ListingAda
             super(itemView);
 
             textViewTitle = itemView.findViewById(R.id.text_view_title);
-            logShipmentButton = itemView.findViewById(R.id.logShipmentButon);
+            logShipmentButton = itemView.findViewById(R.id.logShipmentButton);
             image = itemView.findViewById(R.id.image);
             parent = itemView.findViewById(R.id.listing_list_parent);
         }

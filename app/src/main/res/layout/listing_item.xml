@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:id="@+id/listing_list_parent">
@@ -51,42 +52,29 @@
         <Button
             android:id="@+id/purchaseButton"
             style="@style/GrayOutlineButton"
-            android:layout_width="148dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="8dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="14dp"
+            android:layout_marginTop="1dp"
             android:layout_marginEnd="24dp"
-            android:layout_marginBottom="3dp"
-            android:text="Purchase"
             android:onClick="onClickPurchaseButton"
-            app:layout_constraintBottom_toTopOf="@+id/editListingButton"
+            android:text="Purchase"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDarker"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_view_title"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <Button
-            android:id="@+id/editListingButton"
-            style="@style/GrayOutlineButton"
-            android:layout_width="148dp"
-            android:layout_height="0dp"
-            android:layout_marginStart="8dp"
-            android:layout_marginTop="3dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginBottom="3dp"
-            android:text="Edit"
-            app:layout_constraintBottom_toTopOf="@+id/logShipmentButton"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toEndOf="@+id/text_view_description"
-            app:layout_constraintTop_toBottomOf="@+id/purchaseButton" />
+            app:layout_constraintStart_toEndOf="@+id/logShipmentButton"
+            app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
 
         <Button
             android:id="@+id/logShipmentButton"
-            style="@style/GreenButton"
+            style="@style/GrayOutlineButton"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="20dp"
             android:layout_marginTop="1dp"
             android:text="Log Shipment"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimaryDarker"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toBottomOf="@+id/text_view_title" />
 
