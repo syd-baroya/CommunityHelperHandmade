@@ -9,6 +9,8 @@ import android.net.Uri;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
+
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -31,12 +33,15 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
     private Context context;
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     private CollectionReference artisansRef;
+    private ArtisansFragment frag;
 
 
-    public ArtisanAdapter(@NonNull FirestoreRecyclerOptions<Artisan> options, Context context, CollectionReference artisansRef) {
+    public ArtisanAdapter(@NonNull FirestoreRecyclerOptions<Artisan> options, Context context, CollectionReference artisansRef, ArtisansFragment frag) {
         super(options);
         this.context = context;
         this.artisansRef = artisansRef;
+        this.frag = frag;
+
     }
 
     @Override
@@ -53,6 +58,13 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
             @Override
             public void onClick(View view) {
                 onTileClick(modelCopy);
+            }
+        });
+        holder.parent.setOnLongClickListener(new View.OnLongClickListener() {
+            @Override
+            public boolean onLongClick(View view){
+                frag.showDeleteArtisanModel(modelCopy);
+                return true;
             }
         });
 

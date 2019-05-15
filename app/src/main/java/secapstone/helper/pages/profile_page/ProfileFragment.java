@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
@@ -60,6 +61,7 @@ public class ProfileFragment extends Fragment {
     private Dialog reportIssueModal;
     private Button reportIssueButton;
     private CustomTextField reportField;
+    private ConstraintLayout closeButton;
     private Button submitReportButton;
     public void setArtisanRef(CollectionReference artisansRef){
         this.artisansRef = artisansRef;
@@ -83,7 +85,7 @@ public class ProfileFragment extends Fragment {
         reportIssueButton = view.findViewById(R.id.reportIssueButton);
         submitReportButton = reportIssueModal.findViewById(R.id.submitReportButton);
         reportField = reportIssueModal.findViewById(R.id.reportText);
-        recyclerView=  view.findViewById(R.id.ArtisanRecyclerView);
+        closeButton = reportIssueModal.findViewById(R.id.closeButton);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -91,18 +93,22 @@ public class ProfileFragment extends Fragment {
                 onClickLogout();
             }
         });
-
         reportIssueButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickReportIssue();
             }
         });
-
         submitReportButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 onClickSubmitReport();
+            }
+        });
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                onClickCloseModal();
             }
         });
 
@@ -111,7 +117,6 @@ public class ProfileFragment extends Fragment {
         setImage("",  user_info.getName());
 
         setStatusBarToDark();
-        makeRecyclerView();
 
 
         return view;
@@ -176,6 +181,10 @@ public class ProfileFragment extends Fragment {
         }
     }
 
+    public void onClickCloseModal() {
+        reportIssueModal.dismiss();
+    }
+
     public void onClickLogPayments(View view)
     {
         //startActivity(new Intent(getActivity(), LogPaymentDialog.class));
@@ -189,35 +198,6 @@ public class ProfileFragment extends Fragment {
     public void onClickContactInfoButton(View view)
     {
 
-    }
-
-    public void makeRecyclerView(){
-        Query query = artisansRef.orderBy("lastName", Query.Direction.ASCENDING);
-        FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
-                .setQuery(query, Artisan.class)
-                .build();
-
-        adapter = new ArtisanAdapter(options, this.getContext(), artisansRef);
-
-        RecyclerView.LayoutManager m = new LinearLayoutManager(getActivity()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-
-        recyclerView.setLayoutManager(m);
-        recyclerView.setAdapter(adapter);
-        adapter.notifyDataSetChanged();
-        adapter.startListening();
-
-
-//        adapter = new ArtisanAdapter(options, getContext(), artisansRef);
-//
-//        recyclerView.setLayoutManager(new LinearLayoutManager(getContext()));
-//        recyclerView.setAdapter(adapter);
-//        adapter.notifyDataSetChanged();
-//        adapter.startListening();
     }
 
 

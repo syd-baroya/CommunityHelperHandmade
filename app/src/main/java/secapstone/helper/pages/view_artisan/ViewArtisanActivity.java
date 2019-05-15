@@ -18,6 +18,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -28,10 +29,13 @@ import android.widget.Toast;
 
 import com.bumptech.glide.Glide;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
@@ -49,9 +53,9 @@ public class ViewArtisanActivity extends AppCompatActivity {
     private static final int REQUEST_SMS = 2;
 
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
+    private static final String TAG = "ViewArtisanActivity";
 
     private FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private CollectionReference usersRef = db.collection("users");
 
     public String artisanName;
     public String artisanAddress;
@@ -70,6 +74,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     Dialog contactInfoModal;
     Dialog logPaymentDialog;
+    Dialog logShipmentDialog;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -82,16 +88,17 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         contactInfoModal = new Dialog(this);
         logPaymentDialog = new Dialog(this);
+        logShipmentDialog = new Dialog(this);
 
         setUpContactInfoModal();
         setUpLogPaymentModal();
+        setUpLogShipmentModal();
 
         artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
 
         setStatusBarToDark();
 
         runListingsQuery();
-
     }
 
     private void getIncomingIntent() {
@@ -160,6 +167,19 @@ public class ViewArtisanActivity extends AppCompatActivity {
         Intent intent = new Intent(ViewArtisanActivity.this, NewListingActivity.class);
         intent.putExtra("id", artisanID);
         startActivity(intent);
+    }
+
+
+
+
+
+    public void setUpLogShipmentModal() {
+        logShipmentDialog.setContentView(R.layout.modal_contact_info);
+        logShipmentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public void onClickLogShipment(Listing model) {
+        logShipmentDialog.show();
     }
 
     public void setUpContactInfoModal() {
@@ -294,7 +314,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 .setQuery(query, Listing.class)
                 .build();
 
-        adapter = new ListingAdapter(options, ViewArtisanActivity.this);
+        adapter = new ListingAdapter(options, ViewArtisanActivity.this, this);
 
         recyclerView.setLayoutManager(new LinearLayoutManager(ViewArtisanActivity.this));
         recyclerView.setAdapter(adapter);
