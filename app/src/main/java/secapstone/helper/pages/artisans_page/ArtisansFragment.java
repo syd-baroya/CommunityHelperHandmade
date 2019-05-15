@@ -119,6 +119,14 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
                 deleteListingsThenMove(artisanRef, toPath, deleteArtisanDialog);
             }
         });
+
+        Button cancelButton = deleteArtisanDialog.findViewById(R.id.cancelButton);
+        cancelButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                deleteArtisanDialog.dismiss();
+            }
+        });
     }
 
     public void deleteListingsThenMove(final DocumentReference artisanRef, final DocumentReference toPath, Dialog dialog) {
@@ -140,8 +148,16 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
     }
 
     public void setUpDeleteArtisanModal() {
+
         deleteArtisanDialog = new Dialog(this.getContext());
+
         deleteArtisanDialog.setContentView(R.layout.modal_delete_artisan);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(deleteArtisanDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+
+        deleteArtisanDialog.getWindow().setAttributes(lp);
         deleteArtisanDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 

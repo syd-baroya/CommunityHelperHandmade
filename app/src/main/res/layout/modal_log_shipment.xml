@@ -1,148 +1,163 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
+
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:background="@drawable/background_modal"
-    android:minWidth="320dp"
-    tools:context=".pages.view_artisan.ViewArtisanActivity"
-    app:layout_constraintEnd_toEndOf="parent"
-    app:layout_constraintStart_toStartOf="parent">
+    android:layout_height="match_parent"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:background="#00ffffff">
 
-    <TextView
-        android:id="@+id/phone_num"
-        android:layout_width="0dp"
+    <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/modalContainer"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
         android:layout_marginEnd="32dp"
-        android:fontFamily="@font/googlesans_regular"
-        android:text="Phone Number:"
-        android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
-
-    <TextView
-        android:id="@+id/logPaymentTitle"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/googlesans_bold"
-        android:text="No Phone Number Provided"
-        android:textColor="#000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_num" />
-
-    <Button
-        android:id="@+id/callNowButton"
-        style="@style/GreenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/googlesans"
-        android:text="Call"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle"/>
-
-    <Button
-        android:id="@+id/textNowButton"
-        style="@style/GreenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="16dp"
-        android:layout_marginTop="24dp"
-        android:fontFamily="@font/googlesans"
-        android:text="Text"
-        app:layout_constraintStart_toEndOf="@+id/callNowButton"
-        app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle" />
-
-    <View
-        android:id="@+id/seperator1"
-        android:layout_width="0dp"
-        android:layout_height="1dp"
-        android:layout_marginTop="32dp"
-        android:background="#EBEBEB"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textNowButton" />
-
-    <TextView
-        android:id="@+id/amount"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="32dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/googlesans_regular"
-        android:text="Address:"
-        android:textColor="#000"
-        android:textSize="16sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="@+id/seperator1" />
-
-    <TextView
-        android:id="@+id/artisan_address"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginEnd="32dp"
-        android:fontFamily="@font/googlesans_bold"
-        android:text="No Address Provided"
-        android:textColor="#000"
-        android:textSize="24sp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/amount" />
-
-    <Button
-        android:id="@+id/getDirectionsButton"
-        style="@style/GreenButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="32dp"
-        android:layout_marginTop="24dp"
-        android:layout_marginBottom="32dp"
-        android:fontFamily="@font/googlesans"
-        android:text="Open in Maps"
+        android:background="@drawable/background_modal"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/artisan_address" />
-
-
-    <androidx.constraintlayout.widget.ConstraintLayout
-        android:id="@+id/constraintLayout4"
-        android:layout_width="40dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="4dp"
-        android:layout_marginEnd="8dp"
-        android:onClick="onClickCloseModal"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:context=".pages.view_artisan.ViewArtisanActivity">
 
-        <ImageView
-            android:id="@+id/button8"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
-            android:background="@drawable/icon_close_gray"
-            android:padding="8dp"
-            app:layout_constraintBottom_toBottomOf="parent"
+
+        <TextView
+            android:id="@+id/phone_num"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:text="Phone Number:"
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/constraintLayout4" />
+
+        <TextView
+            android:id="@+id/logPaymentTitle"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="No Phone Number Provided"
+            android:textColor="#000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/phone_num" />
+
+        <Button
+            android:id="@+id/callNowButton"
+            style="@style/GreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/googlesans"
+            android:text="Call"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle" />
+
+        <Button
+            android:id="@+id/textNowButton"
+            style="@style/GreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/googlesans"
+            android:text="Text"
+            app:layout_constraintStart_toEndOf="@+id/callNowButton"
+            app:layout_constraintTop_toBottomOf="@+id/logPaymentTitle" />
+
+        <View
+            android:id="@+id/seperator1"
+            android:layout_width="0dp"
+            android:layout_height="1dp"
+            android:layout_marginTop="32dp"
+            android:background="#EBEBEB"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toBottomOf="@+id/textNowButton" />
+
+        <TextView
+            android:id="@+id/amount"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="32dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:text="Address:"
+            android:textColor="#000"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="@+id/seperator1" />
+
+        <TextView
+            android:id="@+id/artisan_address"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="32dp"
+            android:fontFamily="@font/googlesans_bold"
+            android:text="No Address Provided"
+            android:textColor="#000"
+            android:textSize="24sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/amount" />
+
+        <Button
+            android:id="@+id/getDirectionsButton"
+            style="@style/GreenButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="32dp"
+            android:layout_marginTop="24dp"
+            android:layout_marginBottom="32dp"
+            android:fontFamily="@font/googlesans"
+            android:text="Open in Maps"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/artisan_address" />
+
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/constraintLayout4"
+            android:layout_width="40dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:onClick="onClickCloseModal"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:id="@+id/button8"
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:background="@drawable/icon_close_gray"
+                android:padding="8dp"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+
     </androidx.constraintlayout.widget.ConstraintLayout>
 
-
 </androidx.constraintlayout.widget.ConstraintLayout>
+
