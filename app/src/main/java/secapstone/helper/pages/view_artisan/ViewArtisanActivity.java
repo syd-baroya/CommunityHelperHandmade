@@ -235,16 +235,6 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     }
 
-    public void onClickLogPaymentButton(View view)
-    {
-        logPaymentDialog.show();
-    }
-
-//    public void logPayment(float amount)
-//    {
-//        AccountingSystem accountingSystem = new AccountingSystem();
-//        accountingSystem.logPayment(artisanID, amount);
-//    }
 
     public void onClickCloseModal(View view)
     {
