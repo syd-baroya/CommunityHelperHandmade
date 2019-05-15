@@ -41,6 +41,7 @@ import secapstone.helper.pages.log_payment.LogPaymentDialog;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
 import secapstone.helper.pages.log_payment.LogPaymentDialog;
+import secapstone.helper.pages.make_purchase.PurchaseDialog;
 
 public class ViewArtisanActivity extends AppCompatActivity {
     //Used when requesting permissions for Call and Text
@@ -67,6 +68,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     Dialog contactInfoModal;
     Dialog logPaymentDialog;
+    Dialog purchaseDialog;
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState) {
@@ -79,6 +82,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         contactInfoModal = new Dialog(this);
         logPaymentDialog = new LogPaymentDialog(this, this.artisanID);
+        purchaseDialog = new PurchaseDialog(this);
+
 
         setUpContactInfoModal();
         setUpLogPaymentModal();
@@ -131,6 +136,10 @@ public class ViewArtisanActivity extends AppCompatActivity {
         } else {
             image.setImageResource(R.drawable.icon_empty_person);
         }
+    }
+
+    public void onClickPurchaseButton(View view)
+    {
     }
 
     public void onClickReportsButton(View view)

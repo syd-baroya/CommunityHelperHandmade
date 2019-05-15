@@ -83,6 +83,11 @@
         <item name="android:background">@drawable/button_gray</item>
     </style>
 
+    <style name="GrayOutlineButton" parent="PrimaryButton">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/button_gray_outline</item>
+    </style>
+
     <style name="GreenButton" parent="PrimaryButton">
         <item name="android:textColor">@color/colorPrimaryDarker</item>
         <item name="android:background">@drawable/button_green</item>
