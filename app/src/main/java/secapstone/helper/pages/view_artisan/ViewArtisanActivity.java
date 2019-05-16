@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -281,10 +282,10 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     }
 
     public void setUpLogShipmentListeners(Listing model) {
-        Button closeButton = logShipmentDialog.findViewById(R.id.closeButton);
-        Button minusButton = logShipmentDialog.findViewById(R.id.closeButton);
-        Button plusButton = logShipmentDialog.findViewById(R.id.closeButton);
-        Button submitButton = logShipmentDialog.findViewById(R.id.closeButton);
+        ConstraintLayout closeButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+//        Button minusButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+//        Button plusButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+//        Button submitButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
 
 
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -294,26 +295,26 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             }
         });
 
-        minusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logShipmentDialog.dismiss();
-            }
-        });
-
-        plusButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logShipmentDialog.dismiss();
-            }
-        });
-
-        submitButton.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                logShipmentDialog.dismiss();
-            }
-        });
+//        minusButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logShipmentDialog.dismiss();
+//            }
+//        });
+//
+//        plusButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logShipmentDialog.dismiss();
+//            }
+//        });
+//
+//        submitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logShipmentDialog.dismiss();
+//            }
+//        });
 
 
     }
