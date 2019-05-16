@@ -71,6 +71,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public EditText amount;
     public EditText date;
 
+
     private AccountingSystem accountingSystem;
 
 
@@ -252,9 +253,17 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     }
 
-    public void setUpPurchaseModal() {
+    private void resetPurchaseModal()
+    {
+        ((NumberPicker) purchaseDialog.findViewById(R.id.numberPicker)).setValue(0);
+        purchaseDialog.dismiss();
+
+    }
+
+    public void setUpPurchaseModal()
+    {
         purchaseDialog.setContentView(R.layout.modal_purchase);
-        final NumberPicker np = (NumberPicker) purchaseDialog.findViewById(R.id.numberPicker);
+        NumberPicker np = (NumberPicker) purchaseDialog.findViewById(R.id.numberPicker);
         np.setMaxValue(100);
         np.setMinValue(0);
         np.setWrapSelectorWheel(false);
@@ -264,8 +273,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             @Override
             public void onClick(View view){
                 addToArtisanBalance(newPurchase);
-                purchaseDialog.dismiss();
                 accountingSystem.logPurchase(artisanID, newPurchase, clickedListing);
+                resetPurchaseModal();
 
             }
         });
@@ -345,6 +354,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         contactInfoModal.show();
     }
 
+    private void resetLogPaymentModal()
+    {
+        ((EditText)logPaymentDialog.findViewById((R.id.amountTextField))).setText(null);
+        ((EditText)logPaymentDialog.findViewById((R.id.dateTextField))).setText(null);
+        logPaymentDialog.dismiss();
+    }
 
     public void setUpLogPaymentModal() {
         logPaymentDialog.setContentView(R.layout.modal_log_payment);
@@ -364,8 +379,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
                 EditText amount = (EditText)logPaymentDialog.findViewById((R.id.amountTextField));
                 EditText date = (EditText)logPaymentDialog.findViewById((R.id.dateTextField));
                 onClickMakePayment(amount, date);
-                logPaymentDialog.dismiss();
-
+                resetLogPaymentModal();
             }
         });
 
@@ -389,9 +403,9 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public void onClickCloseModal(View view)
     {
         contactInfoModal.dismiss();
-        logPaymentDialog.dismiss();
+        resetLogPaymentModal();
         logShipmentDialog.dismiss();
-        purchaseDialog.dismiss();
+        resetPurchaseModal();
     }
 
     public void onClickCallButton() {
