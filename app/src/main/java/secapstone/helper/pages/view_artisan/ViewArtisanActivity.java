@@ -13,6 +13,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
+import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.core.app.ActivityCompat;
 import androidx.core.content.ContextCompat;
 import androidx.appcompat.app.AppCompatActivity;
@@ -75,6 +76,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     private AccountingSystem accountingSystem;
 
 
+    private Context context;
+
     private ListingAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -92,6 +95,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_artisan);
+
+        context = this;
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -185,7 +190,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             storageRef.child(url).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    Glide.with(thisAct)
+                    Glide.with(context)
                             .asBitmap()
                             .load(uri)
                             .into(image);
@@ -304,7 +309,75 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     }
 
     public void onClickLogShipment(Listing model) {
+
+        loadLogShipmentInfo(model);
+        setUpLogShipmentListeners(model);
+
         logShipmentDialog.show();
+    }
+
+    public void setUpLogShipmentListeners(Listing model) {
+        ConstraintLayout closeButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+//        Button minusButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+//        Button plusButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+//        Button submitButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logShipmentDialog.dismiss();
+            }
+        });
+
+//        minusButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logShipmentDialog.dismiss();
+//            }
+//        });
+//
+//        plusButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logShipmentDialog.dismiss();
+//            }
+//        });
+//
+//        submitButton.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                logShipmentDialog.dismiss();
+//            }
+//        });
+
+
+    }
+
+    public void loadLogShipmentInfo(Listing model) {
+        final ImageView image = logShipmentDialog.findViewById(R.id.shipmentImage);
+        final TextView title = logShipmentDialog.findViewById(R.id.logShipTitle);
+
+        if(model.getPictureURL()!= null) {
+            storageRef.child(model.getPictureURL()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context)
+                            .asBitmap()
+                            .load(uri)
+                            .into(image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        } else {
+            image.setImageResource(R.drawable.icon_empty_person);
+        }
+
+        title.setText(model.getTitle());
     }
 
     public void setUpContactInfoModal() {
@@ -395,8 +468,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         String dateToPay = date.getText().toString();
         accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
         subFromArtisanBalance(Float.parseFloat(amountPaid));
-        amount.setText(null);
-        date.setText(null);
     }
 
 
