@@ -11,6 +11,7 @@ keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
 
 android {
+    android.defaultConfig.vectorDrawables.useSupportLibrary = true
     signingConfigs {
         config {
             keyAlias keystoreProperties['keyAlias']
