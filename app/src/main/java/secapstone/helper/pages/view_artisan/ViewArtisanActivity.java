@@ -20,6 +20,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -38,6 +40,8 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
+
+import org.w3c.dom.Text;
 
 import java.util.Calendar;
 import java.util.Date;
@@ -323,11 +327,35 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     }
 
     public void setUpLogShipmentListeners(Listing model) {
-        ConstraintLayout closeButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
-//        Button minusButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
-//        Button plusButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
-//        Button submitButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+        final Listing modelCopy = model;
+        final TextView quantityText = logShipmentDialog.findViewById(R.id.quantityText);
 
+        ConstraintLayout closeButton = logShipmentDialog.findViewById(R.id.closeButtonWrapper);
+        Button minusButton = logShipmentDialog.findViewById(R.id.minusButton);
+        Button plusButton = logShipmentDialog.findViewById(R.id.plusButton);
+        final Button submitButton = logShipmentDialog.findViewById(R.id.submitLogShipButton);
+
+        quantityText.addTextChangedListener(new TextWatcher() {
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                int quantity = Integer.parseInt(quantityText.getText().toString());
+                if (quantity <= 0) {
+                    submitButton.setEnabled(false);
+                } else {
+                    submitButton.setEnabled(true);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
 
         closeButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -336,27 +364,32 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             }
         });
 
-//        minusButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                logShipmentDialog.dismiss();
-//            }
-//        });
-//
-//        plusButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                logShipmentDialog.dismiss();
-//            }
-//        });
-//
-//        submitButton.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                logShipmentDialog.dismiss();
-//            }
-//        });
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity = Integer.parseInt(quantityText.getText().toString());
+                if (quantity > 0) {
+                    String newQuantity = Integer.toString(quantity-1);
+                    quantityText.setText(newQuantity);
+                }
+            }
+        });
 
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                int quantity = Integer.parseInt(quantityText.getText().toString());
+                String newQuantity = Integer.toString(quantity+1);
+                quantityText.setText(newQuantity);
+            }
+        });
+//
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                AccountingSystem.logShipment(artisanID, Integer.parseInt(quantityText.getText().toString()), modelCopy, logShipmentDialog);
+            }
+        });
 
     }
 

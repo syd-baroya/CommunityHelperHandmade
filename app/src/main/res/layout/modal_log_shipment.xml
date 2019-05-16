@@ -96,6 +96,8 @@
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="28dp"
+                android:layout_marginEnd="24dp"
+                app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toEndOf="@+id/textView13"
                 app:layout_constraintTop_toTopOf="parent">
 
@@ -189,16 +191,15 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/googlesans"
-                    android:onClick="onRadioButtonClicked"
                     android:text="Fullfilment with Amazon"
-                    android:textColor="@color/almostBlack" />
+                    android:textColor="@color/almostBlack"
+                    android:checked="true"/>
 
                 <RadioButton
                     android:id="@+id/radio_manual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/googlesans"
-                    android:onClick="onRadioButtonClicked"
                     android:text="Ship Manually"
                     android:textColor="@color/almostBlack" />
             </RadioGroup>
@@ -240,7 +241,8 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/shipMethodWrapper" />
+            app:layout_constraintTop_toBottomOf="@+id/shipMethodWrapper"
+            android:enabled="false"/>
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

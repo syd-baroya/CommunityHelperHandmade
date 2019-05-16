@@ -2,6 +2,7 @@ package secapstone.helper.pages.log_payment;
 
 import androidx.annotation.NonNull;
 
+import android.app.Dialog;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
@@ -52,6 +53,7 @@ public class AccountingSystem
      */
 //
     public AccountingSystem(){ System.out.println("made new Accounting System"); }
+
     public static void logPayment(String artisanID, float amount)
     {
         System.out.println("in Accounting System logPayment");
@@ -145,10 +147,50 @@ public class AccountingSystem
                 }
             }
         });
+    }
 
+    public static void logShipment(String artisanID, int amount, Listing listing, final Dialog dialog) {
+        if(listing==null)
+            return;
+        String userID = User.getUser().getID();
+        DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
+        DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
+        DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
+        final CollectionReference productTransRef = FirebaseFirestore.getInstance().collection("Shipments");
 
+        final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
 
-
+        productRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot docSnapshot = task.getResult();
+                    if(docSnapshot!=null){
+                        String id = (String) docSnapshot.get("id");
+                        if(id!=null) {
+                            mewBoi2.setProductID(id);
+                            productTransRef
+                                    .add(mewBoi2)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference){
+                                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                            dialog.dismiss();
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener(){
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
+                        }
+                    }
+                }else{
+                    Log.d(TAG, "GET FAILED WITH: ", task.getException());
+                }
+            }
+        });
     }
 
     public static List<ProductTransaction> getTransactions(long startTime)
