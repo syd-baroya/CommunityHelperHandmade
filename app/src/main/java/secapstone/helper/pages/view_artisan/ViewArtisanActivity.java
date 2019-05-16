@@ -4,6 +4,7 @@ import android.Manifest;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -20,6 +21,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.View;
 import android.view.WindowManager;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -61,6 +63,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public String artisanDescription;
     public String artisanPicURL;
 
+    private Context context;
+
     private ListingAdapter adapter;
     private RecyclerView recyclerView;
 
@@ -76,6 +80,8 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_view_artisan);
+
+        context = this;
 
         recyclerView = findViewById(R.id.recyclerView);
 
@@ -122,7 +128,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
             storageRef.child(url).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                 @Override
                 public void onSuccess(Uri uri) {
-                    Glide.with(thisAct)
+                    Glide.with(context)
                             .asBitmap()
                             .load(uri)
                             .into(image);
@@ -177,7 +183,75 @@ public class ViewArtisanActivity extends AppCompatActivity {
     }
 
     public void onClickLogShipment(Listing model) {
+
+        loadLogShipmentInfo(model);
+        setUpLogShipmentListeners(model);
+
         logShipmentDialog.show();
+    }
+
+    public void setUpLogShipmentListeners(Listing model) {
+        Button closeButton = logShipmentDialog.findViewById(R.id.closeButton);
+        Button minusButton = logShipmentDialog.findViewById(R.id.closeButton);
+        Button plusButton = logShipmentDialog.findViewById(R.id.closeButton);
+        Button submitButton = logShipmentDialog.findViewById(R.id.closeButton);
+
+
+        closeButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logShipmentDialog.dismiss();
+            }
+        });
+
+        minusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logShipmentDialog.dismiss();
+            }
+        });
+
+        plusButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logShipmentDialog.dismiss();
+            }
+        });
+
+        submitButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                logShipmentDialog.dismiss();
+            }
+        });
+
+
+    }
+
+    public void loadLogShipmentInfo(Listing model) {
+        final ImageView image = logShipmentDialog.findViewById(R.id.shipmentImage);
+        final TextView title = logShipmentDialog.findViewById(R.id.logShipTitle);
+
+        if(model.getPictureURL()!= null) {
+            storageRef.child(model.getPictureURL()).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(context)
+                            .asBitmap()
+                            .load(uri)
+                            .into(image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        } else {
+            image.setImageResource(R.drawable.icon_empty_person);
+        }
+
+        title.setText(model.getTitle());
     }
 
     public void setUpContactInfoModal() {

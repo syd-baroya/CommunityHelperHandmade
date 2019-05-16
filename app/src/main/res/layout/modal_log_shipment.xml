@@ -27,7 +27,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="36dp"
             android:layout_marginEnd="24dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
@@ -35,23 +35,24 @@
             app:layout_constraintTop_toTopOf="parent">
 
             <TextView
-                android:id="@+id/textView10"
+                android:id="@+id/logShipTitle"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="20dp"
-                android:fontFamily="@font/googlesans_regular"
+                android:fontFamily="@font/googlesans"
                 android:text="Genuine Italian Leather Wallet Case for Iphone Case Handmade"
                 android:textColor="@color/almostBlack"
                 android:textSize="16sp"
                 app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintStart_toEndOf="@+id/imageView2"
+                app:layout_constraintStart_toEndOf="@+id/shipmentImage"
                 app:layout_constraintTop_toTopOf="parent" />
 
             <ImageView
-                android:id="@+id/imageView2"
-                android:layout_width="100dp"
-                android:layout_height="100dp"
+                android:id="@+id/shipmentImage"
+                android:layout_width="80dp"
+                android:layout_height="80dp"
+                android:scaleType="fitCenter"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 app:srcCompat="@drawable/icon_empty_person" />
@@ -97,29 +98,29 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <Button
-                    android:id="@+id/button"
+                    android:id="@+id/minusButton"
                     style="@style/GreenButton"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginEnd="20dp"
                     android:background="@drawable/icon_minusbutton"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintEnd_toStartOf="@+id/textView14"
+                    app:layout_constraintEnd_toStartOf="@+id/quantityText"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <Button
-                    android:id="@+id/button2"
+                    android:id="@+id/plusButton"
                     style="@style/GreenButton"
                     android:layout_width="24dp"
                     android:layout_height="24dp"
                     android:layout_marginStart="20dp"
                     android:background="@drawable/ic_plusbutton"
                     app:layout_constraintBottom_toBottomOf="parent"
-                    app:layout_constraintStart_toEndOf="@+id/textView14"
+                    app:layout_constraintStart_toEndOf="@+id/quantityText"
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <EditText
-                    android:id="@+id/textView14"
+                    android:id="@+id/quantityText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginBottom="16dp"
@@ -182,7 +183,7 @@
                 app:layout_constraintTop_toTopOf="parent">
 
                 <RadioButton
-                    android:id="@+id/radio_pirates"
+                    android:id="@+id/radio_amazon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/googlesans"
@@ -191,7 +192,7 @@
                     android:textColor="@color/almostBlack" />
 
                 <RadioButton
-                    android:id="@+id/radio_ninjas"
+                    android:id="@+id/radio_manual"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/googlesans"
@@ -225,7 +226,7 @@
         </androidx.constraintlayout.widget.ConstraintLayout>
 
         <Button
-            android:id="@+id/button3"
+            android:id="@+id/submitLogShipButton"
             style="@style/PrimaryButtonSquare"
             android:layout_width="0dp"
             android:layout_height="38dp"
