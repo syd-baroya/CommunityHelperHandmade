@@ -40,6 +40,8 @@ import com.google.firebase.storage.StorageReference;
 
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
@@ -63,6 +65,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public String artisanID;
     public String artisanDescription;
     public String artisanPicURL;
+    public float artisanMoneyOwed;
+    public float newPurchase = 0.0f;
     public EditText amount;
     public EditText date;
 
@@ -114,14 +118,17 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             artisanID = getIntent().getStringExtra("id");
             artisanDescription = getIntent().getStringExtra("description");
             artisanPicURL = getIntent().getStringExtra("url");
-
-            setImage(this, artisanPicURL, artisanName);
+            artisanMoneyOwed = getIntent().getFloatExtra("moneyOwed", 0.0f);
+            setImage(this, artisanPicURL, artisanName, artisanMoneyOwed);
         }
     }
 
-    private void setImage(Activity view, String url, String name) {
+    private void setImage(Activity view, String url, String name, float moneyOwed) {
         TextView nameTitle = view.findViewById(R.id.name);
         nameTitle.setText(name);
+        TextView moneyOwedText = view.findViewById(R.id.moneyOwed);
+        String moneyOwedString = "$" + String.format("%,.2f",moneyOwed);
+        moneyOwedText.setText(moneyOwedString);
 
         final ImageView image = view.findViewById(R.id.banner_image);
 
@@ -156,11 +163,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         descTitle.setText(description);
 
         TextView pricePer = purchaseDialog.findViewById(R.id.pricePer);
-        String pricePerString = "$" + String.valueOf(itemClickedPrice) + " x 0";
+        String pricePerString = "$" + String.format("%,.2f",itemClickedPrice) + " x 0";
         pricePer.setText(pricePerString);
 
         TextView totalPrice = purchaseDialog.findViewById(R.id.totalPrice);
-        String totalPriceString = "$0";
+        String totalPriceString = "$0.00";
         totalPrice.setText(totalPriceString);
 
         final ImageView image = view.findViewById(R.id.banner_image);
@@ -212,6 +219,18 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         startActivity(intent);
     }
 
+    public void addToArtisanBalance(float recentPurchase)
+    {
+        Map<String, Object> moneyUpdates = new HashMap<>();
+        float newMoneyOwed = recentPurchase + artisanMoneyOwed;
+        moneyUpdates.put("moneyOwedFromCommunityLeader", newMoneyOwed);
+
+        artisanRef.update(moneyUpdates);
+        TextView moneyOwedText = findViewById(R.id.moneyOwed);
+        String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
+        moneyOwedText.setText(moneyOwedString);
+    }
+
     public void setUpPurchaseModal() {
         purchaseDialog.setContentView(R.layout.modal_purchase);
         final NumberPicker np = (NumberPicker) purchaseDialog.findViewById(R.id.numberPicker);
@@ -220,12 +239,21 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         np.setWrapSelectorWheel(false);
         np.setOnValueChangedListener(this);
 
+        purchaseDialog.findViewById(R.id.confirmPurchaseButton).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                addToArtisanBalance(newPurchase);
+                purchaseDialog.dismiss();
+            }
+        });
+
         purchaseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
     public void onClickPurchase(Listing model) {
         itemClickedPrice = model.getPrice();
         setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
+
         purchaseDialog.show();
     }
 
@@ -314,6 +342,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
                 onClickMakePayment(amount, date);
             }
         });
+
 
         logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
@@ -428,12 +457,14 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     @Override
     public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        newPurchase = itemClickedPrice * newVal;
         TextView pricePer = purchaseDialog.findViewById(R.id.pricePer);
-        String pricePerString = "$" + String.valueOf(itemClickedPrice) + " x " + String.valueOf(newVal);
+        String pricePerString = "$" + String.format("%,.2f",itemClickedPrice) + " x " + String.valueOf(newVal);
         pricePer.setText(pricePerString);
 
         TextView totalPrice = purchaseDialog.findViewById(R.id.totalPrice);
-        String totalPriceString = "$" + String.valueOf(itemClickedPrice * newVal);
+        String totalPriceString = "$" + String.format("%,.2f",newPurchase);
         totalPrice.setText(totalPriceString);
+
     }
 }
