@@ -10,7 +10,7 @@
     >
 
     <ImageView
-        android:id="@+id/artisan_banner_image"
+        android:id="@+id/banner_image"
         android:layout_width="match_parent"
         android:layout_height="264dp"
         android:scaleType="centerCrop"
@@ -29,7 +29,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/artisan_name"
+        android:id="@+id/name"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginStart="24dp"
@@ -65,8 +65,8 @@
 
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/logPaymentContainer"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
+                android:layout_width="347dp"
+                android:layout_height="64dp"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
@@ -75,7 +75,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/seperator1">
 
                 <TextView
-                    android:id="@+id/textView6"
+                    android:id="@+id/balanceText"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:fontFamily="@font/googlesans"
@@ -85,14 +85,18 @@
                     app:layout_constraintTop_toTopOf="parent" />
 
                 <TextView
-                    android:id="@+id/textView9"
-                    android:layout_width="wrap_content"
+                    android:id="@+id/moneyOwed"
+                    android:layout_width="0dp"
                     android:layout_height="wrap_content"
+                    android:layout_marginStart="4dp"
                     android:layout_marginTop="4dp"
+                    android:layout_marginEnd="13dp"
+                    android:layout_marginBottom="4dp"
                     android:fontFamily="@font/googlesans_medium"
-                    android:text="$3100.32"
                     android:textColor="#000000"
                     android:textSize="26dp"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintEnd_toStartOf="@+id/logPaymentButton"
                     app:layout_constraintStart_toStartOf="parent"
                     app:layout_constraintTop_toBottomOf="@+id/textView6" />
 

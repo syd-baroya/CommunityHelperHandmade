@@ -37,7 +37,7 @@ public class PhotoAddArtisanActivity extends AppCompatActivity
         setContentView(R.layout.activity_photo_add_artisan);
 
         nextButton = findViewById(R.id.nextButton);
-        backButton = findViewById(R.id.backButton);
+        //backButton = findViewById(R.id.backButton);
         photoButton = findViewById(R.id.uploadPhotoButton);
         photoPreview = findViewById(R.id.imageView);
 

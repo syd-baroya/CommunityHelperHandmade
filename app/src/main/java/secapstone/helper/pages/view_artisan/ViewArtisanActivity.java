@@ -22,7 +22,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,17 +38,16 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
-import java.util.Calendar;
-import java.util.Date;
+import java.util.HashMap;
+import java.util.Map;
 
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
 import secapstone.helper.pages.log_payment.AccountingSystem;
-import secapstone.helper.pages.log_payment.LogPaymentActivity;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
 
-public class ViewArtisanActivity extends AppCompatActivity {
+public class ViewArtisanActivity extends AppCompatActivity implements NumberPicker.OnValueChangeListener{
     //Used when requesting permissions for Call and Text
     private static final int REQUEST_CALL = 1;
     private static final int REQUEST_SMS = 2;
@@ -62,6 +63,10 @@ public class ViewArtisanActivity extends AppCompatActivity {
     public String artisanID;
     public String artisanDescription;
     public String artisanPicURL;
+    public float artisanMoneyOwed;
+    public float newPurchase = 0.0f;
+    public EditText amount;
+    public EditText date;
 
     private Context context;
 
@@ -70,10 +75,12 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     //reference to a certain artisan in database
     private DocumentReference artisanRef;
+    private float itemClickedPrice=0.0f;
 
     Dialog contactInfoModal;
     Dialog logPaymentDialog;
     Dialog logShipmentDialog;
+    Dialog purchaseDialog;
 
 
     @Override
@@ -90,10 +97,12 @@ public class ViewArtisanActivity extends AppCompatActivity {
         contactInfoModal = new Dialog(this);
         logPaymentDialog = new Dialog(this);
         logShipmentDialog = new Dialog(this);
+        purchaseDialog = new Dialog(this);
 
         setUpContactInfoModal();
         setUpLogPaymentModal();
         setUpLogShipmentModal();
+        setUpPurchaseModal();
 
         artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
 
@@ -111,16 +120,59 @@ public class ViewArtisanActivity extends AppCompatActivity {
             artisanID = getIntent().getStringExtra("id");
             artisanDescription = getIntent().getStringExtra("description");
             artisanPicURL = getIntent().getStringExtra("url");
-
-            setImage(artisanPicURL, artisanName, artisanDescription, artisanPhone, artisanAddress);
+            artisanMoneyOwed = getIntent().getFloatExtra("moneyOwed", 0.0f);
+            setImage(this, artisanPicURL, artisanName, artisanMoneyOwed);
         }
     }
 
-    private void setImage(String url, String name, String description, String phone, String address) {
-        TextView nameTitle = findViewById(R.id.artisan_name);
+    private void setImage(Activity view, String url, String name, float moneyOwed) {
+        TextView nameTitle = view.findViewById(R.id.name);
+        nameTitle.setText(name);
+        TextView moneyOwedText = view.findViewById(R.id.moneyOwed);
+        String moneyOwedString = "$" + String.format("%,.2f",moneyOwed);
+        moneyOwedText.setText(moneyOwedString);
+
+        final ImageView image = view.findViewById(R.id.banner_image);
+
+        final Activity thisAct = this;
+
+        if (url != null) {
+            storageRef.child(url).getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
+                @Override
+                public void onSuccess(Uri uri) {
+                    Glide.with(thisAct)
+                            .asBitmap()
+                            .load(uri)
+                            .into(image);
+                }
+            }).addOnFailureListener(new OnFailureListener() {
+                @Override
+                public void onFailure(@NonNull Exception exception) {
+                    // Handle any errors
+                }
+            });
+        } else {
+            image.setImageResource(R.drawable.icon_empty_person);
+        }
+
+
+    }
+    private void setImage(Dialog view, String url, String name, String description) {
+        TextView nameTitle = view.findViewById(R.id.name);
         nameTitle.setText(name);
 
-        final ImageView image = findViewById(R.id.artisan_banner_image);
+        TextView descTitle = view.findViewById(R.id.description);
+        descTitle.setText(description);
+
+        TextView pricePer = purchaseDialog.findViewById(R.id.pricePer);
+        String pricePerString = "$" + String.format("%,.2f",itemClickedPrice) + " x 0";
+        pricePer.setText(pricePerString);
+
+        TextView totalPrice = purchaseDialog.findViewById(R.id.totalPrice);
+        String totalPriceString = "$0.00";
+        totalPrice.setText(totalPriceString);
+
+        final ImageView image = view.findViewById(R.id.banner_image);
 
         final Activity thisAct = this;
 
@@ -140,8 +192,11 @@ public class ViewArtisanActivity extends AppCompatActivity {
                 }
             });
         } else {
+            System.out.println("in ViewArtisanActivity, model has null url");
             image.setImageResource(R.drawable.icon_empty_person);
         }
+
+
     }
 
     public void onClickReportsButton(View view)
@@ -151,7 +206,7 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
     public void onClickLogPayments(View view)
     {
-        startActivity(new Intent(ViewArtisanActivity.this, LogPaymentActivity.class));
+        logPaymentDialog.show();
     }
 
     public void onClickBackButton(View view)
@@ -166,8 +221,43 @@ public class ViewArtisanActivity extends AppCompatActivity {
         startActivity(intent);
     }
 
+    public void addToArtisanBalance(float recentPurchase)
+    {
+        Map<String, Object> moneyUpdates = new HashMap<>();
+        float newMoneyOwed = recentPurchase + artisanMoneyOwed;
+        moneyUpdates.put("moneyOwedFromCommunityLeader", newMoneyOwed);
 
+        artisanRef.update(moneyUpdates);
+        TextView moneyOwedText = findViewById(R.id.moneyOwed);
+        String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
+        moneyOwedText.setText(moneyOwedString);
+    }
 
+    public void setUpPurchaseModal() {
+        purchaseDialog.setContentView(R.layout.modal_purchase);
+        final NumberPicker np = (NumberPicker) purchaseDialog.findViewById(R.id.numberPicker);
+        np.setMaxValue(100);
+        np.setMinValue(0);
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(this);
+
+        purchaseDialog.findViewById(R.id.confirmPurchaseButton).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                addToArtisanBalance(newPurchase);
+                purchaseDialog.dismiss();
+            }
+        });
+
+        purchaseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+    }
+
+    public void onClickPurchase(Listing model) {
+        itemClickedPrice = model.getPrice();
+        setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
+
+        purchaseDialog.show();
+    }
 
 
     public void setUpLogShipmentModal() {
@@ -313,36 +403,39 @@ public class ViewArtisanActivity extends AppCompatActivity {
 
         TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
         title.setText("Log Payment to " + artisanName);
-        logPaymentDialog.findViewById(R.id.logPaymentButton).setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                //double amount = Double.parseDouble((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
-                //Date userEnteredDate = new Date((String)((TextView)logPaymentDialog.findViewById((R.id.amountTextField))).getText());
-                double amount = 10.11;
-                Date userEnteredDate = new Date(1999, 12, 31);
-                logPayment(amount, userEnteredDate);
 
-                logPaymentDialog.hide();
+        logPaymentDialog.findViewById(R.id.logPaymentButton).setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                EditText amount = (EditText)logPaymentDialog.findViewById((R.id.amountTextField));
+                EditText date = (EditText)logPaymentDialog.findViewById((R.id.dateTextField));
+                onClickMakePayment(amount, date);
             }
         });
+
 
         logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
-    public void onClickLogPaymentButton(View view)
+    public void onClickMakePayment(EditText amount, EditText date)
     {
-        logPaymentDialog.show();
+        System.out.println("clicked make payment");
+
+        String amountPaid = amount.getText().toString();
+        String dateToPay = date.getText().toString();
+        AccountingSystem accountingSystem = new AccountingSystem();
+        accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
+        logPaymentDialog.dismiss();
+
     }
 
-    public void logPayment(double amount, Date userEnteredDate)
-    {
-        AccountingSystem.logPayment(artisanRef,amount, userEnteredDate, Calendar.getInstance().getTime());
-    }
 
     public void onClickCloseModal(View view)
     {
         contactInfoModal.dismiss();
         logPaymentDialog.dismiss();
+        logShipmentDialog.dismiss();
+        purchaseDialog.dismiss();
     }
 
     public void onClickCallButton() {
@@ -430,5 +523,18 @@ public class ViewArtisanActivity extends AppCompatActivity {
         flags = flags ^ View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         view.setSystemUiVisibility(flags);
         this.getWindow().setFlags(WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS, WindowManager.LayoutParams.FLAG_LAYOUT_NO_LIMITS);
+    }
+
+    @Override
+    public void onValueChange(NumberPicker picker, int oldVal, int newVal) {
+        newPurchase = itemClickedPrice * newVal;
+        TextView pricePer = purchaseDialog.findViewById(R.id.pricePer);
+        String pricePerString = "$" + String.format("%,.2f",itemClickedPrice) + " x " + String.valueOf(newVal);
+        pricePer.setText(pricePerString);
+
+        TextView totalPrice = purchaseDialog.findViewById(R.id.totalPrice);
+        String totalPriceString = "$" + String.format("%,.2f",newPurchase);
+        totalPrice.setText(totalPriceString);
+
     }
 }

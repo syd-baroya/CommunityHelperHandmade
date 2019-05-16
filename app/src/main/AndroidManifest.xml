@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
     package="secapstone.helper">
 
     <!-- To auto-complete the email text field in the login form with the user's emails -->
@@ -22,12 +23,12 @@
 
     <application
         android:name=".other.MyApplication"
-        android:allowBackup="true"
         android:icon="@drawable/logo"
         android:label="@string/app_name"
         android:roundIcon="@drawable/logo_round"
         android:supportsRtl="true"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme"
+        tools:ignore="AllowBackup">
         <activity
             android:name=".pages.login.LoginActivity"
             android:configChanges="keyboard|keyboardHidden|orientation|screenSize"

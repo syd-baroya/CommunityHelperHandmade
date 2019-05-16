@@ -10,7 +10,6 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -97,6 +96,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
         intent.putExtra("phone", model.getPhoneNumber());
         intent.putExtra("address", model.getAddress());
         intent.putExtra("id", model.getID());
+        intent.putExtra("moneyOwed", model.getMoneyOwedFromCommunityLeader());
         context.startActivity(intent);
     }
 

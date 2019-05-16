@@ -73,6 +73,11 @@
         <item name="android:background">@drawable/button_red</item>
     </style>
 
+    <style name="RedOutlineButton" parent="PrimaryButton">
+        <item name="android:textColor">@color/red</item>
+        <item name="android:background">@drawable/button_red_outline_round</item>
+    </style>
+
     <style name="BlueButton" parent="PrimaryButton">
         <item name="android:textColor">@color/blue</item>
         <item name="android:background">@drawable/button_blue</item>
@@ -81,6 +86,11 @@
     <style name="GrayButton" parent="PrimaryButton">
         <item name="android:textColor">@color/gray</item>
         <item name="android:background">@drawable/button_gray</item>
+    </style>
+
+    <style name="GrayOutlineButton" parent="PrimaryButton">
+        <item name="android:textColor">@color/gray</item>
+        <item name="android:background">@drawable/button_gray_outline</item>
     </style>
 
     <style name="GrayOutlineButtonSmall" parent="PrimaryButton">

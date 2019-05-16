@@ -25,7 +25,7 @@
             android:ems="10"
             android:fontFamily="@font/googlesans_medium"
             android:hint="Search Action Items"
-            android:inputType="textPersonName"
+            android:inputType="text"
             android:padding="16dp"
             android:selectAllOnFocus="true"
             android:singleLine="true"
@@ -39,8 +39,8 @@
         <Button
             android:id="@+id/searchButton"
             style="@style/PrimaryButton"
-            android:layout_width="24dp"
-            android:layout_height="24dp"
+            android:layout_width="222dp"
+            android:layout_height="448dp"
             android:layout_marginEnd="12dp"
             android:background="@drawable/icon_search_green"
             app:layout_constraintBottom_toBottomOf="@+id/searchActionItemsField"
@@ -65,8 +65,8 @@
 
         <TextView
             android:id="@+id/textView11"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="40dp"
             android:fontFamily="@font/googlesans_bold"

@@ -2,14 +2,14 @@ package secapstone.helper.model;
 
 import com.google.firebase.Timestamp;
 
-public class AmazonTransaction
+public class ProductTransaction
 {
     private int productID;
     private float amount;
     private Timestamp time;
     private boolean hasBeenAccounted; // Used to see if this transaction has gone through the accounting system.
 
-    public AmazonTransaction(int productID, float amount)
+    public ProductTransaction(int productID, float amount)
     {
         this.productID = productID;
         this.amount = amount;
