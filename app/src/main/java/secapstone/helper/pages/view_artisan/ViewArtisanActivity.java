@@ -236,7 +236,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void setUpPurchaseModal() {
         purchaseDialog.setContentView(R.layout.modal_purchase);
-        final NumberPicker np = (NumberPicker) purchaseDialog.findViewById(R.id.numberPicker);
+
+        WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
+        lp.copyFrom(purchaseDialog.getWindow().getAttributes());
+        lp.width = WindowManager.LayoutParams.MATCH_PARENT;
+
+        final NumberPicker np = purchaseDialog.findViewById(R.id.numberPicker);
         np.setMaxValue(100);
         np.setMinValue(0);
         np.setWrapSelectorWheel(false);
@@ -250,6 +255,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             }
         });
 
+        purchaseDialog.getWindow().setAttributes(lp);
         purchaseDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
     }
 
