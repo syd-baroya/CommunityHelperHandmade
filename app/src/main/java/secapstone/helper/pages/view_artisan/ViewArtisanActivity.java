@@ -381,6 +381,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         String dateToPay = date.getText().toString();
         accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
         subFromArtisanBalance(Float.parseFloat(amountPaid));
+        amount.setText(null);
+        date.setText(null);
     }
 
 
