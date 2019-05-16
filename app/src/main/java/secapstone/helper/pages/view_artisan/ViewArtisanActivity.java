@@ -39,6 +39,8 @@ import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 
+import java.util.Calendar;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -66,8 +68,13 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public String artisanPicURL;
     public float artisanMoneyOwed;
     public float newPurchase = 0.0f;
+    public Listing clickedListing = null;
     public EditText amount;
     public EditText date;
+
+
+    private AccountingSystem accountingSystem;
+
 
     private Context context;
 
@@ -94,6 +101,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         recyclerView = findViewById(R.id.recyclerView);
 
         getIncomingIntent();
+
+        accountingSystem = new AccountingSystem();
 
         contactInfoModal = new Dialog(this);
         logPaymentDialog = new Dialog(this);
@@ -232,9 +241,32 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         TextView moneyOwedText = findViewById(R.id.moneyOwed);
         String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
         moneyOwedText.setText(moneyOwedString);
+        artisanMoneyOwed = newMoneyOwed;
     }
 
-    public void setUpPurchaseModal() {
+    public void subFromArtisanBalance(float recentPayment)
+    {
+        Map<String, Object> moneyUpdates = new HashMap<>();
+        float newMoneyOwed = artisanMoneyOwed - recentPayment;
+        moneyUpdates.put("moneyOwedFromCommunityLeader", newMoneyOwed);
+
+        artisanRef.update(moneyUpdates);
+        TextView moneyOwedText = findViewById(R.id.moneyOwed);
+        String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
+        moneyOwedText.setText(moneyOwedString);
+        artisanMoneyOwed = newMoneyOwed;
+
+    }
+
+    private void resetPurchaseModal()
+    {
+        ((NumberPicker) purchaseDialog.findViewById(R.id.numberPicker)).setValue(0);
+        purchaseDialog.dismiss();
+
+    }
+
+    public void setUpPurchaseModal()
+    {
         purchaseDialog.setContentView(R.layout.modal_purchase);
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
@@ -251,7 +283,9 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             @Override
             public void onClick(View view){
                 addToArtisanBalance(newPurchase);
-                purchaseDialog.dismiss();
+                accountingSystem.logPurchase(artisanID, newPurchase, clickedListing);
+                resetPurchaseModal();
+
             }
         });
 
@@ -260,6 +294,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     }
 
     public void onClickPurchase(Listing model) {
+        clickedListing = model;
         itemClickedPrice = model.getPrice();
         setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
 
@@ -398,6 +433,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         contactInfoModal.show();
     }
 
+    private void resetLogPaymentModal()
+    {
+        ((EditText)logPaymentDialog.findViewById((R.id.amountTextField))).setText(null);
+        ((EditText)logPaymentDialog.findViewById((R.id.dateTextField))).setText(null);
+        logPaymentDialog.dismiss();
+    }
 
     public void setUpLogPaymentModal() {
         logPaymentDialog.setContentView(R.layout.modal_log_payment);
@@ -417,6 +458,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
                 EditText amount = (EditText)logPaymentDialog.findViewById((R.id.amountTextField));
                 EditText date = (EditText)logPaymentDialog.findViewById((R.id.dateTextField));
                 onClickMakePayment(amount, date);
+                resetLogPaymentModal();
             }
         });
 
@@ -430,19 +472,17 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
         String amountPaid = amount.getText().toString();
         String dateToPay = date.getText().toString();
-        AccountingSystem accountingSystem = new AccountingSystem();
         accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
-        logPaymentDialog.dismiss();
-
+        subFromArtisanBalance(Float.parseFloat(amountPaid));
     }
 
 
     public void onClickCloseModal(View view)
     {
         contactInfoModal.dismiss();
-        logPaymentDialog.dismiss();
+        resetLogPaymentModal();
         logShipmentDialog.dismiss();
-        purchaseDialog.dismiss();
+        resetPurchaseModal();
     }
 
     public void onClickCallButton() {

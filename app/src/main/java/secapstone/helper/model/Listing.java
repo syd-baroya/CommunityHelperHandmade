@@ -8,6 +8,7 @@ public class Listing
     private String title;
     private String pictureURL;
     private String description;
+    private String id;
     private float price;
 
     public Listing()
@@ -15,12 +16,13 @@ public class Listing
 
     }
 
-    public Listing(String title, String description, String pictureURL, float price)
+    public Listing(String title, String description, String pictureURL, float price, String id)
     {
         this.title = title;
         this.description = description;
         this.pictureURL = pictureURL;
         this.price = price;
+        this.id = id;
     }
 
     public String getTitle() {
@@ -54,5 +56,8 @@ public class Listing
     public void setPrice(float price) {
         this.price = price;
     }
-
+    public void setID(String id) {
+        this.id = id;
+    }
+    public String getID() { return id; }
 }

@@ -105,7 +105,7 @@
                     style="@style/GreenButton"
                     android:layout_width="128dp"
                     android:layout_height="44dp"
-                    android:onClick="onClickLogPaymentButton"
+                    android:onClick="onClickLogPayments"
                     android:text="Log Payment"
                     app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toEndOf="parent"

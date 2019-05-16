@@ -57,8 +57,8 @@ public class AccountingSystem
         System.out.println("in Accounting System logPayment");
         String userID = User.getUser().getID();
         DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
-        final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
-        CollectionReference payoutsRef = FirebaseFirestore.getInstance().collection("PayoutTranactions");
+        DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
+        final CollectionReference payoutsRef = FirebaseFirestore.getInstance().collection("PayoutTransactions");
 
 
         final PayoutTransaction mewBoi2 = new PayoutTransaction(userID, artisanID, amount);
@@ -70,31 +70,84 @@ public class AccountingSystem
                     DocumentSnapshot docSnapshot = task.getResult();
                     if(docSnapshot!=null){
                         String address = (String) docSnapshot.get("address");
-                        if(address!=null)
+                        if(address!=null) {
                             mewBoi2.setAddress(address);
+
+                            payoutsRef
+                                    .add(mewBoi2)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference) {
+                                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
+                        }
                     }
                 }else{
                     Log.d(TAG, "GET FAILED WITH: ", task.getException());
                 }
             }
         });
-        final CollectionReference finalPayoutsRef = payoutsRef;
 
 
-        finalPayoutsRef
-                .add(mewBoi2)
-                .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
-                    @Override
-                    public void onSuccess(DocumentReference documentReference){
-                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+    }
+
+    public static void logPurchase(String artisanID, float amount, Listing listing)
+    {
+        if(listing==null)
+            return;
+        System.out.println("in Accounting System logPayment");
+        String userID = User.getUser().getID();
+        DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
+        DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
+        DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
+        final CollectionReference productTransRef = FirebaseFirestore.getInstance().collection("ProductTransactions");
+
+
+        final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
+
+        productRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+            @Override
+            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                if(task.isSuccessful()){
+                    DocumentSnapshot docSnapshot = task.getResult();
+                    if(docSnapshot!=null){
+                        String id = (String) docSnapshot.get("id");
+                        System.out.println("docsnap is not null");
+                        if(id!=null) {
+                            mewBoi2.setProductID(id);
+
+                            productTransRef
+                                    .add(mewBoi2)
+                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
+                                        @Override
+                                        public void onSuccess(DocumentReference documentReference){
+                                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener(){
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
+                        }
                     }
-                })
-                .addOnFailureListener(new OnFailureListener(){
-                    @Override
-                    public void onFailure(@NonNull Exception e) {
-                        Log.w(TAG, "Error adding document", e);
-                    }
-                });
+                }else{
+                    Log.d(TAG, "GET FAILED WITH: ", task.getException());
+                }
+            }
+        });
+
+
+
 
     }
 
