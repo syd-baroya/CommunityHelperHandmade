@@ -5,6 +5,7 @@ import android.annotation.TargetApi;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.graphics.Color;
@@ -50,6 +51,8 @@ import java.util.Map;
 
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.User;
+import secapstone.helper.pages.custom_ui.CustomTextField;
+import secapstone.helper.pages.custom_ui.MyEditTextDatePicker;
 import secapstone.helper.pages.log_payment.AccountingSystem;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
@@ -475,38 +478,70 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void setUpLogPaymentModal() {
         logPaymentDialog.setContentView(R.layout.modal_log_payment);
+        logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
 
         WindowManager.LayoutParams lp = new WindowManager.LayoutParams();
         lp.copyFrom(logPaymentDialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
-
         logPaymentDialog.getWindow().setAttributes(lp);
 
-        TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
+        final TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
+        final CustomTextField amount = logPaymentDialog.findViewById((R.id.amountTextField));
+        final CustomTextField date = logPaymentDialog.findViewById((R.id.dateTextField));
+        final Button logPaymentButton = logPaymentDialog.findViewById(R.id.logPaymentButton);
+        final MyEditTextDatePicker datePicker = new MyEditTextDatePicker(logPaymentDialog.getContext(), date);
+
         title.setText("Log Payment to " + artisanName);
 
-        logPaymentDialog.findViewById(R.id.logPaymentButton).setOnClickListener(new View.OnClickListener(){
+        amount.addTextChangedListener(new TextWatcher() {
             @Override
-            public void onClick(View view){
-                EditText amount = (EditText)logPaymentDialog.findViewById((R.id.amountTextField));
-                EditText date = (EditText)logPaymentDialog.findViewById((R.id.dateTextField));
-                onClickMakePayment(amount, date);
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                if (amount.getText().length() != 0) {
+                    logPaymentButton.setEnabled(true);
+                } else {
+                    logPaymentButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        logPaymentDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
+            @Override
+            public void onDismiss(DialogInterface dialogInterface) {
                 resetLogPaymentModal();
             }
         });
 
-
-        logPaymentDialog.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
+        logPaymentButton.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View view){
+                onClickMakePayment(amount, date);
+            }
+        });
     }
 
     public void onClickMakePayment(EditText amount, EditText date)
     {
-        System.out.println("clicked make payment");
-
         String amountPaid = amount.getText().toString();
-        String dateToPay = date.getText().toString();
-        accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid) );
+
+        String dateToPay = date.getHint().toString();
+        if (date.getText().length() != 0) {
+            dateToPay = date.getText().toString();
+        }
+
+        accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid));
         subFromArtisanBalance(Float.parseFloat(amountPaid));
+        logPaymentDialog.dismiss();
+
     }
 
 
