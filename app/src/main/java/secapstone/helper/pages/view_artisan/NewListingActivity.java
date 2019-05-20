@@ -21,7 +21,9 @@ import android.text.TextWatcher;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
+import android.widget.SeekBar;
 
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
@@ -35,6 +37,8 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.IOException;
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
@@ -56,6 +60,8 @@ public class NewListingActivity extends AppCompatActivity {
     Button uploadButton;
     String artisanID;
 
+    String paymentAmount = "";
+
     //private static CollectionReference productsRef;
     private Bitmap productImage = null;
 
@@ -71,9 +77,11 @@ public class NewListingActivity extends AppCompatActivity {
         uploadButton = findViewById(R.id.nlAddListing);
         uploadButton.setEnabled(false);
 
-        setupTextChangedListener(name);
-        setupTextChangedListener(price);
-        setupTextChangedListener(description);
+        setupEnableButtonListener(name);
+        setupEnableButtonListener(price);
+        setupEnableButtonListener(description);
+
+        setupFormatPriceListener(price);
 
         loadingSpinner = findViewById(R.id.progress_loader_add);
         getIncomingIntent();
@@ -218,7 +226,7 @@ public class NewListingActivity extends AppCompatActivity {
         });
     }
 
-    public void setupTextChangedListener(CustomTextField editText)
+    public void setupEnableButtonListener(CustomTextField editText)
     {
         editText.addTextChangedListener(new TextWatcher()
         {
@@ -230,6 +238,40 @@ public class NewListingActivity extends AppCompatActivity {
                         uploadButton.setEnabled(true);
                 } else {
                     uploadButton.setEnabled(false);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable arg0) {}
+
+            @Override
+            public void beforeTextChanged(CharSequence arg0, int arg1,int arg2, int arg3) {}
+        });
+    }
+
+    public void setupFormatPriceListener(final CustomTextField amountField)
+    {
+        amountField.addTextChangedListener(new TextWatcher()
+        {
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count)
+            {
+                if(!s.toString().equals(paymentAmount)){
+                    String cleanString = s.toString().replaceAll("[$,.]", "");
+
+                    if (cleanString.length() > 0) {
+                        double parsed = Double.parseDouble(cleanString);
+                        String formatted = NumberFormat.getCurrencyInstance().format((parsed/100));
+
+                        paymentAmount = formatted;
+                        amountField.setText(formatted);
+                        amountField.setSelection(formatted.length());
+                    } else {
+                        String formatted = "";
+
+                        paymentAmount = formatted;
+                        amountField.setText(formatted);
+                    }
                 }
             }
 
