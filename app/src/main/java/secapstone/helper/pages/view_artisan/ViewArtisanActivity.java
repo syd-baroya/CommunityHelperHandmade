@@ -23,12 +23,14 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import android.text.Editable;
 import android.text.TextWatcher;
+import android.util.Log;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.NumberPicker;
+import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -44,6 +46,8 @@ import com.google.firebase.storage.StorageReference;
 
 import org.w3c.dom.Text;
 
+import java.math.BigDecimal;
+import java.text.NumberFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
@@ -75,9 +79,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public String artisanPicURL;
     public float artisanMoneyOwed;
     public float newPurchase = 0.0f;
+    public String paymentAmount = "";
     public Listing clickedListing = null;
-    public EditText amount;
-    public EditText date;
 
 
     private AccountingSystem accountingSystem;
@@ -223,6 +226,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void onClickLogPayments(View view)
     {
+        ((SeekBar)logPaymentDialog.findViewById((R.id.seekBar))).setMax((int) Math.ceil(artisanMoneyOwed));
         logPaymentDialog.show();
     }
 
@@ -262,6 +266,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
+
+
 
     }
 
@@ -308,7 +314,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         purchaseDialog.show();
     }
 
-
     public void setUpLogShipmentModal() {
 
         logShipmentDialog.setContentView(R.layout.modal_log_shipment);
@@ -325,6 +330,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
         loadLogShipmentInfo(model);
         setUpLogShipmentListeners(model);
+
+
 
         logShipmentDialog.show();
     }
@@ -485,33 +492,37 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
         logPaymentDialog.getWindow().setAttributes(lp);
 
-        final TextView title = logPaymentDialog.findViewById(R.id.logPaymentTitle);
-        final CustomTextField amount = logPaymentDialog.findViewById((R.id.amountTextField));
+        final EditText amountField = logPaymentDialog.findViewById((R.id.amountTextField));
         final CustomTextField date = logPaymentDialog.findViewById((R.id.dateTextField));
         final Button logPaymentButton = logPaymentDialog.findViewById(R.id.logPaymentButton);
         final MyEditTextDatePicker datePicker = new MyEditTextDatePicker(logPaymentDialog.getContext(), date);
+        final SeekBar amountSlider = logPaymentDialog.findViewById(R.id.seekBar);
 
-        title.setText("Log Payment to " + artisanName);
+        logPaymentButton.setText("Log Payment to " + artisanName);
 
-        amount.addTextChangedListener(new TextWatcher() {
-            @Override
-            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-
-            }
-
+        amountField.addTextChangedListener(new TextWatcher() {
             @Override
             public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
-                if (amount.getText().length() != 0) {
-                    logPaymentButton.setEnabled(true);
-                } else {
-                    logPaymentButton.setEnabled(false);
+                if (charSequence.toString().isEmpty() || charSequence.toString().equals("$")) {
+                    setAmountTextField(amountField, new BigDecimal(0), logPaymentButton, amountSlider);
+                }
+
+                if(!charSequence.toString().equals(paymentAmount)){
+                    String cleanString = charSequence.toString().replaceAll("[$,.]", "");
+
+                    if (cleanString.length() == 0) {
+                        setAmountTextField(amountField, new BigDecimal(0), logPaymentButton, amountSlider);
+                    } else {
+                        BigDecimal parsed = new BigDecimal(cleanString).setScale(2,BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100),BigDecimal.ROUND_FLOOR);
+                        setAmountTextField(amountField, parsed, logPaymentButton, amountSlider);
+                    }
                 }
             }
 
             @Override
-            public void afterTextChanged(Editable editable) {
-
-            }
+            public void afterTextChanged(Editable editable) {}
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {}
         });
 
         logPaymentDialog.setOnDismissListener(new DialogInterface.OnDismissListener() {
@@ -524,14 +535,49 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         logPaymentButton.setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                onClickMakePayment(amount, date);
+                onClickMakePayment(amountField, date);
             }
         });
+
+        amountSlider.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
+            @Override
+            public void onProgressChanged(SeekBar seekBar, int i, boolean b) {
+                BigDecimal val;
+                if (i == seekBar.getMax()) {
+                    val = new BigDecimal(artisanMoneyOwed);
+                } else {
+                    val = new BigDecimal(i);
+                }
+
+                setAmountTextField(amountField, val, logPaymentButton, seekBar);
+            }
+
+            @Override
+            public void onStartTrackingTouch(SeekBar seekBar) {}
+            @Override
+            public void onStopTrackingTouch(SeekBar seekBar) {}
+        });
+    }
+
+    public void setAmountTextField(EditText amountField, BigDecimal value, Button logPaymentButton, SeekBar seekBar) {
+        String amountString = NumberFormat.getCurrencyInstance().format(value);
+
+        paymentAmount = amountString;
+        amountField.setText(amountString);
+        amountField.setSelection(amountString.length());
+
+        seekBar.setProgress((int) Math.round(value.doubleValue()));
+
+        if (value.compareTo(new BigDecimal(0)) > 0) {
+            logPaymentButton.setEnabled(true);
+        } else {
+            logPaymentButton.setEnabled(false);
+        }
     }
 
     public void onClickMakePayment(EditText amount, EditText date)
     {
-        String amountPaid = amount.getText().toString();
+        String amountPaid = paymentAmount.replace("$", "");
 
         String dateToPay = date.getHint().toString();
         if (date.getText().length() != 0) {
@@ -541,7 +587,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid));
         subFromArtisanBalance(Float.parseFloat(amountPaid));
         logPaymentDialog.dismiss();
-
     }
 
 
