@@ -514,7 +514,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
                         setAmountTextField(amountField, new BigDecimal(0), logPaymentButton, amountSlider);
                     } else {
                         BigDecimal parsed = new BigDecimal(cleanString).setScale(2,BigDecimal.ROUND_FLOOR).divide(new BigDecimal(100),BigDecimal.ROUND_FLOOR);
-                        setAmountTextField(amountField, parsed, logPaymentButton, amountSlider);
+
+                        if (parsed.doubleValue() > artisanMoneyOwed) {
+                            setAmountTextField(amountField, new BigDecimal(artisanMoneyOwed), logPaymentButton, amountSlider);
+                        } else {
+                            setAmountTextField(amountField, parsed, logPaymentButton, amountSlider);
+                        }
                     }
                 }
             }
