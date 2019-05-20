@@ -67,7 +67,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="24dp"
-            android:layout_marginTop="40dp"
+            android:layout_marginTop="44dp"
             android:layout_marginEnd="24dp"
             android:fontFamily="@font/googlesans_regular"
             android:text="Date:"
@@ -117,13 +117,13 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="16dp"
-            android:layout_marginTop="12dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="16dp"
+            android:progressDrawable="@drawable/background_seekbar"
+            android:thumb="@drawable/seekbar_thumb"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/amountTextField"
-            android:progressDrawable="@drawable/background_seekbar"
-            android:thumb="@drawable/seekbar_thumb"/>
+            app:layout_constraintTop_toBottomOf="@+id/amountTextField" />
 
 
     </androidx.constraintlayout.widget.ConstraintLayout>

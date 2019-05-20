@@ -82,9 +82,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public String paymentAmount = "";
     public Listing clickedListing = null;
 
-
     private AccountingSystem accountingSystem;
-
 
     private Context context;
 
