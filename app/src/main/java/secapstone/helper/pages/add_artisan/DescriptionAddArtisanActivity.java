@@ -14,7 +14,7 @@ import secapstone.helper.R;
 
 public class DescriptionAddArtisanActivity extends AppCompatActivity
 {
-    CustomTextField desInfo, craftInfo, howItsDoneInfo, inspirationInfo;
+    CustomTextField desInfo;
     Button nextButton;
 
     @Override
@@ -24,9 +24,6 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
         setContentView(R.layout.activity_description_add_artisan);
 
         desInfo = findViewById(R.id.artisanDescription);
-        craftInfo = findViewById(R.id.craftEditText);
-        howItsDoneInfo = findViewById(R.id.howItsMadeEditText);
-        inspirationInfo = findViewById(R.id.inspirationEditText);
         nextButton = findViewById(R.id.nextButton);
 
         setupTextChangedListener(desInfo);
@@ -37,9 +34,6 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
     public void onClickNext(View view)
     {
         setDescription(desInfo.getText().toString());
-//        setCraft(craftInfo.getText().toString());
-//        setHowItsMade(howItsDoneInfo.getText().toString());
-//        setInspiration(inspirationInfo.getText().toString());
 
         startActivity(new Intent(DescriptionAddArtisanActivity.this, SignatureAddArtisanActivity.class));
         overridePendingTransition(R.anim.slide_from_right, R.anim.slide_to_left);
@@ -56,17 +50,6 @@ public class DescriptionAddArtisanActivity extends AppCompatActivity
         WelcomeAddArtisanActivity.artisanObject.setDescription(des);
     }
 
-    public void setCraft(String c){
-        WelcomeAddArtisanActivity.artisanObject.setCraft(c);
-    }
-
-    public void setHowItsMade(String him){
-        WelcomeAddArtisanActivity.artisanObject.setHowItsMade(him);
-    }
-
-    public void setInspiration(String i){
-        WelcomeAddArtisanActivity.artisanObject.setInspiration(i);
-    }
 
     public void setupTextChangedListener(CustomTextField editText)
     {
