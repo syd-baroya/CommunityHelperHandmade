@@ -30,8 +30,5 @@ cache:
   - $HOME/.gradle/caches/
   - $HOME/.gradle/wrapper/
   - $HOME/.android/build-cache
-before_script :
-- mkdir -p "$ANDROID_HOME/licenses"
-- cp ./licenses/* "$ANDROID_HOME/licenses"
 script :
 - ./gradlew build check
