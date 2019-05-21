@@ -22,7 +22,9 @@ import com.google.firebase.storage.UploadTask;
 import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import secapstone.helper.model.Artisan;
 import secapstone.helper.model.Listing;
@@ -159,6 +161,11 @@ public class AccountingSystem
         final CollectionReference productTransRef = FirebaseFirestore.getInstance().collection("Shipments");
 
         final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
+
+        Map<String, Object> moneyUpdates = new HashMap<>();
+        int shippedCount = listing.getShippedCount() + amount;
+        moneyUpdates.put("shippedCount", shippedCount);
+        productRef.update(moneyUpdates);
 
         productRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

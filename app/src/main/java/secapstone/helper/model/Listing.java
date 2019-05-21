@@ -10,6 +10,7 @@ public class Listing
     private String description;
     private String id;
     private float price;
+    private int shippedCount;
 
     public Listing()
     {
@@ -23,6 +24,7 @@ public class Listing
         this.pictureURL = pictureURL;
         this.price = price;
         this.id = id;
+        this.shippedCount = 0;
     }
 
     public String getTitle() {
@@ -60,4 +62,6 @@ public class Listing
         this.id = id;
     }
     public String getID() { return id; }
+    public int getShippedCount(){return shippedCount; }
+    public void setShippedCount(int shippedCount){this.shippedCount=shippedCount;}
 }

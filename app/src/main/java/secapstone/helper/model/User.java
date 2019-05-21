@@ -6,6 +6,7 @@ public class User implements Serializable {
     private String email;
     private String name;
     private String id;
+    private float balance = 0.0f;
 
     private static User obj;//Early, instance will be created at load time
     private User(){}
@@ -37,5 +38,8 @@ public class User implements Serializable {
     public String getID(){
         return id;
     }
+
+    public float getBalance() { return balance; }
+    public void updateBalance(float balance) { this.balance += balance; }
 }
 

@@ -251,6 +251,9 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
+
+        User.getUser().updateBalance(recentPurchase);
+
     }
 
     public void subFromArtisanBalance(float recentPayment)
@@ -265,7 +268,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
 
-
+        User.getUser().updateBalance(recentPayment*(-1.0f));
 
     }
 
@@ -284,11 +287,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         lp.copyFrom(purchaseDialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 
-        final NumberPicker np = purchaseDialog.findViewById(R.id.numberPicker);
-        np.setMaxValue(100);
-        np.setMinValue(0);
-        np.setWrapSelectorWheel(false);
-        np.setOnValueChangedListener(this);
 
         purchaseDialog.findViewById(R.id.confirmPurchaseButton).setOnClickListener(new View.OnClickListener(){
             @Override
@@ -308,6 +306,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         clickedListing = model;
         itemClickedPrice = model.getPrice();
         setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
+        final NumberPicker np = purchaseDialog.findViewById(R.id.numberPicker);
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(this);
+        np.setMaxValue(clickedListing.getShippedCount());
+        np.setMinValue(0);
 
         purchaseDialog.show();
     }
@@ -328,8 +331,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
         loadLogShipmentInfo(model);
         setUpLogShipmentListeners(model);
-
-
 
         logShipmentDialog.show();
     }

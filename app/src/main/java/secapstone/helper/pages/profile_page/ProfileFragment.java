@@ -63,6 +63,7 @@ public class ProfileFragment extends Fragment {
     private CustomTextField reportField;
     private ConstraintLayout closeButton;
     private Button submitReportButton;
+    private TextView balanceText;
     public void setArtisanRef(CollectionReference artisansRef){
         this.artisansRef = artisansRef;
     }
@@ -112,8 +113,13 @@ public class ProfileFragment extends Fragment {
             }
         });
 
+        balanceText = view.findViewById(R.id.balanceText);
 
         User user_info = User.getUser();
+
+        String balanceString = "$" + String.format("%,.2f", user_info.getBalance());
+        balanceText.setText(balanceString);
+
         setImage("",  user_info.getName());
 
         setStatusBarToDark();
