@@ -8,6 +8,7 @@ import android.content.Intent;
 import android.graphics.Color;
 
 import androidx.annotation.NonNull;
+import androidx.core.content.ContextCompat;
 import androidx.fragment.app.Fragment;
 
 import android.graphics.drawable.ColorDrawable;
@@ -302,6 +303,8 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
         int flags = View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR;
         getActivity().getWindow().getDecorView().setSystemUiVisibility(flags);
         getActivity().getWindow().setStatusBarColor(Color.WHITE);
+
+        getActivity().getWindow().setNavigationBarColor(Color.rgb(0,0,0));
     }
 
     public void setUpFilterSpinner() {

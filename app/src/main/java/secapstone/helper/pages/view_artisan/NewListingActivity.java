@@ -168,10 +168,14 @@ public class NewListingActivity extends AppCompatActivity {
 
     public void onClickAddListingButton(View view) {
         loadingSpinner.setVisibility(View.VISIBLE);
+
         Listing newListing = new Listing();
         newListing.setTitle(name.getText().toString());
         newListing.setDescription(description.getText().toString());
-        newListing.setPrice(Float.parseFloat(price.getText().toString()));
+
+        String amountPaid = price.getText().toString().replace("$", "");
+        newListing.setPrice(Float.parseFloat(amountPaid));
+
         pushListing(newListing);
     }
 

@@ -66,7 +66,7 @@
             <androidx.constraintlayout.widget.ConstraintLayout
                 android:id="@+id/logPaymentContainer"
                 android:layout_width="347dp"
-                android:layout_height="64dp"
+                android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="32dp"
@@ -90,14 +90,12 @@
                     android:layout_height="wrap_content"
                     android:layout_marginTop="4dp"
                     android:layout_marginEnd="13dp"
-                    android:layout_marginBottom="4dp"
                     android:fontFamily="@font/googlesans_medium"
                     android:textColor="#000000"
                     android:textSize="26dp"
-                    app:layout_constraintBottom_toBottomOf="parent"
                     app:layout_constraintEnd_toStartOf="@+id/logPaymentButton"
                     app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toBottomOf="@+id/textView6" />
+                    app:layout_constraintTop_toBottomOf="@+id/balanceText" />
 
                 <Button
                     android:id="@+id/logPaymentButton"
