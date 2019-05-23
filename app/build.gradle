@@ -9,7 +9,6 @@ def keystoreProperties = new Properties()
 // Load your keystore.properties file into the keystoreProperties object.
 keystoreProperties.load(new FileInputStream(keystorePropertiesFile))
 
-
 android {
     android.defaultConfig.vectorDrawables.useSupportLibrary = true
     signingConfigs {
@@ -103,6 +102,8 @@ dependencies {
     implementation files('lib/aws-android-sdk-sns.jar')
     implementation files('lib/aws-android-sdk-sqs.jar')
     implementation files('lib/aws-android-sdk-transcribe.jar')
+    implementation 'com.kyanogen.signatureview:signature-view:1.2'
+
 }
 
 apply plugin: 'com.google.gms.google-services'
