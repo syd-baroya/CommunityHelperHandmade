@@ -95,6 +95,33 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/date" />
 
+        <TextView
+            android:id="@+id/signatureLabel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="24dp"
+            android:layout_marginTop="44dp"
+            android:layout_marginEnd="24dp"
+            android:fontFamily="@font/googlesans_regular"
+            android:text="Artisan's Signature:"
+            android:textColor="@color/gray"
+            android:textSize="16sp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/dateTextField" />
+
+        <com.kyanogen.signatureview.SignatureView
+            xmlns:sign="http://schemas.android.com/apk/res-auto"
+            android:id="@+id/signature_view"
+            android:layout_width="match_parent"
+            android:layout_height="150dp"
+            sign:penSize="5dp"
+            sign:backgroundColor="#ffffff"
+            sign:penColor="#000000"
+            sign:enableSignature="true"
+            app:layout_constraintTop_toBottomOf="@+id/signatureLabel"/>
+
         <Button
             android:id="@+id/logPaymentButton"
             style="@style/PrimaryButtonSquare"
@@ -110,7 +137,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/dateTextField" />
+            app:layout_constraintTop_toBottomOf="@+id/signature_view" />
 
         <SeekBar
             android:id="@+id/seekBar"
