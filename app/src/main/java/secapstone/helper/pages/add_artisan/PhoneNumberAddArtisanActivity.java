@@ -7,13 +7,14 @@ import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 
 import secapstone.helper.pages.custom_ui.CustomTextField;
 import secapstone.helper.R;
 
 public class PhoneNumberAddArtisanActivity extends AppCompatActivity
 {
-    CustomTextField pNum;
+    EditText pNum;
     Button nextButton;
 
     @Override
@@ -22,7 +23,7 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_phone_number_add_artisan);
 
-        pNum = findViewById(R.id.reportText);
+        pNum = findViewById(R.id.phoneText);
         nextButton = findViewById(R.id.nextButton);
 
         setupTextChangedListener(pNum);
@@ -48,7 +49,7 @@ public class PhoneNumberAddArtisanActivity extends AppCompatActivity
     }
 
 
-    public void setupTextChangedListener(CustomTextField editText)
+    public void setupTextChangedListener(EditText editText)
     {
         editText.addTextChangedListener(new TextWatcher()
         {
