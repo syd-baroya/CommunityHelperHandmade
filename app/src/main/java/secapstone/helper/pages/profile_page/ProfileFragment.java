@@ -17,26 +17,22 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.api.Listener;
 import com.amazon.identity.auth.device.api.authorization.AuthorizationManager;
-import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.firestore.Query;
 
 import java.util.Calendar;
 import java.util.HashMap;
 import java.util.Map;
 
 import secapstone.helper.R;
-import secapstone.helper.model.Artisan;
 import secapstone.helper.model.User;
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.pages.artisans_page.ArtisanAdapter;
@@ -85,7 +81,7 @@ public class ProfileFragment extends Fragment {
         logoutButton = view.findViewById(R.id.logoutButton);
         reportIssueButton = view.findViewById(R.id.reportIssueButton);
         submitReportButton = reportIssueModal.findViewById(R.id.submitReportButton);
-        reportField = reportIssueModal.findViewById(R.id.reportText);
+        reportField = reportIssueModal.findViewById(R.id.phoneText);
         closeButton = reportIssueModal.findViewById(R.id.closeButton);
 
         logoutButton.setOnClickListener(new View.OnClickListener() {
