@@ -117,6 +117,13 @@ public class AccountingSystem
 
         final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
 
+        Map<String, Object> purchaseUpdate = new HashMap<>();
+        int amountPurchased = (int) ((int) amount/listing.getPrice());
+        int newShippedCount = listing.getShippedCount() - amountPurchased;
+        purchaseUpdate.put("shippedCount", newShippedCount);
+        productRef.update(purchaseUpdate);
+
+
         productRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
@@ -162,10 +169,10 @@ public class AccountingSystem
 
         final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
 
-        Map<String, Object> moneyUpdates = new HashMap<>();
+        Map<String, Object> shipmentUpdates = new HashMap<>();
         int shippedCount = listing.getShippedCount() + amount;
-        moneyUpdates.put("shippedCount", shippedCount);
-        productRef.update(moneyUpdates);
+        shipmentUpdates.put("shippedCount", shippedCount);
+        productRef.update(shipmentUpdates);
 
         productRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override

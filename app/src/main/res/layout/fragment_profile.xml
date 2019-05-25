@@ -212,7 +212,7 @@
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:fontFamily="@font/googlesans_medium"
-            android:text="$0"
+            android:text="$0.00"
             android:textColor="#000000"
             android:textSize="26dp"
             app:layout_constraintStart_toStartOf="parent"

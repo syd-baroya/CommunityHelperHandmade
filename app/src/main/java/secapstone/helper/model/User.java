@@ -40,6 +40,7 @@ public class User implements Serializable {
     }
 
     public float getBalance() { return balance; }
+    public void setBalance(float balance) { this.balance = balance; }
     public void updateBalance(float balance) { this.balance += balance; }
 }
 

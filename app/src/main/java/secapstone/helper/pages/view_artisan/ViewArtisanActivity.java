@@ -83,6 +83,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public Listing clickedListing = null;
 
     private AccountingSystem accountingSystem;
+    private User user_info;
 
     private Context context;
 
@@ -91,6 +92,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     //reference to a certain artisan in database
     private DocumentReference artisanRef;
+    private DocumentReference userRef;
     private float itemClickedPrice=0.0f;
 
     Dialog contactInfoModal;
@@ -122,7 +124,10 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         setUpLogShipmentModal();
         setUpPurchaseModal();
 
-        artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
+        user_info = User.getUser();
+
+        userRef = FirebaseFirestore.getInstance().collection("users").document(user_info.getID());
+        artisanRef = userRef.collection("artisans").document(artisanID);
 
         setStatusBarToDark();
 
@@ -252,7 +257,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
 
-        User.getUser().updateBalance(recentPurchase);
+        user_info.updateBalance(recentPurchase);
+        moneyUpdates = new HashMap<>();
+        newMoneyOwed = user_info.getBalance();
+        moneyUpdates.put("balance", newMoneyOwed);
+        userRef.update(moneyUpdates);
 
     }
 
@@ -268,8 +277,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
 
-        User.getUser().updateBalance(recentPayment*(-1.0f));
-
+        user_info.updateBalance(recentPayment*(-1.0f));
+        moneyUpdates = new HashMap<>();
+        newMoneyOwed = user_info.getBalance();
+        moneyUpdates.put("balance", newMoneyOwed);
+        userRef.update(moneyUpdates);
     }
 
     private void resetPurchaseModal()
