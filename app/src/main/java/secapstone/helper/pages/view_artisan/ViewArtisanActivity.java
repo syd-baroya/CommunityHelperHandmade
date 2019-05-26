@@ -69,8 +69,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     private static final String TAG = "ViewArtisanActivity";
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     public String artisanName;
     public String artisanAddress;
     public String artisanPhone;
@@ -224,7 +222,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void onClickReportsButton(View view)
     {
-        startActivity(new Intent(ViewArtisanActivity.this, ViewReportsActivity.class));
+        Intent intent = new Intent(context, ViewReportsActivity.class);
+        intent.putExtra("artisanID", artisanID);
+        intent.putExtra("cgaID", user_info.getID());
+
+        context.startActivity(intent);
     }
 
     public void onClickLogPayments(View view)
