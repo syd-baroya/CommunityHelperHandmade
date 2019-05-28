@@ -57,20 +57,15 @@ dependencies {
     implementation 'androidx.legacy:legacy-support-v4:1.0.0'
     androidTestImplementation 'androidx.test:runner:1.1.1'
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
-
     implementation 'com.google.firebase:firebase-auth:16.2.1'
     implementation 'com.firebaseui:firebase-ui-firestore:4.2.1'
     implementation 'com.google.firebase:firebase-core:16.0.8'
-
     testImplementation 'junit:junit:4.12'
-
     implementation 'com.google.android.gms:play-services-maps:16.1.0'
     implementation 'com.google.android.gms:play-services-places:16.0.0'
-
     implementation 'de.hdodenhof:circleimageview:2.2.0'
     implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
-
     implementation 'androidx.arch.core:core-runtime:2.0.1'
     implementation 'com.firebaseui:firebase-ui-storage:4.2.1'
     implementation 'androidx.multidex:multidex:2.0.1'
@@ -103,7 +98,7 @@ dependencies {
     implementation files('lib/aws-android-sdk-sqs.jar')
     implementation files('lib/aws-android-sdk-transcribe.jar')
     implementation 'com.kyanogen.signatureview:signature-view:1.2'
-
+    implementation files('opencsv-4.6.jar')
 }
 
 apply plugin: 'com.google.gms.google-services'
