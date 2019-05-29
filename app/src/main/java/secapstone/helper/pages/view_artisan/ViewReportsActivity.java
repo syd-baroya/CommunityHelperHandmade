@@ -79,7 +79,7 @@ public class ViewReportsActivity extends AppCompatActivity
                 AlertDialog.Builder alertBuilder = new AlertDialog.Builder(this);
                 alertBuilder.setCancelable(true);
 //                alertBuilder.setTitle(getString(R.string.permission_necessary));
-//                alertBuilder.setMessage(R.string.storage_permission_is_encessary_to_wrote_event);
+//                alertBuilder.setMessage(R.string.storage_permission_is_necessary_to_wrote_event);
                 alertBuilder.setPositiveButton(android.R.string.yes, new DialogInterface.OnClickListener() {
                     @TargetApi(Build.VERSION_CODES.JELLY_BEAN)
                     public void onClick(DialogInterface dialog, int which) {
@@ -177,7 +177,7 @@ public class ViewReportsActivity extends AppCompatActivity
         String[] data = {"Address", "Amount", "artisanID", "cgaID"};
 
         writer.writeNext(data);
-        writer.writeAll(dataList);
+        //writer.writeAll(dataList);
 
         try {
             writer.close();
