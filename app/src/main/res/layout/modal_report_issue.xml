@@ -10,7 +10,7 @@
     app:layout_constraintStart_toStartOf="parent">
 
     <TextView
-        android:id="@+id/phone_num"
+        android:id="@+id/downloadModalText"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -25,7 +25,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/phone_num2"
+        android:id="@+id/downloadModalSubtext"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:layout_marginStart="32dp"
@@ -37,7 +37,7 @@
         android:textSize="16sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_num" />
+        app:layout_constraintTop_toBottomOf="@+id/downloadModalText" />
 
     <secapstone.helper.pages.custom_ui.CustomTextField
         android:id="@+id/phoneText"
@@ -51,10 +51,10 @@
         android:hint="What's going on?"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/phone_num2" />
+        app:layout_constraintTop_toBottomOf="@+id/downloadModalSubtext" />
 
     <Button
-        android:id="@+id/submitReportButton"
+        android:id="@+id/downloadModalButton"
         style="@style/PrimaryButtonSquare"
         android:layout_width="0dp"
         android:layout_height="wrap_content"

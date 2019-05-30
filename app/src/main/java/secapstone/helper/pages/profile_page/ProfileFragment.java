@@ -18,7 +18,6 @@ import androidx.annotation.NonNull;
 import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import com.amazon.identity.auth.device.AuthError;
 import com.amazon.identity.auth.device.api.Listener;
@@ -39,8 +38,6 @@ import java.util.Map;
 
 import secapstone.helper.R;
 import secapstone.helper.model.User;
-import secapstone.helper.pages.MainActivity;
-import secapstone.helper.pages.artisans_page.ArtisanAdapter;
 import secapstone.helper.pages.custom_ui.CustomTextField;
 import secapstone.helper.pages.login.LoginActivity;
 import secapstone.helper.pages.view_artisan.ViewReportsActivity;
@@ -83,7 +80,7 @@ public class ProfileFragment extends Fragment {
 
         logoutButton = view.findViewById(R.id.logoutButton);
         reportIssueButton = view.findViewById(R.id.reportIssueButton);
-        submitReportButton = reportIssueModal.findViewById(R.id.submitReportButton);
+        submitReportButton = reportIssueModal.findViewById(R.id.downloadModalButton);
         reportField = reportIssueModal.findViewById(R.id.phoneText);
         closeButton = reportIssueModal.findViewById(R.id.closeButton);
 

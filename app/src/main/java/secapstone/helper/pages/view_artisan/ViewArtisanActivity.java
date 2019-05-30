@@ -262,44 +262,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         startActivity(intent);
     }
 
-    public void addToArtisanBalance(float recentPurchase)
-    {
-        Map<String, Object> moneyUpdates = new HashMap<>();
-        float newMoneyOwed = recentPurchase + artisanMoneyOwed;
-        moneyUpdates.put("moneyOwedFromCommunityLeader", newMoneyOwed);
-
-        artisanRef.update(moneyUpdates);
-        TextView moneyOwedText = findViewById(R.id.moneyOwed);
-        String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
-        moneyOwedText.setText(moneyOwedString);
-        artisanMoneyOwed = newMoneyOwed;
-
-        user_info.updateBalance(recentPurchase);
-        moneyUpdates = new HashMap<>();
-        newMoneyOwed = user_info.getBalance();
-        moneyUpdates.put("balance", newMoneyOwed);
-        userRef.update(moneyUpdates);
-
-    }
-
-    public void subFromArtisanBalance(float recentPayment)
-    {
-        Map<String, Object> moneyUpdates = new HashMap<>();
-        float newMoneyOwed = artisanMoneyOwed - recentPayment;
-        moneyUpdates.put("moneyOwedFromCommunityLeader", newMoneyOwed);
-
-        artisanRef.update(moneyUpdates);
-        TextView moneyOwedText = findViewById(R.id.moneyOwed);
-        String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
-        moneyOwedText.setText(moneyOwedString);
-        artisanMoneyOwed = newMoneyOwed;
-
-        user_info.updateBalance(recentPayment*(-1.0f));
-        moneyUpdates = new HashMap<>();
-        newMoneyOwed = user_info.getBalance();
-        moneyUpdates.put("balance", newMoneyOwed);
-        userRef.update(moneyUpdates);
-    }
 
     private void resetPurchaseModal()
     {
