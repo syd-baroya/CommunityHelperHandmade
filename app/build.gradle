@@ -103,6 +103,7 @@ dependencies {
     implementation files('lib/aws-android-sdk-sqs.jar')
     implementation files('lib/aws-android-sdk-transcribe.jar')
     implementation 'com.kyanogen.signatureview:signature-view:1.2'
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 
 }
 
