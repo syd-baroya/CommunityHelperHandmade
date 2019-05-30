@@ -15,6 +15,7 @@
         app:layout_constraintTop_toTopOf="parent">
 
         <com.kyanogen.signatureview.SignatureView
+            android:id="@+id/signature_view"
             android:layout_width="0dp"
             android:layout_height="0dp"
             app:layout_constraintBottom_toBottomOf="parent"
@@ -182,6 +183,7 @@
                 android:layout_marginStart="16dp"
                 android:layout_marginTop="24dp"
                 android:layout_marginEnd="16dp"
+                android:enabled="False"
                 android:text="Confirm Payment"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"

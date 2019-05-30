@@ -30,7 +30,7 @@ public class Artisan {
     }
 
     public Artisan() {
-
+        moneyOwedFromCommunityLeader = 0f;
     }
 
     public void setName(String n) {
