@@ -10,6 +10,7 @@ import androidx.annotation.NonNull;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -40,7 +41,6 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
         this.context = context;
         this.artisansRef = artisansRef;
         this.frag = frag;
-
     }
 
     @Override
@@ -48,7 +48,7 @@ public class ArtisanAdapter extends FirestoreRecyclerAdapter<Artisan, ArtisanAda
         holder.textViewDescription.setText(model.getDescription());
         holder.textViewName.setText(String.valueOf(model.getName()));
 
-        System.out.println(position);
+        Log.d("TAG", ""+ position);
 
         final ArtisanHolder copy = holder;
         final Artisan modelCopy = model;
