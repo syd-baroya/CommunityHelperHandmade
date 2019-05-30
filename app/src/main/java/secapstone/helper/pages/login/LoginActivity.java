@@ -23,10 +23,14 @@ import com.amazon.identity.auth.device.api.authorization.ProfileScope;
 import com.amazon.identity.auth.device.api.authorization.User;
 import com.amazon.identity.auth.device.api.workflow.RequestContext;
 import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 import secapstone.helper.pages.MainActivity;
 import secapstone.helper.R;
@@ -155,12 +159,26 @@ public class LoginActivity extends AppCompatActivity {
                         if (task.isSuccessful()) {
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "Created firebase user successfully");
-                            FirebaseUser user = mAuth.getCurrentUser();
+                            final FirebaseUser user = mAuth.getCurrentUser();
                             CGA = secapstone.helper.model.User.getUser();
                             CGA.setEmail(email);
                             CGA.setID(user.getUid());
                             CGA.setName(name);
-                            goToMainActivity(user);
+
+                            FirebaseFirestore db = FirebaseFirestore.getInstance();
+                            db.collection("users").document(user.getUid()).set(CGA)
+                                    .addOnSuccessListener(new OnSuccessListener() {
+                                        @Override
+                                        public void onSuccess(Object o) {
+                                            goToMainActivity(user);
+                                        }
+                                    })
+                                    .addOnFailureListener(new OnFailureListener() {
+                                        @Override
+                                        public void onFailure(@NonNull Exception e) {
+                                            Log.w(TAG, "Error adding document", e);
+                                        }
+                                    });
                         } else {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "Failed to create firebase user", task.getException());
