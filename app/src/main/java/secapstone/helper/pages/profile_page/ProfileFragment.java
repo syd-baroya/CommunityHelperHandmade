@@ -3,6 +3,7 @@ package secapstone.helper.pages.profile_page;
 
 import android.annotation.TargetApi;
 import android.app.Dialog;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Color;
 import android.graphics.drawable.ColorDrawable;
@@ -12,6 +13,7 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -60,9 +62,12 @@ public class ProfileFragment extends Fragment {
     private ConstraintLayout closeButton;
     private Button submitReportButton;
     private TextView balanceText;
+    private LinearLayout reportsLayout;
+
     public void setArtisanRef(CollectionReference artisansRef){
         this.artisansRef = artisansRef;
     }
+
 
     public ProfileFragment() {
         // Required empty public constructor
@@ -73,7 +78,7 @@ public class ProfileFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
 
         view = inflater.inflate(R.layout.fragment_profile, container, false);
-
+        reportsLayout = view.findViewById(R.id.reportsLayout);
         reportIssueModal = new Dialog(this.getContext());
         reportIssueModal.setContentView(R.layout.modal_report_issue);
         reportIssueModal.getWindow().setBackgroundDrawable(new ColorDrawable(Color.TRANSPARENT));
@@ -100,6 +105,12 @@ public class ProfileFragment extends Fragment {
             @Override
             public void onClick(View view) {
                 onClickSubmitReport();
+            }
+        });
+        reportsLayout.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                onClickReportsButton(v);
             }
         });
         closeButton.setOnClickListener(new View.OnClickListener() {
@@ -135,6 +146,14 @@ public class ProfileFragment extends Fragment {
         return view;
     }
 
+    public void onClickReportsButton(View v)
+    {
+        Intent intent = new Intent(getActivity(), ViewReportsActivity.class);
+        intent.putExtra("cgaID", User.getUser().getID());
+
+        startActivity(intent);
+    }
+
     public void onClickLogout()
     {
         FirebaseAuth.getInstance().signOut();
@@ -159,11 +178,6 @@ public class ProfileFragment extends Fragment {
         nameTitle.setText(name);
     }
 
-
-    public void onClickReportsButton(View view)
-    {
-        startActivity(new Intent(getActivity(), ViewReportsActivity.class));
-    }
 
     public void onClickReportIssue()
     {

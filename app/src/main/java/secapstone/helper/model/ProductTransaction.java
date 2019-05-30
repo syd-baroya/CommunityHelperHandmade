@@ -8,14 +8,14 @@ public class ProductTransaction
     private String cgaID;
     private String artisanID;
     private float amount;
-    private Timestamp time;
+    private String date;
 
-    public ProductTransaction(String cgaID, String artisanID, float amount)
+    public ProductTransaction(String cgaID, String artisanID, float amount, String date)
     {
         this.cgaID = cgaID;
         this.artisanID = artisanID;
         this.amount = amount;
-        this.time = Timestamp.now();
+        this.date = date;
     }
 
 
@@ -33,5 +33,7 @@ public class ProductTransaction
     {
         return amount;
     }
+    public void setDate(String date) {this.date = date; }
+    public String getDate(){return date;}
 
 }

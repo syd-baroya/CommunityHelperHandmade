@@ -5,10 +5,7 @@ import androidx.annotation.NonNull;
 import android.app.Activity;
 import android.app.Dialog;
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Bitmap;
 import android.util.Log;
-import android.view.View;
 
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
@@ -19,13 +16,9 @@ import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
 import java.util.ArrayList;
-import java.util.Date;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -34,9 +27,7 @@ import secapstone.helper.model.Artisan;
 import secapstone.helper.model.Listing;
 import secapstone.helper.model.PayoutTransaction;
 import secapstone.helper.model.ProductTransaction;
-import secapstone.helper.model.Report;
 import secapstone.helper.model.User;
-import secapstone.helper.pages.login.LoginActivity;
 
 public class AccountingSystem
 {
@@ -61,7 +52,7 @@ public class AccountingSystem
 
     public AccountingSystem(){ System.out.println("made new Accounting System"); }
 
-    public static void logPayment(String artisanID, float amount, final Context context)
+    public static void logPayment(String artisanID, float amount, final Context context, String date)
     {
         final double doubleAmount = amount;
         String userID = User.getUser().getID();
@@ -70,7 +61,7 @@ public class AccountingSystem
         final CollectionReference payoutsRef = FirebaseFirestore.getInstance().collection("PayoutTransactions");
 
 
-        final PayoutTransaction mewBoi2 = new PayoutTransaction(userID, artisanID, amount);
+        final PayoutTransaction mewBoi2 = new PayoutTransaction(userID, artisanID, amount, date);
 
         artisanRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
@@ -121,8 +112,12 @@ public class AccountingSystem
         DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
         final CollectionReference productTransRef = FirebaseFirestore.getInstance().collection("ProductTransactions");
 
-
-        final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String date = (month+1) + "/" + day + "/" + year;
+        final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount, date);
 
         Map<String, Object> purchaseUpdate = new HashMap<>();
         int amountPurchased = (int) ((int) amount/listing.getPrice());
@@ -174,7 +169,13 @@ public class AccountingSystem
         DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
         final CollectionReference productTransRef = FirebaseFirestore.getInstance().collection("Shipments");
 
-        final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount);
+        Calendar c = Calendar.getInstance();
+        int day = c.get(Calendar.DAY_OF_MONTH);
+        int month = c.get(Calendar.MONTH);
+        int year = c.get(Calendar.YEAR);
+        String date = (month+1) + "/" + day + "/" + year;
+
+        final ProductTransaction mewBoi2 = new ProductTransaction(userID, artisanID, amount, date);
 
         Map<String, Object> shipmentUpdates = new HashMap<>();
         int shippedCount = listing.getShippedCount() + amount;

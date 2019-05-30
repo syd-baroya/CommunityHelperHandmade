@@ -239,8 +239,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     {
         Intent intent = new Intent(context, ViewReportsActivity.class);
         intent.putExtra("artisanID", artisanID);
-        intent.putExtra("cgaID", user_info.getID());
-
         context.startActivity(intent);
     }
 

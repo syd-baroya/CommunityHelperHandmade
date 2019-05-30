@@ -25,13 +25,13 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="44dp"
+            android:layout_marginTop="8dp"
             android:layout_marginEnd="32dp"
             android:hint="File Name"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/downloadModalText" />
+            app:layout_constraintTop_toBottomOf="@+id/downloadModalSubtext" />
 
         <TextView
             android:id="@+id/downloadModalText"
@@ -54,7 +54,7 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="8dp"
+            android:layout_marginTop="16dp"
             android:layout_marginEnd="32dp"
             android:fontFamily="@font/googlesans_regular"
             android:text="What would you like to save the file as?"
@@ -70,16 +70,19 @@
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
+            android:layout_marginTop="24dp"
             android:layout_marginEnd="32dp"
-            android:layout_marginBottom="16dp"
+            android:layout_marginBottom="24dp"
+            android:enabled="false"
             android:fontFamily="@font/googlesans_bold"
             android:text="Download CSV File"
-            android:enabled="false"
+
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/fileNameField" />
+            app:layout_constraintTop_toBottomOf="@+id/fileNameField"
+            app:layout_constraintVertical_bias="1.0" />
 
 
         <androidx.constraintlayout.widget.ConstraintLayout
