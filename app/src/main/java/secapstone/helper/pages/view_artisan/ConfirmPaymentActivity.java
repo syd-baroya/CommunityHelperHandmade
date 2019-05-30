@@ -16,6 +16,7 @@ import android.provider.MediaStore;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.Log;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.WindowManager;
 import android.widget.Button;
@@ -37,6 +38,7 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
+import com.kyanogen.signatureview.SignatureView;
 
 import java.io.ByteArrayOutputStream;
 import java.io.File;
@@ -89,7 +91,6 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
         confirmButton = findViewById(R.id.confirmButton);
         cancelButton = findViewById(R.id.declineButton);
 
-
         confirmButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -103,6 +104,16 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 finish();
+            }
+        });
+
+        SignatureView sigView = (SignatureView) findViewById(R.id.signature_view);
+        sigView.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View v, MotionEvent event) {
+                Button confirmButton = findViewById(R.id.confirmButton);
+                confirmButton.setEnabled(true);
+                return false;
             }
         });
 
