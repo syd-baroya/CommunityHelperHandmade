@@ -48,7 +48,7 @@ public class AccountingSystem
     private static CollectionReference usersRef = db.collection("users");
     private static User user_info = User.getUser();
     private static CollectionReference artisanRef = usersRef.document(user_info.getID()).collection("artisans");
-    private static final String TAG = "AccountingSystem";
+    public static final String TAG = "AccountingSystem";
 
     /*
       Gets all the artisans for the Community Leader.
@@ -220,12 +220,5 @@ public class AccountingSystem
         //TODO This is where Amazon MWS API call is.
         //TODO Only get transactions after startTime.
         return transactions;
-    }
-
-    public static List<Artisan> getArtisans()
-    {
-        List<Artisan> artisans = new ArrayList<Artisan>();
-        //TODO grab artisans from firebase
-        return artisans;
     }
 }
