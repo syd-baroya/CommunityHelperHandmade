@@ -5,13 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
-<<<<<<< HEAD
-import android.view.WindowManager;
-=======
 import android.widget.Button;
-
 import com.kyanogen.signatureview.SignatureView;
->>>>>>> You now must input artisan's signature before continue button is enabled
+import android.view.WindowManager;
 
 import secapstone.helper.R;
 
