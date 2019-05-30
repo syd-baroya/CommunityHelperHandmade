@@ -91,6 +91,7 @@
         android:layout_marginEnd="32dp"
         android:layout_marginBottom="32dp"
         android:drawableRight="@drawable/icon_right_arrow_white_padded"
+        android:enabled="False"
         android:onClick="onClickNext"
         android:paddingLeft="28dp"
         android:paddingRight="28dp"
