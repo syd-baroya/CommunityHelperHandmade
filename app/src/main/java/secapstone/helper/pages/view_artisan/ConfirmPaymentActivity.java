@@ -95,7 +95,7 @@ public class ConfirmPaymentActivity extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 if ((amountString != null) && (dateString != null) && (nameString != null)) {
-                    AccountingSystem.logPayment(artisanID, Float.parseFloat(amountString), context);
+                    AccountingSystem.logPayment(artisanID, Float.parseFloat(amountString), context, dateString);
                 }
             }
         });
