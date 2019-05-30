@@ -39,7 +39,10 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 import com.google.firebase.firestore.Query;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -69,8 +72,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     private StorageReference storageRef = FirebaseStorage.getInstance().getReference();
     private static final String TAG = "ViewArtisanActivity";
 
-    private FirebaseFirestore db = FirebaseFirestore.getInstance();
-
     public String artisanName;
     public String artisanAddress;
     public String artisanPhone;
@@ -82,7 +83,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public String paymentAmount = "";
     public Listing clickedListing = null;
 
-    private AccountingSystem accountingSystem;
+    private User user_info;
 
     private Context context;
 
@@ -91,6 +92,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     //reference to a certain artisan in database
     private DocumentReference artisanRef;
+    private DocumentReference userRef;
     private float itemClickedPrice=0.0f;
 
     Dialog contactInfoModal;
@@ -110,7 +112,8 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
         getIncomingIntent();
 
-        accountingSystem = new AccountingSystem();
+        final TextView moneyOwedText = this.findViewById(R.id.moneyOwed);
+
 
         contactInfoModal = new Dialog(this);
         logPaymentDialog = new Dialog(this);
@@ -122,11 +125,26 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         setUpLogShipmentModal();
         setUpPurchaseModal();
 
-        artisanRef = FirebaseFirestore.getInstance().collection("users").document(User.getUser().getID()).collection("artisans").document(artisanID);
+        user_info = User.getUser();
+
+        userRef = FirebaseFirestore.getInstance().collection("users").document(user_info.getID());
+        artisanRef = userRef.collection("artisans").document(artisanID);
 
         setStatusBarToDark();
 
         runListingsQuery();
+
+        artisanRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (snapshot != null && snapshot.exists()) {
+
+                    String moneyOwedString = "$" + String.format("%,.2f",snapshot.get("moneyOwedFromCommunityLeader"));
+                    artisanMoneyOwed = Float.parseFloat(String.format("%,.2f",snapshot.get("moneyOwedFromCommunityLeader")));
+                    moneyOwedText.setText(moneyOwedString);
+                }
+            }
+        });
     }
 
     private void getIncomingIntent() {
@@ -219,7 +237,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
     public void onClickReportsButton(View view)
     {
-        startActivity(new Intent(ViewArtisanActivity.this, ViewReportsActivity.class));
+        Intent intent = new Intent(context, ViewReportsActivity.class);
+        intent.putExtra("artisanID", artisanID);
+        intent.putExtra("cgaID", user_info.getID());
+
+        context.startActivity(intent);
     }
 
     public void onClickLogPayments(View view)
@@ -251,6 +273,13 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         String moneyOwedString = "$" + String.format("%,.2f", newMoneyOwed);
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
+
+        user_info.updateBalance(recentPurchase);
+        moneyUpdates = new HashMap<>();
+        newMoneyOwed = user_info.getBalance();
+        moneyUpdates.put("balance", newMoneyOwed);
+        userRef.update(moneyUpdates);
+
     }
 
     public void subFromArtisanBalance(float recentPayment)
@@ -265,8 +294,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         moneyOwedText.setText(moneyOwedString);
         artisanMoneyOwed = newMoneyOwed;
 
-
-
+        user_info.updateBalance(recentPayment*(-1.0f));
+        moneyUpdates = new HashMap<>();
+        newMoneyOwed = user_info.getBalance();
+        moneyUpdates.put("balance", newMoneyOwed);
+        userRef.update(moneyUpdates);
     }
 
     private void resetPurchaseModal()
@@ -284,19 +316,12 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         lp.copyFrom(purchaseDialog.getWindow().getAttributes());
         lp.width = WindowManager.LayoutParams.MATCH_PARENT;
 
-        final NumberPicker np = purchaseDialog.findViewById(R.id.numberPicker);
-        np.setMaxValue(100);
-        np.setMinValue(0);
-        np.setWrapSelectorWheel(false);
-        np.setOnValueChangedListener(this);
 
         purchaseDialog.findViewById(R.id.confirmPurchaseButton).setOnClickListener(new View.OnClickListener(){
             @Override
             public void onClick(View view){
-                addToArtisanBalance(newPurchase);
-                accountingSystem.logPurchase(artisanID, newPurchase, clickedListing);
+                AccountingSystem.logPurchase(artisanID, newPurchase, clickedListing);
                 resetPurchaseModal();
-
             }
         });
 
@@ -308,6 +333,11 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
         clickedListing = model;
         itemClickedPrice = model.getPrice();
         setImage(purchaseDialog, model.getPictureURL(), model.getTitle(), model.getDescription());
+        final NumberPicker np = purchaseDialog.findViewById(R.id.numberPicker);
+        np.setWrapSelectorWheel(false);
+        np.setOnValueChangedListener(this);
+        np.setMaxValue(clickedListing.getShippedCount());
+        np.setMinValue(0);
 
         purchaseDialog.show();
     }
@@ -328,8 +358,6 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
 
         loadLogShipmentInfo(model);
         setUpLogShipmentListeners(model);
-
-
 
         logShipmentDialog.show();
     }
@@ -539,6 +567,7 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
             @Override
             public void onClick(View view){
                 onClickMakePayment(amountField, date);
+                logPaymentDialog.dismiss();
             }
         });
 
@@ -581,15 +610,20 @@ public class ViewArtisanActivity extends AppCompatActivity implements NumberPick
     public void onClickMakePayment(EditText amount, EditText date)
     {
         String amountPaid = paymentAmount.replace("$", "");
+        String artisanName = User.getUser().getName();
 
         String dateToPay = date.getHint().toString();
         if (date.getText().length() != 0) {
             dateToPay = date.getText().toString();
         }
 
-        accountingSystem.logPayment(artisanID, Float.parseFloat(amountPaid));
-        subFromArtisanBalance(Float.parseFloat(amountPaid));
-        logPaymentDialog.dismiss();
+        Intent intent = new Intent(context, ConfirmPaymentActivity.class);
+        intent.putExtra("name", artisanName);
+        intent.putExtra("date", dateToPay);
+        intent.putExtra("amount", amountPaid);
+        intent.putExtra("artisanID", artisanID);
+
+        context.startActivity(intent);
     }
 
 

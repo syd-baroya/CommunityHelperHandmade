@@ -6,8 +6,8 @@ import android.os.Bundle;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
-
 import com.kyanogen.signatureview.SignatureView;
+import android.view.WindowManager;
 
 import secapstone.helper.R;
 
@@ -19,6 +19,8 @@ public class SignatureAddArtisanActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
+        getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN,
+                WindowManager.LayoutParams.FLAG_FULLSCREEN);
         setContentView(R.layout.activity_signature_add_artisan);
 
         SignatureView sigView = (SignatureView) findViewById(R.id.signature_view);

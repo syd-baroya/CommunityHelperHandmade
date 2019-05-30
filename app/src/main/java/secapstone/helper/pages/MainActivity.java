@@ -2,6 +2,9 @@ package secapstone.helper.pages;
 
 import android.content.DialogInterface;
 import androidx.annotation.NonNull;
+
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
@@ -10,6 +13,7 @@ import android.view.*;
 
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.FirebaseFirestore;
 
 import secapstone.helper.pages.action_items.ActionItemFragment;
@@ -37,8 +41,26 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        User user_info = User.getUser();
+        final User user_info = User.getUser();
         CGARef = usersRef.document(user_info.getID());
+
+        CGARef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+                                                @Override
+                                                public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+                                                    if (task.isSuccessful()) {
+                                                        DocumentSnapshot docSnapshot = task.getResult();
+                                                        if (docSnapshot != null) {
+                                                            Object dbBalance = docSnapshot.get("balance");
+                                                            if (dbBalance != null) {
+                                                                if(dbBalance instanceof Long)
+                                                                    user_info.setBalance(((Long)dbBalance).floatValue());
+                                                                else if(dbBalance instanceof Double)
+                                                                    user_info.setBalance(((Double)dbBalance).floatValue());
+                                                            }
+                                                        }
+                                                    }
+                                                }
+                                            });
 
         profileFragment = new ProfileFragment();
         profileFragment.setArtisanRef(CGARef.collection("artisans"));
@@ -86,5 +108,10 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                 })
                 .setNegativeButton("No", null)
                 .show();
+    }
+
+    private void calculateBalance()
+    {
+
     }
 }

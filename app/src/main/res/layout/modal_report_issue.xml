@@ -40,7 +40,7 @@
         app:layout_constraintTop_toBottomOf="@+id/phone_num" />
 
     <secapstone.helper.pages.custom_ui.CustomTextField
-        android:id="@+id/reportText"
+        android:id="@+id/phoneText"
         style="@style/TextInput"
         android:layout_width="0dp"
         android:layout_height="210dp"
@@ -67,7 +67,7 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/reportText" />
+        app:layout_constraintTop_toBottomOf="@+id/phoneText" />
 
 
     <androidx.constraintlayout.widget.ConstraintLayout
