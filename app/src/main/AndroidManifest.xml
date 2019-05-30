@@ -60,7 +60,7 @@
         <activity android:name=".pages.add_artisan.PhoneNumberAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".pages.add_artisan.MapAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
         <activity android:name=".pages.add_artisan.DescriptionAddArtisanActivity" android:windowSoftInputMode="adjustResize"/>
-        <activity android:name=".pages.add_artisan.SignatureAddArtisanActivity" />
+        <activity android:name=".pages.add_artisan.SignatureAddArtisanActivity" android:screenOrientation="landscape"/>
         <activity android:name=".pages.login.ForgotPasswordActivity" />
         <activity android:name=".pages.view_artisan.ViewArtisanActivity" />
         <activity android:name=".pages.view_artisan.ConfirmPaymentActivity" android:screenOrientation="landscape"/>
