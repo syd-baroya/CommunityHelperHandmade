@@ -332,9 +332,7 @@ public class ViewReportsActivity extends AppCompatActivity
             return;
         }
 
-        String[] data = {"Address", "Amount", "artisanID", "cgaID"};
 
-        writer.writeNext(data);
         writer.writeAll(listTransData);
 
         try {
