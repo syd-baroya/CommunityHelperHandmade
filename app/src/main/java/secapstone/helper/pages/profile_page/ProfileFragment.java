@@ -15,6 +15,7 @@ import android.widget.Button;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
+import androidx.annotation.Nullable;
 import androidx.constraintlayout.widget.ConstraintLayout;
 import androidx.fragment.app.Fragment;
 import androidx.recyclerview.widget.RecyclerView;
@@ -26,7 +27,11 @@ import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.firestore.CollectionReference;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.EventListener;
 import com.google.firebase.firestore.FirebaseFirestore;
+import com.google.firebase.firestore.FirebaseFirestoreException;
 
 import java.util.Calendar;
 import java.util.HashMap;
@@ -52,8 +57,6 @@ public class ProfileFragment extends Fragment {
     private View view;
 
     private Button logoutButton;
-    private RecyclerView recyclerView;
-    private ArtisanAdapter adapter;
     private Dialog reportIssueModal;
     private Button reportIssueButton;
     private CustomTextField reportField;
@@ -119,6 +122,17 @@ public class ProfileFragment extends Fragment {
         setImage("",  user_info.getName());
 
         setStatusBarToDark();
+
+        DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(user_info.getID());
+        userRef.addSnapshotListener(new EventListener<DocumentSnapshot>() {
+            @Override
+            public void onEvent(@Nullable DocumentSnapshot snapshot, @Nullable FirebaseFirestoreException e) {
+                if (snapshot != null && snapshot.exists()) {
+                    String moneyOwedString = "$" + String.format("%,.2f",snapshot.get("balance"));
+                    balanceText.setText(moneyOwedString);
+                }
+            }
+        });
 
 
         return view;
@@ -187,20 +201,14 @@ public class ProfileFragment extends Fragment {
         reportIssueModal.dismiss();
     }
 
-    public void onClickLogPayments(View view)
-    {
-        //startActivity(new Intent(getActivity(), LogPaymentDialog.class));
+    @Override
+    public void onStart() {
+        super.onStart();
+        User user_info = User.getUser();
+        String balanceString = "$" + String.format("%,.2f", user_info.getBalance());
+        balanceText.setText(balanceString);
     }
 
-    public void onClickBackButton(View view)
-    {
-        startActivity(new Intent(getActivity(), MainActivity.class));
-    }
-
-    public void onClickContactInfoButton(View view)
-    {
-
-    }
 
 
     @TargetApi(23)

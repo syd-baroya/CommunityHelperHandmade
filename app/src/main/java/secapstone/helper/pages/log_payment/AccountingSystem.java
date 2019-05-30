@@ -2,7 +2,10 @@ package secapstone.helper.pages.log_payment;
 
 import androidx.annotation.NonNull;
 
+import android.app.Activity;
 import android.app.Dialog;
+import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.util.Log;
 import android.view.View;
@@ -14,6 +17,7 @@ import com.google.android.gms.tasks.Task;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FieldValue;
 import com.google.firebase.firestore.FirebaseFirestore;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
@@ -32,6 +36,7 @@ import secapstone.helper.model.PayoutTransaction;
 import secapstone.helper.model.ProductTransaction;
 import secapstone.helper.model.Report;
 import secapstone.helper.model.User;
+import secapstone.helper.pages.login.LoginActivity;
 
 public class AccountingSystem
 {
@@ -53,15 +58,15 @@ public class AccountingSystem
       which Artisan made that product, and adds that transaction amount
       to the amount the Community Leader owes that Artisan.
      */
-//
+
     public AccountingSystem(){ System.out.println("made new Accounting System"); }
 
-    public static void logPayment(String artisanID, float amount)
+    public static void logPayment(String artisanID, float amount, final Context context)
     {
-        System.out.println("in Accounting System logPayment");
+        final double doubleAmount = amount;
         String userID = User.getUser().getID();
-        DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
-        DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
+        final DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
+        final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
         final CollectionReference payoutsRef = FirebaseFirestore.getInstance().collection("PayoutTransactions");
 
 
@@ -70,29 +75,30 @@ public class AccountingSystem
         artisanRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()){
                     DocumentSnapshot docSnapshot = task.getResult();
-                    if(docSnapshot!=null){
+                    if (docSnapshot!=null){
                         String address = (String) docSnapshot.get("address");
-                        if(address!=null) {
+                        if (address!=null) {
                             mewBoi2.setAddress(address);
-
                             payoutsRef
-                                    .add(mewBoi2)
-                                    .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
-                                        @Override
-                                        public void onSuccess(DocumentReference documentReference) {
-                                            Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
-
-                                        }
-                                    })
-                                    .addOnFailureListener(new OnFailureListener() {
-                                        @Override
-                                        public void onFailure(@NonNull Exception e) {
-                                            Log.w(TAG, "Error adding document", e);
-                                        }
-                                    });
-                        }
+                                .add(mewBoi2)
+                                .addOnSuccessListener(new OnSuccessListener<DocumentReference>() {
+                                    @Override
+                                    public void onSuccess(DocumentReference documentReference) {
+                                        Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                        userRef.update("balance", FieldValue.increment((-1)*doubleAmount));
+                                        artisanRef.update("moneyOwedFromCommunityLeader", FieldValue.increment((-1)*doubleAmount));
+                                        ((Activity)context).finish();
+                                    }
+                                })
+                                .addOnFailureListener(new OnFailureListener() {
+                                    @Override
+                                    public void onFailure(@NonNull Exception e) {
+                                        Log.w(TAG, "Error adding document", e);
+                                    }
+                                });
+                    }
                     }
                 }else{
                     Log.d(TAG, "GET FAILED WITH: ", task.getException());
@@ -100,17 +106,18 @@ public class AccountingSystem
             }
         });
 
-
     }
 
     public static void logPurchase(String artisanID, float amount, Listing listing)
     {
         if(listing==null)
             return;
+
+        final double doubleAmount = amount;
         System.out.println("in Accounting System logPayment");
         String userID = User.getUser().getID();
-        DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
-        DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
+        final DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
+        final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
         DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
         final CollectionReference productTransRef = FirebaseFirestore.getInstance().collection("ProductTransactions");
 
@@ -127,20 +134,20 @@ public class AccountingSystem
         productRef.get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
-                if(task.isSuccessful()){
+                if (task.isSuccessful()){
                     DocumentSnapshot docSnapshot = task.getResult();
-                    if(docSnapshot!=null){
+                    if (docSnapshot!=null){
                         String id = (String) docSnapshot.get("id");
-                        System.out.println("docsnap is not null");
-                        if(id!=null) {
+                        if (id!=null) {
                             mewBoi2.setProductID(id);
-
                             productTransRef
                                     .add(mewBoi2)
                                     .addOnSuccessListener(new OnSuccessListener<DocumentReference>(){
                                         @Override
                                         public void onSuccess(DocumentReference documentReference){
                                             Log.d(TAG, "DocumentSnapshot written with ID: " + documentReference.getId());
+                                            userRef.update("balance", FieldValue.increment(doubleAmount));
+                                            artisanRef.update("moneyOwedFromCommunityLeader", FieldValue.increment(doubleAmount));
                                         }
                                     })
                                     .addOnFailureListener(new OnFailureListener(){
@@ -151,7 +158,7 @@ public class AccountingSystem
                                     });
                         }
                     }
-                }else{
+                } else{
                     Log.d(TAG, "GET FAILED WITH: ", task.getException());
                 }
             }

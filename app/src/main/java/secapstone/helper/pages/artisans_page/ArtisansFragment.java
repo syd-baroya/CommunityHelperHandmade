@@ -262,21 +262,16 @@ public class ArtisansFragment extends Fragment implements AdapterView.OnItemSele
             query = query.whereEqualTo("name", searchTerm);
         }
 
+
         FirestoreRecyclerOptions<Artisan> options = new FirestoreRecyclerOptions.Builder<Artisan>()
                 .setQuery(query, Artisan.class)
                 .build();
 
+
         adapter = new ArtisanAdapter(options, this.getContext(), artisansRef, this);
 
-
-        RecyclerView.LayoutManager m = new LinearLayoutManager(getActivity()){
-            @Override
-            public boolean canScrollVertically() {
-                return false;
-            }
-        };
-
-        recyclerView.setLayoutManager(m);
+        recyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        recyclerView.setNestedScrollingEnabled(false);
 
         recyclerView.setAdapter(adapter);
         adapter.notifyDataSetChanged();
