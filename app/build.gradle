@@ -101,6 +101,7 @@ dependencies {
     implementation files('lib/aws-android-sdk-transcribe.jar')
     implementation 'com.kyanogen.signatureview:signature-view:1.2'
     implementation files('opencsv-4.6.jar')
+    androidTestImplementation 'androidx.test:rules:1.2.0'
 }
 
 apply plugin: 'com.google.gms.google-services'
