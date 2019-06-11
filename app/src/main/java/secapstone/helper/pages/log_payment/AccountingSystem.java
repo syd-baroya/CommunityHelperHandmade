@@ -34,11 +34,6 @@ public class AccountingSystem
 
     private static long timeLastRun = -1; //TODO This needs to be in firebase, not kept in RAM or it will reset each time APP restarts.
     private static final long TIME_BETWEEN_EACH_RUN = 86400000;
-
-    private static FirebaseFirestore db = FirebaseFirestore.getInstance();
-    private static CollectionReference usersRef = db.collection("users");
-    private static User user_info = User.getUser();
-    private static CollectionReference artisanRef = usersRef.document(user_info.getID()).collection("artisans");
     public static final String TAG = "AccountingSystem";
 
     /*
@@ -52,10 +47,14 @@ public class AccountingSystem
 
     public AccountingSystem(){ System.out.println("made new Accounting System"); }
 
+    protected static String getId() {
+        return User.getUser().getID();
+    }
+
     public static void logPayment(String artisanID, float amount, final Context context, String date)
     {
         final double doubleAmount = amount;
-        String userID = User.getUser().getID();
+        String userID = getId();
         final DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
         final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
         final CollectionReference payoutsRef = FirebaseFirestore.getInstance().collection("PayoutTransactions");
@@ -99,6 +98,8 @@ public class AccountingSystem
 
     }
 
+
+
     public static void logPurchase(String artisanID, float amount, Listing listing)
     {
         if(listing==null)
@@ -106,7 +107,7 @@ public class AccountingSystem
 
         final double doubleAmount = amount;
         System.out.println("in Accounting System logPayment");
-        String userID = User.getUser().getID();
+        String userID = getId();
         final DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
         final DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
         DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
@@ -163,7 +164,7 @@ public class AccountingSystem
     public static void logShipment(String artisanID, int amount, Listing listing, final Dialog dialog) {
         if(listing==null)
             return;
-        String userID = User.getUser().getID();
+        String userID = getId();
         DocumentReference userRef = FirebaseFirestore.getInstance().collection("users").document(userID);
         DocumentReference artisanRef = userRef.collection("artisans").document(artisanID);
         DocumentReference productRef = artisanRef.collection("products").document(listing.getID());
